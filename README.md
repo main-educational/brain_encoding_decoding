@@ -2,7 +2,7 @@
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/main-educational/brain_decoding/main?labpath=notebooks%2Fmultiple_decoders_haxby_tutorial.ipynb)
 
-This is a jupyter book presenting an introduction to brain encoding and decoding using python. It is rendered on [main-educational.github.io/brain_encoding_decoding](https://main-educational.github.io/brain_encoding_decoding). See the introduction of the jupyter book for more details, and acknowledgements.
+This is a jupyter book presenting an introduction to brain encoding and decoding using python. It is rendered on [main-educational.github.io/brain_encoding_decoding](https://main-educational.github.io/brain_encoding_decoding/intro.html). See the introduction of the jupyter book for more details, and acknowledgements.
 
 ### Build the book
 

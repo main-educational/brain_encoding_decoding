@@ -1,5 +1,13 @@
 # Introduction
-These tutorials will introduce you to brain encoding and decoding in fMRI. The tutorials make heavy use of [nilearn](https://nilearn.github.io/stable/index.html)
+## Brain encoding and decoding
+```{figure} haxby_data/brain-encoding-decoding.png
+---
+width: 800px
+name: brain-encoding-decoding-fig
+---
+To test the consistency of representations in artificial neural networks (ANNs) and the brain, it is possible to **encode** brain activity based on ANN presented with similar stimuli, or **decode** brain activity by predicting the expected ANN activity and corresponding annotation of cognitive states. Figure from [Schrimpf et al. (2020)](https://doi.org/10.1101/407007) {cite:p}`Schrimpf2020-mc`, sous licence [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+```
+This jupyter book presents an introduction to brain encoding and decoding using fMRI. Brain decoding is a type of model where we try to guess what a subject is doing, based on recordings of brain activity. Brain encoding is the reverse operation, where we use machine learning tools to predict the activity of the brain, either based on annotations of the cognitive states of the subject, or using features learned by an artificial neural network presented with the same stimuli as the subject. The tutorials make heavy use of [nilearn](https://nilearn.github.io/stable/index.html)
 manipulate and process fMRI data, as well as [scikit-learn](https://scikit-learn.org/stable/) and [pytorch](https://pytorch.org/)
 to apply machine learning techniques on the data.
 
@@ -12,15 +20,16 @@ There are two ways to run the tutorials: local installation and Binder.
 
 ### Local installation (Recommended)
 
-::::{note}
-
+```{admonition} Install python
+:class: tip
+:name: python-install-tip
 You need to have access to a terminal with Python 3.
 If you have setup your environment based on instructions of [MAIN educational installation guide](https://main-educational.github.io/installation.html), you are good to go 🎉
 
 If it not already the case,
 [here](https://realpython.com/installing-python/#how-to-check-your-python-version-on-windows)
 is a quick guide to install python 3 on any OS.
-::::
+```
 
 1. Clone/download this repository to your machine and navigate to the directory.
 
@@ -82,3 +91,9 @@ Some images and code are used from a previous iteration of this tutorial, prepar
 
 It is rendered here using [Jupyter Book](https://github.com/jupyter/jupyter-book),
 <!-- with compute infrastructure provided by the [Canadian Open Neuroscience Platform (CONP)](http://conp.ca). -->
+
+## References
+
+```{bibliography}
+:filter: docname in docnames
+```
