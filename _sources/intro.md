@@ -5,7 +5,7 @@
 width: 800px
 name: brain-encoding-decoding-fig
 ---
-To test the consistency of representations in artificial neural networks (ANNs) and the brain, it is possible to **encode** brain activity based on ANN presented with similar stimuli, or **decode** brain activity by predicting the expected ANN activity and corresponding annotation of cognitive states. Figure from [Schrimpf et al. (2020)](https://doi.org/10.1101/407007) {cite:p}`Schrimpf2020-mc`, under a [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) license.
+To test the consistency of representations in artificial neural networks (ANNs) and the brain, it is possible to **encode** brain activity based on ANN presented with similar stimuli, or **decode** brain activity by predicting the expected ANN activity and corresponding annotation of cognitive states. Figure from [Schrimpf et al. (2020)](https://doi.org/10.1101/407007) {cite:p}`Schrimpf2020-mc`, sous licence [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 ```
 This jupyter book presents an introduction to brain encoding and decoding using fMRI. Brain decoding is a type of model where we try to guess what a subject is doing, based on recordings of brain activity. Brain encoding is the reverse operation, where we use machine learning tools to predict the activity of the brain, either based on annotations of the cognitive states of the subject, or using features learned by an artificial neural network presented with the same stimuli as the subject. The tutorials make heavy use of [nilearn](https://nilearn.github.io/stable/index.html)
 manipulate and process fMRI data, as well as [scikit-learn](https://scikit-learn.org/stable/) and [pytorch](https://pytorch.org/)

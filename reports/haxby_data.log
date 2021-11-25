@@ -1,34 +1,57 @@
 Traceback (most recent call last):
-  File "/home/pbellec/env/brain_encoding_decoding/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+  File "/home/pbellec/env/psy3018/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
     executenb(
-  File "/home/pbellec/env/brain_encoding_decoding/lib/python3.8/site-packages/nbclient/client.py", line 1093, in execute
+  File "/home/pbellec/env/psy3018/lib/python3.8/site-packages/nbclient/client.py", line 1112, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/home/pbellec/env/brain_encoding_decoding/lib/python3.8/site-packages/nbclient/util.py", line 84, in wrapped
+  File "/home/pbellec/env/psy3018/lib/python3.8/site-packages/nbclient/util.py", line 74, in wrapped
     return just_run(coro(*args, **kwargs))
-  File "/home/pbellec/env/brain_encoding_decoding/lib/python3.8/site-packages/nbclient/util.py", line 62, in just_run
+  File "/home/pbellec/env/psy3018/lib/python3.8/site-packages/nbclient/util.py", line 53, in just_run
     return loop.run_until_complete(coro)
   File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
     return future.result()
-  File "/home/pbellec/env/brain_encoding_decoding/lib/python3.8/site-packages/nbclient/client.py", line 559, in async_execute
+  File "/home/pbellec/env/psy3018/lib/python3.8/site-packages/nbclient/client.py", line 553, in async_execute
     await self.async_execute_cell(
-  File "/home/pbellec/env/brain_encoding_decoding/lib/python3.8/site-packages/nbclient/client.py", line 854, in async_execute_cell
+  File "/home/pbellec/env/psy3018/lib/python3.8/site-packages/nbclient/client.py", line 857, in async_execute_cell
     self._check_raise_for_error(cell, exec_reply)
-  File "/home/pbellec/env/brain_encoding_decoding/lib/python3.8/site-packages/nbclient/client.py", line 756, in _check_raise_for_error
+  File "/home/pbellec/env/psy3018/lib/python3.8/site-packages/nbclient/client.py", line 760, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# Selecting data
-X = masker.fit_transform(func_file)
-print(X.shape)
+import pandas as pd
+behavioral = pd.read_csv(haxby_dataset.session_target[0], delimiter=' ')
+print(behavioral[range(0, 10, len(behavioral))])
+y = behavioral['labels']
 ------------------
 
-[0;31m---------------------------------------------------------------------------[0m
-[0;31mNameError[0m                                 Traceback (most recent call last)
-[0;32m/tmp/ipykernel_12300/3888785731.py[0m in [0;36m<module>[0;34m[0m
-[1;32m      1[0m [0;31m# Selecting data[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 2[0;31m [0mX[0m [0;34m=[0m [0mmasker[0m[0;34m.[0m[0mfit_transform[0m[0;34m([0m[0mfunc_file[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      3[0m [0mprint[0m[0;34m([0m[0mX[0m[0;34m.[0m[0mshape[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;31m------------------------------------------------------------------[0m
+[0;31mKeyError[0m                         Traceback (most recent call last)
+[0;32m<ipython-input-5-e4dc007efd84>[0m in [0;36m<module>[0;34m[0m
+[1;32m      1[0m [0;32mimport[0m [0mpandas[0m [0;32mas[0m [0mpd[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      2[0m [0mbehavioral[0m [0;34m=[0m [0mpd[0m[0;34m.[0m[0mread_csv[0m[0;34m([0m[0mhaxby_dataset[0m[0;34m.[0m[0msession_target[0m[0;34m[[0m[0;36m0[0m[0;34m][0m[0;34m,[0m [0mdelimiter[0m[0;34m=[0m[0;34m' '[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 3[0;31m [0mprint[0m[0;34m([0m[0mbehavioral[0m[0;34m[[0m[0mrange[0m[0;34m([0m[0;36m0[0m[0;34m,[0m [0;36m10[0m[0;34m,[0m [0mlen[0m[0;34m([0m[0mbehavioral[0m[0;34m)[0m[0;34m)[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      4[0m [0my[0m [0;34m=[0m [0mbehavioral[0m[0;34m[[0m[0;34m'labels'[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
 
-[0;31mNameError[0m: name 'masker' is not defined
-NameError: name 'masker' is not defined
+[0;32m~/env/psy3018/lib/python3.8/site-packages/pandas/core/frame.py[0m in [0;36m__getitem__[0;34m(self, key)[0m
+[1;32m   3028[0m             [0;32mif[0m [0mis_iterator[0m[0;34m([0m[0mkey[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   3029[0m                 [0mkey[0m [0;34m=[0m [0mlist[0m[0;34m([0m[0mkey[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 3030[0;31m             [0mindexer[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0mloc[0m[0;34m.[0m[0m_get_listlike_indexer[0m[0;34m([0m[0mkey[0m[0;34m,[0m [0maxis[0m[0;34m=[0m[0;36m1[0m[0;34m,[0m [0mraise_missing[0m[0;34m=[0m[0;32mTrue[0m[0;34m)[0m[0;34m[[0m[0;36m1[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   3031[0m [0;34m[0m[0m
+[1;32m   3032[0m         [0;31m# take() does not accept boolean indexers[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/env/psy3018/lib/python3.8/site-packages/pandas/core/indexing.py[0m in [0;36m_get_listlike_indexer[0;34m(self, key, axis, raise_missing)[0m
+[1;32m   1264[0m             [0mkeyarr[0m[0;34m,[0m [0mindexer[0m[0;34m,[0m [0mnew_indexer[0m [0;34m=[0m [0max[0m[0;34m.[0m[0m_reindex_non_unique[0m[0;34m([0m[0mkeyarr[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   1265[0m [0;34m[0m[0m
+[0;32m-> 1266[0;31m         [0mself[0m[0;34m.[0m[0m_validate_read_indexer[0m[0;34m([0m[0mkeyarr[0m[0;34m,[0m [0mindexer[0m[0;34m,[0m [0maxis[0m[0;34m,[0m [0mraise_missing[0m[0;34m=[0m[0mraise_missing[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   1267[0m         [0;32mreturn[0m [0mkeyarr[0m[0;34m,[0m [0mindexer[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   1268[0m [0;34m[0m[0m
+
+[0;32m~/env/psy3018/lib/python3.8/site-packages/pandas/core/indexing.py[0m in [0;36m_validate_read_indexer[0;34m(self, key, indexer, axis, raise_missing)[0m
+[1;32m   1306[0m             [0;32mif[0m [0mmissing[0m [0;34m==[0m [0mlen[0m[0;34m([0m[0mindexer[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   1307[0m                 [0maxis_name[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0mobj[0m[0;34m.[0m[0m_get_axis_name[0m[0;34m([0m[0maxis[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 1308[0;31m                 [0;32mraise[0m [0mKeyError[0m[0;34m([0m[0;34mf"None of [{key}] are in the [{axis_name}]"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   1309[0m [0;34m[0m[0m
+[1;32m   1310[0m             [0max[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0mobj[0m[0;34m.[0m[0m_get_axis[0m[0;34m([0m[0maxis[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mKeyError[0m: "None of [Int64Index([0], dtype='int64')] are in the [columns]"
+KeyError: "None of [Int64Index([0], dtype='int64')] are in the [columns]"
 
