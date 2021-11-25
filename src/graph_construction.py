@@ -75,7 +75,7 @@ def make_group_graph(connectomes, k=8, self_loops=False, symmetric=True):
 
     # Group average connectome and nndirected 8 k-NN graph
     avg_conn = np.array(connectomes).mean(axis=0)
-    avg_conn = np.round(avg_conn, 6)#shima
+    avg_conn = np.round(avg_conn, 6)
     avg_conn_k = knn_graph_quantile(avg_conn, k=k, self_loops=self_loops, symmetric=symmetric)
 
     # Format matrix into graph for torch_geometric
