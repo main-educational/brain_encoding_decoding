@@ -192,6 +192,11 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#brain-encoding-and-decoding">
+   Brain encoding and decoding
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#setup">
    Setup
   </a>
@@ -213,6 +218,11 @@
    Acknowledgements
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -226,23 +236,33 @@
                 
   <section class="tex2jax_ignore mathjax_ignore" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
-<p>These tutorials will introduce you to brain encoding and decoding in fMRI. The tutorials make heavy use of <a class="reference external" href="https://nilearn.github.io/stable/index.html">nilearn</a>
+<section id="brain-encoding-and-decoding">
+<h2>Brain encoding and decoding<a class="headerlink" href="#brain-encoding-and-decoding" title="Permalink to this headline">¶</a></h2>
+<figure class="align-default" id="brain-encoding-decoding-fig">
+<a class="reference internal image-reference" href="_images/brain-encoding-decoding.png"><img alt="_images/brain-encoding-decoding.png" src="_images/brain-encoding-decoding.png" style="width: 800px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">To test the consistency of representations in artificial neural networks (ANNs) and the brain, it is possible to <strong>encode</strong> brain activity based on ANN presented with similar stimuli, or <strong>decode</strong> brain activity by predicting the expected ANN activity and corresponding annotation of cognitive states. Figure from <a class="reference external" href="https://doi.org/10.1101/407007">Schrimpf et al. (2020)</a> <span id="id1">[<a class="reference internal" href="#id4">SKH+20</a>]</span>, sous licence <a class="reference external" href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a>.</span><a class="headerlink" href="#brain-encoding-decoding-fig" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>This jupyter book presents an introduction to brain encoding and decoding using fMRI. Brain decoding is a type of model where we try to guess what a subject is doing, based on recordings of brain activity. Brain encoding is the reverse operation, where we use machine learning tools to predict the activity of the brain, either based on annotations of the cognitive states of the subject, or using features learned by an artificial neural network presented with the same stimuli as the subject. The tutorials make heavy use of <a class="reference external" href="https://nilearn.github.io/stable/index.html">nilearn</a>
 manipulate and process fMRI data, as well as <a class="reference external" href="https://scikit-learn.org/stable/">scikit-learn</a> and <a class="reference external" href="https://pytorch.org/">pytorch</a>
 to apply machine learning techniques on the data.</p>
 <p>This resource was developed for use at the <a class="reference external" href="https://www.main2021.org/">Montreal AI and Neuroscience (MAIN)</a>
 conference in November 2021.</p>
+</section>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
 <p>There are two ways to run the tutorials: local installation and Binder.</p>
 <section id="local-installation-recommended">
 <h3>Local installation (Recommended)<a class="headerlink" href="#local-installation-recommended" title="Permalink to this headline">¶</a></h3>
-<p>::::{note}</p>
+<div class="tip admonition" id="python-install-tip">
+<p class="admonition-title">Install python</p>
 <p>You need to have access to a terminal with Python 3.
 If you have setup your environment based on instructions of <a class="reference external" href="https://main-educational.github.io/installation.html">MAIN educational installation guide</a>, you are good to go 🎉</p>
 <p>If it not already the case,
 <a class="reference external" href="https://realpython.com/installing-python/#how-to-check-your-python-version-on-windows">here</a>
-is a quick guide to install python 3 on any OS.
-::::</p>
+is a quick guide to install python 3 on any OS.</p>
+</div>
 <ol>
 <li><p>Clone/download this repository to your machine and navigate to the directory.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/main-educational/brain_encoding_decoding.git
@@ -298,6 +318,15 @@ For the full experience, we recommend using the local set up instruction.</p>
 <p>Some images and code are used from a previous iteration of this tutorial, prepared by Dr <a class="reference external" href="https://github.com/zhangyu2ustc">Yu Zhang</a>.</p>
 <p>It is rendered here using <a class="reference external" href="https://github.com/jupyter/jupyter-book">Jupyter Book</a>,</p>
 <!-- with compute infrastructure provided by the [Canadian Open Neuroscience Platform (CONP)](http://conp.ca). -->
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p id="id2"><dl class="citation">
+<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id1">SKH+20</a></span></dt>
+<dd><p>Martin Schrimpf, Jonas Kubilius, Ha Hong, Najib J Majaj, Rishi Rajalingham, Elias B Issa, Kohitij Kar, Pouya Bashivan, Jonathan Prescott-Roy, Franziska Geiger, Kailyn Schmidt, Daniel L K Yamins, and James J DiCarlo. Brain-Score: which artificial neural network for object recognition is most Brain-Like? <em>bioRxiv</em>, pages 407007, January 2020.</p>
+</dd>
+</dl>
+</p>
 </section>
 <div class="toctree-wrapper compound">
 </div>
