@@ -3,7 +3,6 @@ import seaborn as sn
 import pandas as pd
 from sklearn.metrics import confusion_matrix
 from nilearn.plotting import plot_matrix
-import seaborn as sn
 
 
 def classifier_history(history, title):
