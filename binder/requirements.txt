@@ -9,5 +9,3 @@ torch-cluster
 torch-scatter
 torch-sparse
 torch-geometric
-keras
-tensorflow
