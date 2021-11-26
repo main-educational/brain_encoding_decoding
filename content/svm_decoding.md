@@ -16,6 +16,13 @@ kernelspec:
 # Brain decoding with SVM
 
 ## Support vector machines
+```{figure} svm_decoding/optimal-hyperplane.png
+---
+width: 500px
+name: optimal-hyperplane-fig
+---
+A SVM aims at finding an optimal hyperplane to separate two classes in high-dimensional space, while maximizing the margin. Image from the [scikit-learn SVM documentation](https://scikit-learn.org/stable/modules/svm.html) under [BSD 3-Clause license](https://github.com/scikit-learn/scikit-learn/blob/main/COPYING).
+```
 We are going to train a support vector machine (SVM) classifier for brain decoding on the Haxby dataset. SVM is often successful in high dimensional spaces, and it is a popular technique in neuroimaging.
 
 In the SVM algorithm, we plot each data item as a point in N-dimensional space that N depends on the number of features that distinctly classify the data points (e.g. when the number of features is 3 the hyperplane becomes a two-dimensional plane.). The objective here is finding a hyperplane (decision boundaries that help classify the data points) with the maximum margin (i.e the maximum distance between data points of both classes). Data points falling on either side of the hyperplane can be attributed to different classes.
@@ -61,7 +68,6 @@ So we have 1452 time points, with one cognitive annotations each, and for each t
 ## Training a model
 We are going to start by splitting our dataset between train and test. We will keep 20% of the time points as test, and then set up a 10 fold cross validation for training/validation.
 ```{code-cell} python3
-from sklearn.model_selection import KFold
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)   
 ```
@@ -120,3 +126,4 @@ plotting.view_img(
  * Instead of a 80/20 train/test split, implement a 5 fold cross validation. How variable is the prediction accuracy across folds?
  * Try implementing a random forest or k nearest neighbor classifier.
  * **Hard**: implement a systematic hyper-parameter optimization using nested cross-validation. Tip: check this [scikit-learn tutorial](https://scikit-learn.org/stable/auto_examples/model_selection/plot_grid_search_digits.html#sphx-glr-auto-examples-model-selection-plot-grid-search-digits-py).
+ * **Hard**: try to account for class imbalance in the dataset.
