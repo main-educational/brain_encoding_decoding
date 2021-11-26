@@ -58,17 +58,6 @@ print(X.shape)
 ```
 So we have 1452 time points, with one cognitive annotations each, and for each time point we have recordings of fMRI activity across 675 voxels. We can also see that the cognitive annotations span 9 different categories.
 
-Before we carry on with the brain decoding, we first need to convert the cognitive annotations to some numeric values:
-```{code-cell} python3
-from sklearn.preprocessing import LabelEncoder
-import numpy as np
-# Encoding the string to numerical values
-labelencoder_y = LabelEncoder()
-y = labelencoder_y.fit_transform(y)
-y = y.ravel()
-print(np.unique(y))
-```
-
 ## Training a model
 We are going to start by splitting our dataset between train and test. We will keep 20% of the time points as test, and then set up a 10 fold cross validation for training/validation.
 ```{code-cell} python3
@@ -100,6 +89,7 @@ We can have a look at the confusion matrix:
 ```{code-cell} python3
 # confusion matrix
 import sys
+import numpy as np
 from sklearn.metrics import confusion_matrix
 sys.path.append('../src')
 import visualization
