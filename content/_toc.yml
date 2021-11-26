@@ -5,3 +5,4 @@ format: jb-book
 root: intro
 chapters:
 - file: haxby_data
+- file: svm_decoding

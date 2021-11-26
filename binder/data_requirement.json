@@ -1,0 +1,8 @@
+{
+  "haxby": { "src": "from nilearn import datasets; datasets.fetch_haxby(subjects=[4], fetch_stimuli=True, data_dir=_dst)",
+      "dst": "./data",
+      "projectName": "brain_decoding_main"},
+  "post-processed_data": { "src": "https://drive.google.com/uc?id=1LQO2hagRyImTqELh-VE44HDska43yo9Y",
+      "dst": "./data",
+      "projectName": "brain_decoding_main"}
+}

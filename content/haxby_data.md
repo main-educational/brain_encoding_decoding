@@ -13,6 +13,7 @@ kernelspec:
   name: python3
 ---
 
+(haxby-dataset)=
 # The Haxby dataset
 
 ## Downloading the data
@@ -74,8 +75,54 @@ We can see that the dataset has 1452 time samples (number of rows) and 675 voxel
 :class: tip
 Nilearn maskers are very versatile and offer many approaches to extract a time series array from 4D data, as well as reshape back an array into a series of brain volumes. You can learn more about nilearn maskers in this [documentation](https://nilearn.github.io/stable/manipulating_images/masker_objects.html).
 ```
+
+## Preparing the cognitive annotations
+
+Now, we are going to extract cognitive annotations, that is values which tell us what type of images the subject was viewing at each time point. Let's look at the first 20 annotations:
+```{code-cell} python3
+import pandas as pd
+behavioral = pd.read_csv(haxby_dataset.session_target[0], delimiter=' ')
+display(behavioral.iloc[0:20])
+```
+So let's extract the labels for each time points. We can check that the number of annotations match exactly the number of samples we had in `X`. We can also check all the annotation categories available.
+```{code-cell} python3
+y = behavioral['labels']
+categories = y.unique()
+print(categories)
+print(y.shape)
+print(X.shape)
+```
+These annotations correspond to the category of the image subjects were watching at each time point. Samples of images for each category are shown below:
+```{code-cell} python3
+:tags: ["hide-input"]
+
+import matplotlib.pyplot as plt
+
+from nilearn import datasets
+from nilearn.plotting import show
+
+stimulus_information = haxby_dataset.stimuli
+
+for stim_type in stimulus_information:
+  # skip control images, there are too many
+  if stim_type != 'controls':
+
+     file_names = stimulus_information[stim_type]
+     file_names = file_names[0:16]
+     fig, axes = plt.subplots(4, 4)
+     fig.suptitle(stim_type)
+
+     for img_path, ax in zip(file_names, axes.ravel()):
+         ax.imshow(plt.imread(img_path), cmap=plt.cm.gray)
+
+     for ax in axes.ravel():
+         ax.axis("off")
+
+show()
+```
 ## References
 
 ```{bibliography}
 :filter: docname in docnames
+```
 ```
