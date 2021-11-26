@@ -13,6 +13,7 @@ kernelspec:
   name: python3
 ---
 
+(haxby-dataset)=
 # The Haxby dataset
 
 ## Downloading the data
