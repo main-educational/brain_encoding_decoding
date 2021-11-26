@@ -120,6 +120,26 @@ for stim_type in stimulus_information:
 
 show()
 ```
+Note that for each image category, a number of scrambled images were also presented.
+```{code-cell} python3
+:tags: ["hide-input"]
+
+for stim_num in range(len(stimulus_information['controls'])):
+    stim_type = stimulus_information['controls'][stim_num][0]
+    file_names = stimulus_information['controls'][stim_num][1]  
+    file_names = file_names[0:16]
+    fig, axes = plt.subplots(4, 4)
+    fig.suptitle(stim_type)
+
+    for img_path, ax in zip(file_names, axes.ravel()):
+     ax.imshow(plt.imread(img_path), cmap=plt.cm.gray)
+
+    for ax in axes.ravel():
+     ax.axis("off")
+
+show()
+```
+
 ## References
 
 ```{bibliography}
