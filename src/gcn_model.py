@@ -10,10 +10,12 @@ class GCN(torch.nn.Module):
         super().__init__()
         self.edge_index = edge_index
         self.edge_weight = edge_weight
-        self.conv1 = tg.nn.ChebConv(in_channels=n_timepoints, out_channels=32, K=2, bias=True)
+        self.conv1 = tg.nn.ChebConv(
+            in_channels=n_timepoints, out_channels=32, K=2, bias=True
+        )
         self.conv2 = tg.nn.ChebConv(in_channels=32, out_channels=32, K=2, bias=True)
         self.conv3 = tg.nn.ChebConv(in_channels=32, out_channels=16, K=2, bias=True)
-        self.fc1 = nn.Linear(675*16, 256)
+        self.fc1 = nn.Linear(675 * 16, 256)
         self.fc2 = nn.Linear(256, 128)
         self.fc3 = nn.Linear(128, n_classes)
         self.dropout = nn.Dropout(0.2)
@@ -28,8 +30,10 @@ class GCN(torch.nn.Module):
         x = self.conv3(x, self.edge_index, self.edge_weight)
         x = F.relu(x)
         x = self.dropout(x)
-        x = tg.nn.global_mean_pool(x, torch.from_numpy(np.array(range(x.size(0)), dtype=int)))
-        x = x.view(-1, 675*16)
+        x = tg.nn.global_mean_pool(
+            x, torch.from_numpy(np.array(range(x.size(0)), dtype=int))
+        )
+        x = x.view(-1, 675 * 16)
         x = self.fc1(x)
         x = self.dropout(x)
         x = self.fc2(x)
