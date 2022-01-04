@@ -18,7 +18,6 @@ class GCN(torch.nn.Module):
         self.fc3 = nn.Linear(128, n_classes)
         self.dropout = nn.Dropout(0.2)
 
-
     def forward(self, x):
         x = self.conv1(x, self.edge_index, self.edge_weight)
         x = F.relu(x)

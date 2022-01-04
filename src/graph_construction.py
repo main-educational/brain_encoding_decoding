@@ -12,7 +12,7 @@ def make_undirected(mat):
     mat: array
         Square adjacency matrix.
     """
-    if not (mat.shape[0] == mat.shape[1]):
+    if mat.shape[0] != mat.shape[1]:
         raise ValueError('Adjacency matrix must be square.')
 
     sym = (mat + mat.transpose())/2
@@ -20,14 +20,14 @@ def make_undirected(mat):
         return np.ceil(sym) #otherwise return average
     return sym
 
-    
+
 def knn_graph_quantile(mat, self_loops=False, k=8, symmetric=True):
     """
-    Takes an input correlation matrix and returns a k-Nearest 
+    Takes an input correlation matrix and returns a k-Nearest
     Neighbour weighted undirected adjacency matrix.
     """
 
-    if not (mat.shape[0] == mat.shape[1]):
+    if mat.shape[0] != mat.shape[1]:
         raise ValueError("Adjacency matrix must be square.")
     dim = mat.shape[0]
     if (k <= 0) or (dim <= k):
@@ -47,7 +47,6 @@ def knn_graph_quantile(mat, self_loops=False, k=8, symmetric=True):
         np.fill_diagonal(adj, 0)
     if symmetric:
         adj = make_undirected(adj)
-    
     return adj
 
 
@@ -70,7 +69,7 @@ def make_group_graph(connectomes, k=8, self_loops=False, symmetric=True):
     -------
     Torch geometric graph object of k-Nearest Neighbours graph for the group average connectome.
     """
-    if not (connectomes[0].shape[0] == connectomes[0].shape[1]):
+    if connectomes[0].shape[0] != connectomes[0].shape[1]:
         raise ValueError('Connectomes must be square.')
 
     # Group average connectome and nndirected 8 k-NN graph
@@ -80,6 +79,4 @@ def make_group_graph(connectomes, k=8, self_loops=False, symmetric=True):
 
     # Format matrix into graph for torch_geometric
     adj_sparse = tg.utils.dense_to_sparse(torch.from_numpy(avg_conn_k))
-    tg_graph = tg.data.Data(edge_index=adj_sparse[0], edge_attr=adj_sparse[1])
-
-    return tg_graph
+    return tg.data.Data(edge_index=adj_sparse[0], edge_attr=adj_sparse[1])
