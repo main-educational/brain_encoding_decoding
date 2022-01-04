@@ -6,7 +6,7 @@ import numpy as np
 
 
 class GCN(torch.nn.Module):
-    def __init__(self, edge_index, edge_weight, n_timepoints=1, n_classes=21):
+    def __init__(self, edge_index, edge_weight, n_timepoints=1, n_classes=9):
         super().__init__()
         self.edge_index = edge_index
         self.edge_weight = edge_weight

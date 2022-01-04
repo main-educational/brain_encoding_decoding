@@ -70,6 +70,9 @@ dic_labels = {name: i for i, name in enumerate(categories)}
 So we have 1452 time points, with one cognitive annotations each, and for each time point we have recordings of fMRI activity across 675 voxels. We can also see that the cognitive annotations span 9 different categories.
 
 ```{code-cell} ipython3
+# generate data; delete everything in `data/haxby_connectomes`, 
+# `data/haxby_concat` and `data/haxby_split_win`
+# so we don't keep adding seen data to the generated file
 conn_path = os.path.join(data_dir, 'haxby_connectomes/')
 if not os.path.exists(conn_path):
     os.makedirs(conn_path)
@@ -83,27 +86,23 @@ warnings.filterwarnings(action='once')
 corr_measure = nilearn.connectome.ConnectivityMeasure(kind="correlation")
 conn = corr_measure.fit_transform([X])[0]
 np.save(os.path.join(conn_path, 'conn_subj{}.npy'.format(sub_no)), conn)
-```
 
-```{code-cell} ipython3
 concat_path = os.path.join(data_dir, 'haxby_concat/')
 if not os.path.exists(concat_path):
     os.makedirs(concat_path)
 
 concat_bold_files = []
-for i in range(0,len(y)):
-    label = y[i]
-    concat_bold_files = X[i:i+1]
+for i, label in enumerate(y):
+    concat_bold_files = X[i: i+1]
     concat_file_name = concat_path + '{}_concat_fMRI.npy'.format(label)
     
     if os.path.isfile(concat_file_name):
-        concat_file = np.load(concat_file_name, allow_pickle = True)
-        concat_file = np.concatenate((concat_file, concat_bold_files), axis = 0)
-        np.save(concat_file_name, concat_file)
+        concat_file = np.load(concat_file_name, allow_pickle=True)
+        if concat_file.shape[0] < y.shape[0]:
+            concat_file = np.concatenate((concat_file, concat_bold_files), axis=0)
+            np.save(concat_file_name, concat_file)
     else:
         np.save(concat_file_name, concat_bold_files)
-
-
 
 import pandas as pd
 split_path = os.path.join(data_dir, 'haxby_split_win/')
@@ -258,9 +257,9 @@ def train_loop(dataloader, model, loss_fn, optimizer):
 
         correct = (pred.argmax(1) == y).type(torch.float).sum().item()
         correct /= X.shape[0]
-        print(f"#{batch:>5};\ttrain_loss: {loss:>0.3f};\ttrain_accuracy:{(100*correct):>5.1f}%\t\t[{current:>5d}/{size:>5d}]")
+#         print(f"#{batch:>5};\ttrain_loss: {loss:>0.3f};\ttrain_accuracy:{(100*correct):>5.1f}%\t\t[{current:>5d}/{size:>5d}]")
 
-def valid_test_loop(dataloader, model, loss_fn):
+def valid_loop(dataloader, model, loss_fn):
     size = len(dataloader.dataset)
     loss, correct = 0, 0
 
@@ -284,12 +283,33 @@ epochs = 15
 for t in range(epochs):
     print(f"Epoch {t+1}/{epochs}\n-------------------------------")
     train_loop(train_generator, gcn, loss_fn, optimizer)
-    loss, correct = valid_test_loop(valid_generator, gcn, loss_fn)
+    loss, correct = valid_loop(valid_generator, gcn, loss_fn)
     print(f"Valid metrics:\n\t avg_loss: {loss:>8f};\t avg_accuracy: {(100*correct):>0.1f}%")
 ```
 
 ```{code-cell} ipython3
 # results
-loss, correct = valid_test_loop(test_generator, gcn, loss_fn) 
+def test_loop(dataloader, model, loss_fn):
+    size = len(dataloader.dataset)
+    loss, correct = 0, 0
+
+    with torch.no_grad():
+        for X, y in dataloader:
+            pred = model.forward(X)
+            cur_loss = loss_fn(pred, y).item()
+            cur_correct = (pred.argmax(1) == y).type(torch.float).sum().item()
+            loss += cur_loss
+            correct += cur_correct
+    loss /= size
+    correct /= size
+
+    return loss, correct
+
+
+loss, correct = test_loop(test_generator, gcn, loss_fn) 
 print(f"Test metrics:\n\t avg_loss: {loss:>f};\t avg_accuracy: {(100*correct):>0.1f}%")
+```
+
+```{code-cell} ipython3
+
 ```
