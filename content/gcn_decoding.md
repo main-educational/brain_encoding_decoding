@@ -63,6 +63,8 @@ categories = y.unique()
 print(categories)
 print(y.shape)
 print(X.shape)
+
+dic_labels = {name: i for i, name in enumerate(categories)}
 ```
 
 So we have 1452 time points, with one cognitive annotations each, and for each time point we have recordings of fMRI activity across 675 voxels. We can also see that the cognitive annotations span 9 different categories.
@@ -108,7 +110,6 @@ split_path = os.path.join(data_dir, 'haxby_split_win/')
 if not os.path.exists(split_path):
     os.makedirs(split_path)
 
-dic_labels = {'rest':0,'face':1,'chair':2,'scissors':3,'shoe':4,'scrambledpix':5,'house':6,'cat':7,'bottle':8}
 label_df = pd.DataFrame(columns=['label', 'filename'])
 processed_bold_files = sorted(glob.glob(concat_path + '/*.npy'))
 window_length = 1
@@ -214,7 +215,8 @@ graph = make_group_graph(connectomes, self_loops=False, k=8, symmetric=True)
 ## Running model
 __*Time windows*__
 
-For the GCN model in order to run the model on different sizes of input, we will concatenate bold data of the same stimuli and save it in a single file.
+For the
+GCN model in order to run the model on different sizes of input, we will concatenate bold data of the same stimuli and save it in a single file.
 
 It means that we need to extract the fmri time-series for each trial using the event design labels.
 
@@ -227,7 +229,10 @@ TR is cycle time between corresponding points in fMRI.
 from gcn_model import GCN
 
 window_length = 1
-gcn = GCN(graph.edge_index, graph.edge_attr, n_timepoints=window_length)
+gcn = GCN(graph.edge_index, 
+          graph.edge_attr, 
+          n_timepoints=window_length, 
+          n_classes=len(categories))
 gcn
 ```
 
