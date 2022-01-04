@@ -3,7 +3,7 @@ import torch
 import torch_geometric as tg
 
 
-def make_undirected(mat):
+def _make_undirected(mat):
     """
     Takes an input adjacency matrix and makes it undirected (symmetric).
 
@@ -21,7 +21,7 @@ def make_undirected(mat):
     return sym
 
 
-def knn_graph_quantile(mat, self_loops=False, k=8, symmetric=True):
+def _knn_graph_quantile(mat, self_loops=False, k=8, symmetric=True):
     """
     Takes an input correlation matrix and returns a k-Nearest
     Neighbour weighted undirected adjacency matrix.
@@ -46,7 +46,7 @@ def knn_graph_quantile(mat, self_loops=False, k=8, symmetric=True):
     if not self_loops:
         np.fill_diagonal(adj, 0)
     if symmetric:
-        adj = make_undirected(adj)
+        adj = _make_undirected(adj)
     return adj
 
 
@@ -75,7 +75,7 @@ def make_group_graph(connectomes, k=8, self_loops=False, symmetric=True):
     # Group average connectome and nndirected 8 k-NN graph
     avg_conn = np.array(connectomes).mean(axis=0)
     avg_conn = np.round(avg_conn, 6)
-    avg_conn_k = knn_graph_quantile(avg_conn, k=k, self_loops=self_loops, symmetric=symmetric)
+    avg_conn_k = _knn_graph_quantile(avg_conn, k=k, self_loops=self_loops, symmetric=symmetric)
 
     # Format matrix into graph for torch_geometric
     adj_sparse = tg.utils.dense_to_sparse(torch.from_numpy(avg_conn_k))
