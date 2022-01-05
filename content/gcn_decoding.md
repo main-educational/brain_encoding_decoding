@@ -23,11 +23,6 @@ name: gcn-pipeline-fig
 ---
 ```
 
-- __6__ graph convolutional layers
-- __32 graph filters__  at each layer
-- followed by a __global average pooling__ layer
-- __2 fully connected__ layers 
-
 ## Getting the data
 
 We are going to download the dataset from Haxby and colleagues (2001) {cite:p}`Haxby2001-vt`. You can check section {ref}`haxby-dataset` for more details on that dataset. Here we are going to quickly download it, and prepare it for machine learning applications with a set of predictive variable, the brain time series `X`, and a dependent variable, the annotation on cognition `y`.
@@ -63,83 +58,56 @@ categories = y.unique()
 print(categories)
 print(y.shape)
 print(X.shape)
-
-dic_labels = {name: i for i, name in enumerate(categories)}
 ```
 
 So we have 1452 time points, with one cognitive annotations each, and for each time point we have recordings of fMRI activity across 675 voxels. We can also see that the cognitive annotations span 9 different categories.
+
+We now can define some property of the GCN and process the data accordingly.
 
 ```{code-cell} ipython3
 # generate data; delete everything in `data/haxby_connectomes`, 
 # `data/haxby_concat` and `data/haxby_split_win`
 # so we don't keep adding seen data to the generated file
-conn_path = os.path.join(data_dir, 'haxby_connectomes/')
-if not os.path.exists(conn_path):
-    os.makedirs(conn_path)
-
-import glob
-import nilearn.connectome
-import numpy as np
-import warnings
-warnings.filterwarnings(action='once')
-# Estimating connectomes and save for pytorch to load
-corr_measure = nilearn.connectome.ConnectivityMeasure(kind="correlation")
-conn = corr_measure.fit_transform([X])[0]
-np.save(os.path.join(conn_path, 'conn_subj{}.npy'.format(sub_no)), conn)
-
-concat_path = os.path.join(data_dir, 'haxby_concat/')
-if not os.path.exists(concat_path):
-    os.makedirs(concat_path)
-
-concat_bold_files = []
-for i, label in enumerate(y):
-    concat_bold_files = X[i: i+1]
-    concat_file_name = concat_path + '{}_concat_fMRI.npy'.format(label)
-    
-    if os.path.isfile(concat_file_name):
-        concat_file = np.load(concat_file_name, allow_pickle=True)
-        if concat_file.shape[0] < y.shape[0]:
-            concat_file = np.concatenate((concat_file, concat_bold_files), axis=0)
-            np.save(concat_file_name, concat_file)
-    else:
-        np.save(concat_file_name, concat_bold_files)
-
 import pandas as pd
+import numpy as np
+
+# cancatenate the same type of trials
+concat_bold = {}
+for i, label in enumerate(y):
+    curr_bold_seg = X[i: i+1]    
+    bold_sign = concat_bold.get(label, False)
+    if isinstance(bold_sign, np.ndarray):
+        curr_bold_seg = np.concatenate((bold_sign, curr_bold_seg), axis=0)
+        concat_bold.update({label: curr_bold_seg})
+    else:
+        concat_bold[label] = curr_bold_seg
+```
+```
+# split the data by time window size
+window_length = 1
+
 split_path = os.path.join(data_dir, 'haxby_split_win/')
 if not os.path.exists(split_path):
     os.makedirs(split_path)
 
 label_df = pd.DataFrame(columns=['label', 'filename'])
-processed_bold_files = sorted(glob.glob(concat_path + '/*.npy'))
-window_length = 1
 out_file = os.path.join(split_path, '{}_{:04d}.npy')
-out_csv = os.path.join(split_path, 'labels.csv')
 
-for proc_bold in processed_bold_files:
-    
-    ts_data = np.load(proc_bold)
+for label, ts_data in concat_bold.items():
     ts_duration = len(ts_data)
-
-    ts_filename = os.path.basename(proc_bold)
-    ts_label = ts_filename.split('_', 1)[0]
-
-    valid_label = dic_labels[ts_label]
+    ts_filename = f"{label}_seg"
     
     # Split the timeseries
     rem = ts_duration % window_length
     n_splits = int(np.floor(ts_duration / window_length))
 
-    ts_data = ts_data[:(ts_duration-rem), :]   
+    ts_data = ts_data[:(ts_duration - rem), :]   
     
     for j, split_ts in enumerate(np.split(ts_data, n_splits)):
         ts_output_file_name = out_file.format(ts_filename, j)
 
         split_ts = np.swapaxes(split_ts, 0, 1)
         np.save(ts_output_file_name, split_ts)
-        curr_label = {'label': valid_label, 'filename': os.path.basename(ts_output_file_name)}
-        label_df = label_df.append(curr_label, ignore_index=True)
-    
-label_df.to_csv(out_csv, index=False)  
 ```
 
 ```{code-cell} ipython3
@@ -193,7 +161,7 @@ print(f"Labels batch shape: {train_labels.size()}; mean {torch.mean(torch.Tensor
 
 ## Building brain graphs
 
-After loading brain connectome, we will build brain garph.
+After generating brain connectome, we will build brain garph.
 __k-Nearest Neighbours(KNN) graph__ for the group average connectome will be built based on the connectivity-matrix.
 
 Each node is only connected to *k* other neighbours, which is __8 nodes__ with the strongest regions connectivity in this experiment.
@@ -201,21 +169,31 @@ Each node is only connected to *k* other neighbours, which is __8 nodes__ with t
 For more details you please check out __*src/graph_construction.py*__ script.
 
 ```{code-cell} ipython3
-conn_files = sorted(glob.glob(conn_path + '/*.npy')) 
-connectomes = []
-for conn_file in conn_files:
-      connectomes += [np.load(conn_file)]
+import warnings
+warnings.filterwarnings(action='once')
 
+import nilearn.connectome
 from graph_construction import make_group_graph
 
-graph = make_group_graph(connectomes, self_loops=False, k=8, symmetric=True)
+# Estimating connectomes and save for pytorch to load
+corr_measure = nilearn.connectome.ConnectivityMeasure(kind="correlation")
+conn = corr_measure.fit_transform([X])
+# make a graph for the subject
+graph = make_group_graph(conn, self_loops=False, k=8, symmetric=True)
 ```
 
 ## Running model
+
+We have created a GCN of the following property:
+- __3__ graph convolutional layers
+- __32 graph filters__  at each layer
+- followed by a __global average pooling__ layer
+- __2 fully connected__ layers 
+
+
 __*Time windows*__
 
-For the
-GCN model in order to run the model on different sizes of input, we will concatenate bold data of the same stimuli and save it in a single file.
+For the GCN model in order to run the model on different sizes of input, we will concatenate bold data of the same stimuli and save it in a single file.
 
 It means that we need to extract the fmri time-series for each trial using the event design labels.
 
@@ -227,7 +205,6 @@ TR is cycle time between corresponding points in fMRI.
 ```{code-cell} ipython3
 from gcn_model import GCN
 
-window_length = 1
 gcn = GCN(graph.edge_index, 
           graph.edge_attr, 
           n_timepoints=window_length, 
@@ -237,7 +214,7 @@ gcn
 
 ## Train and evaluating the model
 
-We will repeat the process for 15 epochs (times), and will evaluate the model based on the average accuracy and loss of these epochs.
+We will repeat the process for 20 epochs (times), and will evaluate the model based on the average accuracy and loss of these epochs.
 
 ```{code-cell} ipython3
 def train_loop(dataloader, model, loss_fn, optimizer):
@@ -257,7 +234,7 @@ def train_loop(dataloader, model, loss_fn, optimizer):
 
         correct = (pred.argmax(1) == y).type(torch.float).sum().item()
         correct /= X.shape[0]
-#         print(f"#{batch:>5};\ttrain_loss: {loss:>0.3f};\ttrain_accuracy:{(100*correct):>5.1f}%\t\t[{current:>5d}/{size:>5d}]")
+        print(f"#{batch:>5};\ttrain_loss: {loss:>0.3f};\ttrain_accuracy:{(100*correct):>5.1f}%\t\t[{current:>5d}/{size:>5d}]")
 
 def valid_loop(dataloader, model, loss_fn):
     size = len(dataloader.dataset)
@@ -279,7 +256,7 @@ def valid_loop(dataloader, model, loss_fn):
 loss_fn = torch.nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(gcn.parameters(), lr=1e-4, weight_decay=5e-4)
 
-epochs = 15
+epochs = 20
 for t in range(epochs):
     print(f"Epoch {t+1}/{epochs}\n-------------------------------")
     train_loop(train_generator, gcn, loss_fn, optimizer)
