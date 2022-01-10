@@ -7,4 +7,5 @@ chapters:
 - file: haxby_data
 - file: svm_decoding
 - file: mlp_decoding
+- file: gcn_decoding
 - file: encoding
