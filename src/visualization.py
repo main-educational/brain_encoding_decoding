@@ -7,7 +7,7 @@ from nilearn.plotting import plot_matrix
 
 def classifier_history(history, title):
     print(history.history.keys())
-    
+
     # summarize history for accuracy
     plt.plot(history.history['accuracy'])
     plt.plot(history.history['val_accuracy'])
@@ -17,7 +17,7 @@ def classifier_history(history, title):
     plt.legend(['train', 'validation'], loc = 'upper left')
     plt.show()
 
-    
+
     # summarize history for loss
     plt.plot(history.history['loss'])
     plt.plot(history.history['val_loss'])
@@ -27,12 +27,9 @@ def classifier_history(history, title):
     plt.legend(['train', 'validation'], loc = 'upper left')
     plt.show()
 
-    
-    
-    
 def conf_matrix(model_conf_matrix, unique_conditions, title):
-    
-    df_cm = pd.DataFrame(model_conf_matrix, index = unique_conditions, 
+
+    df_cm = pd.DataFrame(model_conf_matrix, index = unique_conditions,
                          columns = unique_conditions)
     plt.figure(figsize = (10,7))
     sn.heatmap(df_cm, annot = True, cmap = 'Blues', square = True)
@@ -41,5 +38,3 @@ def conf_matrix(model_conf_matrix, unique_conditions, title):
     plt.xlabel("true labels", fontsize = 14, fontweight = 'bold')
     plt.ylabel("predicted labels", fontsize = 14, fontweight = 'bold')
     plt.show()
-
-    
