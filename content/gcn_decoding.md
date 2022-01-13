@@ -21,16 +21,14 @@ kernelspec:
 width: 500px
 name: gcn-pipeline-fig
 ---
-Schematic of GCN analysis. 
+Schematic of the analysis proposed in Zhang and colleagues (2021).
+The full time series are used to constrcut the brain graph to a network representation of brain organization by associating nodes to brain regions and defining edges via functional connections. 
+
 ```
-
- proposed in Zhang and colleagues (2021) {cite:p}`Zhang2021-fa`
-GCN is an recent emerging approach studying fMRI.
-
 
 ## Getting the data
 
-We are going to download the dataset from Haxby and colleagues (2001) {cite:p}`Haxby2001-vt`. You can check section {ref}`haxby-dataset` for more details on that dataset. Here we are going to quickly download it, and prepare it for machine learning applications with a set of predictive variable, the brain time series `X`, and a dependent variable, the annotation on cognition `y`.
+We are going to download the dataset from Haxby and colleagues (2001) {cite:p}`Haxby2001-vt`. You can check section {ref}`haxby-dataset` for more details on that dataset. Here we are going to quickly download it, and prepare it for machine learning applications with a set of predictive variable, the brain time series, and a dependent variable, the annotation on cognition.
 
 ```{code-cell} python3
 :tags: ["hide_input", "hide_output"] 
@@ -45,28 +43,152 @@ sub_no = 4
 haxby_dataset = datasets.fetch_haxby(subjects=[sub_no], fetch_stimuli=True, data_dir=data_dir)
 func_file = haxby_dataset.func[0]
 
-# mask the data
-from nilearn.input_data import NiftiMasker
-mask_filename = haxby_dataset.mask_vt[0]
-masker = NiftiMasker(mask_img=mask_filename, standardize=True, detrend=True)
-X = masker.fit_transform(func_file)
-
 # cognitive annotations
 import pandas as pd
 behavioral = pd.read_csv(haxby_dataset.session_target[0], delimiter=' ')
 y = behavioral['labels']
 ```
 
-Let's check the size of `X` and `y`:
+Let's check the size of dependent variable `y`:
 
 ```{code-cell} python3
 categories = y.unique()
 print(categories)
 print(y.shape)
+```
+
+The generation of brain time series is a little bit more complicated for the GCN framework.
+The GCN framework from Zhang and colleagues (2021) {cite:p}`Zhang2021-fa` require a full brain graph. 
+
+## Extract time series from a full brain atlas
+
+There are two common approaches to define the brain regions: using predefined atlases from published studies or generate from own data.
+As the Haxby dataset is shipped in the native resolution, we cannot easily use an published atlas.  
+Here we will demostrate how to use nilearn to generate the brain regions, extract signals, and calculate the brain graph.
+
+### Dictionary learning for estimating brain networks
+
+Nilearn provides several methods for data-driven brain network estimation and dictionary learning is one of the robust method. 
+Dictionary learning (or sparse coding) is a representation learning method aiming at finding a sparse representation of the input data as a linear combination of basic elements called atoms. 
+The identification of these atoms composing the dictionary relies on a sparsity principle: 
+maximally sparse representations of the dataset are sought for. Atoms are not required to be orthogonal.
+
+We use the nilearn function `DictLearning` to estimate networks on the haxby EPI data.
+
+```{code-cell} python3
+import warnings
+warnings.filterwarnings(action='once')
+from nilearn.decomposition import DictLearning
+
+# Initialize DictLearning object
+dict_learn = DictLearning(n_components=20, smoothing_fwhm=6.,
+                          memory="nilearn_cache", memory_level=2,
+                          random_state=0)
+# Fit to the data
+dict_learn.fit(func_file)
+# Resting state networks/maps in attribute `components_img_`
+components_img = dict_learn.components_img_
+
+# Visualization of functional networks
+# Show networks using plotting utilities
+from nilearn.image import mean_img
+from nilearn import plotting
+mean_haxby = mean_img(func_file)
+plotting.plot_prob_atlas(components_img, 
+                         bg_img=mean_haxby, 
+                         view_type='filled_contours',
+                         title='Dictionary Learning maps')
+```
+
+### Region extraction from network components
+
+This approach has been previously used in the neuroscience literature to study the intrinsic organization of brain anatomy and functions.
+The next step is to separate the learned networks into discrete regions.
+Nilearn provides an useful class `RegionExtractor` to extract isolated regions from statistical maps.
+As the networks generated from dictionary learning are denoted by probablilty rather than discrete values,
+we will use `RegionExtractor` to generate a parcellation scheme.
+
+```{admonition} Extract connected regions from a brain atlas image defined by labels (integers). 
+:class: tip
+See function `nilearn.regions.connected_label_regions` and the tutorial on 
+[Yeo 7 networks](https://nilearn.github.io/auto_examples/06_manipulating_images/plot_extract_regions_labels_image.html#sphx-glr-auto-examples-06-manipulating-images-plot-extract-regions-labels-image-py)
+```
+
+```{code-cell} python3
+import warnings
+warnings.filterwarnings(action='once')
+from nilearn.regions import RegionExtractor
+
+extractor = RegionExtractor(components_img, threshold=0.5,
+                            thresholding_strategy='ratio_n_voxels',
+                            extractor='local_regions',
+                            standardize=True)
+# Just call fit() to process for regions extraction
+extractor.fit()
+# Extracted regions are stored in regions_img_
+regions_extracted_img = extractor.regions_img_
+# Each region index is stored in index_
+regions_index = extractor.index_
+# Total number of regions extracted
+n_regions_extracted = regions_extracted_img.shape[-1]
+
+# Visualization of region extraction results
+title = ('%d regions are extracted from %d components.'
+         '\nEach separate color of region indicates extracted region'
+         % (n_regions_extracted, 20))
+plotting.plot_prob_atlas(regions_extracted_img, 
+                         bg_img=mean_haxby, 
+                         view_type='filled_contours',
+                         title=title)
+
+X = extractor.transform(func_file)
 print(X.shape)
 ```
 
-So we have 1452 time points, with one cognitive annotations each, and for each time point we have recordings of fMRI activity across 675 voxels. We can also see that the cognitive annotations span 9 different categories.
+So we have 1452 time points in the imaging data, and for each time point we have recordings of fMRI activity across 68 brain regions.
+
+## Create brain graph for GCN
+
+A key component of GCN is brain graph.
+Brain graph provides a network representation of brain organization by associating nodes to brain regions and defining edges via anatomical or functional connections.
+After generating time series, we will firstly use the nilearn function to geneate a correlation based functional connectome.
+
+```{code-cell} python3
+import warnings
+warnings.filterwarnings(action='once')
+
+import nilearn.connectome
+
+# Estimating connectomes and save for pytorch to load
+corr_measure = nilearn.connectome.ConnectivityMeasure(kind="correlation")
+conn = corr_measure.fit_transform([X])[0]
+
+title = 'Correlation between %d regions' % n_regions_extracted
+
+# First plot the matrix
+display = plotting.plot_matrix(conn, vmax=1, vmin=-1,
+                               colorbar=True, title=title)
+
+```
+
+The next step is to construct the brain graph for GCN.
+
+__k-Nearest Neighbours(KNN) graph__ for the group average connectome will be built based on the connectivity-matrix.
+
+Each node is only connected to *k* conn = corr_measure.fit_transform([X])[0]
+other neighbouring nodes.
+For the purpose of demostration, we constrain the graph to from clusters with __8__ neighbouring nodes with the strongest connectivity.
+
+For more details you please check out __*src/graph_construction.py*__ script.
+
+```{code-cell} python3
+import sys
+sys.path.append('../src')
+from graph_construction import make_group_graph
+
+# make a graph for the subject
+graph = make_group_graph([conn], self_loops=False, k=8, symmetric=True)
+```
 
 
 ## Preparing the dataset for model training
@@ -144,8 +266,6 @@ official [`pytorch` documentation](https://pytorch.org/tutorials/beginner/basics
 
 ```{code-cell} python3
 # split dataset
-import sys
-sys.path.append('../src')
 from gcn_windows_dataset import TimeWindowsDataset
 
 random_seed = 0
@@ -187,7 +307,7 @@ We are separating the dataset into 16 time windows per batch.
 import torch
 from torch.utils.data import DataLoader
 
-batch_size=16
+batch_size = 16
 
 torch.manual_seed(random_seed)
 train_generator = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
@@ -196,33 +316,6 @@ test_generator = DataLoader(test_dataset, batch_size=batch_size, shuffle=True)
 train_features, train_labels = next(iter(train_generator))
 print(f"Feature batch shape: {train_features.size()}; mean {torch.mean(train_features)}")
 print(f"Labels batch shape: {train_labels.size()}; mean {torch.mean(torch.Tensor.float(train_labels))}")
-```
-
-## Building brain graphs
-
-Here we generate a connectome based on the local activity in the visual area. 
-After generating brain connectome, we will build brain garph.
-
-__k-Nearest Neighbours(KNN) graph__ for the group average connectome will be built based on the connectivity-matrix.
-
-Each node is only connected to *k* other neighbouring nodes.
-For the purpose of demostration, we constrain the graph to from clusters with __16__ neighbouring nodes with the strongest connectivity.
-
-For more details you please check out __*src/graph_construction.py*__ script.
-
-```{code-cell} python3
-import warnings
-warnings.filterwarnings(action='once')
-
-import nilearn.connectome
-from graph_construction import make_group_graph
-
-# Estimating connectomes and save for pytorch to load
-corr_measure = nilearn.connectome.ConnectivityMeasure(kind="correlation")
-conn = corr_measure.fit_transform([X])[0]
-
-# make a graph for the subject
-graph = make_group_graph([conn], self_loops=False, k=16, symmetric=True)
 ```
 
 ## Generating a GCN model 
@@ -276,7 +369,8 @@ def train_loop(dataloader, model, loss_fn, optimizer):
 
         correct = (pred.argmax(1) == y).type(torch.float).sum().item()
         correct /= X.shape[0]
-        print(f"#{batch:>5};\ttrain_loss: {loss:>0.3f};\ttrain_accuracy:{(100*correct):>5.1f}%\t\t[{current:>5d}/{size:>5d}]")
+        if (batch % 10 == 0) or (current == size):
+            print(f"#{batch:>5};\ttrain_loss: {loss:>0.3f};\ttrain_accuracy:{(100*correct):>5.1f}%\t\t[{current:>5d}/{size:>5d}]")
 
         
 def valid_test_loop(dataloader, model, loss_fn):
@@ -296,7 +390,7 @@ def valid_test_loop(dataloader, model, loss_fn):
 ```
 
 This whole procedure described above is called an __epoch__.
-We will repeat the process for 15 epochs.
+We will repeat the process for 60 epochs.
 Here the choice of loss function is `CrossEntropyLoss` and the optimizer to update the model is `Adam`.
 
 ```{code-cell} python3
@@ -304,7 +398,7 @@ Here the choice of loss function is `CrossEntropyLoss` and the optimizer to upda
 loss_fn = torch.nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(gcn.parameters(), lr=1e-4, weight_decay=5e-4)
 
-epochs = 15
+epochs = 60
 for t in range(epochs):
     print(f"Epoch {t+1}/{epochs}\n-------------------------------")
     train_loop(train_generator, gcn, loss_fn, optimizer)
@@ -312,7 +406,7 @@ for t in range(epochs):
     print(f"Valid metrics:\n\t avg_loss: {loss:>8f};\t avg_accuracy: {(100*correct):>0.1f}%")
 ```
 
-After training the model for 15 epochs, we use the untouched test data to evaluate the model and conclude the results of training.
+After training the model for 60 epochs, we use the untouched test data to evaluate the model and conclude the results of training.
 
 ```{code-cell} python3
 # results
@@ -332,8 +426,9 @@ with torch.no_grad():
 loss /= size
 correct /= size
 print(f"Test metrics:\n\t avg_loss: {loss:>f};\t avg_accuracy: {(100*correct):>0.1f}%")
-
 ```
+
+The performance is not greate. How would you improve it?
 
 ## Exercises
  * Try out different time window size, batch size for the dataset,
