@@ -82,6 +82,8 @@ from nilearn.decomposition import DictLearning
 
 # Initialize DictLearning object
 dict_learn = DictLearning(n_components=20, smoothing_fwhm=6.,
+                          low_pass=0.1, high_pass=0.01, t_r=2,
+                          detrend=True, standardize=True,
                           memory="nilearn_cache", memory_level=2,
                           random_state=0)
 # Fit to the data
@@ -122,7 +124,8 @@ from nilearn.regions import RegionExtractor
 extractor = RegionExtractor(components_img, threshold=0.5,
                             thresholding_strategy='ratio_n_voxels',
                             extractor='local_regions',
-                            standardize=True)
+                            low_pass=0.1, high_pass=0.01, t_r=2,
+                            detrend=True, standardize=True)
 # Just call fit() to process for regions extraction
 extractor.fit()
 # Extracted regions are stored in regions_img_
