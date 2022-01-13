@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Brain encoding &#8212; Introduction to brain encoding and decoding in fMRI</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
@@ -53,7 +54,7 @@
     <link rel="canonical" href="https://main-educational.github.io/brain_encoding_decoding/encoding.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Brain decoding with MLP" href="mlp_decoding.html" />
+    <link rel="prev" title="Brain decoding with GCN" href="gcn_decoding.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -111,6 +112,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="mlp_decoding.html">
    Brain decoding with MLP
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="gcn_decoding.html">
+   Brain decoding with GCN
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -372,7 +378,7 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="brain-encoding">
+  <section class="tex2jax_ignore mathjax_ignore" id="brain-encoding">
 <h1>Brain encoding<a class="headerlink" href="#brain-encoding" title="Permalink to this headline">¶</a></h1>
 <p>Encoding models try to predict neuronal activity using information from presented stimuli, like an image or sound. Where decoding goes from brain data to real-world stimulus, encoding goes the other direction.</p>
 <p>They learn to transform stimuli (typically) into neural response signals. Such models help us understand the relationship between the stimuli and the brain signals (brain’s “code”).</p>
@@ -386,7 +392,7 @@
 </ul>
 <hr class="docutils" />
 <p>In this tutorial, we will consider a study based on Miyawaki et al. 2008. This is based on the nilearn <a class="reference external" href="https://nilearn.github.io/auto_examples/02_decoding/plot_miyawaki_encoding.html">tutorial on encoding</a>.</p>
-<div class="section" id="miyawaki-et-al-2008-study">
+<section id="miyawaki-et-al-2008-study">
 <h2>Miyawaki et al. 2008 Study<a class="headerlink" href="#miyawaki-et-al-2008-study" title="Permalink to this headline">¶</a></h2>
 <p>This example partly reproduces the encoding model presented in Miyawaki, Y., Uchida, H., Yamashita, O., Sato, M.A., Morito, Y., Tanabe, H.C., Sadato, N. and Kamitani, Y., 2008. <a class="reference external" href="http://www.cell.com/neuron/abstract/S0896-6273%2808%2900958-6"><code class="docutils literal notranslate"><span class="pre">Visual</span> <span class="pre">image</span> <span class="pre">reconstruction</span> <span class="pre">from</span> <span class="pre">human</span> <span class="pre">brain</span> <span class="pre">activity</span> <span class="pre">using</span> <span class="pre">a</span> <span class="pre">combination</span> <span class="pre">of</span> <span class="pre">multiscale</span> <span class="pre">local</span> <span class="pre">image</span> <span class="pre">decoders</span></code></a> - <em>Miyawaki, Y., Uchida, H., Yamashita, O., Sato, M. A., Morito, Y., Tanabe, H. C., … &amp; Kamitani, Y. Neuron, 60(5), 915-929.</em></p>
 <p>Participants were shown images, which consisted of random 10x10 binary (either black or white) pixels, and the corresponding fMRI activity was recorded. We will try to predict the activity in each voxel from the binary pixel-values of the presented images.</p>
@@ -394,8 +400,8 @@
 <p>We will first prepare the data for training a model. Then we will understand the regression model and the scoring metric before proceeding to fit the encoding model on the data.</p>
 <p>We will evaluate the predictability of the activity at different voxels from the images. We shall explore the nature of prediction and plot these scores as brain maps to draw some inferences.</p>
 <p>Then we extract the receptive fields for a set of voxels to see which pixel location a voxel is most sensitive to. We attempt to understand the relationship between the stimuli image pixels and the voxel activities.</p>
-</div>
-<div class="section" id="basic-imports">
+</section>
+<section id="basic-imports">
 <h2>Basic Imports<a class="headerlink" href="#basic-imports" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -410,8 +416,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="loading-the-data">
+</section>
+<section id="loading-the-data">
 <h2>Loading the data<a class="headerlink" href="#loading-the-data" title="Permalink to this headline">¶</a></h2>
 <p>The dataset is readily available in nilearn and can be imported directly.</p>
 <p>It can be loaded in the following way.</p>
@@ -423,20 +429,6 @@
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dataset created in /home/runner/nilearn_data/miyawaki2008
-
-Downloading data from https://www.nitrc.org/frs/download.php/8486/miyawaki2008.tgz ...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 159424512 of 161069109 bytes (99.0%,    0.0s remaining) ...done. (1 seconds, 0 min)
-Extracting data from /home/runner/nilearn_data/miyawaki2008/18b67c55cebe5e71427c5ffdcfafd948/miyawaki2008.tgz...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>.. done.
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -445,119 +437,119 @@ Extracting data from /home/runner/nilearn_data/miyawaki2008/18b67c55cebe5e71427c
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;func&#39;: [&#39;/home/runner/nilearn_data/miyawaki2008/func/data_figure_run01.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_figure_run02.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_figure_run03.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_figure_run04.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_figure_run05.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_figure_run06.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_figure_run07.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_figure_run08.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_figure_run09.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_figure_run10.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_figure_run11.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_figure_run12.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run01.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run02.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run03.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run04.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run05.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run06.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run07.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run08.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run09.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run10.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run11.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run12.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run13.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run14.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run15.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run16.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run17.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run18.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run19.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run20.nii.gz&#39;],
- &#39;label&#39;: [&#39;/home/runner/nilearn_data/miyawaki2008/label/data_figure_run01_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_figure_run02_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_figure_run03_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_figure_run04_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_figure_run05_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_figure_run06_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_figure_run07_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_figure_run08_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_figure_run09_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_figure_run10_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_figure_run11_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_figure_run12_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run01_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run02_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run03_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run04_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run05_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run06_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run07_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run08_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run09_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run10_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run11_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run12_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run13_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run14_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run15_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run16_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run17_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run18_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run19_label.csv&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run20_label.csv&#39;],
- &#39;mask&#39;: &#39;/home/runner/nilearn_data/miyawaki2008/mask/mask.nii.gz&#39;,
- &#39;mask_roi&#39;: [&#39;/home/runner/nilearn_data/miyawaki2008/mask/LHlag0to1.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/LHlag10to11.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/LHlag1to2.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/LHlag2to3.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/LHlag3to4.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/LHlag4to5.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/LHlag5to6.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/LHlag6to7.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/LHlag7to8.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/LHlag8to9.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/LHlag9to10.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/LHV1d.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/LHV1v.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/LHV2d.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/LHV2v.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/LHV3A.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/LHV3.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/LHV4v.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/LHVP.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/RHlag0to1.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/RHlag10to11.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/RHlag1to2.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/RHlag2to3.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/RHlag3to4.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/RHlag4to5.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/RHlag5to6.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/RHlag6to7.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/RHlag7to8.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/RHlag8to9.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/RHlag9to10.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/RHV1d.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/RHV1v.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/RHV2d.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/RHV2v.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/RHV3A.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/RHV3.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/RHV4v.nii.gz&#39;,
-  &#39;/home/runner/nilearn_data/miyawaki2008/mask/RHVP.nii.gz&#39;],
- &#39;background&#39;: &#39;/home/runner/nilearn_data/miyawaki2008/bg.nii.gz&#39;,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;func&#39;: [&#39;/home/haoting/nilearn_data/miyawaki2008/func/data_figure_run01.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_figure_run02.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_figure_run03.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_figure_run04.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_figure_run05.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_figure_run06.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_figure_run07.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_figure_run08.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_figure_run09.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_figure_run10.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_figure_run11.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_figure_run12.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run01.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run02.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run03.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run04.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run05.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run06.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run07.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run08.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run09.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run10.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run11.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run12.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run13.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run14.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run15.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run16.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run17.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run18.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run19.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run20.nii.gz&#39;],
+ &#39;label&#39;: [&#39;/home/haoting/nilearn_data/miyawaki2008/label/data_figure_run01_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_figure_run02_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_figure_run03_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_figure_run04_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_figure_run05_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_figure_run06_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_figure_run07_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_figure_run08_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_figure_run09_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_figure_run10_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_figure_run11_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_figure_run12_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run01_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run02_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run03_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run04_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run05_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run06_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run07_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run08_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run09_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run10_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run11_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run12_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run13_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run14_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run15_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run16_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run17_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run18_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run19_label.csv&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run20_label.csv&#39;],
+ &#39;mask&#39;: &#39;/home/haoting/nilearn_data/miyawaki2008/mask/mask.nii.gz&#39;,
+ &#39;mask_roi&#39;: [&#39;/home/haoting/nilearn_data/miyawaki2008/mask/LHlag0to1.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/LHlag10to11.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/LHlag1to2.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/LHlag2to3.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/LHlag3to4.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/LHlag4to5.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/LHlag5to6.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/LHlag6to7.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/LHlag7to8.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/LHlag8to9.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/LHlag9to10.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/LHV1d.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/LHV1v.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/LHV2d.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/LHV2v.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/LHV3A.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/LHV3.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/LHV4v.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/LHVP.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/RHlag0to1.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/RHlag10to11.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/RHlag1to2.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/RHlag2to3.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/RHlag3to4.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/RHlag4to5.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/RHlag5to6.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/RHlag6to7.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/RHlag7to8.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/RHlag8to9.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/RHlag9to10.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/RHV1d.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/RHV1v.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/RHV2d.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/RHV2v.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/RHV3A.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/RHV3.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/RHV4v.nii.gz&#39;,
+  &#39;/home/haoting/nilearn_data/miyawaki2008/mask/RHVP.nii.gz&#39;],
+ &#39;background&#39;: &#39;/home/haoting/nilearn_data/miyawaki2008/bg.nii.gz&#39;,
  &#39;description&#39;: b&quot;Miyawaki 2008\n\n\nNotes\n-----\nCollection of result images from MVPA investigation of the human visual systems.\n\nThis :term:`fMRI` study reconstructed visual images by combining local\nimage bases of multiple scales. Their :term:`contrasts&lt;contrast&gt;` were independently\ndecoded from :term:`fMRI` activity by selecting important :term:`voxels&lt;voxel&gt;` and\ncapitalizing on their correlation structure.\n\nContent\n-------\n    :&#39;label&#39;: Paths to text files containing session and target data\n    :&#39;func&#39;: Paths to nifti files with :term:`BOLD` data\n    :&#39;mask&#39;: Path to general mask nifti that defines target volume in visual cortex\n    :&#39;mask_roi&#39;: List of paths to images with specific data (&#39;RH&#39; for right hemisphere, &#39;LH&#39; for left hemisphere, &#39;Vxxx&#39; denote visual areas)\n\n\nReferences\n----------\nFor more information on this dataset&#39;s structure, see\nhttp://www.cns.atr.jp/dni/en/downloads/ fmri-data-set-for-visual-image-reconstruction\n\nMiyawaki, Y., Uchida, H., Yamashita, O., Sato, M. A.,\nMorito, Y., Tanabe, H. C., ... &amp; Kamitani, Y. (2008).\nNeuron, 60(5), 915-929.\n\nLicence: unknown.\n&quot;}
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="preparing-the-training-data">
+</section>
+<section id="preparing-the-training-data">
 <h2>Preparing the training data<a class="headerlink" href="#preparing-the-training-data" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="making-a-list-of-the-necessary-files">
+<section id="making-a-list-of-the-necessary-files">
 <h3>Making a list of the necessary files<a class="headerlink" href="#making-a-list-of-the-necessary-files" title="Permalink to this headline">¶</a></h3>
 <p>We only use the training data of this study,
 where random binary images were shown.</p>
@@ -578,26 +570,26 @@ where random binary images were shown.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run01.nii.gz&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run02.nii.gz&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run03.nii.gz&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run04.nii.gz&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run05.nii.gz&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run06.nii.gz&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run07.nii.gz&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run08.nii.gz&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run09.nii.gz&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run10.nii.gz&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run11.nii.gz&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run12.nii.gz&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run13.nii.gz&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run14.nii.gz&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run15.nii.gz&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run16.nii.gz&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run17.nii.gz&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run18.nii.gz&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run19.nii.gz&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/func/data_random_run20.nii.gz&#39;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run01.nii.gz&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run02.nii.gz&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run03.nii.gz&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run04.nii.gz&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run05.nii.gz&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run06.nii.gz&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run07.nii.gz&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run08.nii.gz&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run09.nii.gz&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run10.nii.gz&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run11.nii.gz&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run12.nii.gz&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run13.nii.gz&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run14.nii.gz&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run15.nii.gz&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run16.nii.gz&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run17.nii.gz&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run18.nii.gz&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run19.nii.gz&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/func/data_random_run20.nii.gz&#39;]
 </pre></div>
 </div>
 </div>
@@ -609,32 +601,32 @@ where random binary images were shown.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run01_label.csv&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run02_label.csv&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run03_label.csv&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run04_label.csv&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run05_label.csv&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run06_label.csv&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run07_label.csv&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run08_label.csv&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run09_label.csv&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run10_label.csv&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run11_label.csv&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run12_label.csv&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run13_label.csv&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run14_label.csv&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run15_label.csv&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run16_label.csv&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run17_label.csv&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run18_label.csv&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run19_label.csv&#39;,
- &#39;/home/runner/nilearn_data/miyawaki2008/label/data_random_run20_label.csv&#39;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run01_label.csv&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run02_label.csv&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run03_label.csv&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run04_label.csv&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run05_label.csv&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run06_label.csv&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run07_label.csv&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run08_label.csv&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run09_label.csv&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run10_label.csv&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run11_label.csv&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run12_label.csv&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run13_label.csv&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run14_label.csv&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run15_label.csv&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run16_label.csv&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run17_label.csv&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run18_label.csv&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run19_label.csv&#39;,
+ &#39;/home/haoting/nilearn_data/miyawaki2008/label/data_random_run20_label.csv&#39;]
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="fmri-data-preprocessing-masking-and-data-extraction">
+</section>
+<section id="fmri-data-preprocessing-masking-and-data-extraction">
 <h3>fMRI data : Preprocessing, Masking and Data extraction<a class="headerlink" href="#fmri-data-preprocessing-masking-and-data-extraction" title="Permalink to this headline">¶</a></h3>
 <p>We can use <code class="docutils literal notranslate"><span class="pre">nilearn.input_data.MultiNiftiMasker</span></code> to load the fMRI
 data, clean and mask it.</p>
@@ -702,8 +694,8 @@ data, clean and mask it.</p>
 <img alt="_images/encoding_26_0.png" src="_images/encoding_26_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="stimuli-data-data-extraction">
+</section>
+<section id="stimuli-data-data-extraction">
 <h3>Stimuli data: Data Extraction<a class="headerlink" href="#stimuli-data-data-extraction" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -776,8 +768,8 @@ data, clean and mask it.</p>
 <img alt="_images/encoding_33_0.png" src="_images/encoding_33_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="creating-the-input-and-target-matrices-for-training">
+</section>
+<section id="creating-the-input-and-target-matrices-for-training">
 <h3>Creating the input and target matrices for training<a class="headerlink" href="#creating-the-input-and-target-matrices-for-training" title="Permalink to this headline">¶</a></h3>
 <p>The input matrix and target matrix required for fitting the encoding model are prepared as follows:</p>
 <p>As fMRI BOLD is a very slow signal, we ensure that the fMRI response data corresponds to the stimulus image shown at a given time by shifting the output sequence by a fixed number of steps (=2)</p>
@@ -831,14 +823,14 @@ fmri_data.shape = (2860, 5438)
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="building-the-encoding-models">
+</section>
+</section>
+<section id="building-the-encoding-models">
 <h2>Building the encoding models<a class="headerlink" href="#building-the-encoding-models" title="Permalink to this headline">¶</a></h2>
 <p>We can now proceed to build a simple <strong>voxel-wise encoding model</strong> using <a class="reference external" href="http://en.wikipedia.org/wiki/Tikhonov_regularization">Ridge regression</a>.</p>
 <p>For each voxel we fit an independent regression model, using the pixel-values of the visual stimuli to predict the BOLD activity in this voxel.</p>
 <p>We need to understand the model and a way to score our predictions to quantify the estimation.</p>
-<div class="section" id="ridge-regression-model">
+<section id="ridge-regression-model">
 <h3>Ridge Regression Model<a class="headerlink" href="#ridge-regression-model" title="Permalink to this headline">¶</a></h3>
 <p>For the learning task in encoding, the data matrix for training is not always ideal.</p>
 <p>Especially in most neroimaging studies, it is very common the have the number of samples of the stimuli lesser the dimensionality of the data.</p>
@@ -850,8 +842,8 @@ $$ \mathbf{\beta} =  (\mathbf{X}^{T}\mathbf{X} + \alpha \mathbf{I})^{-1} \mathbf
 <p>The parameter matrix $\mathbf{\beta}$ can also be calculated using optimization.</p>
 <p>The mean squared error ($MSE$) objective function of ordinary linear regression is augmented with an extra term to reduce the magnitude of the coefficients ${\beta_i}^{(k)}$ in the matrix $\mathbf{\beta}$.</p>
 <p>We will use the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html"><code class="docutils literal notranslate"><span class="pre">Ridge</span></code></a> model from scikit-learn.</p>
-</div>
-<div class="section" id="r-2-score-for-evaluation-of-regression">
+</section>
+<section id="r-2-score-for-evaluation-of-regression">
 <h3>$R^2$ score for evaluation of regression<a class="headerlink" href="#r-2-score-for-evaluation-of-regression" title="Permalink to this headline">¶</a></h3>
 <p>For the actual target values ${y}_i$ the regression model attempts to predict a good estimates $\hat{y}_i$ and the error of such a model prediction can be expressed by the mean squared error ($MSE$) which is the mean of all the squared error terms.</p>
 <p>$$MSE(y,\hat{y})~=~ \frac{1}{n} \sum_{i=1}^{n}~(y_i - \hat{y}<em>i)^2 ~=~ \frac{1}{n} ~SSE</em>{regression}$$</p>
@@ -866,14 +858,14 @@ $$ \mathbf{\beta} =  (\mathbf{X}^{T}\mathbf{X} + \alpha \mathbf{I})^{-1} \mathbf
 <p>This quantity $R^2$ (that is equivalently referred to as R2) is a relative measure that is usually between $0$ and $1$ and can be interpreted as aprportion of explained variance (can also be expressed as a percentage).</p>
 <p>This score is very useful in determining if</p>
 <p>We make use of the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html"><code class="docutils literal notranslate"><span class="pre">r2_score</span></code></a> function in scikit-lean to compute this for each voxel during the model evaluation.</p>
-</div>
-<div class="section" id="cross-validation">
+</section>
+<section id="cross-validation">
 <h3>Cross-Validation<a class="headerlink" href="#cross-validation" title="Permalink to this headline">¶</a></h3>
 <p>The evaluation of regression model used in encoding needs to be done for truly “unseen” inputs. Otherwise, the model could easily overfit to the stimuli/features seen during training and could perform poorly in general and can signal an association that is not true.</p>
 <p>Cross-validation methods (k-Fold, LOOCV, etc) can be used to get a good estimate of the generalization of prediction of the regression model. As these methods fit models several times and average the results, these are more reliable.</p>
 <p>The <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html"><code class="docutils literal notranslate"><span class="pre">KFold</span></code></a> class in scikit-learn helps us create the splits for thse different folds.</p>
-</div>
-<div class="section" id="training-the-model">
+</section>
+<section id="training-the-model">
 <h3>Training the model<a class="headerlink" href="#training-the-model" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -921,7 +913,9 @@ $$ \mathbf{\beta} =  (\mathbf{X}^{T}\mathbf{X} + \alpha \mathbf{I})^{-1} \mathbf
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fold = [3] :: #train samples = 2574, #test samples = 286
-fold = [4] :: #train samples = 2574, #test samples = 286
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fold = [4] :: #train samples = 2574, #test samples = 286
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fold = [5] :: #train samples = 2574, #test samples = 286
@@ -934,13 +928,15 @@ fold = [4] :: #train samples = 2574, #test samples = 286
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fold = [8] :: #train samples = 2574, #test samples = 286
-fold = [9] :: #train samples = 2574, #test samples = 286
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fold = [9] :: #train samples = 2574, #test samples = 286
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="analyzing-the-predictions">
+</section>
+<section id="analyzing-the-predictions">
 <h3>Analyzing the predictions<a class="headerlink" href="#analyzing-the-predictions" title="Permalink to this headline">¶</a></h3>
 <p>We will consider the predicted signals from the last fold of the k-fold that is found in the <code class="docutils literal notranslate"><span class="pre">predictions</span></code> variable and take the index values from the actual <code class="docutils literal notranslate"><span class="pre">fmri_data</span></code> that correspond to the original data.</p>
 <p>From this we will consider 1 run from the test set of the final fold (which contains 2 runs).</p>
@@ -991,7 +987,7 @@ predicted.shape (#TRs,#voxels) =  (143, 5438)
 <img alt="_images/encoding_64_0.png" src="_images/encoding_64_0.png" />
 </div>
 </div>
-<div class="section" id="scatter-plot-of-actual-vs-predicted-values">
+<section id="scatter-plot-of-actual-vs-predicted-values">
 <h4>Scatter Plot of actual vs predicted values<a class="headerlink" href="#scatter-plot-of-actual-vs-predicted-values" title="Permalink to this headline">¶</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1040,13 +1036,13 @@ R2 score at voxel  1951 = 0.657
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="section" id="mapping-the-encoding-scores-on-the-brain">
+</section>
+</section>
+</section>
+<section id="mapping-the-encoding-scores-on-the-brain">
 <h2>Mapping the encoding scores on the brain<a class="headerlink" href="#mapping-the-encoding-scores-on-the-brain" title="Permalink to this headline">¶</a></h2>
 <p>To plot the scores onto the brain, we create a Nifti1Image containing the scores and then threshold it:</p>
-<div class="section" id="computation-of-the-score-map-and-generating-the-brain-image">
+<section id="computation-of-the-score-map-and-generating-the-brain-image">
 <h3>Computation of the score map and generating the brain image<a class="headerlink" href="#computation-of-the-score-map-and-generating-the-brain-image" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">masker</span></code> object used to map the voxels to the data matrix is reused to inverse transform the score matrix to the brain volumne.</p>
 <div class="cell docutils container">
@@ -1195,7 +1191,7 @@ R2 score at voxel  1951 = 0.657
 </table>
 </div></div></div>
 </div>
-<div class="section" id="histogram-of-the-r-2-scores">
+<section id="histogram-of-the-r-2-scores">
 <h4>Histogram of the $R^2$ scores<a class="headerlink" href="#histogram-of-the-r-2-scores" title="Permalink to this headline">¶</a></h4>
 <p>We notice that only a small minority of voxels have higher $R^2$ score and these are the voxels that are more predictive for the input features.</p>
 <div class="cell docutils container">
@@ -1212,9 +1208,9 @@ R2 score at voxel  1951 = 0.657
 <img alt="_images/encoding_82_0.png" src="_images/encoding_82_0.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="plotting-the-score-map-brain-image">
+</section>
+</section>
+<section id="plotting-the-score-map-brain-image">
 <h3>Plotting the score map brain image<a class="headerlink" href="#plotting-the-score-map-brain-image" title="Permalink to this headline">¶</a></h3>
 <p>We can plot first plot the statistical map of the $R^2$ scores in an interactive plot.</p>
 <div class="cell docutils container">
@@ -1313,14 +1309,14 @@ We mark four voxels (with outlines blue, green, red, pink) which we will inspect
 <li><p>We can observe that among the visual areas defined by the mask, only few locations deem. These seem to be concentrated around the visual cortices. This means that the voxels in these regions could potentially encode these fine-grained features such as pixels and/or their positions. It is known from years of study that the early visual areas such as V1, V2, etc. encode such features.</p></li>
 <li><p>There are other areas in VT that are not very predictable from the stimulus pixels. This could either mean that the voxels at these locations do not respond depending on these type of stimuli (or) that they do not encode these pixel-level features of the stimuli. For example, they could be more sensitive to images of faces, places, etc. or higher-level concepts/patterns unlike the scrambled image patterns in the stimuli.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="estimating-receptive-fields">
+</section>
+</section>
+<section id="estimating-receptive-fields">
 <h2>Estimating receptive fields<a class="headerlink" href="#estimating-receptive-fields" title="Permalink to this headline">¶</a></h2>
 <p>A voxel’s <a class="reference external" href="http://en.wikipedia.org/wiki/Receptive_field"><code class="docutils literal notranslate"><span class="pre">receptive</span> <span class="pre">field</span></code></a> is the region of a stimulus (like an image) where the presence of an object,
 like a white instead of a black pixel, results in a change in activity in the voxel.</p>
 <p>In our case the receptive field is just the vector of 100 regression  coefficients (one for each pixel) reshaped into the 10x10 form of the original images.</p>
-<div class="section" id="receptive-fields-from-the-ridge-model">
+<section id="receptive-fields-from-the-ridge-model">
 <h3>Receptive fields from the Ridge model<a class="headerlink" href="#receptive-fields-from-the-ridge-model" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">model</span></code> variable consists of the model fit from the last fold (10th) rom the previous section. Ideally, we average or pick the best fold for a model. But this is good enough for analyzing the coefficients.</p>
 <p>For a given voxel, the coefficients of the linear model can be accessed to obtain 100 dimensional weights that can be visulaized on 10x10 grid corresponding to the stimulus image.</p>
@@ -1382,8 +1378,8 @@ like a white instead of a black pixel, results in a change in activity in the vo
 </div>
 </div>
 <p>We see that rach of them have a strong selectivity to specific pixel locations, while they do not seem to attend to th other pixels.</p>
-</div>
-<div class="section" id="receptive-fields-from-lasso-model">
+</section>
+<section id="receptive-fields-from-lasso-model">
 <h3>Receptive fields from Lasso model<a class="headerlink" href="#receptive-fields-from-lasso-model" title="Permalink to this headline">¶</a></h3>
 <p>Now we take a closer look at the receptive fields of the four marked voxels.</p>
 <p>Some voxels are receptive to only very few pixels, so we use <a class="reference external" href="http://en.wikipedia.org/wiki/Lasso_(statistic)"><code class="docutils literal notranslate"><span class="pre">Lasso</span> <span class="pre">regression</span></code></a> to estimate a sparse
@@ -1464,13 +1460,13 @@ the relative location of the pixel each voxel is most sensitive to
 roughly maps to the relative location of the voxels to each other.
 We can see a relationship between some voxel’s receptive field and
 its location in the brain.</p>
-</div>
-</div>
-<div class="section" id="evaluation-of-the-encoding-model-on-a-test-dataset">
+</section>
+</section>
+<section id="evaluation-of-the-encoding-model-on-a-test-dataset">
 <h2>Evaluation of the encoding model on a test dataset<a class="headerlink" href="#evaluation-of-the-encoding-model-on-a-test-dataset" title="Permalink to this headline">¶</a></h2>
 <p>We will now use another set of runs which used slightly different stimuli distribution of “figures” (non-random images) as opposed to the random pattern images that it was trained on.</p>
 <p>There are the first 12 runs in both the fmri and stimulus data.</p>
-<div class="section" id="data-preparation">
+<section id="data-preparation">
 <h3>Data Preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h3>
 <p>We will do the same procedure for extracting the data and preparing the data matrices for the evaluation.</p>
 <p>Getting the file paths of these data.</p>
@@ -1567,8 +1563,8 @@ stimuli_figure_data.shape = (1536, 100)
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="scoring-the-test-set-using-the-encoding-model">
+</section>
+<section id="scoring-the-test-set-using-the-encoding-model">
 <h3>Scoring the test set using the encoding model<a class="headerlink" href="#scoring-the-test-set-using-the-encoding-model" title="Permalink to this headline">¶</a></h3>
 <p>Use the trained encoding model to predict for the test simuli.</p>
 <p>Consider the actual fmri data extracted for the test set and compute the R2 score.</p>
@@ -1675,9 +1671,9 @@ stimuli_figure_data.shape = (1536, 100)
 <p>We can see that the encoding model predicts similar predictability for this unseen stimulus set.</p>
 <p>This means that it has learned the stimulus image pixel to brain voxel associations very well and identifies the voxels that are more responsive to the input pixels.</p>
 <hr class="docutils" />
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1704,11 +1700,11 @@ stimuli_figure_data.shape = (1536, 100)
         
             <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="mlp_decoding.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="gcn_decoding.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Brain decoding with MLP</p>
+            <p class="prev-next-title">Brain decoding with GCN</p>
         </div>
     </a>
 </div>

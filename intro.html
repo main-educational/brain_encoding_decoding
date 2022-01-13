@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Introduction &#8212; Introduction to brain encoding and decoding in fMRI</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
@@ -111,6 +112,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="mlp_decoding.html">
    Brain decoding with MLP
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="gcn_decoding.html">
+   Brain decoding with GCN
   </a>
  </li>
  <li class="toctree-l1">
@@ -248,24 +254,26 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="introduction">
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="brain-encoding-and-decoding">
+<section id="brain-encoding-and-decoding">
 <h2>Brain encoding and decoding<a class="headerlink" href="#brain-encoding-and-decoding" title="Permalink to this headline">¶</a></h2>
-<div class="figure align-default" id="brain-encoding-decoding-fig">
+<figure class="align-default" id="brain-encoding-decoding-fig">
 <a class="reference internal image-reference" href="_images/brain-encoding-decoding.png"><img alt="_images/brain-encoding-decoding.png" src="_images/brain-encoding-decoding.png" style="width: 800px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">To test the consistency of representations in artificial neural networks (ANNs) and the brain, it is possible to <strong>encode</strong> brain activity based on ANN presented with similar stimuli, or <strong>decode</strong> brain activity by predicting the expected ANN activity and corresponding annotation of cognitive states. Figure from <a class="reference external" href="https://doi.org/10.1101/407007">Schrimpf et al. (2020)</a> <span id="id1">[<a class="reference internal" href="#id4">SKH+20</a>]</span>, under a <a class="reference external" href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a> license.</span><a class="headerlink" href="#brain-encoding-decoding-fig" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">To test the consistency of representations in artificial neural networks (ANNs) and the brain, it is possible to <strong>encode</strong> brain activity based on ANN presented with similar stimuli, or <strong>decode</strong> brain activity by predicting the expected ANN activity and corresponding annotation of cognitive states. Figure from <a class="reference external" href="https://doi.org/10.1101/407007">Schrimpf et al. (2020)</a> <span id="id1">[<a class="reference internal" href="#id4">SKH+20</a>]</span>, under a <a class="reference external" href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a> license.</span><a class="headerlink" href="#brain-encoding-decoding-fig" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
 <p>This jupyter book presents an introduction to brain encoding and decoding using fMRI. Brain decoding is a type of model where we try to guess what a subject is doing, based on recordings of brain activity. Brain encoding is the reverse operation, where we use machine learning tools to predict the activity of the brain, either based on annotations of the cognitive states of the subject, or using features learned by an artificial neural network presented with the same stimuli as the subject. The tutorials make heavy use of <a class="reference external" href="https://nilearn.github.io/stable/index.html">nilearn</a>
 manipulate and process fMRI data, as well as <a class="reference external" href="https://scikit-learn.org/stable/">scikit-learn</a> and <a class="reference external" href="https://pytorch.org/">pytorch</a>
 to apply machine learning techniques on the data.</p>
 <p>This resource was developed for use at the <a class="reference external" href="https://www.main2021.org/">Montreal AI and Neuroscience (MAIN)</a>
 conference in November 2021.</p>
-</div>
-<div class="section" id="setup">
+</section>
+<section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
 <p>There are two ways to run the tutorials: local installation and Binder.</p>
-<div class="section" id="local-installation-recommended">
+<section id="local-installation-recommended">
 <h3>Local installation (Recommended)<a class="headerlink" href="#local-installation-recommended" title="Permalink to this headline">¶</a></h3>
 <div class="tip admonition" id="python-install-tip">
 <p class="admonition-title">Install python</p>
@@ -309,8 +317,8 @@ environment in a folder named <code class="docutils literal notranslate"><span c
 <p>Click on the <code class="docutils literal notranslate"><span class="pre">.md</span></code> files. They will be rendered as jupyter notebooks 🎉</p>
 </li>
 </ol>
-</div>
-<div class="section" id="binder">
+</section>
+<section id="binder">
 <h3>Binder<a class="headerlink" href="#binder" title="Permalink to this headline">¶</a></h3>
 <p>If you wish to run the tutorial in Binder, click on the rocket icon to launch the notebook 🚀</p>
 <div class="admonition warning">
@@ -319,9 +327,9 @@ environment in a folder named <code class="docutils literal notranslate"><span c
 Some cells might not execute correctly, or the data download will not be completed.
 For the full experience, we recommend using the local set up instruction.</p>
 </div>
-</div>
-</div>
-<div class="section" id="acknowledgements">
+</section>
+</section>
+<section id="acknowledgements">
 <h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this headline">¶</a></h2>
 <p>Parts of the tutorial are directly adapted from a nilearn <a class="reference external" href="https://nilearn.github.io/auto_examples/plot_decoding_tutorial.html">tutorial</a> on the Haxby dataset.</p>
 <p>This tutorial was prepared and presented by
@@ -330,8 +338,8 @@ For the full experience, we recommend using the local set up instruction.</p>
 <p>Some images and code are used from a previous iteration of this tutorial, prepared by Dr <a class="reference external" href="https://github.com/zhangyu2ustc">Yu Zhang</a>.</p>
 <p>It is rendered here using <a class="reference external" href="https://github.com/jupyter/jupyter-book">Jupyter Book</a>,</p>
 <!-- with compute infrastructure provided by the [Canadian Open Neuroscience Platform (CONP)](http://conp.ca). -->
-</div>
-<div class="section" id="references">
+</section>
+<section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <p id="id2"><dl class="citation">
 <dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id1">SKH+20</a></span></dt>
@@ -339,10 +347,10 @@ For the full experience, we recommend using the local set up instruction.</p>
 </dd>
 </dl>
 </p>
-</div>
+</section>
 <div class="toctree-wrapper compound">
 </div>
-</div>
+</section>
 
     <script type="text/x-thebe-config">
     {
