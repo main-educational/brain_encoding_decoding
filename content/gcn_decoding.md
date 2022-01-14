@@ -413,21 +413,7 @@ After training the model for 60 epochs, we use the untouched test data to evalua
 
 ```{code-cell} python3
 # results
-# loss, correct = valid_test_loop(test_generator, gcn, loss_fn)
-from sklearn.metrics import confusion_matrix
-
-size = len(test_generator.dataset)
-loss, correct = 0, 0
-
-with torch.no_grad():
-    for X, y in test_generator:
-        pred = gcn.forward(X)
-        loss += loss_fn(pred, y).item()
-        cur_correct = (pred.argmax(1) == y).type(torch.float).sum().item()
-        correct += cur_correct
-
-loss /= size
-correct /= size
+loss, correct = valid_test_loop(test_generator, gcn, loss_fn)
 print(f"Test metrics:\n\t avg_loss: {loss:>f};\t avg_accuracy: {(100*correct):>0.1f}%")
 ```
 
