@@ -84,7 +84,9 @@ For the full experience, we recommend using the local set up instruction.
 Parts of the tutorial are directly adapted from a nilearn [tutorial](https://nilearn.github.io/auto_examples/plot_decoding_tutorial.html) on the Haxby dataset.
 
 This tutorial was prepared and presented by
+[Pravish Sainath](https://github.com/pravishsainath)
 [Shima Rastegarnia](https://github.com/srastegarnia),
+[Hao-Ting Wang](https://github.com/htwangtw)
 [Loic Tetrel](https://github.com/ltetrel) and [Pierre Bellec](https://github.com/pbellec).
 
 Some images and code are used from a previous iteration of this tutorial, prepared by Dr [Yu Zhang](https://github.com/zhangyu2ustc).
