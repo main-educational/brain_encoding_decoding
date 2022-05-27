@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Haxby dataset &#8212; Introduction to brain encoding and decoding in fMRI</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
@@ -314,9 +313,9 @@
             
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="the-haxby-dataset">
+  <div class="tex2jax_ignore mathjax_ignore section" id="the-haxby-dataset">
 <span id="haxby-dataset"></span><h1>The Haxby dataset<a class="headerlink" href="#the-haxby-dataset" title="Permalink to this headline">¶</a></h1>
-<section id="downloading-the-data">
+<div class="section" id="downloading-the-data">
 <h2>Downloading the data<a class="headerlink" href="#downloading-the-data" title="Permalink to this headline">¶</a></h2>
 <p>In the field of functional magnetic resonance imaging (fMRI), one of the first studies which have demonstrated the feasibility of brain decoding was the study by Haxby and colleagues (2001) <span id="id1">[<a class="reference internal" href="#id3">HGF+01</a>]</span>. Subjects were presented with various images drawn from different categories. In this tutorial, we will try to decode the category of the image presented to the subject from brain data. We are first going to use nilearn to download one subject (number 4) from the Haxby dataset.</p>
 <div class="cell tag_remove-output docutils container">
@@ -332,8 +331,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="visualizing-the-data">
+</div>
+<div class="section" id="visualizing-the-data">
 <h2>Visualizing the data<a class="headerlink" href="#visualizing-the-data" title="Permalink to this headline">¶</a></h2>
 <p>The data includes <code class="docutils literal notranslate"><span class="pre">nii</span></code> files, which contains images of brain volumes, either anatomical or functional. We can examine one functional volume using nilearn’s plotting tools. Because fmri data are 4D we use <a class="reference external" href="https://nilearn.github.io/modules/generated/nilearn.image.mean_img.html#nilearn.image.mean_img">nilearn.image.mean_img</a> to extract the average brain volume.</p>
 <div class="cell docutils container">
@@ -345,7 +344,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/haoting/.virtualenvs/brain_encoding_decoding/lib/python3.8/site-packages/nilearn/plotting/html_stat_map.py:217: FutureWarning: Default resolution of the MNI template will change from 2mm to 1mm in version 0.10.0
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/nilearn/plotting/html_stat_map.py:217: FutureWarning: Default resolution of the MNI template will change from 2mm to 1mm in version 0.10.0
   bg_img = load_mni152_template()
 </pre></div>
 </div>
@@ -395,15 +394,13 @@
 <p class="admonition-title">Interactive viewer</p>
 <p>The viewer <code class="docutils literal notranslate"><span class="pre">plotting.view_img</span></code> is interactive. You can click on the brain volume to explore different slices. You can learn about the three anatomical planes: sagittal (<code class="docutils literal notranslate"><span class="pre">x</span></code>), coronal (<code class="docutils literal notranslate"><span class="pre">y</span></code>) and axial (<code class="docutils literal notranslate"><span class="pre">z</span></code>) in the <a class="reference external" href="https://en.wikipedia.org/wiki/Anatomical_plane">wikipedia article</a>.</p>
 </div>
-</section>
-<section id="preparing-the-fmri-data">
+</div>
+<div class="section" id="preparing-the-fmri-data">
 <h2>Preparing the fMRI data<a class="headerlink" href="#preparing-the-fmri-data" title="Permalink to this headline">¶</a></h2>
-<figure class="align-default" id="masker-fig">
+<div class="figure align-default" id="masker-fig">
 <a class="reference internal image-reference" href="_images/masker.png"><img alt="_images/masker.png" src="_images/masker.png" style="width: 800px;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 2 </span><span class="caption-text">A <code class="docutils literal notranslate"><span class="pre">Masker</span></code> object is used to convert a 4D volume (space + time) into a data array, where each column is a voxel or brain region (features) and each row is a time point (samples). Figure from the <a class="reference external" href="https://nilearn.github.io/stable/manipulating_images/masker_objects.html">nilearn documentation</a>.</span><a class="headerlink" href="#masker-fig" title="Permalink to this image">¶</a></p>
-</figcaption>
-</figure>
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">A <code class="docutils literal notranslate"><span class="pre">Masker</span></code> object is used to convert a 4D volume (space + time) into a data array, where each column is a voxel or brain region (features) and each row is a time point (samples). Figure from the <a class="reference external" href="https://nilearn.github.io/stable/manipulating_images/masker_objects.html">nilearn documentation</a>.</span><a class="headerlink" href="#masker-fig" title="Permalink to this image">¶</a></p>
+</div>
 <p>Instead of keeping the fMRI data as a 4D array (3D spatial coordinates + time), we are going to extract the time series associated with a mask of the ventral temporal cortex. This mask has been generated as part of the Haxby et al. (2001) study, and highlights a part of the brain specialized in the processing of visual information, and which contains areas sensitive to different types of image categories.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -416,7 +413,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f823fafa370&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7fc120f6d640&gt;
 </pre></div>
 </div>
 <img alt="_images/haxby_data_5_1.png" src="_images/haxby_data_5_1.png" />
@@ -444,8 +441,8 @@
 <p class="admonition-title">Nilearn maskers</p>
 <p>Nilearn maskers are very versatile and offer many approaches to extract a time series array from 4D data, as well as reshape back an array into a series of brain volumes. You can learn more about nilearn maskers in this <a class="reference external" href="https://nilearn.github.io/stable/manipulating_images/masker_objects.html">documentation</a>.</p>
 </div>
-</section>
-<section id="preparing-the-cognitive-annotations">
+</div>
+<div class="section" id="preparing-the-cognitive-annotations">
 <h2>Preparing the cognitive annotations<a class="headerlink" href="#preparing-the-cognitive-annotations" title="Permalink to this headline">¶</a></h2>
 <p>Now, we are going to extract cognitive annotations, that is values which tell us what type of images the subject was viewing at each time point. Let’s look at the first 20 annotations:</p>
 <div class="cell docutils container">
@@ -673,8 +670,8 @@
 <img alt="_images/haxby_data_15_6.png" src="_images/haxby_data_15_6.png" />
 </div>
 </div>
-</section>
-<section id="references">
+</div>
+<div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <p id="id2"><dl class="citation">
 <dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id1">HGF+01</a></span></dt>
@@ -685,8 +682,8 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {

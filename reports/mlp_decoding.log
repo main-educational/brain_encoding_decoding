@@ -1,0 +1,194 @@
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from keras.models import Sequential
+from keras.layers import Dense
+
+# number of unique conditions that we have
+model_mlp = Sequential()
+
+# Adding the input layer and the first hidden layer
+model_mlp.add(Dense(50 , input_dim = 675, kernel_initializer="uniform", activation = 'relu'))
+
+# Adding the second hidden layer
+model_mlp.add(Dense(30, kernel_initializer="uniform", activation = 'relu'))
+
+# Using softmax at the end, length of categories shows the number of labels we have
+model_mlp.add(Dense(len(categories), activation = 'softmax'))
+
+model_mlp.summary()
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mTypeError[0m                                 Traceback (most recent call last)
+Input [0;32mIn [5][0m, in [0;36m<cell line: 1>[0;34m()[0m
+[0;32m----> 1[0m [38;5;28;01mfrom[39;00m [38;5;21;01mkeras[39;00m[38;5;21;01m.[39;00m[38;5;21;01mmodels[39;00m [38;5;28;01mimport[39;00m Sequential
+[1;32m      2[0m [38;5;28;01mfrom[39;00m [38;5;21;01mkeras[39;00m[38;5;21;01m.[39;00m[38;5;21;01mlayers[39;00m [38;5;28;01mimport[39;00m Dense
+[1;32m      4[0m [38;5;66;03m# number of unique conditions that we have[39;00m
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/keras/__init__.py:21[0m, in [0;36m<module>[0;34m[0m
+[1;32m     15[0m [38;5;124;03m"""Implementation of the Keras API, the high-level API of TensorFlow.[39;00m
+[1;32m     16[0m 
+[1;32m     17[0m [38;5;124;03mDetailed documentation and user guides are available at[39;00m
+[1;32m     18[0m [38;5;124;03m[keras.io](https://keras.io).[39;00m
+[1;32m     19[0m [38;5;124;03m"""[39;00m
+[1;32m     20[0m [38;5;66;03m# pylint: disable=unused-import[39;00m
+[0;32m---> 21[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtensorflow[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpython[39;00m [38;5;28;01mimport[39;00m tf2
+[1;32m     22[0m [38;5;28;01mfrom[39;00m [38;5;21;01mkeras[39;00m [38;5;28;01mimport[39;00m distribute
+[1;32m     24[0m [38;5;66;03m# See b/110718070#comment18 for more details about this import.[39;00m
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/tensorflow/__init__.py:41[0m, in [0;36m<module>[0;34m[0m
+[1;32m     38[0m [38;5;28;01mimport[39;00m [38;5;21;01msix[39;00m [38;5;28;01mas[39;00m [38;5;21;01m_six[39;00m
+[1;32m     39[0m [38;5;28;01mimport[39;00m [38;5;21;01msys[39;00m [38;5;28;01mas[39;00m [38;5;21;01m_sys[39;00m
+[0;32m---> 41[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtensorflow[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpython[39;00m[38;5;21;01m.[39;00m[38;5;21;01mtools[39;00m [38;5;28;01mimport[39;00m module_util [38;5;28;01mas[39;00m _module_util
+[1;32m     42[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtensorflow[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpython[39;00m[38;5;21;01m.[39;00m[38;5;21;01mutil[39;00m[38;5;21;01m.[39;00m[38;5;21;01mlazy_loader[39;00m [38;5;28;01mimport[39;00m LazyLoader [38;5;28;01mas[39;00m _LazyLoader
+[1;32m     44[0m [38;5;66;03m# Make sure code inside the TensorFlow codebase can use tf2.enabled() at import.[39;00m
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/tensorflow/python/__init__.py:40[0m, in [0;36m<module>[0;34m[0m
+[1;32m     31[0m [38;5;28;01mimport[39;00m [38;5;21;01mtraceback[39;00m
+[1;32m     33[0m [38;5;66;03m# We aim to keep this file minimal and ideally remove completely.[39;00m
+[1;32m     34[0m [38;5;66;03m# If you are adding a new file with @tf_export decorators,[39;00m
+[1;32m     35[0m [38;5;66;03m# import it in modules_with_exports.py instead.[39;00m
+[1;32m     36[0m 
+[1;32m     37[0m [38;5;66;03m# go/tf-wildcard-import[39;00m
+[1;32m     38[0m [38;5;66;03m# pylint: disable=wildcard-import,g-bad-import-order,g-import-not-at-top[39;00m
+[0;32m---> 40[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtensorflow[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpython[39;00m[38;5;21;01m.[39;00m[38;5;21;01meager[39;00m [38;5;28;01mimport[39;00m context
+[1;32m     41[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtensorflow[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpython[39;00m [38;5;28;01mimport[39;00m pywrap_tensorflow [38;5;28;01mas[39;00m _pywrap_tensorflow
+[1;32m     43[0m [38;5;66;03m# pylint: enable=wildcard-import[39;00m
+[1;32m     44[0m 
+[1;32m     45[0m [38;5;66;03m# Bring in subpackages.[39;00m
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/tensorflow/python/eager/context.py:32[0m, in [0;36m<module>[0;34m[0m
+[1;32m     29[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
+[1;32m     30[0m [38;5;28;01mimport[39;00m [38;5;21;01msix[39;00m
+[0;32m---> 32[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtensorflow[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mframework[39;00m [38;5;28;01mimport[39;00m function_pb2
+[1;32m     33[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtensorflow[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mprotobuf[39;00m [38;5;28;01mimport[39;00m config_pb2
+[1;32m     34[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtensorflow[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mprotobuf[39;00m [38;5;28;01mimport[39;00m rewriter_config_pb2
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/tensorflow/core/framework/function_pb2.py:16[0m, in [0;36m<module>[0;34m[0m
+[1;32m     11[0m [38;5;66;03m# @@protoc_insertion_point(imports)[39;00m
+[1;32m     13[0m _sym_db [38;5;241m=[39m _symbol_database[38;5;241m.[39mDefault()
+[0;32m---> 16[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtensorflow[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mframework[39;00m [38;5;28;01mimport[39;00m attr_value_pb2 [38;5;28;01mas[39;00m tensorflow_dot_core_dot_framework_dot_attr__value__pb2
+[1;32m     17[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtensorflow[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mframework[39;00m [38;5;28;01mimport[39;00m node_def_pb2 [38;5;28;01mas[39;00m tensorflow_dot_core_dot_framework_dot_node__def__pb2
+[1;32m     18[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtensorflow[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mframework[39;00m [38;5;28;01mimport[39;00m op_def_pb2 [38;5;28;01mas[39;00m tensorflow_dot_core_dot_framework_dot_op__def__pb2
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/tensorflow/core/framework/attr_value_pb2.py:16[0m, in [0;36m<module>[0;34m[0m
+[1;32m     11[0m [38;5;66;03m# @@protoc_insertion_point(imports)[39;00m
+[1;32m     13[0m _sym_db [38;5;241m=[39m _symbol_database[38;5;241m.[39mDefault()
+[0;32m---> 16[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtensorflow[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mframework[39;00m [38;5;28;01mimport[39;00m tensor_pb2 [38;5;28;01mas[39;00m tensorflow_dot_core_dot_framework_dot_tensor__pb2
+[1;32m     17[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtensorflow[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mframework[39;00m [38;5;28;01mimport[39;00m tensor_shape_pb2 [38;5;28;01mas[39;00m tensorflow_dot_core_dot_framework_dot_tensor__shape__pb2
+[1;32m     18[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtensorflow[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mframework[39;00m [38;5;28;01mimport[39;00m types_pb2 [38;5;28;01mas[39;00m tensorflow_dot_core_dot_framework_dot_types__pb2
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/tensorflow/core/framework/tensor_pb2.py:16[0m, in [0;36m<module>[0;34m[0m
+[1;32m     11[0m [38;5;66;03m# @@protoc_insertion_point(imports)[39;00m
+[1;32m     13[0m _sym_db [38;5;241m=[39m _symbol_database[38;5;241m.[39mDefault()
+[0;32m---> 16[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtensorflow[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mframework[39;00m [38;5;28;01mimport[39;00m resource_handle_pb2 [38;5;28;01mas[39;00m tensorflow_dot_core_dot_framework_dot_resource__handle__pb2
+[1;32m     17[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtensorflow[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mframework[39;00m [38;5;28;01mimport[39;00m tensor_shape_pb2 [38;5;28;01mas[39;00m tensorflow_dot_core_dot_framework_dot_tensor__shape__pb2
+[1;32m     18[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtensorflow[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mframework[39;00m [38;5;28;01mimport[39;00m types_pb2 [38;5;28;01mas[39;00m tensorflow_dot_core_dot_framework_dot_types__pb2
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/tensorflow/core/framework/resource_handle_pb2.py:16[0m, in [0;36m<module>[0;34m[0m
+[1;32m     11[0m [38;5;66;03m# @@protoc_insertion_point(imports)[39;00m
+[1;32m     13[0m _sym_db [38;5;241m=[39m _symbol_database[38;5;241m.[39mDefault()
+[0;32m---> 16[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtensorflow[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mframework[39;00m [38;5;28;01mimport[39;00m tensor_shape_pb2 [38;5;28;01mas[39;00m tensorflow_dot_core_dot_framework_dot_tensor__shape__pb2
+[1;32m     17[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtensorflow[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mframework[39;00m [38;5;28;01mimport[39;00m types_pb2 [38;5;28;01mas[39;00m tensorflow_dot_core_dot_framework_dot_types__pb2
+[1;32m     20[0m DESCRIPTOR [38;5;241m=[39m _descriptor[38;5;241m.[39mFileDescriptor(
+[1;32m     21[0m   name[38;5;241m=[39m[38;5;124m'[39m[38;5;124mtensorflow/core/framework/resource_handle.proto[39m[38;5;124m'[39m,
+[1;32m     22[0m   package[38;5;241m=[39m[38;5;124m'[39m[38;5;124mtensorflow[39m[38;5;124m'[39m,
+[0;32m   (...)[0m
+[1;32m     26[0m   ,
+[1;32m     27[0m   dependencies[38;5;241m=[39m[tensorflow_dot_core_dot_framework_dot_tensor__shape__pb2[38;5;241m.[39mDESCRIPTOR,tensorflow_dot_core_dot_framework_dot_types__pb2[38;5;241m.[39mDESCRIPTOR,])
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/tensorflow/core/framework/tensor_shape_pb2.py:36[0m, in [0;36m<module>[0;34m[0m
+[1;32m     13[0m _sym_db [38;5;241m=[39m _symbol_database[38;5;241m.[39mDefault()
+[1;32m     18[0m DESCRIPTOR [38;5;241m=[39m _descriptor[38;5;241m.[39mFileDescriptor(
+[1;32m     19[0m   name[38;5;241m=[39m[38;5;124m'[39m[38;5;124mtensorflow/core/framework/tensor_shape.proto[39m[38;5;124m'[39m,
+[1;32m     20[0m   package[38;5;241m=[39m[38;5;124m'[39m[38;5;124mtensorflow[39m[38;5;124m'[39m,
+[0;32m   (...)[0m
+[1;32m     23[0m   serialized_pb[38;5;241m=[39m_b([38;5;124m'[39m[38;5;130;01m\n[39;00m[38;5;124m,tensorflow/core/framework/tensor_shape.proto[39m[38;5;130;01m\x12[39;00m[38;5;130;01m\n[39;00m[38;5;124mtensorflow[39m[38;5;130;01m\"[39;00m[38;5;124mz[39m[38;5;130;01m\n[39;00m[38;5;130;01m\x10[39;00m[38;5;124mTensorShapeProto[39m[38;5;130;01m\x12[39;00m[38;5;124m-[39m[38;5;130;01m\n[39;00m[38;5;130;01m\x03[39;00m[38;5;130;01m\x64[39;00m[38;5;124mim[39m[38;5;130;01m\x18[39;00m[38;5;130;01m\x02[39;00m[38;5;124m [39m[38;5;130;01m\x03[39;00m[38;5;124m([39m[38;5;130;01m\x0b[39;00m[38;5;130;01m\x32[39;00m[38;5;124m .tensorflow.TensorShapeProto.Dim[39m[38;5;130;01m\x12[39;00m[38;5;130;01m\x14[39;00m[38;5;130;01m\n[39;00m[38;5;130;01m\x0c[39;00m[38;5;124munknown_rank[39m[38;5;130;01m\x18[39;00m[38;5;130;01m\x03[39;00m[38;5;124m [39m[38;5;130;01m\x01[39;00m[38;5;124m([39m[38;5;130;01m\x08[39;00m[38;5;130;01m\x1a[39;00m[38;5;124m![39m[38;5;130;01m\n[39;00m[38;5;130;01m\x03[39;00m[38;5;130;01m\x44[39;00m[38;5;124mim[39m[38;5;130;01m\x12[39;00m[38;5;130;01m\x0c[39;00m[38;5;130;01m\n[39;00m[38;5;130;01m\x04[39;00m[38;5;124msize[39m[38;5;130;01m\x18[39;00m[38;5;130;01m\x01[39;00m[38;5;124m [39m[38;5;130;01m\x01[39;00m[38;5;124m([39m[38;5;130;01m\x03[39;00m[38;5;130;01m\x12[39;00m[38;5;130;01m\x0c[39;00m[38;5;130;01m\n[39;00m[38;5;130;01m\x04[39;00m[38;5;124mname[39m[38;5;130;01m\x18[39;00m[38;5;130;01m\x02[39;00m[38;5;124m [39m[38;5;130;01m\x01[39;00m[38;5;124m([39m[38;5;130;01m\t[39;00m[38;5;124mB[39m[38;5;130;01m\x87[39;00m[38;5;130;01m\x01[39;00m[38;5;130;01m\n[39;00m[38;5;130;01m\x18[39;00m[38;5;124morg.tensorflow.frameworkB[39m[38;5;130;01m\x11[39;00m[38;5;124mTensorShapeProtosP[39m[38;5;130;01m\x01[39;00m[38;5;124mZSgithub.com/tensorflow/tensorflow/tensorflow/go/core/framework/tensor_shape_go_proto[39m[38;5;130;01m\xf8[39;00m[38;5;130;01m\x01[39;00m[38;5;130;01m\x01[39;00m[38;5;130;01m\x62[39;00m[38;5;130;01m\x06[39;00m[38;5;124mproto3[39m[38;5;124m'[39m)
+[1;32m     24[0m )
+[1;32m     29[0m _TENSORSHAPEPROTO_DIM [38;5;241m=[39m _descriptor[38;5;241m.[39mDescriptor(
+[1;32m     30[0m   name[38;5;241m=[39m[38;5;124m'[39m[38;5;124mDim[39m[38;5;124m'[39m,
+[1;32m     31[0m   full_name[38;5;241m=[39m[38;5;124m'[39m[38;5;124mtensorflow.TensorShapeProto.Dim[39m[38;5;124m'[39m,
+[1;32m     32[0m   filename[38;5;241m=[39m[38;5;28;01mNone[39;00m,
+[1;32m     33[0m   file[38;5;241m=[39mDESCRIPTOR,
+[1;32m     34[0m   containing_type[38;5;241m=[39m[38;5;28;01mNone[39;00m,
+[1;32m     35[0m   fields[38;5;241m=[39m[
+[0;32m---> 36[0m     [43m_descriptor[49m[38;5;241;43m.[39;49m[43mFieldDescriptor[49m[43m([49m
+[1;32m     37[0m [43m      [49m[43mname[49m[38;5;241;43m=[39;49m[38;5;124;43m'[39;49m[38;5;124;43msize[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[43mfull_name[49m[38;5;241;43m=[39;49m[38;5;124;43m'[39;49m[38;5;124;43mtensorflow.TensorShapeProto.Dim.size[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[43mindex[49m[38;5;241;43m=[39;49m[38;5;241;43m0[39;49m[43m,[49m
+[1;32m     38[0m [43m      [49m[43mnumber[49m[38;5;241;43m=[39;49m[38;5;241;43m1[39;49m[43m,[49m[43m [49m[38;5;28;43mtype[39;49m[38;5;241;43m=[39;49m[38;5;241;43m3[39;49m[43m,[49m[43m [49m[43mcpp_type[49m[38;5;241;43m=[39;49m[38;5;241;43m2[39;49m[43m,[49m[43m [49m[43mlabel[49m[38;5;241;43m=[39;49m[38;5;241;43m1[39;49m[43m,[49m
+[1;32m     39[0m [43m      [49m[43mhas_default_value[49m[38;5;241;43m=[39;49m[38;5;28;43;01mFalse[39;49;00m[43m,[49m[43m [49m[43mdefault_value[49m[38;5;241;43m=[39;49m[38;5;241;43m0[39;49m[43m,[49m
+[1;32m     40[0m [43m      [49m[43mmessage_type[49m[38;5;241;43m=[39;49m[38;5;28;43;01mNone[39;49;00m[43m,[49m[43m [49m[43menum_type[49m[38;5;241;43m=[39;49m[38;5;28;43;01mNone[39;49;00m[43m,[49m[43m [49m[43mcontaining_type[49m[38;5;241;43m=[39;49m[38;5;28;43;01mNone[39;49;00m[43m,[49m
+[1;32m     41[0m [43m      [49m[43mis_extension[49m[38;5;241;43m=[39;49m[38;5;28;43;01mFalse[39;49;00m[43m,[49m[43m [49m[43mextension_scope[49m[38;5;241;43m=[39;49m[38;5;28;43;01mNone[39;49;00m[43m,[49m
+[1;32m     42[0m [43m      [49m[43mserialized_options[49m[38;5;241;43m=[39;49m[38;5;28;43;01mNone[39;49;00m[43m,[49m[43m [49m[43mfile[49m[38;5;241;43m=[39;49m[43mDESCRIPTOR[49m[43m)[49m,
+[1;32m     43[0m     _descriptor[38;5;241m.[39mFieldDescriptor(
+[1;32m     44[0m       name[38;5;241m=[39m[38;5;124m'[39m[38;5;124mname[39m[38;5;124m'[39m, full_name[38;5;241m=[39m[38;5;124m'[39m[38;5;124mtensorflow.TensorShapeProto.Dim.name[39m[38;5;124m'[39m, index[38;5;241m=[39m[38;5;241m1[39m,
+[1;32m     45[0m       number[38;5;241m=[39m[38;5;241m2[39m, [38;5;28mtype[39m[38;5;241m=[39m[38;5;241m9[39m, cpp_type[38;5;241m=[39m[38;5;241m9[39m, label[38;5;241m=[39m[38;5;241m1[39m,
+[1;32m     46[0m       has_default_value[38;5;241m=[39m[38;5;28;01mFalse[39;00m, default_value[38;5;241m=[39m_b([38;5;124m"[39m[38;5;124m"[39m)[38;5;241m.[39mdecode([38;5;124m'[39m[38;5;124mutf-8[39m[38;5;124m'[39m),
+[1;32m     47[0m       message_type[38;5;241m=[39m[38;5;28;01mNone[39;00m, enum_type[38;5;241m=[39m[38;5;28;01mNone[39;00m, containing_type[38;5;241m=[39m[38;5;28;01mNone[39;00m,
+[1;32m     48[0m       is_extension[38;5;241m=[39m[38;5;28;01mFalse[39;00m, extension_scope[38;5;241m=[39m[38;5;28;01mNone[39;00m,
+[1;32m     49[0m       serialized_options[38;5;241m=[39m[38;5;28;01mNone[39;00m, file[38;5;241m=[39mDESCRIPTOR),
+[1;32m     50[0m   ],
+[1;32m     51[0m   extensions[38;5;241m=[39m[
+[1;32m     52[0m   ],
+[1;32m     53[0m   nested_types[38;5;241m=[39m[],
+[1;32m     54[0m   enum_types[38;5;241m=[39m[
+[1;32m     55[0m   ],
+[1;32m     56[0m   serialized_options[38;5;241m=[39m[38;5;28;01mNone[39;00m,
+[1;32m     57[0m   is_extendable[38;5;241m=[39m[38;5;28;01mFalse[39;00m,
+[1;32m     58[0m   syntax[38;5;241m=[39m[38;5;124m'[39m[38;5;124mproto3[39m[38;5;124m'[39m,
+[1;32m     59[0m   extension_ranges[38;5;241m=[39m[],
+[1;32m     60[0m   oneofs[38;5;241m=[39m[
+[1;32m     61[0m   ],
+[1;32m     62[0m   serialized_start[38;5;241m=[39m[38;5;241m149[39m,
+[1;32m     63[0m   serialized_end[38;5;241m=[39m[38;5;241m182[39m,
+[1;32m     64[0m )
+[1;32m     66[0m _TENSORSHAPEPROTO [38;5;241m=[39m _descriptor[38;5;241m.[39mDescriptor(
+[1;32m     67[0m   name[38;5;241m=[39m[38;5;124m'[39m[38;5;124mTensorShapeProto[39m[38;5;124m'[39m,
+[1;32m     68[0m   full_name[38;5;241m=[39m[38;5;124m'[39m[38;5;124mtensorflow.TensorShapeProto[39m[38;5;124m'[39m,
+[0;32m   (...)[0m
+[1;32m    100[0m   serialized_end[38;5;241m=[39m[38;5;241m182[39m,
+[1;32m    101[0m )
+[1;32m    103[0m _TENSORSHAPEPROTO_DIM[38;5;241m.[39mcontaining_type [38;5;241m=[39m _TENSORSHAPEPROTO
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/google/protobuf/descriptor.py:560[0m, in [0;36mFieldDescriptor.__new__[0;34m(cls, name, full_name, index, number, type, cpp_type, label, default_value, message_type, enum_type, containing_type, is_extension, extension_scope, options, serialized_options, has_default_value, containing_oneof, json_name, file, create_key)[0m
+[1;32m    554[0m [38;5;28;01mdef[39;00m [38;5;21m__new__[39m([38;5;28mcls[39m, name, full_name, index, number, [38;5;28mtype[39m, cpp_type, label,
+[1;32m    555[0m             default_value, message_type, enum_type, containing_type,
+[1;32m    556[0m             is_extension, extension_scope, options[38;5;241m=[39m[38;5;28;01mNone[39;00m,
+[1;32m    557[0m             serialized_options[38;5;241m=[39m[38;5;28;01mNone[39;00m,
+[1;32m    558[0m             has_default_value[38;5;241m=[39m[38;5;28;01mTrue[39;00m, containing_oneof[38;5;241m=[39m[38;5;28;01mNone[39;00m, json_name[38;5;241m=[39m[38;5;28;01mNone[39;00m,
+[1;32m    559[0m             file[38;5;241m=[39m[38;5;28;01mNone[39;00m, create_key[38;5;241m=[39m[38;5;28;01mNone[39;00m):  [38;5;66;03m# pylint: disable=redefined-builtin[39;00m
+[0;32m--> 560[0m   [43m_message[49m[38;5;241;43m.[39;49m[43mMessage[49m[38;5;241;43m.[39;49m[43m_CheckCalledFromGeneratedFile[49m[43m([49m[43m)[49m
+[1;32m    561[0m   [38;5;28;01mif[39;00m is_extension:
+[1;32m    562[0m     [38;5;28;01mreturn[39;00m _message[38;5;241m.[39mdefault_pool[38;5;241m.[39mFindExtensionByName(full_name)
+
+[0;31mTypeError[0m: Descriptors cannot not be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+TypeError: Descriptors cannot not be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
