@@ -4,7 +4,7 @@ name: deploy-book
 on:
   push:
     branches:
-    - updates_peer_2022 
+    - main 
     
 # This job installs dependencies, build the book, and pushes it to `gh-pages`
 jobs:
