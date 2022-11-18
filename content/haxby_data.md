@@ -220,13 +220,13 @@ and of course, this also works for `interactive` plots.
 plotting.view_img(func_image_mean, cmap='magma', symmetric_cmap=False)
 ```
 
-The last type of `neuroimaging` file we need to check are the (`binary`) `masks`, so let's do it for one example `mask`: the `ventral temporal cortex`. This mask has been generated as part of the Haxby et al. (2001) study {cite:p}`Haxby2001-vt`, and highlights a part of the brain specialized in the processing of visual information, and which contains areas sensitive to different types of image categories {cite:p}`grill-spector_functional_2014` . As with the types before, we can `load`, 
+The last type of `neuroimaging` file we need to check are the (`binary`) `masks`, so let's do it for one example `mask`: the `ventral temporal cortex`. This mask has been generated as part of the Haxby et al. (2001) study {cite:p}`Haxby2001-vt`, and highlights a part of the brain specialized in the processing of visual information, and which contains areas sensitive to different types of image categories {cite:p}`grill-spector_functional_2014` . As with the types before, we can `load`,
 
 ```{code-cell} ipython3
 vt_mask = load_img(haxby_dataset.mask_vt)
 ```
 
-`inspect` 
+`inspect`
 
 ```{code-cell} ipython3
 print(vt_mask.header)
@@ -240,7 +240,7 @@ vt_mask.get_data()
 vt_mask.dataobj.shape
 ```
 
-and `visualize` it (Here, we are going to plot it as an overlay on the `anatomical image`). 
+and `visualize` it (Here, we are going to plot it as an overlay on the `anatomical image`).
 
 ```{code-cell} ipython3
 plotting.plot_roi(vt_mask, bg_img=anat_image,
@@ -311,15 +311,14 @@ If you have any questions, please don't hesitate to ask us. Thank you very much 
 ```{bibliography}
 :filter: docname in docnames
 ```
-```
+
++++
 
 +++
 
 ## Bonus: checking the stimuli
 
 As you saw above, our `tutorial dataset` actually also contains the `stimuli` utilized in the experiment. This pretty unique (because of e.g. copyright problems) but really cool. As we could use the `stimuli` for certain analyses, e.g. [encoding]() and/or comparing their processing in `biological` and `artificial neural networks`. However, this is unfortunately outside the scope of this session. Thus, we are just going to plot a few of them so you get an impression.
-
-+++
 
 We can examine one functional volume using nilearn's plotting tools. Because fmri data are 4D we use [nilearn.image.mean_img](https://nilearn.github.io/modules/generated/nilearn.image.mean_img.html#nilearn.image.mean_img) to extract the average brain volume.
 
