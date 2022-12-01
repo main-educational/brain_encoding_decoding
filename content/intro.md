@@ -8,7 +8,7 @@ This `jupyter book` presents an introduction to `brain decoding` using `fMRI`. I
 [![Jupyter Book Badge](https://jupyterbook.org/badge.svg)](https://main-educational.github.io/brain_encoding_decoding/intro.html) 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/main-educational/brain_encoding_decoding/HEAD)
 [![Docker Hub](https://img.shields.io/docker/pulls/user/repo)]() 
-[![GitHub size](https://github-size-badge.herokuapp.com/main-educational/brain_encoding_decoding.svg)](https://github.com/main-educational/brain_encoding_decoding/archive/master.zip)
+[![GitHub size](https://img.shields.io/github/repo-size/main-educational/brain_encoding_decoding)](https://github.com/main-educational/brain_encoding_decoding/archive/master.zip)
 [![GitHub issues](https://img.shields.io/github/issues/main-educational/brain_encoding_decoding?style=plastic)](https://github.com/main-educational/brain_encoding_decoding)
 [![GitHub PR](https://img.shields.io/github/issues-pr/main-educational/brain_encoding_decoding)](https://github.com/main-educational/brain_encoding_decoding/pulls)
 [![License](https://img.shields.io/github/license/main-educational/brain_encoding_decoding)](https://github.com/main-educational/brain_encoding_decoding)
