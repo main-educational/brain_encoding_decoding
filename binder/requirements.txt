@@ -9,14 +9,14 @@ matplotlib==3.3.4
 seaborn==0.11.1
 jupyter-book==0.12.1
 sphinx-design
-torch==1.11.0
+torch==1.13.0
 psutil==5.8.0
 torchvision
 torch-cluster
---find-links https://data.pyg.org/whl/torch-1.11.0+cpu.html
+--find-links https://data.pyg.org/whl/torch-1.13.0+cpu.html
 torch-scatter
---find-links https://data.pyg.org/whl/torch-1.11.0+cpu.html
+--find-links https://data.pyg.org/whl/torch-1.13.0+cpu.html
 torch-sparse
---find-links https://data.pyg.org/whl/torch-1.11.0+cpu.html
+--find-links https://data.pyg.org/whl/torch-1.13.0+cpu.html
 torch-geometric
---find-links https://data.pyg.org/whl/torch-1.11.0+cpu.html
+--find-links https://data.pyg.org/whl/torch-1.13.0+cpu.html
