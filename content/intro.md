@@ -57,10 +57,10 @@ As noted above, this part of the educational course focuses on `decoding models`
 :margin: 3
 :class-body: text-center
 :class-header: bg-light text-center
-:link: https://main-educational.github.io/brain_encoding_decoding/haxby_data.html
+:link: https://main-educational.github.io/brain_decoding/haxby_data.html
 **An overview of the Haxby Dataset**
 ^^^
-```{image} https://main-educational.github.io/brain_encoding_decoding/_images/haxby_data_13_1.png
+```{image} https://main-educational.github.io/brain_decoding/_images/haxby_data_52_0.png
 :height: 100
 ```
 
@@ -73,11 +73,11 @@ Explore this tutorial {fas}`arrow-right`
 :margin: 3
 :class-body: text-center
 :class-header: bg-light text-center
-:link: https://main-educational.github.io/brain_encoding_decoding/svm_decoding.html
+:link: https://main-educational.github.io/brain_decoding/svm_decoding.html
 
 **Brain decoding with SVM**
 ^^^
-```{image} https://main-educational.github.io/brain_encoding_decoding/_images/svm_decoding_13_0.png
+```{image} https://main-educational.github.io/brain_decoding/_images/optimal-hyperplane.png
 :height: 100
 ```
 
@@ -90,11 +90,11 @@ Explore this tutorial {fas}`arrow-right`
 :margin: 3
 :class-body: text-center
 :class-header: bg-light text-center
-:link: https://main-educational.github.io/brain_encoding_decoding/mlp_decoding.html
+:link: https://main-educational.github.io/brain_decoding/mlp_decoding.html
 
 **Brain decoding with MLP**
 ^^^
-```{image} https://main-educational.github.io/brain_encoding_decoding/_images/multilayer-perceptron.png
+```{image} https://main-educational.github.io/brain_decoding/_images/multilayer-perceptron.png
 :height: 100
 ```
 
@@ -111,7 +111,7 @@ Explore this book {fas}`arrow-right`
 
 **Brain decoding with GCN**
 ^^^
-```{image} https://main-educational.github.io/brain_encoding_decoding/_images/gcn_decoding_9_0.png
+```{image} https://main-educational.github.io/brain_decoding/_images/GCN_pipeline.png
 :height: 100
 ```
 
