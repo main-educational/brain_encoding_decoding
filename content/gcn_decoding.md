@@ -2,15 +2,8 @@
 jupytext:
   cell_metadata_filter: -all
   formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.11.5
-kernelspec:
-  display_name: Python 3 (ipykernel)
-  language: python
-  name: python3
+  text_representation: {extension: .md, format_name: myst, format_version: 0.13, jupytext_version: 1.10.3}
+kernelspec: {display_name: main_edu_2022, language: python, name: main_edu_2022}
 ---
 
 # Brain decoding with GCN
@@ -30,8 +23,9 @@ The full time series are used to constrcut the brain graph to a network represen
 
 We are going to download the dataset from Haxby and colleagues (2001) {cite:p}`Haxby2001-vt`. You can check section {ref}`haxby-dataset` for more details on that dataset. Here we are going to quickly download it, and prepare it for machine learning applications with a set of predictive variable, the brain time series, and a dependent variable, the annotation on cognition.
 
-```{code-cell} python3
-:tags: ["hide_input", "hide_output"] 
+```{code-cell} ipython3
+:tags: [hide_input, hide_output]
+
 import os
 import warnings
 warnings.filterwarnings(action='once')
@@ -51,7 +45,7 @@ y = behavioral['labels']
 
 Let's check the size of dependent variable `y`:
 
-```{code-cell} python3
+```{code-cell} ipython3
 categories = y.unique()
 print(categories)
 print(y.shape)
@@ -75,7 +69,7 @@ maximally sparse representations of the dataset are sought for. Atoms are not re
 
 We use the nilearn function `DictLearning` to estimate networks on the haxby EPI data.
 
-```{code-cell} python3
+```{code-cell} ipython3
 import warnings
 warnings.filterwarnings(action='once')
 from nilearn.decomposition import DictLearning
@@ -116,7 +110,7 @@ See function `nilearn.regions.connected_label_regions` and the tutorial on
 [Yeo 7 networks](https://nilearn.github.io/auto_examples/06_manipulating_images/plot_extract_regions_labels_image.html#sphx-glr-auto-examples-06-manipulating-images-plot-extract-regions-labels-image-py)
 ```
 
-```{code-cell} python3
+```{code-cell} ipython3
 import warnings
 warnings.filterwarnings(action='once')
 from nilearn.regions import RegionExtractor
@@ -156,7 +150,7 @@ A key component of GCN is brain graph.
 Brain graph provides a network representation of brain organization by associating nodes to brain regions and defining edges via anatomical or functional connections.
 After generating time series, we will firstly use the nilearn function to geneate a correlation based functional connectome.
 
-```{code-cell} python3
+```{code-cell} ipython3
 import warnings
 warnings.filterwarnings(action='once')
 
@@ -171,7 +165,6 @@ title = 'Correlation between %d regions' % n_regions_extracted
 # First plot the matrix
 display = plotting.plot_matrix(conn, vmax=1, vmin=-1,
                                colorbar=True, title=title)
-
 ```
 
 The next step is to construct the brain graph for GCN.
@@ -184,7 +177,7 @@ For the purpose of demostration, we constrain the graph to from clusters with __
 
 For more details you please check out __*src/graph_construction.py*__ script.
 
-```{code-cell} python3
+```{code-cell} ipython3
 import sys
 sys.path.append('../src')
 from graph_construction import make_group_graph
@@ -193,13 +186,12 @@ from graph_construction import make_group_graph
 graph = make_group_graph([conn], self_loops=False, k=8, symmetric=True)
 ```
 
-
 ## Preparing the dataset for model training
 
 The trials for different object categories are scattered in the experiment. 
 Firstly we will concatenated the volumes of the same category together.
 
-```{code-cell} python3
+```{code-cell} ipython3
 # generate data
 import pandas as pd
 import numpy as np
@@ -219,7 +211,7 @@ The splitted timeseries are saved as individual files (in the format of `<catego
 the file names and the associated label are stored in the same directory,
 under a file named `label.csv`.
 
-```{code-cell} python3
+```{code-cell} ipython3
 # split the data by time window size and save to file
 window_length = 1
 dic_labels = {name: i for i, name in enumerate(categories)}
@@ -267,7 +259,7 @@ The dataset generator defaults isolates 20% of the data as the validation set, a
 For more details of customising a dataset, please see `src/gcn_windows_dataset.py` and the 
 official [`pytorch` documentation](https://pytorch.org/tutorials/beginner/basics/data_tutorial.html#creating-a-custom-dataset-for-your-files).
 
-```{code-cell} python3
+```{code-cell} ipython3
 # split dataset
 from gcn_windows_dataset import TimeWindowsDataset
 
@@ -304,9 +296,9 @@ print("test dataset: {}".format(test_dataset))
 
 Once the datasets are created, we can use the pytorch [data loader](https://pytorch.org/tutorials/beginner/basics/data_tutorial.html#preparing-your-data-for-training-with-dataloaders) to iterate through the data during the model selection process.
 The __batch size__ defines the number of samples that will be propagated through the neural network.
-We are separating the dataset into 16 time windows per batch. 
+We are separating the dataset into 16 time windows per batch.
 
-```{code-cell} python3
+```{code-cell} ipython3
 import torch
 from torch.utils.data import DataLoader
 
@@ -327,9 +319,9 @@ We have created a GCN of the following property:
 - __3__ graph convolutional layers
 - __32 graph filters__  at each layer
 - followed by a __global average pooling__ layer
-- __2 fully connected__ layers 
+- __2 fully connected__ layers
 
-```{code-cell} python3
+```{code-cell} ipython3
 from gcn_model import GCN
 
 gcn = GCN(graph.edge_index, 
@@ -354,7 +346,7 @@ One can use their own choice of optimizer for backpropagation and estimator for 
 After one round of training, we use the validation dataset to calculate the average accuracy and loss with function `valid_test_loop`. 
 These metrics will serve as the reference for model performance of this round of training.
 
-```{code-cell} python3
+```{code-cell} ipython3
 def train_loop(dataloader, model, loss_fn, optimizer):
     size = len(dataloader.dataset)    
 
@@ -396,8 +388,9 @@ This whole procedure described above is called an __epoch__.
 We will repeat the process for 60 epochs.
 Here the choice of loss function is `CrossEntropyLoss` and the optimizer to update the model is `Adam`.
 
-```{code-cell} python3
-:tags: ["hide_output"]
+```{code-cell} ipython3
+:tags: [hide_output]
+
 loss_fn = torch.nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(gcn.parameters(), lr=1e-4, weight_decay=5e-4)
 
@@ -411,7 +404,7 @@ for t in range(epochs):
 
 After training the model for 60 epochs, we use the untouched test data to evaluate the model and conclude the results of training.
 
-```{code-cell} python3
+```{code-cell} ipython3
 # results
 loss, correct = valid_test_loop(test_generator, gcn, loss_fn)
 print(f"Test metrics:\n\t avg_loss: {loss:>f};\t avg_accuracy: {(100*correct):>0.1f}%")
