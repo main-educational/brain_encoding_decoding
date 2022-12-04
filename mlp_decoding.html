@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Brain decoding with MLP &#8212; Introduction to brain encoding and decoding in fMRI</title>
+    <title>Brain decoding with MLP &#8212; Introduction to brain decoding in fMRI</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -30,6 +30,7 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
     
   <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
@@ -43,8 +44,10 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="_static/design-tabs.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -86,7 +89,7 @@
       <img src="_static/neurolibre-logo.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">Introduction to brain encoding and decoding in fMRI</h1>
+      <h1 class="site-logo" id="site-title">Introduction to brain decoding in fMRI</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -97,14 +100,14 @@
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   Introduction
+   Welcome
   </a>
  </li>
 </ul>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="haxby_data.html">
-   The Haxby dataset
+   An overview of the Haxby dataset
   </a>
  </li>
  <li class="toctree-l1">
@@ -120,11 +123,6 @@
  <li class="toctree-l1">
   <a class="reference internal" href="gcn_decoding.html">
    Brain decoding with GCN
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="encoding.html">
-   Brain encoding
   </a>
  </li>
 </ul>
@@ -194,7 +192,9 @@
             href="https://github.com/main-educational/brain_encoding_decoding/issues/new?title=Issue%20on%20page%20%2Fmlp_decoding.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
+        <a class="edit-button" href="https://github.com/main-educational/brain_encoding_decoding/edit/main/content/mlp_decoding.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
 </div>
 
@@ -319,17 +319,17 @@
 <h2>Multilayer Perceptron<a class="headerlink" href="#multilayer-perceptron" title="Permalink to this headline">¶</a></h2>
 <div class="figure align-default" id="multilayer-perceptron-fig">
 <a class="reference internal image-reference" href="_images/multilayer-perceptron.png"><img alt="_images/multilayer-perceptron.png" src="_images/multilayer-perceptron.png" style="width: 800px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">A multilayer perceptron with 25 units on the input layer, a single hidden layer with 17 units, and an output layer with 9 units. Figure generated with the <a class="reference external" href="http://alexlenail.me/NN-SVG/index.html">NN-SVG</a> tool by [Alexander Lenail]. The figure is shared under a <a class="reference external" href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a> license.</span><a class="headerlink" href="#multilayer-perceptron-fig" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">A multilayer perceptron with 25 units on the input layer, a single hidden layer with 17 units, and an output layer with 9 units. Figure generated with the <a class="reference external" href="http://alexlenail.me/NN-SVG/index.html">NN-SVG</a> tool by [Alexander Lenail]. The figure is shared under a <a class="reference external" href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a> license.</span><a class="headerlink" href="#multilayer-perceptron-fig" title="Permalink to this image">¶</a></p>
 </div>
 <p>We are going to train a Multilayer Perceptron (MLP) classifier for brain decoding on the Haxby dataset. MLPs are one of the most basic architecture of artificial neural networks. MLPs consist of input and output layers as well as hidden layers that transform the input to the usable data for the output layer. Like other machine learning models for supervised learning, a MLP initially goes through a training phase. During this supervised phase, the network is taught what to look for and what is the desired output.
 In this tutorial, we are going to train the simplest MLP architecture featuring one input layer, one output layer and just one hidden layer.</p>
 </div>
 <div class="section" id="getting-the-data">
 <h2>Getting the data<a class="headerlink" href="#getting-the-data" title="Permalink to this headline">¶</a></h2>
-<p>We are going to download the dataset from Haxby and colleagues (2001) <span id="id1">[<a class="reference internal" href="haxby_data.html#id3">HGF+01</a>]</span>. You can check section <a class="reference internal" href="haxby_data.html#haxby-dataset"><span class="std std-ref">The Haxby dataset</span></a> for more details on that dataset. Here we are going to quickly download it, and prepare it for machine learning applications with a set of predictive variable, the brain time series <code class="docutils literal notranslate"><span class="pre">X</span></code>, and a dependent variable, the annotation on cognition <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<p>We are going to download the dataset from Haxby and colleagues (2001) <span id="id1">[<a class="reference internal" href="haxby_data.html#id6">HGF+01</a>]</span>. You can check section <a class="reference internal" href="haxby_data.html#haxby-dataset"><span class="std std-ref">An overview of the Haxby dataset</span></a> for more details on that dataset. Here we are going to quickly download it, and prepare it for machine learning applications with a set of predictive variable, the brain time series <code class="docutils literal notranslate"><span class="pre">X</span></code>, and a dependent variable, the annotation on cognition <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
 <div class="cell tag_hide_input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;once&#39;</span><span class="p">)</span>
 
@@ -353,36 +353,14 @@ In this tutorial, we are going to train the simplest MLP architecture featuring 
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/sklearn/utils/multiclass.py:14: DeprecationWarning: Please use `spmatrix` from the `scipy.sparse` namespace, the `scipy.sparse.base` namespace is deprecated.
-  from scipy.sparse.base import spmatrix
-/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/sklearn/utils/optimize.py:18: DeprecationWarning: Please use `line_search_wolfe2` from the `scipy.optimize` namespace, the `scipy.optimize.linesearch` namespace is deprecated.
-  from scipy.optimize.linesearch import line_search_wolfe2, line_search_wolfe1
-/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/sklearn/utils/optimize.py:18: DeprecationWarning: Please use `line_search_wolfe1` from the `scipy.optimize` namespace, the `scipy.optimize.linesearch` namespace is deprecated.
-  from scipy.optimize.linesearch import line_search_wolfe2, line_search_wolfe1
-/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/nilearn/datasets/func.py:20: DeprecationWarning: Please use `MatReadError` from the `scipy.io.matlab` namespace, the `scipy.io.matlab.miobase` namespace is deprecated.
-  from scipy.io.matlab.miobase import MatReadError
-/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/nilearn/datasets/__init__.py:93: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
-  warn(&quot;Fetchers from the nilearn.datasets module will be &quot;
-</pre></div>
-</div>
-</div>
 </div>
 <p>Let’s check the size of <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">categories</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">categories</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">categories</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;rest&#39; &#39;face&#39; &#39;chair&#39; &#39;scissors&#39; &#39;shoe&#39; &#39;scrambledpix&#39; &#39;house&#39; &#39;cat&#39;
- &#39;bottle&#39;]
-(1452,)
-(1452, 675)
 </pre></div>
 </div>
 </div>
@@ -391,7 +369,7 @@ In this tutorial, we are going to train the simplest MLP architecture featuring 
 <p>We are going to use Keras for training the MLP, and we are going to convert the string categories into a one-hot encoder:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># creating instance of one-hot-encoder</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># creating instance of one-hot-encoder</span>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">OneHotEncoder</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="n">enc</span> <span class="o">=</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
@@ -402,173 +380,6 @@ In this tutorial, we are going to train the simplest MLP architecture featuring 
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>0</th>
-      <th>1</th>
-      <th>2</th>
-      <th>3</th>
-      <th>4</th>
-      <th>5</th>
-      <th>6</th>
-      <th>7</th>
-      <th>8</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>1447</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>1448</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>1449</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>1450</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>1451</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-  </tbody>
-</table>
-<p>1452 rows × 9 columns</p>
-</div></div></div>
 </div>
 </div>
 <div class="section" id="training-a-model">
@@ -576,7 +387,7 @@ In this tutorial, we are going to train the simplest MLP architecture featuring 
 <p>We are going to start by splitting our dataset between train and test. We will keep 20% of the time points as test, and then set up a 10 fold cross validation for training/validation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>   
 </pre></div>
 </div>
@@ -585,7 +396,7 @@ In this tutorial, we are going to train the simplest MLP architecture featuring 
 <p>Now we can build a MLP using Tensorflow and Keras:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
 <span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span>
 
 <span class="c1"># number of unique conditions that we have</span>
@@ -604,164 +415,11 @@ In this tutorial, we are going to train the simplest MLP architecture featuring 
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">Input In [5],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># number of unique conditions that we have</span>
-
-<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">21</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="sd">&quot;&quot;&quot;Implementation of the Keras API, the high-level API of TensorFlow.</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span><span class="sd"> </span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span><span class="sd"> Detailed documentation and user guides are available at</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span><span class="sd"> [keras.io](https://keras.io).</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="c1"># pylint: disable=unused-import</span>
-<span class="ne">---&gt; </span><span class="mi">21</span> <span class="kn">from</span> <span class="nn">tensorflow.python</span> <span class="kn">import</span> <span class="n">tf2</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="kn">from</span> <span class="nn">keras</span> <span class="kn">import</span> <span class="n">distribute</span>
-<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="c1"># See b/110718070#comment18 for more details about this import.</span>
-
-<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">tensorflow</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">41</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">38</span> <span class="kn">import</span> <span class="nn">six</span> <span class="k">as</span> <span class="nn">_six</span>
-<span class="g g-Whitespace">     </span><span class="mi">39</span> <span class="kn">import</span> <span class="nn">sys</span> <span class="k">as</span> <span class="nn">_sys</span>
-<span class="ne">---&gt; </span><span class="mi">41</span> <span class="kn">from</span> <span class="nn">tensorflow.python.tools</span> <span class="kn">import</span> <span class="n">module_util</span> <span class="k">as</span> <span class="n">_module_util</span>
-<span class="g g-Whitespace">     </span><span class="mi">42</span> <span class="kn">from</span> <span class="nn">tensorflow.python.util.lazy_loader</span> <span class="kn">import</span> <span class="n">LazyLoader</span> <span class="k">as</span> <span class="n">_LazyLoader</span>
-<span class="g g-Whitespace">     </span><span class="mi">44</span> <span class="c1"># Make sure code inside the TensorFlow codebase can use tf2.enabled() at import.</span>
-
-<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">tensorflow</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">31</span> <span class="kn">import</span> <span class="nn">traceback</span>
-<span class="g g-Whitespace">     </span><span class="mi">33</span> <span class="c1"># We aim to keep this file minimal and ideally remove completely.</span>
-<span class="g g-Whitespace">     </span><span class="mi">34</span> <span class="c1"># If you are adding a new file with @tf_export decorators,</span>
-<span class="g g-Whitespace">     </span><span class="mi">35</span> <span class="c1"># import it in modules_with_exports.py instead.</span>
-<span class="g g-Whitespace">     </span><span class="mi">36</span> 
-<span class="g g-Whitespace">     </span><span class="mi">37</span> <span class="c1"># go/tf-wildcard-import</span>
-<span class="g g-Whitespace">     </span><span class="mi">38</span> <span class="c1"># pylint: disable=wildcard-import,g-bad-import-order,g-import-not-at-top</span>
-<span class="ne">---&gt; </span><span class="mi">40</span> <span class="kn">from</span> <span class="nn">tensorflow.python.eager</span> <span class="kn">import</span> <span class="n">context</span>
-<span class="g g-Whitespace">     </span><span class="mi">41</span> <span class="kn">from</span> <span class="nn">tensorflow.python</span> <span class="kn">import</span> <span class="n">pywrap_tensorflow</span> <span class="k">as</span> <span class="n">_pywrap_tensorflow</span>
-<span class="g g-Whitespace">     </span><span class="mi">43</span> <span class="c1"># pylint: enable=wildcard-import</span>
-<span class="g g-Whitespace">     </span><span class="mi">44</span> 
-<span class="g g-Whitespace">     </span><span class="mi">45</span> <span class="c1"># Bring in subpackages.</span>
-
-<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">tensorflow</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">eager</span><span class="o">/</span><span class="n">context</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">32</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">     </span><span class="mi">30</span> <span class="kn">import</span> <span class="nn">six</span>
-<span class="ne">---&gt; </span><span class="mi">32</span> <span class="kn">from</span> <span class="nn">tensorflow.core.framework</span> <span class="kn">import</span> <span class="n">function_pb2</span>
-<span class="g g-Whitespace">     </span><span class="mi">33</span> <span class="kn">from</span> <span class="nn">tensorflow.core.protobuf</span> <span class="kn">import</span> <span class="n">config_pb2</span>
-<span class="g g-Whitespace">     </span><span class="mi">34</span> <span class="kn">from</span> <span class="nn">tensorflow.core.protobuf</span> <span class="kn">import</span> <span class="n">rewriter_config_pb2</span>
-
-<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">tensorflow</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">framework</span><span class="o">/</span><span class="n">function_pb2</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">16</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="c1"># @@protoc_insertion_point(imports)</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">_sym_db</span> <span class="o">=</span> <span class="n">_symbol_database</span><span class="o">.</span><span class="n">Default</span><span class="p">()</span>
-<span class="ne">---&gt; </span><span class="mi">16</span> <span class="kn">from</span> <span class="nn">tensorflow.core.framework</span> <span class="kn">import</span> <span class="n">attr_value_pb2</span> <span class="k">as</span> <span class="n">tensorflow_dot_core_dot_framework_dot_attr__value__pb2</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="kn">from</span> <span class="nn">tensorflow.core.framework</span> <span class="kn">import</span> <span class="n">node_def_pb2</span> <span class="k">as</span> <span class="n">tensorflow_dot_core_dot_framework_dot_node__def__pb2</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="kn">from</span> <span class="nn">tensorflow.core.framework</span> <span class="kn">import</span> <span class="n">op_def_pb2</span> <span class="k">as</span> <span class="n">tensorflow_dot_core_dot_framework_dot_op__def__pb2</span>
-
-<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">tensorflow</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">framework</span><span class="o">/</span><span class="n">attr_value_pb2</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">16</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="c1"># @@protoc_insertion_point(imports)</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">_sym_db</span> <span class="o">=</span> <span class="n">_symbol_database</span><span class="o">.</span><span class="n">Default</span><span class="p">()</span>
-<span class="ne">---&gt; </span><span class="mi">16</span> <span class="kn">from</span> <span class="nn">tensorflow.core.framework</span> <span class="kn">import</span> <span class="n">tensor_pb2</span> <span class="k">as</span> <span class="n">tensorflow_dot_core_dot_framework_dot_tensor__pb2</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="kn">from</span> <span class="nn">tensorflow.core.framework</span> <span class="kn">import</span> <span class="n">tensor_shape_pb2</span> <span class="k">as</span> <span class="n">tensorflow_dot_core_dot_framework_dot_tensor__shape__pb2</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="kn">from</span> <span class="nn">tensorflow.core.framework</span> <span class="kn">import</span> <span class="n">types_pb2</span> <span class="k">as</span> <span class="n">tensorflow_dot_core_dot_framework_dot_types__pb2</span>
-
-<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">tensorflow</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">framework</span><span class="o">/</span><span class="n">tensor_pb2</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">16</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="c1"># @@protoc_insertion_point(imports)</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">_sym_db</span> <span class="o">=</span> <span class="n">_symbol_database</span><span class="o">.</span><span class="n">Default</span><span class="p">()</span>
-<span class="ne">---&gt; </span><span class="mi">16</span> <span class="kn">from</span> <span class="nn">tensorflow.core.framework</span> <span class="kn">import</span> <span class="n">resource_handle_pb2</span> <span class="k">as</span> <span class="n">tensorflow_dot_core_dot_framework_dot_resource__handle__pb2</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="kn">from</span> <span class="nn">tensorflow.core.framework</span> <span class="kn">import</span> <span class="n">tensor_shape_pb2</span> <span class="k">as</span> <span class="n">tensorflow_dot_core_dot_framework_dot_tensor__shape__pb2</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="kn">from</span> <span class="nn">tensorflow.core.framework</span> <span class="kn">import</span> <span class="n">types_pb2</span> <span class="k">as</span> <span class="n">tensorflow_dot_core_dot_framework_dot_types__pb2</span>
-
-<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">tensorflow</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">framework</span><span class="o">/</span><span class="n">resource_handle_pb2</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">16</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="c1"># @@protoc_insertion_point(imports)</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">_sym_db</span> <span class="o">=</span> <span class="n">_symbol_database</span><span class="o">.</span><span class="n">Default</span><span class="p">()</span>
-<span class="ne">---&gt; </span><span class="mi">16</span> <span class="kn">from</span> <span class="nn">tensorflow.core.framework</span> <span class="kn">import</span> <span class="n">tensor_shape_pb2</span> <span class="k">as</span> <span class="n">tensorflow_dot_core_dot_framework_dot_tensor__shape__pb2</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="kn">from</span> <span class="nn">tensorflow.core.framework</span> <span class="kn">import</span> <span class="n">types_pb2</span> <span class="k">as</span> <span class="n">tensorflow_dot_core_dot_framework_dot_types__pb2</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="n">DESCRIPTOR</span> <span class="o">=</span> <span class="n">_descriptor</span><span class="o">.</span><span class="n">FileDescriptor</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span>   <span class="n">name</span><span class="o">=</span><span class="s1">&#39;tensorflow/core/framework/resource_handle.proto&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span>   <span class="n">package</span><span class="o">=</span><span class="s1">&#39;tensorflow&#39;</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span>   <span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">27</span>   <span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="n">tensorflow_dot_core_dot_framework_dot_tensor__shape__pb2</span><span class="o">.</span><span class="n">DESCRIPTOR</span><span class="p">,</span><span class="n">tensorflow_dot_core_dot_framework_dot_types__pb2</span><span class="o">.</span><span class="n">DESCRIPTOR</span><span class="p">,])</span>
-
-<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">tensorflow</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">framework</span><span class="o">/</span><span class="n">tensor_shape_pb2</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">_sym_db</span> <span class="o">=</span> <span class="n">_symbol_database</span><span class="o">.</span><span class="n">Default</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="n">DESCRIPTOR</span> <span class="o">=</span> <span class="n">_descriptor</span><span class="o">.</span><span class="n">FileDescriptor</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span>   <span class="n">name</span><span class="o">=</span><span class="s1">&#39;tensorflow/core/framework/tensor_shape.proto&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span>   <span class="n">package</span><span class="o">=</span><span class="s1">&#39;tensorflow&#39;</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span>   <span class="n">serialized_pb</span><span class="o">=</span><span class="n">_b</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">,tensorflow/core/framework/tensor_shape.proto</span><span class="se">\x12\n</span><span class="s1">tensorflow</span><span class="se">\&quot;</span><span class="s1">z</span><span class="se">\n\x10</span><span class="s1">TensorShapeProto</span><span class="se">\x12</span><span class="s1">-</span><span class="se">\n\x03\x64</span><span class="s1">im</span><span class="se">\x18\x02</span><span class="s1"> </span><span class="se">\x03</span><span class="s1">(</span><span class="se">\x0b\x32</span><span class="s1"> .tensorflow.TensorShapeProto.Dim</span><span class="se">\x12\x14\n\x0c</span><span class="s1">unknown_rank</span><span class="se">\x18\x03</span><span class="s1"> </span><span class="se">\x01</span><span class="s1">(</span><span class="se">\x08\x1a</span><span class="s1">!</span><span class="se">\n\x03\x44</span><span class="s1">im</span><span class="se">\x12\x0c\n\x04</span><span class="s1">size</span><span class="se">\x18\x01</span><span class="s1"> </span><span class="se">\x01</span><span class="s1">(</span><span class="se">\x03\x12\x0c\n\x04</span><span class="s1">name</span><span class="se">\x18\x02</span><span class="s1"> </span><span class="se">\x01</span><span class="s1">(</span><span class="se">\t</span><span class="s1">B</span><span class="se">\x87\x01\n\x18</span><span class="s1">org.tensorflow.frameworkB</span><span class="se">\x11</span><span class="s1">TensorShapeProtosP</span><span class="se">\x01</span><span class="s1">ZSgithub.com/tensorflow/tensorflow/tensorflow/go/core/framework/tensor_shape_go_proto</span><span class="se">\xf8\x01\x01\x62\x06</span><span class="s1">proto3&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="n">_TENSORSHAPEPROTO_DIM</span> <span class="o">=</span> <span class="n">_descriptor</span><span class="o">.</span><span class="n">Descriptor</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">30</span>   <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Dim&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">31</span>   <span class="n">full_name</span><span class="o">=</span><span class="s1">&#39;tensorflow.TensorShapeProto.Dim&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">32</span>   <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">33</span>   <span class="n">file</span><span class="o">=</span><span class="n">DESCRIPTOR</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">34</span>   <span class="n">containing_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">35</span>   <span class="n">fields</span><span class="o">=</span><span class="p">[</span>
-<span class="ne">---&gt; </span><span class="mi">36</span>     <span class="n">_descriptor</span><span class="o">.</span><span class="n">FieldDescriptor</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">37</span>       <span class="n">name</span><span class="o">=</span><span class="s1">&#39;size&#39;</span><span class="p">,</span> <span class="n">full_name</span><span class="o">=</span><span class="s1">&#39;tensorflow.TensorShapeProto.Dim.size&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">38</span>       <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">cpp_type</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">39</span>       <span class="n">has_default_value</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">40</span>       <span class="n">message_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">enum_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">containing_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">41</span>       <span class="n">is_extension</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">extension_scope</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">42</span>       <span class="n">serialized_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">DESCRIPTOR</span><span class="p">),</span>
-<span class="g g-Whitespace">     </span><span class="mi">43</span>     <span class="n">_descriptor</span><span class="o">.</span><span class="n">FieldDescriptor</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">44</span>       <span class="n">name</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">full_name</span><span class="o">=</span><span class="s1">&#39;tensorflow.TensorShapeProto.Dim.name&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">45</span>       <span class="n">number</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">cpp_type</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">46</span>       <span class="n">has_default_value</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default_value</span><span class="o">=</span><span class="n">_b</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span>
-<span class="g g-Whitespace">     </span><span class="mi">47</span>       <span class="n">message_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">enum_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">containing_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">48</span>       <span class="n">is_extension</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">extension_scope</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">49</span>       <span class="n">serialized_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">DESCRIPTOR</span><span class="p">),</span>
-<span class="g g-Whitespace">     </span><span class="mi">50</span>   <span class="p">],</span>
-<span class="g g-Whitespace">     </span><span class="mi">51</span>   <span class="n">extensions</span><span class="o">=</span><span class="p">[</span>
-<span class="g g-Whitespace">     </span><span class="mi">52</span>   <span class="p">],</span>
-<span class="g g-Whitespace">     </span><span class="mi">53</span>   <span class="n">nested_types</span><span class="o">=</span><span class="p">[],</span>
-<span class="g g-Whitespace">     </span><span class="mi">54</span>   <span class="n">enum_types</span><span class="o">=</span><span class="p">[</span>
-<span class="g g-Whitespace">     </span><span class="mi">55</span>   <span class="p">],</span>
-<span class="g g-Whitespace">     </span><span class="mi">56</span>   <span class="n">serialized_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">57</span>   <span class="n">is_extendable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">58</span>   <span class="n">syntax</span><span class="o">=</span><span class="s1">&#39;proto3&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">59</span>   <span class="n">extension_ranges</span><span class="o">=</span><span class="p">[],</span>
-<span class="g g-Whitespace">     </span><span class="mi">60</span>   <span class="n">oneofs</span><span class="o">=</span><span class="p">[</span>
-<span class="g g-Whitespace">     </span><span class="mi">61</span>   <span class="p">],</span>
-<span class="g g-Whitespace">     </span><span class="mi">62</span>   <span class="n">serialized_start</span><span class="o">=</span><span class="mi">149</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">63</span>   <span class="n">serialized_end</span><span class="o">=</span><span class="mi">182</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">64</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">66</span> <span class="n">_TENSORSHAPEPROTO</span> <span class="o">=</span> <span class="n">_descriptor</span><span class="o">.</span><span class="n">Descriptor</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">67</span>   <span class="n">name</span><span class="o">=</span><span class="s1">&#39;TensorShapeProto&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">68</span>   <span class="n">full_name</span><span class="o">=</span><span class="s1">&#39;tensorflow.TensorShapeProto&#39;</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">100</span>   <span class="n">serialized_end</span><span class="o">=</span><span class="mi">182</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">101</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">103</span> <span class="n">_TENSORSHAPEPROTO_DIM</span><span class="o">.</span><span class="n">containing_type</span> <span class="o">=</span> <span class="n">_TENSORSHAPEPROTO</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/google/protobuf/descriptor.py:560,</span> in <span class="ni">FieldDescriptor.__new__</span><span class="nt">(cls, name, full_name, index, number, type, cpp_type, label, default_value, message_type, enum_type, containing_type, is_extension, extension_scope, options, serialized_options, has_default_value, containing_oneof, json_name, file, create_key)</span>
-<span class="g g-Whitespace">    </span><span class="mi">554</span> <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">full_name</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">cpp_type</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">555</span>             <span class="n">default_value</span><span class="p">,</span> <span class="n">message_type</span><span class="p">,</span> <span class="n">enum_type</span><span class="p">,</span> <span class="n">containing_type</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">556</span>             <span class="n">is_extension</span><span class="p">,</span> <span class="n">extension_scope</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">557</span>             <span class="n">serialized_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">558</span>             <span class="n">has_default_value</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">containing_oneof</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">json_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">559</span>             <span class="n">file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">create_key</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1"># pylint: disable=redefined-builtin</span>
-<span class="ne">--&gt; </span><span class="mi">560</span>   <span class="n">_message</span><span class="o">.</span><span class="n">Message</span><span class="o">.</span><span class="n">_CheckCalledFromGeneratedFile</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">561</span>   <span class="k">if</span> <span class="n">is_extension</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">562</span>     <span class="k">return</span> <span class="n">_message</span><span class="o">.</span><span class="n">default_pool</span><span class="o">.</span><span class="n">FindExtensionByName</span><span class="p">(</span><span class="n">full_name</span><span class="p">)</span>
-
-<span class="ne">TypeError</span>: Descriptors cannot not be created directly.
-<span class="n">If</span> <span class="n">this</span> <span class="n">call</span> <span class="n">came</span> <span class="kn">from</span> <span class="nn">a</span> <span class="n">_pb2</span><span class="o">.</span><span class="n">py</span> <span class="n">file</span><span class="p">,</span> <span class="n">your</span> <span class="n">generated</span> <span class="n">code</span> <span class="ow">is</span> <span class="n">out</span> <span class="n">of</span> <span class="n">date</span> <span class="ow">and</span> <span class="n">must</span> <span class="n">be</span> <span class="n">regenerated</span> <span class="k">with</span> <span class="n">protoc</span> <span class="o">&gt;=</span> <span class="mf">3.19.0</span><span class="o">.</span>
-<span class="n">If</span> <span class="n">you</span> <span class="n">cannot</span> <span class="n">immediately</span> <span class="n">regenerate</span> <span class="n">your</span> <span class="n">protos</span><span class="p">,</span> <span class="n">some</span> <span class="n">other</span> <span class="n">possible</span> <span class="n">workarounds</span> <span class="n">are</span><span class="p">:</span>
-<span class="g g-Whitespace"> </span><span class="mi">1</span><span class="o">.</span> <span class="n">Downgrade</span> <span class="n">the</span> <span class="n">protobuf</span> <span class="n">package</span> <span class="n">to</span> <span class="mf">3.20</span><span class="o">.</span><span class="n">x</span> <span class="ow">or</span> <span class="n">lower</span><span class="o">.</span>
-<span class="g g-Whitespace"> </span><span class="mi">2</span><span class="o">.</span> <span class="n">Set</span> <span class="n">PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION</span><span class="o">=</span><span class="n">python</span> <span class="p">(</span><span class="n">but</span> <span class="n">this</span> <span class="n">will</span> <span class="n">use</span> <span class="n">pure</span><span class="o">-</span><span class="n">Python</span> <span class="n">parsing</span> <span class="ow">and</span> <span class="n">will</span> <span class="n">be</span> <span class="n">much</span> <span class="n">slower</span><span class="p">)</span><span class="o">.</span>
-
-<span class="n">More</span> <span class="n">information</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">developers</span><span class="o">.</span><span class="n">google</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">protocol</span><span class="o">-</span><span class="n">buffers</span><span class="o">/</span><span class="n">docs</span><span class="o">/</span><span class="n">news</span><span class="o">/</span><span class="mi">2022</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">06</span><span class="c1">#python-updates</span>
-</pre></div>
-</div>
-</div>
 </div>
 <p>Time to train that model!</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compiling the model</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compiling the model</span>
 <span class="n">model_mlp</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span> <span class="o">=</span> <span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">loss</span> <span class="o">=</span> <span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
 <span class="c1"># Fitting the model on the Training set</span>
 <span class="n">history</span> <span class="o">=</span> <span class="n">model_mlp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
@@ -772,7 +430,7 @@ In this tutorial, we are going to train the simplest MLP architecture featuring 
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../src&#39;</span><span class="p">)</span>
 <span class="kn">import</span> <span class="nn">visualization</span>
 <span class="n">plot_history</span> <span class="o">=</span> <span class="n">visualization</span><span class="o">.</span><span class="n">classifier_history</span> <span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="s1">&#39;MLP &#39;</span><span class="p">)</span>
@@ -786,7 +444,7 @@ In this tutorial, we are going to train the simplest MLP architecture featuring 
 <p>Let’s check the accuracy of the prediction on the training set:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Making the predictions and evaluating the model</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Making the predictions and evaluating the model</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span>
 <span class="n">y_train_pred</span> <span class="o">=</span> <span class="n">model_mlp</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_train</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">),</span> <span class="n">y_train_pred</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span>
@@ -797,7 +455,7 @@ In this tutorial, we are going to train the simplest MLP architecture featuring 
 <p>This is dangerously high. Let’s check on the test set:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_test_pred</span> <span class="o">=</span> <span class="n">model_mlp</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">y_test_pred</span> <span class="o">=</span> <span class="n">model_mlp</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">),</span> <span class="n">y_test_pred</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span>
 </pre></div>
 </div>
@@ -806,7 +464,7 @@ In this tutorial, we are going to train the simplest MLP architecture featuring 
 <p>We can have a look at the confusion matrix:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># confusion matrix</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># confusion matrix</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
@@ -883,9 +541,7 @@ In this tutorial, we are going to train the simplest MLP architecture featuring 
     <footer class="footer">
   <p>
     
-      By Shima Rastegarnia, Pravish Sainath, Loic Tetrel, Pierre Bellec<br/>
-    
-        &copy; Copyright 2021.<br/>
+        &copy; Copyright 2022.<br/>
   </p>
 </footer>
 </main>
