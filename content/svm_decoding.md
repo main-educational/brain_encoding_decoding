@@ -111,7 +111,7 @@ Finally we can visualize the weights of the (linear) classifier to see which bra
 ```{code-cell} python3
 from nilearn import plotting
 # first row of coef_ is comparing the first pair of class labels
-# with 9 classes, there are 9*8/2 distinct
+# with 9 classes, there are 9 * 8 / 2 distinct
 coef_img = masker.inverse_transform(model_svm.coef_[0, :])
 plotting.view_img(
     coef_img, bg_img=haxby_dataset.anat[0],
@@ -138,14 +138,30 @@ We can now look at the results: F1 score and coefficient image:
 ```
 print('F1 scores')
 for category in categories:
-    print(category, '    {:.2f}'.format(np.mean(decoder.cv_scores_[category])))
+    print(category, '\t\t    {:.2f}'.format(np.mean(decoder.cv_scores_[category])))
 plotting.view_img(
     decoder.coef_img_['face'], bg_img=haxby_dataset.anat[0],
     title="SVM weights for face", dim=-1, resampling_interpolation='nearest'
 )
 ```
 Note: the Decoder implements a one-vs-all strategy. Note that this is a better choice in general than one-vs-one.
-
+## Getting more meaningful weight maps with Frem
+It is often tempting to interpret regions with high weights as 'important' for the prediction task. However, there is no statistical guarantee on these maps. Moreover, they iften do not even exhibit very clear structure. To improve that, a regularization can be brought by using the so-called Fast Regularized Ensembles of models (FREM), that rely on simple averaging and clustering tools to provide smoother maps, yet with minimal computational overhead.  
+```
+from nilearn.decoding import FREMClassifier
+frem = FREMClassifier(estimator='svc', cv=5, mask=mask_filename, scoring='f1')
+frem.fit(func_file, y)
+plotting.view_img(
+    frem.coef_img_['face'], bg_img=haxby_dataset.anat[0],
+    title="SVM weights for face", dim=-1, resampling_interpolation='nearest'
+)
+```
+Note that the resulting accuracy is in general slightly higher
+```
+print('F1 scoreswith FREM')
+for category in categories:
+    print(category, '\t\t    {:.2f}'.format(np.mean(decoder.cv_scores_[category])))
+```
 ## Exercises
  * What is the most difficult category to decode? Why?
  * The model seemed to overfit. Can you find a parameter value for `C` in `SVC` such that the model does not overfit as much?
