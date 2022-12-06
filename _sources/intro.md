@@ -100,23 +100,6 @@ Brain decoding using a basic artificial neural network.
 +++
 Explore this tutorial {fas}`arrow-right`
 :::
-
-:::{card}
-:margin: 3
-:class-body: text-center
-:class-header: bg-light text-center
-:link: https://main-educational.github.io/brain_encoding_decoding/gcn_decoding.html
-
-**Brain decoding with GCN**
-^^^
-```{image} https://main-educational.github.io/brain_encoding_decoding/_images/gcn_decoding_9_0.png
-:height: 100
-```
-
-Graph convolutional networks for brain decoding. 
-+++
-Explore this tutorial {fas}`arrow-right`
-:::
 ::::
 
 ::::{card-carousel} 2
@@ -129,7 +112,7 @@ Explore this tutorial {fas}`arrow-right`
 
 **Brain decoding with GCN**
 ^^^
-```{image} https://main-educational.github.io/brain_decoding/_images/GCN_pipeline.png
+```{image} https://main-educational.github.io/brain_encoding_decoding/_images/gcn_decoding_9_0.png
 :height: 100
 ```
 
@@ -259,7 +242,7 @@ This tutorial was prepared and presented by
 :margin: 3
 :class-body: text-center
 :link: https://twitter.com/BertrandThirion
-:img-top: images/profile_bertrand.jpg
+:img-top: https://pbs.twimg.com/profile_images/1347298788382273536/r9JpUkVT_400x400.jpg
 :::
 ::::
 
@@ -275,7 +258,7 @@ This tutorial was prepared and presented by
 :margin: 3
 :class-body: text-center
 :link: https://twitter.com/a_pasquiou
-:img-top: images/profile_alexandre_pasquiou.jpg
+:img-top: https://pbs.twimg.com/profile_images/1542505896386764800/pyC2rgHp_400x400.jpg
 :::
 
 :::{card} Pravish Sainath
