@@ -58,7 +58,7 @@ More information and their application can be found in the respective sections o
 :link: https://main-educational.github.io/brain_decoding/haxby_data.html
 **An overview of the Haxby Dataset**
 ^^^
-```{image} https://main-educational.github.io/brain_decoding/_images/haxby_data_52_0.png
+```{image} https://main-educational.github.io/brain_encoding_decoding/_images/haxby_data_52_0.png
 :height: 100
 ```
 
@@ -75,7 +75,7 @@ Explore this tutorial {fas}`arrow-right`
 
 **Brain decoding with SVM**
 ^^^
-```{image} https://main-educational.github.io/brain_decoding/_images/optimal-hyperplane.png
+```{image} https://main-educational.github.io/brain_encoding_decoding/_images/svm_decoding_13_0.png
 :height: 100
 ```
 
@@ -92,7 +92,7 @@ Explore this tutorial {fas}`arrow-right`
 
 **Brain decoding with MLP**
 ^^^
-```{image} https://main-educational.github.io/brain_decoding/_images/multilayer-perceptron.png
+```{image} https://main-educational.github.io/brain_encoding_decoding/_images/multilayer-perceptron.png
 :height: 100
 ```
 
@@ -109,7 +109,7 @@ Explore this tutorial {fas}`arrow-right`
 
 **Brain decoding with GCN**
 ^^^
-```{image} https://main-educational.github.io/brain_decoding/_images/GCN_pipeline.png
+```{image} https://main-educational.github.io/brain_encoding_decoding/_images/gcn_decoding_9_0.png
 :height: 100
 ```
 
@@ -146,7 +146,7 @@ Explore this tutorial {fas}`arrow-right`
 
 **Brain encoding**
 ^^^
-```{image} graphics/brain_encoding_pred_timeseries.png
+```{image} https://main-educational.github.io/brain_encoding_decoding/_images/encoding_87_0.png
 :height: 100
 ```
 
@@ -240,42 +240,51 @@ For the full experience, we recommend using the local set up instruction.
 
 This tutorial was prepared and presented by
 
-<table>
-  <tr>
-    <td align="center">
-      <a href="">
-        <img src="" width="100px;" alt=""/>
-        <br /><sub><b>Instructor I</b></sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="">
-        <img src="" width="100px;" alt=""/>
-        <br /><sub><b>Instructor II</b></sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="">
-        <img src="" width="100px;" alt=""/>
-        <br /><sub><b>Instructor III</b></sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="">
-        <img src="" width="100px;" alt=""/>
-        <br /><sub><b>Instructor IV</b></sub>
-      </a>
-    </td>  
-    <td align="center">
-      <a href="">
-        <img src="" width="100px;" alt=""/>
-        <br /><sub><b>Instructor V</b></sub>
-      </a>
-    </td>
-  </tr>
-</table>
+::::{card-carousel} 3
+:::{card} Peer Herholz
+:margin: 1
+:class-body: text-center
+:link: https://github.com/PeerHerholz
+:img-top: https://avatars.githubusercontent.com/u/20129524?v=4?s=100
+:::
 
+:::{card} Shima Rastegarnia
+:margin: 3
+:class-body: text-center
+:link: https://github.com/srastegarnia
+:img-top: https://avatars.githubusercontent.com/u/64853244?v=4
+:::
 
+:::{card} Bertrand Thirion
+:margin: 3
+:class-body: text-center
+:link: https://twitter.com/BertrandThirion
+:img-top: images/profile_bertrand.jpg
+:::
+::::
+
+::::{card-carousel} 3
+:::{card} Isil Bilgin
+:margin: 3
+:class-body: text-center
+:link: https://github.com/complexbrains
+:img-top: https://avatars.githubusercontent.com/u/45263281?v=4
+:::
+
+:::{card} Alexandre Pasquiou
+:margin: 3
+:class-body: text-center
+:link: https://twitter.com/a_pasquiou
+:img-top: images/profile_alexandre_pasquiou.jpg
+:::
+
+:::{card} Pravish Sainath
+:margin: 3
+:class-body: text-center
+:link: https://github.com/pravishsainath
+:img-top: https://avatars.githubusercontent.com/u/13696562?v=4
+:::
+::::
 
 ## Thanks and acknowledgements 
 Parts of the tutorial are directly adapted from a [nilearn tutorial](https://nilearn.github.io/auto_examples/plot_decoding_tutorial.html) on the so-called [Haxby dataset]().
