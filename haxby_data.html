@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>An overview of the Haxby dataset &#8212; Introduction to brain decoding in fMRI</title>
+    <title>An overview of the Haxby dataset &#8212; Introduction to brain decoding &amp; encoding in fMRI</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -89,7 +89,7 @@
       <img src="_static/neurolibre-logo.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">Introduction to brain decoding in fMRI</h1>
+      <h1 class="site-logo" id="site-title">Introduction to brain decoding & encoding in fMRI</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -123,6 +123,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="gcn_decoding.html">
    Brain decoding with GCN
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="encoding.html">
+   Brain encoding
   </a>
  </li>
 </ul>
@@ -410,7 +415,8 @@ from nilearn import datasets
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/nilearn/datasets/__init__.py:93: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+  warn(&quot;Fetchers from the nilearn.datasets module will be &quot;
 </pre></div>
 </div>
 </div>
@@ -425,7 +431,7 @@ haxby_dataset = datasets.fetch_haxby(subjects=[4], fetch_stimuli=True, data_dir=
 </div>
 </div>
 <p>What do we have now? Lets have a look!</p>
-<div class="cell docutils container">
+<div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>haxby_dataset
 </pre></div>
@@ -442,7 +448,151 @@ haxby_dataset = datasets.fetch_haxby(subjects=[4], fetch_stimuli=True, data_dir=
  &#39;mask_house_little&#39;: [&#39;../data/haxby2001/subj4/mask8_house_vt.nii.gz&#39;],
  &#39;mask&#39;: &#39;../data/haxby2001/mask.nii.gz&#39;,
  &#39;description&#39;: b&#39;Haxby 2001 results\n\n\nNotes\n-----\nResults from a classical fMRI study that investigated the differences between\nthe neural correlates of face versus object processing in the ventral visual\nstream. Face and object stimuli showed widely distributed and overlapping\nresponse patterns.\n\nContent\n-------\nThe &quot;simple&quot; dataset includes\n    :\&#39;func\&#39;: Nifti images with bold data\n    :\&#39;session_target\&#39;: Text file containing session data\n    :\&#39;mask\&#39;: Nifti images with employed mask\n    :\&#39;session\&#39;: Text file with condition labels\n\n\nThe full dataset additionally includes\n    :\&#39;anat\&#39;: Nifti images with anatomical image\n    :\&#39;func\&#39;: Nifti images with bold data\n    :\&#39;mask_vt\&#39;: Nifti images with mask for ventral visual/temporal cortex\n    :\&#39;mask_face\&#39;: Nifti images with face-reponsive brain regions\n    :\&#39;mask_house\&#39;: Nifti images with house-reponsive brain regions\n    :\&#39;mask_face_little\&#39;: Spatially more constrained version of the above\n    :\&#39;mask_house_little\&#39;: Spatially more constrained version of the above\n\n\nReferences\n----------\nFor more information see:\nPyMVPA provides a tutorial using this dataset :\nhttp://www.pymvpa.org/tutorial.html\n\nMore information about its structure :\nhttp://dev.pymvpa.org/datadb/haxby2001.html\n\n\n`Haxby, J., Gobbini, M., Furey, M., Ishai, A., Schouten, J.,\nand Pietrini, P. (2001). Distributed and overlapping representations of\nfaces and objects in ventral temporal cortex. Science 293, 2425-2430.`\n\n\nLicence: unknown.\n&#39;,
- &#39;stimuli&#39;: {&#39;cats&#39;: [&#39;../data/haxby2001/stimuli/cats/MISTY3.jpg&#39;,
+ &#39;stimuli&#39;: {&#39;chairs&#39;: [&#39;../data/haxby2001/stimuli/chairs/d23a.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d23b.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d23c.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d23d.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d25a.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d25b.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d25c.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d25d.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d30a.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d30b.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d30c.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d30d.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d37a.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d37b.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d37c.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d37d.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d38a.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d38b.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d38c.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d38d.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d39a.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d39b.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d39c.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d39d.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d62a.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d62b.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d62c.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d62d.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d63a.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d63b.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d63c.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d63d.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d67a.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d67b.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d67c.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d67d.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d79a.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d79b.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d79c.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d79d.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d85a.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d85b.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d85c.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d85d.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d9a.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d9b.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d9c.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d9d.jpg&#39;],
+  &#39;scissors&#39;: [&#39;../data/haxby2001/stimuli/scissors/scissor1.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor1.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor1.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor1.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor10.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor10.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor10.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor10.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor11.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor11.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor11.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor11.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor12.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor12.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor12.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor12.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor2.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor2.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor2.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor2.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor3.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor3.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor3.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor3.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor4.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor4.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor4.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor4.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor5.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor5.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor5.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor5.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor6.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor6.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor6.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor6.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor7.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor7.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor7.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor7.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor8.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor8.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor8.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor8.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor9.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor9.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor9.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/scissors/scissor9.4.jpg&#39;],
+  &#39;bottles&#39;: [&#39;../data/haxby2001/stimuli/bottles/bottle1.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle1.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle1.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle1.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle10.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle10.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle10.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle10.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle11.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle11.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle11.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle11.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle12.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle12.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle12.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle12.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle2.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle2.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle2.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle2.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle3.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle3.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle3.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle3.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle4.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle4.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle4.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle4.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle5.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle5.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle5.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle5.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle6.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle6.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle6.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle6.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle7.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle7.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle7.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle7.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle8.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle8.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle8.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle8.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle9.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle9.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle9.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle9.4.jpg&#39;],
+  &#39;cats&#39;: [&#39;../data/haxby2001/stimuli/cats/MISTY3.jpg&#39;,
    &#39;../data/haxby2001/stimuli/cats/MISTY4.jpg&#39;,
    &#39;../data/haxby2001/stimuli/cats/MISTY5.jpg&#39;,
    &#39;../data/haxby2001/stimuli/cats/MISTY6.jpg&#39;,
@@ -538,54 +688,6 @@ haxby_dataset = datasets.fetch_haxby(subjects=[4], fetch_stimuli=True, data_dir=
    &#39;../data/haxby2001/stimuli/houses/house9.2.jpg&#39;,
    &#39;../data/haxby2001/stimuli/houses/house9.3.jpg&#39;,
    &#39;../data/haxby2001/stimuli/houses/house9.4.jpg&#39;],
-  &#39;bottles&#39;: [&#39;../data/haxby2001/stimuli/bottles/bottle1.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle1.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle1.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle1.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle10.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle10.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle10.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle10.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle11.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle11.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle11.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle11.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle12.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle12.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle12.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle12.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle2.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle2.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle2.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle2.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle3.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle3.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle3.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle3.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle4.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle4.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle4.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle4.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle5.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle5.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle5.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle5.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle6.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle6.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle6.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle6.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle7.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle7.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle7.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle7.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle8.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle8.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle8.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle8.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle9.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle9.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle9.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle9.4.jpg&#39;],
   &#39;controls&#39;: [(&#39;scrambled_bottles&#39;,
     [&#39;../data/haxby2001/stimuli/controls/scrambled_bottles/scrambled_bottle1.1.jpg&#39;,
      &#39;../data/haxby2001/stimuli/controls/scrambled_bottles/scrambled_bottle1.2.jpg&#39;,
@@ -921,102 +1023,6 @@ haxby_dataset = datasets.fetch_haxby(subjects=[4], fetch_stimuli=True, data_dir=
      &#39;../data/haxby2001/stimuli/controls/scrambled_shoes/scrambled_shoev2.jpg&#39;,
      &#39;../data/haxby2001/stimuli/controls/scrambled_shoes/scrambled_shoev3.jpg&#39;,
      &#39;../data/haxby2001/stimuli/controls/scrambled_shoes/scrambled_shoev4.jpg&#39;])],
-  &#39;chairs&#39;: [&#39;../data/haxby2001/stimuli/chairs/d23a.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d23b.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d23c.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d23d.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d25a.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d25b.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d25c.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d25d.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d30a.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d30b.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d30c.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d30d.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d37a.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d37b.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d37c.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d37d.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d38a.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d38b.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d38c.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d38d.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d39a.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d39b.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d39c.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d39d.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d62a.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d62b.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d62c.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d62d.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d63a.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d63b.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d63c.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d63d.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d67a.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d67b.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d67c.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d67d.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d79a.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d79b.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d79c.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d79d.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d85a.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d85b.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d85c.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d85d.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d9a.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d9b.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d9c.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d9d.jpg&#39;],
-  &#39;scissors&#39;: [&#39;../data/haxby2001/stimuli/scissors/scissor1.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor1.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor1.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor1.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor10.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor10.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor10.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor10.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor11.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor11.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor11.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor11.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor12.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor12.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor12.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor12.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor2.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor2.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor2.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor2.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor3.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor3.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor3.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor3.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor4.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor4.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor4.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor4.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor5.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor5.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor5.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor5.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor6.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor6.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor6.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor6.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor7.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor7.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor7.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor7.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor8.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor8.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor8.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor8.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor9.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor9.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor9.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/scissors/scissor9.4.jpg&#39;],
   &#39;shoes&#39;: [&#39;../data/haxby2001/stimuli/shoes/shoea1.jpg&#39;,
    &#39;../data/haxby2001/stimuli/shoes/shoea2.jpg&#39;,
    &#39;../data/haxby2001/stimuli/shoes/shoea3.jpg&#39;,
@@ -1152,7 +1158,7 @@ Using <code class="docutils literal notranslate"><span class="pre">nilearn</span
 </div>
 </div>
 <p>Now we can access basically all parts of the <code class="docutils literal notranslate"><span class="pre">image</span></code>, including the <code class="docutils literal notranslate"><span class="pre">header</span></code></p>
-<div class="cell docutils container">
+<div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(anat_image.header)
 </pre></div>
@@ -1208,7 +1214,7 @@ magic           : b&#39;n+1&#39;
 </div>
 </div>
 <p>and actual <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p>
-<div class="cell docutils container">
+<div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>anat_image.dataobj
 </pre></div>
@@ -1553,7 +1559,7 @@ magic           : b&#39;n+1&#39;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7fdea8ea4a30&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f11441f99a0&gt;
 </pre></div>
 </div>
 <img alt="_images/haxby_data_19_1.png" src="_images/haxby_data_19_1.png" />
@@ -1567,7 +1573,12 @@ magic           : b&#39;n+1&#39;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/nilearn/plotting/html_stat_map.py:217: FutureWarning: Default resolution of the MNI template will change from 2mm to 1mm in version 0.10.0
+  bg_img = load_mni152_template()
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/nilearn/image/resampling.py:531: UserWarning: Casting data from int32 to float32
+  warnings.warn(&quot;Casting data from %s to %s&quot; % (data.dtype.name, aux))
 </pre></div>
 </div>
 <div class="output text_html"><iframe srcdoc="&lt;!DOCTYPE html&gt;
@@ -1620,7 +1631,7 @@ magic           : b&#39;n+1&#39;
 </div>
 </div>
 <p>and inspect its <code class="docutils literal notranslate"><span class="pre">header</span></code>:</p>
-<div class="cell docutils container">
+<div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(func_image.header)
 </pre></div>
@@ -1676,14 +1687,14 @@ magic           : b&#39;n+1&#39;
 </div>
 </div>
 <p>and <code class="docutils literal notranslate"><span class="pre">data</span></code>:</p>
-<div class="cell docutils container">
+<div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>func_image.get_data()
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/61/0lj9r7px3k52gv9yfyx6ky300000gn/T/ipykernel_23749/1789311566.py:1: DeprecationWarning: get_data() is deprecated in favor of get_fdata(), which has a more predictable return type. To obtain get_data() behavior going forward, use numpy.asanyarray(img.dataobj).
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2118/1789311566.py:1: DeprecationWarning: get_data() is deprecated in favor of get_fdata(), which has a more predictable return type. To obtain get_data() behavior going forward, use numpy.asanyarray(img.dataobj).
 
 * deprecated from version: 3.0
 * Will raise &lt;class &#39;nibabel.deprecator.ExpiredDeprecationError&#39;&gt; as of version: 5.0
@@ -2053,7 +2064,7 @@ magic           : b&#39;n+1&#39;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7fde97f6da60&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f1122848fd0&gt;
 </pre></div>
 </div>
 <img alt="_images/haxby_data_36_1.png" src="_images/haxby_data_36_1.png" />
@@ -2117,7 +2128,7 @@ magic           : b&#39;n+1&#39;
 </div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">inspect</span></code></p>
-<div class="cell docutils container">
+<div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(vt_mask.header)
 </pre></div>
@@ -2172,14 +2183,14 @@ magic           : b&#39;n+1&#39;
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>vt_mask.get_data()
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/61/0lj9r7px3k52gv9yfyx6ky300000gn/T/ipykernel_23749/2751075843.py:1: DeprecationWarning: get_data() is deprecated in favor of get_fdata(), which has a more predictable return type. To obtain get_data() behavior going forward, use numpy.asanyarray(img.dataobj).
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2118/2751075843.py:1: DeprecationWarning: get_data() is deprecated in favor of get_fdata(), which has a more predictable return type. To obtain get_data() behavior going forward, use numpy.asanyarray(img.dataobj).
 
 * deprecated from version: 3.0
 * Will raise &lt;class &#39;nibabel.deprecator.ExpiredDeprecationError&#39;&gt; as of version: 5.0
@@ -2518,7 +2529,7 @@ magic           : b&#39;n+1&#39;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7fde17f88fd0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f11221ad790&gt;
 </pre></div>
 </div>
 <img alt="_images/haxby_data_46_1.png" src="_images/haxby_data_46_1.png" />
@@ -2539,7 +2550,7 @@ stimulus_annotations = pd.read_csv(haxby_dataset.session_target[0], delimiter=&#
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>stimulus_annotations.head(n=40)
 </pre></div>
@@ -2835,7 +2846,7 @@ sns.despine(offset=5)
 <h2>Bonus: checking the stimuli<a class="headerlink" href="#bonus-checking-the-stimuli" title="Permalink to this headline">¶</a></h2>
 <p>As you saw above, our <code class="docutils literal notranslate"><span class="pre">tutorial</span> <span class="pre">dataset</span></code> actually also contains the <code class="docutils literal notranslate"><span class="pre">stimuli</span></code> utilized in the experiment. This pretty unique (because of e.g. copyright problems) but really cool. As we could use the <code class="docutils literal notranslate"><span class="pre">stimuli</span></code> for certain analyses, e.g. <span class="xref myst">encoding</span> and/or comparing their processing in <code class="docutils literal notranslate"><span class="pre">biological</span></code> and <code class="docutils literal notranslate"><span class="pre">artificial</span> <span class="pre">neural</span> <span class="pre">networks</span></code>. However, this is unfortunately outside the scope of this session. Thus, we are just going to plot a few of them so you get an impression.</p>
 <p>We can examine one functional volume using nilearn’s plotting tools. Because fmri data are 4D we use <a class="reference external" href="https://nilearn.github.io/modules/generated/nilearn.image.mean_img.html#nilearn.image.mean_img">nilearn.image.mean_img</a> to extract the average brain volume.</p>
-<div class="cell docutils container">
+<div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
 
@@ -2874,7 +2885,7 @@ show()
 </div>
 </div>
 <p>Please note that for each <code class="docutils literal notranslate"><span class="pre">image</span></code> <code class="docutils literal notranslate"><span class="pre">category</span></code>, a number of <code class="docutils literal notranslate"><span class="pre">scrambled</span> <span class="pre">images</span></code> were also presented.</p>
-<div class="cell docutils container">
+<div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for stim_num in range(len(stimulus_information[&#39;controls&#39;])):
     stim_type = stimulus_information[&#39;controls&#39;][stim_num][0]
@@ -2915,16 +2926,16 @@ show()
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "main_edu_2022"
+            mode: "python"
         },
         kernelOptions: {
-            kernelName: "main_edu_2022",
+            kernelName: "python3",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'main_edu_2022'</script>
+    <script>kernelName = 'python3'</script>
 
               </div>
               

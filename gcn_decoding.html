@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Brain decoding with GCN &#8212; Introduction to brain decoding in fMRI</title>
+    <title>Brain decoding with GCN &#8212; Introduction to brain decoding &amp; encoding in fMRI</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -59,6 +59,7 @@
     <link rel="canonical" href="https://main-educational.github.io/brain_encoding_decoding/gcn_decoding.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Brain encoding" href="encoding.html" />
     <link rel="prev" title="Brain decoding with MLP" href="mlp_decoding.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -88,7 +89,7 @@
       <img src="_static/neurolibre-logo.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">Introduction to brain decoding in fMRI</h1>
+      <h1 class="site-logo" id="site-title">Introduction to brain decoding & encoding in fMRI</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -122,6 +123,11 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Brain decoding with GCN
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="encoding.html">
+   Brain encoding
   </a>
  </li>
 </ul>
@@ -391,21 +397,95 @@ The full time series are used to constrcut the brain graph to a network represen
 <p>We are going to download the dataset from Haxby and colleagues (2001) <span id="id1">[<a class="reference internal" href="haxby_data.html#id6">HGF+01</a>]</span>. You can check section <a class="reference internal" href="haxby_data.html#haxby-dataset"><span class="std std-ref">An overview of the Haxby dataset</span></a> for more details on that dataset. Here we are going to quickly download it, and prepare it for machine learning applications with a set of predictive variable, the brain time series, and a dependent variable, the annotation on cognition.</p>
 <div class="cell tag_hide_input tag_hide_output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
-<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;once&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
+import warnings
+warnings.filterwarnings(action=&#39;once&#39;)
 
-<span class="kn">from</span> <span class="nn">nilearn</span> <span class="kn">import</span> <span class="n">datasets</span>
-<span class="c1"># We are fetching the data for subject 4</span>
-<span class="n">data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">)</span>
-<span class="n">sub_no</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="n">haxby_dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">fetch_haxby</span><span class="p">(</span><span class="n">subjects</span><span class="o">=</span><span class="p">[</span><span class="n">sub_no</span><span class="p">],</span> <span class="n">fetch_stimuli</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">)</span>
-<span class="n">func_file</span> <span class="o">=</span> <span class="n">haxby_dataset</span><span class="o">.</span><span class="n">func</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+from nilearn import datasets
+# We are fetching the data for subject 4
+data_dir = os.path.join(&#39;..&#39;, &#39;data&#39;)
+sub_no = 4
+haxby_dataset = datasets.fetch_haxby(subjects=[sub_no], fetch_stimuli=True, data_dir=data_dir)
+func_file = haxby_dataset.func[0]
 
-<span class="c1"># cognitive annotations</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="n">behavioral</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">haxby_dataset</span><span class="o">.</span><span class="n">session_target</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">behavioral</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">]</span>
+# cognitive annotations
+import pandas as pd
+behavioral = pd.read_csv(haxby_dataset.session_target[0], delimiter=&#39; &#39;)
+y = behavioral[&#39;labels&#39;]
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/sklearn/utils/multiclass.py:14: DeprecationWarning: Please use `spmatrix` from the `scipy.sparse` namespace, the `scipy.sparse.base` namespace is deprecated.
+  from scipy.sparse.base import spmatrix
+/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/sklearn/utils/optimize.py:18: DeprecationWarning: Please use `line_search_wolfe2` from the `scipy.optimize` namespace, the `scipy.optimize.linesearch` namespace is deprecated.
+  from scipy.optimize.linesearch import line_search_wolfe2, line_search_wolfe1
+/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/sklearn/utils/optimize.py:18: DeprecationWarning: Please use `line_search_wolfe1` from the `scipy.optimize` namespace, the `scipy.optimize.linesearch` namespace is deprecated.
+  from scipy.optimize.linesearch import line_search_wolfe2, line_search_wolfe1
+/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/nilearn/datasets/func.py:20: DeprecationWarning: Please use `MatReadError` from the `scipy.io.matlab` namespace, the `scipy.io.matlab.miobase` namespace is deprecated.
+  from scipy.io.matlab.miobase import MatReadError
+/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/nilearn/datasets/__init__.py:93: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+  warn(&quot;Fetchers from the nilearn.datasets module will be &quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dataset created in ../data/haxby2001
+
+Downloading data from https://www.nitrc.org/frs/download.php/7868/mask.nii.gz ...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from http://data.pymvpa.org/datasets/haxby2001/MD5SUMS ...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from http://data.pymvpa.org/datasets/haxby2001/subj4-2010.01.14.tar.gz ...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 15278080 of 329954386 bytes (4.6%,   20.6s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 50610176 of 329954386 bytes (15.3%,   11.0s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 86851584 of 329954386 bytes (26.3%,    8.4s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 122306560 of 329954386 bytes (37.1%,    6.8s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 158195712 of 329954386 bytes (47.9%,    5.4s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 194387968 of 329954386 bytes (58.9%,    4.2s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 230268928 of 329954386 bytes (69.8%,    3.0s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 266240000 of 329954386 bytes (80.7%,    1.9s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 302399488 of 329954386 bytes (91.6%,    0.8s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (10 seconds, 0 min)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Extracting data from ../data/haxby2001/622d4f5d4b8f14a567901606c924e90d/subj4-2010.01.14.tar.gz...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>.. done.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from http://data.pymvpa.org/datasets/haxby2001/stimuli-2010.01.14.tar.gz ...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
+Extracting data from ../data/haxby2001/5cd78c74b711572c7f41a5bddb69abca/stimuli-2010.01.14.tar.gz..... done.
 </pre></div>
 </div>
 </div>
@@ -413,9 +493,16 @@ The full time series are used to constrcut the brain graph to a network represen
 <p>Let’s check the size of dependent variable <code class="docutils literal notranslate"><span class="pre">y</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">categories</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">categories</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>categories = y.unique()
+print(categories)
+print(y.shape)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;rest&#39; &#39;face&#39; &#39;chair&#39; &#39;scissors&#39; &#39;shoe&#39; &#39;scrambledpix&#39; &#39;house&#39; &#39;cat&#39;
+ &#39;bottle&#39;]
+(1452,)
 </pre></div>
 </div>
 </div>
@@ -437,32 +524,54 @@ maximally sparse representations of the dataset are sought for. Atoms are not re
 <p>We use the nilearn function <code class="docutils literal notranslate"><span class="pre">DictLearning</span></code> to estimate networks on the haxby EPI data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
-<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;once&#39;</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">nilearn.decomposition</span> <span class="kn">import</span> <span class="n">DictLearning</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import warnings
+warnings.filterwarnings(action=&#39;once&#39;)
+from nilearn.decomposition import DictLearning
 
-<span class="c1"># Initialize DictLearning object</span>
-<span class="n">dict_learn</span> <span class="o">=</span> <span class="n">DictLearning</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">smoothing_fwhm</span><span class="o">=</span><span class="mf">6.</span><span class="p">,</span>
-                          <span class="n">low_pass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">high_pass</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">t_r</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-                          <span class="n">detrend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">standardize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                          <span class="n">memory</span><span class="o">=</span><span class="s2">&quot;nilearn_cache&quot;</span><span class="p">,</span> <span class="n">memory_level</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-                          <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="c1"># Fit to the data</span>
-<span class="n">dict_learn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">func_file</span><span class="p">)</span>
-<span class="c1"># Resting state networks/maps in attribute `components_img_`</span>
-<span class="n">components_img</span> <span class="o">=</span> <span class="n">dict_learn</span><span class="o">.</span><span class="n">components_img_</span>
+# Initialize DictLearning object
+dict_learn = DictLearning(n_components=20, smoothing_fwhm=6.,
+                          low_pass=0.1, high_pass=0.01, t_r=2,
+                          detrend=True, standardize=True,
+                          memory=&quot;nilearn_cache&quot;, memory_level=2,
+                          random_state=0)
+# Fit to the data
+dict_learn.fit(func_file)
+# Resting state networks/maps in attribute `components_img_`
+components_img = dict_learn.components_img_
 
-<span class="c1"># Visualization of functional networks</span>
-<span class="c1"># Show networks using plotting utilities</span>
-<span class="kn">from</span> <span class="nn">nilearn.image</span> <span class="kn">import</span> <span class="n">mean_img</span>
-<span class="kn">from</span> <span class="nn">nilearn</span> <span class="kn">import</span> <span class="n">plotting</span>
-<span class="n">mean_haxby</span> <span class="o">=</span> <span class="n">mean_img</span><span class="p">(</span><span class="n">func_file</span><span class="p">)</span>
-<span class="n">plotting</span><span class="o">.</span><span class="n">plot_prob_atlas</span><span class="p">(</span><span class="n">components_img</span><span class="p">,</span> 
-                         <span class="n">bg_img</span><span class="o">=</span><span class="n">mean_haxby</span><span class="p">,</span> 
-                         <span class="n">view_type</span><span class="o">=</span><span class="s1">&#39;filled_contours&#39;</span><span class="p">,</span>
-                         <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Dictionary Learning maps&#39;</span><span class="p">)</span>
+# Visualization of functional networks
+# Show networks using plotting utilities
+from nilearn.image import mean_img
+from nilearn import plotting
+mean_haxby = mean_img(func_file)
+plotting.plot_prob_atlas(components_img, 
+                         bg_img=mean_haxby, 
+                         view_type=&#39;filled_contours&#39;,
+                         title=&#39;Dictionary Learning maps&#39;)
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/sklearn/linear_model/_ridge.py:147: DeprecationWarning: The &#39;sym_pos&#39; keyword is deprecated and should be replaced by using &#39;assume_a = &quot;pos&quot;&#39;. &#39;sym_pos&#39; will be removed in SciPy 1.11.0.
+  return linalg.solve(A, Xy, sym_pos=True,
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/nilearn/image/image.py:1106: FutureWarning: The parameter &quot;sessions&quot; will be removed in 0.9.0 release of Nilearn. Please use the parameter &quot;runs&quot; instead.
+  data = signal.clean(
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/scipy/ndimage/_measurements.py:305: DeprecationWarning: In future, it will be an error for &#39;np.bool_&#39; scalars to be interpreted as an index
+  return _nd_image.find_objects(input, max_label)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/nilearn/plotting/displays.py:101: UserWarning: linewidths is ignored by contourf
+  im = getattr(ax, type)(data_2d.copy(),
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f9455149340&gt;
+</pre></div>
+</div>
+<img alt="_images/gcn_decoding_5_5.png" src="_images/gcn_decoding_5_5.png" />
 </div>
 </div>
 </div>
@@ -480,37 +589,66 @@ we will use <code class="docutils literal notranslate"><span class="pre">RegionE
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
-<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;once&#39;</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">nilearn.regions</span> <span class="kn">import</span> <span class="n">RegionExtractor</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import warnings
+warnings.filterwarnings(action=&#39;once&#39;)
+from nilearn.regions import RegionExtractor
 
-<span class="n">extractor</span> <span class="o">=</span> <span class="n">RegionExtractor</span><span class="p">(</span><span class="n">components_img</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-                            <span class="n">thresholding_strategy</span><span class="o">=</span><span class="s1">&#39;ratio_n_voxels&#39;</span><span class="p">,</span>
-                            <span class="n">extractor</span><span class="o">=</span><span class="s1">&#39;local_regions&#39;</span><span class="p">,</span>
-                            <span class="n">low_pass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">high_pass</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">t_r</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-                            <span class="n">detrend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">standardize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="c1"># Just call fit() to process for regions extraction</span>
-<span class="n">extractor</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="c1"># Extracted regions are stored in regions_img_</span>
-<span class="n">regions_extracted_img</span> <span class="o">=</span> <span class="n">extractor</span><span class="o">.</span><span class="n">regions_img_</span>
-<span class="c1"># Each region index is stored in index_</span>
-<span class="n">regions_index</span> <span class="o">=</span> <span class="n">extractor</span><span class="o">.</span><span class="n">index_</span>
-<span class="c1"># Total number of regions extracted</span>
-<span class="n">n_regions_extracted</span> <span class="o">=</span> <span class="n">regions_extracted_img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+extractor = RegionExtractor(components_img, threshold=0.5,
+                            thresholding_strategy=&#39;ratio_n_voxels&#39;,
+                            extractor=&#39;local_regions&#39;,
+                            low_pass=0.1, high_pass=0.01, t_r=2,
+                            detrend=True, standardize=True)
+# Just call fit() to process for regions extraction
+extractor.fit()
+# Extracted regions are stored in regions_img_
+regions_extracted_img = extractor.regions_img_
+# Each region index is stored in index_
+regions_index = extractor.index_
+# Total number of regions extracted
+n_regions_extracted = regions_extracted_img.shape[-1]
 
-<span class="c1"># Visualization of region extraction results</span>
-<span class="n">title</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1"> regions are extracted from </span><span class="si">%d</span><span class="s1"> components.&#39;</span>
-         <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Each separate color of region indicates extracted region&#39;</span>
-         <span class="o">%</span> <span class="p">(</span><span class="n">n_regions_extracted</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
-<span class="n">plotting</span><span class="o">.</span><span class="n">plot_prob_atlas</span><span class="p">(</span><span class="n">regions_extracted_img</span><span class="p">,</span> 
-                         <span class="n">bg_img</span><span class="o">=</span><span class="n">mean_haxby</span><span class="p">,</span> 
-                         <span class="n">view_type</span><span class="o">=</span><span class="s1">&#39;filled_contours&#39;</span><span class="p">,</span>
-                         <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">)</span>
+# Visualization of region extraction results
+title = (&#39;%d regions are extracted from %d components.&#39;
+         &#39;\nEach separate color of region indicates extracted region&#39;
+         % (n_regions_extracted, 20))
+plotting.plot_prob_atlas(regions_extracted_img, 
+                         bg_img=mean_haxby, 
+                         view_type=&#39;filled_contours&#39;,
+                         title=title)
 
-<span class="n">X</span> <span class="o">=</span> <span class="n">extractor</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">func_file</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+X = extractor.transform(func_file)
+print(X.shape)
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;decorator-gen-3&gt;:2: DeprecationWarning: scipy.sparse.linalg.cg called without specifying `atol`. The default value will be changed in a future release. For compatibility, specify a value for `atol` explicitly, e.g., ``cg(..., atol=0)``, or to retain the old behavior ``cg(..., atol=&#39;legacy&#39;)``
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/nilearn/image/image.py:1106: FutureWarning: The parameter &quot;sessions&quot; will be removed in 0.9.0 release of Nilearn. Please use the parameter &quot;runs&quot; instead.
+  data = signal.clean(
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/scipy/ndimage/_measurements.py:305: DeprecationWarning: In future, it will be an error for &#39;np.bool_&#39; scalars to be interpreted as an index
+  return _nd_image.find_objects(input, max_label)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/nilearn/plotting/displays.py:101: UserWarning: linewidths is ignored by contourf
+  im = getattr(ax, type)(data_2d.copy(),
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/numpy/ma/core.py:2826: UserWarning: Warning: converting a masked element to nan.
+  _data = np.array(data, dtype=dtype, copy=copy,
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/nilearn/plotting/displays.py:101: UserWarning: No contour levels were found within the data range.
+  im = getattr(ax, type)(data_2d.copy(),
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1452, 65)
+</pre></div>
+</div>
+<img alt="_images/gcn_decoding_7_7.png" src="_images/gcn_decoding_7_7.png" />
 </div>
 </div>
 <p>So we have 1452 time points in the imaging data, and for each time point we have recordings of fMRI activity across 68 brain regions.</p>
@@ -523,22 +661,25 @@ Brain graph provides a network representation of brain organization by associati
 After generating time series, we will firstly use the nilearn function to geneate a correlation based functional connectome.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
-<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;once&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import warnings
+warnings.filterwarnings(action=&#39;once&#39;)
 
-<span class="kn">import</span> <span class="nn">nilearn.connectome</span>
+import nilearn.connectome
 
-<span class="c1"># Estimating connectomes and save for pytorch to load</span>
-<span class="n">corr_measure</span> <span class="o">=</span> <span class="n">nilearn</span><span class="o">.</span><span class="n">connectome</span><span class="o">.</span><span class="n">ConnectivityMeasure</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;correlation&quot;</span><span class="p">)</span>
-<span class="n">conn</span> <span class="o">=</span> <span class="n">corr_measure</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="n">X</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+# Estimating connectomes and save for pytorch to load
+corr_measure = nilearn.connectome.ConnectivityMeasure(kind=&quot;correlation&quot;)
+conn = corr_measure.fit_transform([X])[0]
 
-<span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Correlation between </span><span class="si">%d</span><span class="s1"> regions&#39;</span> <span class="o">%</span> <span class="n">n_regions_extracted</span>
+title = &#39;Correlation between %d regions&#39; % n_regions_extracted
 
-<span class="c1"># First plot the matrix</span>
-<span class="n">display</span> <span class="o">=</span> <span class="n">plotting</span><span class="o">.</span><span class="n">plot_matrix</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
-                               <span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">)</span>
+# First plot the matrix
+display = plotting.plot_matrix(conn, vmax=1, vmin=-1,
+                               colorbar=True, title=title)
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/gcn_decoding_9_0.png" src="_images/gcn_decoding_9_0.png" />
 </div>
 </div>
 <p>The next step is to construct the brain graph for GCN.</p>
@@ -549,12 +690,12 @@ For the purpose of demostration, we constrain the graph to from clusters with <s
 <p>For more details you please check out <strong><em>src/graph_construction.py</em></strong> script.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../src&#39;</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">graph_construction</span> <span class="kn">import</span> <span class="n">make_group_graph</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import sys
+sys.path.append(&#39;../src&#39;)
+from graph_construction import make_group_graph
 
-<span class="c1"># make a graph for the subject</span>
-<span class="n">graph</span> <span class="o">=</span> <span class="n">make_group_graph</span><span class="p">([</span><span class="n">conn</span><span class="p">],</span> <span class="n">self_loops</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+# make a graph for the subject
+graph = make_group_graph([conn], self_loops=False, k=8, symmetric=True)
 </pre></div>
 </div>
 </div>
@@ -566,16 +707,16 @@ For the purpose of demostration, we constrain the graph to from clusters with <s
 Firstly we will concatenated the volumes of the same category together.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate data</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># generate data
+import pandas as pd
+import numpy as np
 
-<span class="c1"># cancatenate the same type of trials</span>
-<span class="n">concat_bold</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">categories</span><span class="p">:</span>
-    <span class="n">cur_label_index</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">y</span> <span class="o">==</span> <span class="n">label</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-    <span class="n">curr_bold_seg</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">cur_label_index</span><span class="p">]</span>    
-    <span class="n">concat_bold</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">curr_bold_seg</span>
+# cancatenate the same type of trials
+concat_bold = {}
+for label in categories:
+    cur_label_index = y.index[y == label].tolist()
+    curr_bold_seg = X[cur_label_index]    
+    concat_bold[label] = curr_bold_seg
 </pre></div>
 </div>
 </div>
@@ -588,39 +729,39 @@ the file names and the associated label are stored in the same directory,
 under a file named <code class="docutils literal notranslate"><span class="pre">label.csv</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># split the data by time window size and save to file</span>
-<span class="n">window_length</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">dic_labels</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">categories</span><span class="p">)}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># split the data by time window size and save to file
+window_length = 1
+dic_labels = {name: i for i, name in enumerate(categories)}
 
-<span class="c1"># set output paths</span>
-<span class="n">split_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">&#39;haxby_split_win/&#39;</span><span class="p">)</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">split_path</span><span class="p">):</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">split_path</span><span class="p">)</span>
-<span class="n">out_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">split_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_</span><span class="si">{:04d}</span><span class="s1">.npy&#39;</span><span class="p">)</span>
-<span class="n">out_csv</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">split_path</span><span class="p">,</span> <span class="s1">&#39;labels.csv&#39;</span><span class="p">)</span>
+# set output paths
+split_path = os.path.join(data_dir, &#39;haxby_split_win/&#39;)
+if not os.path.exists(split_path):
+    os.makedirs(split_path)
+out_file = os.path.join(split_path, &#39;{}_{:04d}.npy&#39;)
+out_csv = os.path.join(split_path, &#39;labels.csv&#39;)
 
-<span class="n">label_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="s1">&#39;filename&#39;</span><span class="p">])</span>
-<span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">ts_data</span> <span class="ow">in</span> <span class="n">concat_bold</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="n">ts_duration</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ts_data</span><span class="p">)</span>
-    <span class="n">ts_filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">_seg&quot;</span>
-    <span class="n">valid_label</span> <span class="o">=</span> <span class="n">dic_labels</span><span class="p">[</span><span class="n">label</span><span class="p">]</span>
+label_df = pd.DataFrame(columns=[&#39;label&#39;, &#39;filename&#39;])
+for label, ts_data in concat_bold.items():
+    ts_duration = len(ts_data)
+    ts_filename = f&quot;{label}_seg&quot;
+    valid_label = dic_labels[label]
 
-    <span class="c1"># Split the timeseries</span>
-    <span class="n">rem</span> <span class="o">=</span> <span class="n">ts_duration</span> <span class="o">%</span> <span class="n">window_length</span>
-    <span class="n">n_splits</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">ts_duration</span> <span class="o">/</span> <span class="n">window_length</span><span class="p">))</span>
+    # Split the timeseries
+    rem = ts_duration % window_length
+    n_splits = int(np.floor(ts_duration / window_length))
 
-    <span class="n">ts_data</span> <span class="o">=</span> <span class="n">ts_data</span><span class="p">[:(</span><span class="n">ts_duration</span> <span class="o">-</span> <span class="n">rem</span><span class="p">),</span> <span class="p">:]</span>   
+    ts_data = ts_data[:(ts_duration - rem), :]   
 
-    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">split_ts</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">ts_data</span><span class="p">,</span> <span class="n">n_splits</span><span class="p">)):</span>
-        <span class="n">ts_output_file_name</span> <span class="o">=</span> <span class="n">out_file</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ts_filename</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+    for j, split_ts in enumerate(np.split(ts_data, n_splits)):
+        ts_output_file_name = out_file.format(ts_filename, j)
 
-        <span class="n">split_ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">split_ts</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">ts_output_file_name</span><span class="p">,</span> <span class="n">split_ts</span><span class="p">)</span>
+        split_ts = np.swapaxes(split_ts, 0, 1)
+        np.save(ts_output_file_name, split_ts)
 
-        <span class="n">curr_label</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">valid_label</span><span class="p">,</span> <span class="s1">&#39;filename&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">ts_output_file_name</span><span class="p">)}</span>
-        <span class="n">label_df</span> <span class="o">=</span> <span class="n">label_df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">curr_label</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        curr_label = {&#39;label&#39;: valid_label, &#39;filename&#39;: os.path.basename(ts_output_file_name)}
+        label_df = label_df.append(curr_label, ignore_index=True)
         
-<span class="n">label_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">out_csv</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  
+label_df.to_csv(out_csv, index=False)  
 </pre></div>
 </div>
 </div>
@@ -636,38 +777,45 @@ For more details of customising a dataset, please see <code class="docutils lite
 official <a class="reference external" href="https://pytorch.org/tutorials/beginner/basics/data_tutorial.html#creating-a-custom-dataset-for-your-files"><code class="docutils literal notranslate"><span class="pre">pytorch</span></code> documentation</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># split dataset</span>
-<span class="kn">from</span> <span class="nn">gcn_windows_dataset</span> <span class="kn">import</span> <span class="n">TimeWindowsDataset</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># split dataset
+from gcn_windows_dataset import TimeWindowsDataset
 
-<span class="n">random_seed</span> <span class="o">=</span> <span class="mi">0</span>
+random_seed = 0
 
-<span class="n">train_dataset</span> <span class="o">=</span> <span class="n">TimeWindowsDataset</span><span class="p">(</span>
-    <span class="n">data_dir</span><span class="o">=</span><span class="n">split_path</span><span class="p">,</span> 
-    <span class="n">partition</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">,</span> 
-    <span class="n">random_seed</span><span class="o">=</span><span class="n">random_seed</span><span class="p">,</span> 
-    <span class="n">pin_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
-    <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+train_dataset = TimeWindowsDataset(
+    data_dir=split_path, 
+    partition=&quot;train&quot;, 
+    random_seed=random_seed, 
+    pin_memory=True, 
+    normalize=True,
+    shuffle=True)
 
-<span class="n">valid_dataset</span> <span class="o">=</span> <span class="n">TimeWindowsDataset</span><span class="p">(</span>
-    <span class="n">data_dir</span><span class="o">=</span><span class="n">split_path</span><span class="p">,</span> 
-    <span class="n">partition</span><span class="o">=</span><span class="s2">&quot;valid&quot;</span><span class="p">,</span> 
-    <span class="n">random_seed</span><span class="o">=</span><span class="n">random_seed</span><span class="p">,</span> 
-    <span class="n">pin_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
-    <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+valid_dataset = TimeWindowsDataset(
+    data_dir=split_path, 
+    partition=&quot;valid&quot;, 
+    random_seed=random_seed, 
+    pin_memory=True, 
+    normalize=True,
+    shuffle=True)
 
-<span class="n">test_dataset</span> <span class="o">=</span> <span class="n">TimeWindowsDataset</span><span class="p">(</span>
-    <span class="n">data_dir</span><span class="o">=</span><span class="n">split_path</span><span class="p">,</span> 
-    <span class="n">partition</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> 
-    <span class="n">random_seed</span><span class="o">=</span><span class="n">random_seed</span><span class="p">,</span> 
-    <span class="n">pin_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
-    <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+test_dataset = TimeWindowsDataset(
+    data_dir=split_path, 
+    partition=&quot;test&quot;, 
+    random_seed=random_seed, 
+    pin_memory=True, 
+    normalize=True,
+    shuffle=True)
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;train dataset: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;valid dataset: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">valid_dataset</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;test dataset: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_dataset</span><span class="p">))</span>
+print(&quot;train dataset: {}&quot;.format(train_dataset))
+print(&quot;valid dataset: {}&quot;.format(valid_dataset))
+print(&quot;test dataset: {}&quot;.format(test_dataset))
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>train dataset: 1016*(torch.Size([65, 1]), ())
+valid dataset: 290*(torch.Size([65, 1]), ())
+test dataset: 146*(torch.Size([65, 1]), ())
 </pre></div>
 </div>
 </div>
@@ -677,18 +825,24 @@ The <strong>batch size</strong> defines the number of samples that will be propa
 We are separating the dataset into 16 time windows per batch.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import torch
+from torch.utils.data import DataLoader
 
-<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">16</span>
+batch_size = 16
 
-<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="n">random_seed</span><span class="p">)</span>
-<span class="n">train_generator</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">valid_generator</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">valid_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">test_generator</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">test_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">train_features</span><span class="p">,</span> <span class="n">train_labels</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">train_generator</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Feature batch shape: </span><span class="si">{</span><span class="n">train_features</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="si">}</span><span class="s2">; mean </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">train_features</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Labels batch shape: </span><span class="si">{</span><span class="n">train_labels</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="si">}</span><span class="s2">; mean </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="o">.</span><span class="n">float</span><span class="p">(</span><span class="n">train_labels</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+torch.manual_seed(random_seed)
+train_generator = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+valid_generator = DataLoader(valid_dataset, batch_size=batch_size, shuffle=True)
+test_generator = DataLoader(test_dataset, batch_size=batch_size, shuffle=True)
+train_features, train_labels = next(iter(train_generator))
+print(f&quot;Feature batch shape: {train_features.size()}; mean {torch.mean(train_features)}&quot;)
+print(f&quot;Labels batch shape: {train_labels.size()}; mean {torch.mean(torch.Tensor.float(train_labels))}&quot;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Feature batch shape: torch.Size([16, 65, 1]); mean 6.4189618065313425e-09
+Labels batch shape: torch.Size([16]); mean 3.8125
 </pre></div>
 </div>
 </div>
@@ -705,15 +859,28 @@ We are separating the dataset into 16 time windows per batch.</p>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gcn_model</span> <span class="kn">import</span> <span class="n">GCN</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from gcn_model import GCN
 
-<span class="n">gcn</span> <span class="o">=</span> <span class="n">GCN</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">edge_index</span><span class="p">,</span> 
-          <span class="n">graph</span><span class="o">.</span><span class="n">edge_attr</span><span class="p">,</span> 
-          <span class="n">n_roi</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-          <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
-          <span class="n">n_timepoints</span><span class="o">=</span><span class="n">window_length</span><span class="p">,</span> 
-          <span class="n">n_classes</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">categories</span><span class="p">))</span>
-<span class="n">gcn</span>
+gcn = GCN(graph.edge_index, 
+          graph.edge_attr, 
+          n_roi=X.shape[1],
+          batch_size=batch_size,
+          n_timepoints=window_length, 
+          n_classes=len(categories))
+gcn
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GCN(
+  (conv1): ChebConv(1, 32, K=2, normalization=sym)
+  (conv2): ChebConv(32, 32, K=2, normalization=sym)
+  (conv3): ChebConv(32, 16, K=2, normalization=sym)
+  (fc1): Linear(in_features=1040, out_features=256, bias=True)
+  (fc2): Linear(in_features=256, out_features=128, bias=True)
+  (fc3): Linear(in_features=128, out_features=9, bias=True)
+  (dropout): Dropout(p=0.2, inplace=False)
+)
 </pre></div>
 </div>
 </div>
@@ -731,41 +898,41 @@ One can use their own choice of optimizer for backpropagation and estimator for 
 These metrics will serve as the reference for model performance of this round of training.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_loop</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">):</span>
-    <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>    
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def train_loop(dataloader, model, loss_fn, optimizer):
+    size = len(dataloader.dataset)    
 
-    <span class="k">for</span> <span class="n">batch</span><span class="p">,</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataloader</span><span class="p">):</span>
-        <span class="c1"># Compute prediction and loss</span>
-        <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-        <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    for batch, (X, y) in enumerate(dataloader):
+        # Compute prediction and loss
+        pred = model(X)
+        loss = loss_fn(pred, y)
 
-        <span class="c1"># Backpropagation</span>
-        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
-        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
-        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        # Backpropagation
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
         
-        <span class="n">loss</span><span class="p">,</span> <span class="n">current</span> <span class="o">=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="n">batch</span> <span class="o">*</span> <span class="n">dataloader</span><span class="o">.</span><span class="n">batch_size</span>
+        loss, current = loss.item(), batch * dataloader.batch_size
 
-        <span class="n">correct</span> <span class="o">=</span> <span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-        <span class="n">correct</span> <span class="o">/=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">batch</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">current</span> <span class="o">==</span> <span class="n">size</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;#</span><span class="si">{</span><span class="n">batch</span><span class="si">:</span><span class="s2">&gt;5</span><span class="si">}</span><span class="s2">;</span><span class="se">\t</span><span class="s2">train_loss: </span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="s2">&gt;0.3f</span><span class="si">}</span><span class="s2">;</span><span class="se">\t</span><span class="s2">train_accuracy:</span><span class="si">{</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">correct</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;5.1f</span><span class="si">}</span><span class="s2">%</span><span class="se">\t\t</span><span class="s2">[</span><span class="si">{</span><span class="n">current</span><span class="si">:</span><span class="s2">&gt;5d</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">size</span><span class="si">:</span><span class="s2">&gt;5d</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+        correct = (pred.argmax(1) == y).type(torch.float).sum().item()
+        correct /= X.shape[0]
+        if (batch % 10 == 0) or (current == size):
+            print(f&quot;#{batch:&gt;5};\ttrain_loss: {loss:&gt;0.3f};\ttrain_accuracy:{(100*correct):&gt;5.1f}%\t\t[{current:&gt;5d}/{size:&gt;5d}]&quot;)
 
         
-<span class="k">def</span> <span class="nf">valid_test_loop</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">):</span>
-    <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
-    <span class="n">loss</span><span class="p">,</span> <span class="n">correct</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+def valid_test_loop(dataloader, model, loss_fn):
+    size = len(dataloader.dataset)
+    loss, correct = 0, 0
 
-    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
-        <span class="k">for</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">dataloader</span><span class="p">:</span>
-            <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-            <span class="n">loss</span> <span class="o">+=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-            <span class="n">correct</span> <span class="o">+=</span> <span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+    with torch.no_grad():
+        for X, y in dataloader:
+            pred = model.forward(X)
+            loss += loss_fn(pred, y).item()
+            correct += (pred.argmax(1) == y).type(torch.float).sum().item()
 
-    <span class="n">loss</span> <span class="o">/=</span> <span class="n">size</span>
-    <span class="n">correct</span> <span class="o">/=</span> <span class="n">size</span>
+    loss /= size
+    correct /= size
 
-    <span class="k">return</span> <span class="n">loss</span><span class="p">,</span> <span class="n">correct</span>
+    return loss, correct
 </pre></div>
 </div>
 </div>
@@ -775,15 +942,93 @@ We will repeat the process for 60 epochs.
 Here the choice of loss function is <code class="docutils literal notranslate"><span class="pre">CrossEntropyLoss</span></code> and the optimizer to update the model is <code class="docutils literal notranslate"><span class="pre">Adam</span></code>.</p>
 <div class="cell tag_hide_output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">loss_fn</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
-<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">gcn</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">weight_decay</span><span class="o">=</span><span class="mf">5e-4</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>loss_fn = torch.nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(gcn.parameters(), lr=1e-4, weight_decay=5e-4)
 
-<span class="n">epochs</span> <span class="o">=</span> <span class="mi">60</span>
-<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch </span><span class="si">{</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">epochs</span><span class="si">}</span><span class="se">\n</span><span class="s2">-------------------------------&quot;</span><span class="p">)</span>
-    <span class="n">train_loop</span><span class="p">(</span><span class="n">train_generator</span><span class="p">,</span> <span class="n">gcn</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">)</span>
-    <span class="n">loss</span><span class="p">,</span> <span class="n">correct</span> <span class="o">=</span> <span class="n">valid_test_loop</span><span class="p">(</span><span class="n">valid_generator</span><span class="p">,</span> <span class="n">gcn</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Valid metrics:</span><span class="se">\n\t</span><span class="s2"> avg_loss: </span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="s2">&gt;8f</span><span class="si">}</span><span class="s2">;</span><span class="se">\t</span><span class="s2"> avg_accuracy: </span><span class="si">{</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">correct</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;0.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+epochs = 60
+for t in range(epochs):
+    print(f&quot;Epoch {t+1}/{epochs}\n-------------------------------&quot;)
+    train_loop(train_generator, gcn, loss_fn, optimizer)
+    loss, correct = valid_test_loop(valid_generator, gcn, loss_fn)
+    print(f&quot;Valid metrics:\n\t avg_loss: {loss:&gt;8f};\t avg_accuracy: {(100*correct):&gt;0.1f}%&quot;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/60
+-------------------------------
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">RuntimeError</span><span class="g g-Whitespace">                              </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch </span><span class="si">{</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">epochs</span><span class="si">}</span><span class="se">\n</span><span class="s2">-------------------------------&quot;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">7</span>     <span class="n">train_loop</span><span class="p">(</span><span class="n">train_generator</span><span class="p">,</span> <span class="n">gcn</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">loss</span><span class="p">,</span> <span class="n">correct</span> <span class="o">=</span> <span class="n">valid_test_loop</span><span class="p">(</span><span class="n">valid_generator</span><span class="p">,</span> <span class="n">gcn</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Valid metrics:</span><span class="se">\n\t</span><span class="s2"> avg_loss: </span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="s2">&gt;8f</span><span class="si">}</span><span class="s2">;</span><span class="se">\t</span><span class="s2"> avg_accuracy: </span><span class="si">{</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">correct</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;0.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="nn">Cell In[12], line 6,</span> in <span class="ni">train_loop</span><span class="nt">(dataloader, model, loss_fn, optimizer)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>    
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="k">for</span> <span class="n">batch</span><span class="p">,</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataloader</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="c1"># Compute prediction and loss</span>
+<span class="ne">----&gt; </span><span class="mi">6</span>     <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="c1"># Backpropagation</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/torch/nn/modules/module.py:1190,</span> in <span class="ni">Module._call_impl</span><span class="nt">(self, *input, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1186</span> <span class="c1"># If we don&#39;t have any hooks, we want to skip the rest of the logic in</span>
+<span class="g g-Whitespace">   </span><span class="mi">1187</span> <span class="c1"># this function, and just call forward.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1188</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_backward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_pre_hooks</span> <span class="ow">or</span> <span class="n">_global_backward_hooks</span>
+<span class="g g-Whitespace">   </span><span class="mi">1189</span>         <span class="ow">or</span> <span class="n">_global_forward_hooks</span> <span class="ow">or</span> <span class="n">_global_forward_pre_hooks</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1190</span>     <span class="k">return</span> <span class="n">forward_call</span><span class="p">(</span><span class="o">*</span><span class="nb">input</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1191</span> <span class="c1"># Do not call functions when jit is used</span>
+<span class="g g-Whitespace">   </span><span class="mi">1192</span> <span class="n">full_backward_hooks</span><span class="p">,</span> <span class="n">non_full_backward_hooks</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+
+<span class="nn">File ~/work/brain_encoding_decoding/brain_encoding_decoding/content/../src/gcn_model.py:36,</span> in <span class="ni">GCN.forward</span><span class="nt">(self, x)</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span> <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">35</span> <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">36</span> <span class="n">x</span> <span class="o">=</span> <span class="n">tg</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">global_mean_pool</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">37</span>     <span class="n">x</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_roi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span> <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/torch_geometric/nn/pool/glob.py:58,</span> in <span class="ni">global_mean_pool</span><span class="nt">(x, batch, size)</span>
+<span class="g g-Whitespace">     </span><span class="mi">56</span>     <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">dim</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">57</span> <span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">batch</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">size</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">size</span>
+<span class="ne">---&gt; </span><span class="mi">58</span> <span class="k">return</span> <span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span> <span class="n">reduce</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/torch_scatter/scatter.py:156,</span> in <span class="ni">scatter</span><span class="nt">(src, index, dim, out, dim_size, reduce)</span>
+<span class="g g-Whitespace">    </span><span class="mi">154</span>     <span class="k">return</span> <span class="n">scatter_mul</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">dim_size</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">155</span> <span class="k">elif</span> <span class="n">reduce</span> <span class="o">==</span> <span class="s1">&#39;mean&#39;</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">156</span>     <span class="k">return</span> <span class="n">scatter_mean</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">dim_size</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">157</span> <span class="k">elif</span> <span class="n">reduce</span> <span class="o">==</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">158</span>     <span class="k">return</span> <span class="n">scatter_min</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">dim_size</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/torch_scatter/scatter.py:41,</span> in <span class="ni">scatter_mean</span><span class="nt">(src, index, dim, out, dim_size)</span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span> <span class="k">def</span> <span class="nf">scatter_mean</span><span class="p">(</span><span class="n">src</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span>                  <span class="n">out</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span>                  <span class="n">dim_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">41</span>     <span class="n">out</span> <span class="o">=</span> <span class="n">scatter_sum</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">dim_size</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span>     <span class="n">dim_size</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">44</span>     <span class="n">index_dim</span> <span class="o">=</span> <span class="n">dim</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/torch_scatter/scatter.py:11,</span> in <span class="ni">scatter_sum</span><span class="nt">(src, index, dim, out, dim_size)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="k">def</span> <span class="nf">scatter_sum</span><span class="p">(</span><span class="n">src</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>                 <span class="n">out</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>                 <span class="n">dim_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">11</span>     <span class="n">index</span> <span class="o">=</span> <span class="n">broadcast</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">dim</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="k">if</span> <span class="n">out</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>         <span class="n">size</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/torch_scatter/utils.py:12,</span> in <span class="ni">broadcast</span><span class="nt">(src, other, dim)</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">dim</span><span class="p">(),</span> <span class="n">other</span><span class="o">.</span><span class="n">dim</span><span class="p">()):</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="n">src</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">12</span> <span class="n">src</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="k">return</span> <span class="n">src</span>
+
+<span class="ne">RuntimeError</span>: The expanded size of the tensor (65) must match the existing size (16) at non-singleton dimension 1.  Target sizes: [16, 65, 16].  Tensor sizes: [1, 16, 1]
 </pre></div>
 </div>
 </div>
@@ -791,9 +1036,9 @@ Here the choice of loss function is <code class="docutils literal notranslate"><
 <p>After training the model for 60 epochs, we use the untouched test data to evaluate the model and conclude the results of training.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># results</span>
-<span class="n">loss</span><span class="p">,</span> <span class="n">correct</span> <span class="o">=</span> <span class="n">valid_test_loop</span><span class="p">(</span><span class="n">test_generator</span><span class="p">,</span> <span class="n">gcn</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test metrics:</span><span class="se">\n\t</span><span class="s2"> avg_loss: </span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="s2">&gt;f</span><span class="si">}</span><span class="s2">;</span><span class="se">\t</span><span class="s2"> avg_accuracy: </span><span class="si">{</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">correct</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;0.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># results
+loss, correct = valid_test_loop(test_generator, gcn, loss_fn)
+print(f&quot;Test metrics:\n\t avg_loss: {loss:&gt;f};\t avg_accuracy: {(100*correct):&gt;0.1f}%&quot;)
 </pre></div>
 </div>
 </div>
@@ -854,6 +1099,13 @@ Here the choice of loss function is <code class="docutils literal notranslate"><
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">Brain decoding with MLP</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="encoding.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Brain encoding</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             

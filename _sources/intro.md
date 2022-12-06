@@ -1,9 +1,9 @@
 <!-- #region -->
 # Welcome 
 
-**"Introduction to brain decoding in fMRI"**
+**"Introduction to brain decoding & encoding in fMRI"**
 
-This `jupyter book` presents an introduction to `brain decoding` using `fMRI`. It was developed within the [educational courses](https://main-educational.github.io), conducted as part of the [Montreal AI and Neuroscience (MAIN) conference](https://www.main2022.org/) in November 2022.
+This `jupyter book` presents an introduction to `brain decoding` & `encoding` using `fMRI`. It was developed within the [educational courses](https://main-educational.github.io), conducted as part of the [Montreal AI and Neuroscience (MAIN) conference](https://www.main2022.org/) in November 2022.
 
 [![Jupyter Book Badge](https://jupyterbook.org/badge.svg)](https://main-educational.github.io/brain_encoding_decoding/intro.html) 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/main-educational/brain_encoding_decoding/HEAD)
@@ -14,7 +14,7 @@ This `jupyter book` presents an introduction to `brain decoding` using `fMRI`. I
 [![License](https://img.shields.io/github/license/main-educational/brain_encoding_decoding)](https://github.com/main-educational/brain_encoding_decoding)
 [![CONP](https://img.shields.io/badge/Supported%20by-%20CONP%2FPCNO-red)](https://conp.ca/)
 
-Building upon the prior sections of the [educational courses](https://main-educational.github.io), the here presented resources aim to provide an overview of how `decoding` `models` can be applied to `fMRI` data in order to investigate `brain function`. Importantly, the respective methods cannot only be utilized to analyze data from `biological agents` (e.g. `humans`, `non-human primates`, etc.) but also `artificial neural networks`, as well as presenting the opportunity to compare processing in both. They are thus core approaches that are prominently used at the intersection of `neuroscience` and `AI`.
+Building upon the prior sections of the [educational courses](https://main-educational.github.io), the here presented resources aim to provide an overview of how `decoding` & `encoding` `models` can be applied to `fMRI` data in order to investigate `brain function`. Importantly, the respective methods cannot only be utilized to analyze data from `biological agents` (e.g. `humans`, `non-human primates`, etc.) but also `artificial neural networks`, as well as presenting the opportunity to compare processing in both. They are thus core approaches that are prominently used at the intersection of `neuroscience` and `AI`.
  
  
 ```{figure} haxby_data/brain-encoding-decoding.png
@@ -27,7 +27,7 @@ To test the consistency of representations in artificial neural networks (ANNs) 
 ``` 
 
 The tutorials make heavy use of [nilearn](https://nilearn.github.io/stable/index.html) concerning 
-manipulating and processing `fMRI` data, as well as [scikit-learn](https://scikit-learn.org/stable/) and [pytorch](https://pytorch.org/) to apply `decoding models` on the data.
+manipulating and processing `fMRI` data, as well as [scikit-learn](https://scikit-learn.org/stable/) and [pytorch](https://pytorch.org/) to apply `decoding` & `encoding` `models` on the data.
 
 We used the [Jupyter Book](https://jupyterbook.org/en/stable/intro.html) framework to provide all materials in an open, structured and interactive manner. ALl pages and section you see here are built from `markdown` files or `jupyter notebooks`, allowing you to read through the materials and/or run them, locally or in the cloud. The three symbols on the top right allow to enable full screen mode, link to the underlying [GitHub repository](https://github.com/main-educational/brain_encoding_decoding) and allow you to download the respective sections as a `pdf` or `jupyter notebook` respectively. Some sections will additionally have a little rocket in that row which will allow you to interactively rerun certain parts via cloud computing (please see the [Binder](#Binder) section for more information).
 
@@ -46,12 +46,10 @@ name: brain_encoding_decoding_example_fig
 `Encoding` and `decoding` present contrary, yet complementary operations. While the former targets the prediction of `brain activity`/`responses` based on stimulus percepts/features (e.g. vision & audition), cognitive states or behavior, the latter aims to predict those aspects based on `brain activity`/`responses`. 
 ``` 
 
-For the tutorial on `encoding models`, please have a look at the respective session [here]().
-
-As noted above, this part of the educational course focuses on `decoding models`. More information and their application can be found in the respective sections of this resource. You can either use the `ToC` on the left or the links below to navigate accordingly.
+More information and their application can be found in the respective sections of this resource. You can either use the `ToC` on the left or the links below to navigate accordingly.
 
 
-::::{card-carousel} 4
+::::{card-carousel} 3
 
 :::{card}
 :margin: 3
@@ -100,7 +98,7 @@ Explore this tutorial {fas}`arrow-right`
 
 Brain decoding using a basic artificial neural network.
 +++
-Explore this book {fas}`arrow-right`
+Explore this tutorial {fas}`arrow-right`
 :::
 
 :::{card}
@@ -116,6 +114,43 @@ Explore this book {fas}`arrow-right`
 ```
 
 Graph convolutional networks for brain decoding. 
++++
+Explore this tutorial {fas}`arrow-right`
+:::
+::::
+
+::::{card-carousel} 2
+
+:::{card}
+:margin: 3
+:class-body: text-center
+:class-header: bg-light text-center
+:link: https://main-educational.github.io/brain_encoding_decoding/gcn_decoding.html
+
+**Brain decoding with GCN**
+^^^
+```{image} https://main-educational.github.io/brain_decoding/_images/GCN_pipeline.png
+:height: 100
+```
+
+Graph convolutional networks for brain decoding. 
++++
+Explore this tutorial {fas}`arrow-right`
+:::
+
+:::{card}
+:margin: 3
+:class-body: text-center
+:class-header: bg-light text-center
+:link: https://main-educational.github.io/brain_encoding_decoding/gcn_decoding.html
+
+**Brain encoding**
+^^^
+```{image} graphics/brain_encoding_pred_timeseries.png
+:height: 100
+```
+
+Brain encoding using ridge regression.
 +++
 Explore this tutorial {fas}`arrow-right`
 :::
