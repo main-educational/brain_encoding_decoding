@@ -431,23 +431,27 @@ y = behavioral[&#39;labels&#39;]
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dataset created in ../data/haxby2001
 
 Downloading data from https://www.nitrc.org/frs/download.php/7868/mask.nii.gz ...
-Downloading data from http://data.pymvpa.org/datasets/haxby2001/MD5SUMS ...
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
- ...done. (0 seconds, 0 min)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from http://data.pymvpa.org/datasets/haxby2001/MD5SUMS ...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from http://data.pymvpa.org/datasets/haxby2001/subj4-2010.01.14.tar.gz ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 136429568 of 329954386 bytes (41.3%,    1.4s remaining)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 102768640 of 329954386 bytes (31.1%,    2.2s remaining)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 291348480 of 329954386 bytes (88.3%,    0.3s remaining)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 240574464 of 329954386 bytes (72.9%,    0.7s remaining)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (2 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (3 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Extracting data from ../data/haxby2001/622d4f5d4b8f14a567901606c924e90d/subj4-2010.01.14.tar.gz...
@@ -543,7 +547,7 @@ plotting.plot_prob_atlas(components_img,
   im = getattr(ax, type)(data_2d.copy(),
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f971de48370&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7fc3d8f42df0&gt;
 </pre></div>
 </div>
 <img alt="_images/gcn_decoding_5_5.png" src="_images/gcn_decoding_5_5.png" />
@@ -610,9 +614,7 @@ print(X.shape)
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/nilearn/plotting/displays.py:101: UserWarning: linewidths is ignored by contourf
   im = getattr(ax, type)(data_2d.copy(),
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/numpy/ma/core.py:2826: UserWarning: Warning: converting a masked element to nan.
+/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/numpy/ma/core.py:2826: UserWarning: Warning: converting a masked element to nan.
   _data = np.array(data, dtype=dtype, copy=copy,
 </pre></div>
 </div>
@@ -623,7 +625,7 @@ print(X.shape)
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1452, 65)
 </pre></div>
 </div>
-<img alt="_images/gcn_decoding_7_7.png" src="_images/gcn_decoding_7_7.png" />
+<img alt="_images/gcn_decoding_7_6.png" src="_images/gcn_decoding_7_6.png" />
 </div>
 </div>
 <p>So we have 1452 time points in the imaging data, and for each time point we have recordings of fMRI activity across 68 brain regions.</p>
