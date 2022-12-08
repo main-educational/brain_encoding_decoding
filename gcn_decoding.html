@@ -416,15 +416,9 @@ y = behavioral[&#39;labels&#39;]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/sklearn/utils/multiclass.py:14: DeprecationWarning: Please use `spmatrix` from the `scipy.sparse` namespace, the `scipy.sparse.base` namespace is deprecated.
-  from scipy.sparse.base import spmatrix
-/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/sklearn/utils/optimize.py:18: DeprecationWarning: Please use `line_search_wolfe2` from the `scipy.optimize` namespace, the `scipy.optimize.linesearch` namespace is deprecated.
-  from scipy.optimize.linesearch import line_search_wolfe2, line_search_wolfe1
-/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/sklearn/utils/optimize.py:18: DeprecationWarning: Please use `line_search_wolfe1` from the `scipy.optimize` namespace, the `scipy.optimize.linesearch` namespace is deprecated.
-  from scipy.optimize.linesearch import line_search_wolfe2, line_search_wolfe1
-/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/nilearn/datasets/func.py:20: DeprecationWarning: Please use `MatReadError` from the `scipy.io.matlab` namespace, the `scipy.io.matlab.miobase` namespace is deprecated.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/nilearn/datasets/func.py:20: DeprecationWarning: Please use `MatReadError` from the `scipy.io.matlab` namespace, the `scipy.io.matlab.miobase` namespace is deprecated.
   from scipy.io.matlab.miobase import MatReadError
-/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/nilearn/datasets/__init__.py:93: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/nilearn/datasets/__init__.py:93: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
   warn(&quot;Fetchers from the nilearn.datasets module will be &quot;
 </pre></div>
 </div>
@@ -445,13 +439,13 @@ Downloading data from https://www.nitrc.org/frs/download.php/7868/mask.nii.gz ..
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from http://data.pymvpa.org/datasets/haxby2001/subj4-2010.01.14.tar.gz ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 102768640 of 329954386 bytes (31.1%,    2.2s remaining)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 112844800 of 329954386 bytes (34.2%,    1.9s remaining)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 240574464 of 329954386 bytes (72.9%,    0.7s remaining)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 275800064 of 329954386 bytes (83.6%,    0.4s remaining)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (3 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (2 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Extracting data from ../data/haxby2001/622d4f5d4b8f14a567901606c924e90d/subj4-2010.01.14.tar.gz...
@@ -531,26 +525,30 @@ plotting.plot_prob_atlas(components_img,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/sklearn/linear_model/_ridge.py:147: DeprecationWarning: The &#39;sym_pos&#39; keyword is deprecated and should be replaced by using &#39;assume_a = &quot;pos&quot;&#39;. &#39;sym_pos&#39; will be removed in SciPy 1.11.0.
-  return linalg.solve(A, Xy, sym_pos=True,
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/sklearn/linear_model/_ridge.py:157: DeprecationWarning: The &#39;sym_pos&#39; keyword is deprecated and should be replaced by using &#39;assume_a = &quot;pos&quot;&#39;. &#39;sym_pos&#39; will be removed in SciPy 1.11.0.
+  return linalg.solve(A, Xy, sym_pos=True, overwrite_a=True).T
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/nilearn/image/image.py:1106: FutureWarning: The parameter &quot;sessions&quot; will be removed in 0.9.0 release of Nilearn. Please use the parameter &quot;runs&quot; instead.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/nilearn/image/image.py:1106: FutureWarning: The parameter &quot;sessions&quot; will be removed in 0.9.0 release of Nilearn. Please use the parameter &quot;runs&quot; instead.
   data = signal.clean(
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/scipy/ndimage/_measurements.py:305: DeprecationWarning: In future, it will be an error for &#39;np.bool_&#39; scalars to be interpreted as an index
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/scipy/ndimage/_measurements.py:305: DeprecationWarning: In future, it will be an error for &#39;np.bool_&#39; scalars to be interpreted as an index
   return _nd_image.find_objects(input, max_label)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/nilearn/plotting/displays.py:101: UserWarning: linewidths is ignored by contourf
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/nilearn/plotting/displays.py:101: UserWarning: linewidths is ignored by contourf
   im = getattr(ax, type)(data_2d.copy(),
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7fc3d8f42df0&gt;
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/nilearn/plotting/displays.py:101: UserWarning: No contour levels were found within the data range.
+  im = getattr(ax, type)(data_2d.copy(),
 </pre></div>
 </div>
-<img alt="_images/gcn_decoding_5_5.png" src="_images/gcn_decoding_5_5.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f03540dd610&gt;
+</pre></div>
+</div>
+<img alt="_images/gcn_decoding_5_6.png" src="_images/gcn_decoding_5_6.png" />
 </div>
 </div>
 </div>
@@ -604,25 +602,25 @@ print(X.shape)
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;decorator-gen-3&gt;:2: DeprecationWarning: scipy.sparse.linalg.cg called without specifying `atol`. The default value will be changed in a future release. For compatibility, specify a value for `atol` explicitly, e.g., ``cg(..., atol=0)``, or to retain the old behavior ``cg(..., atol=&#39;legacy&#39;)``
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/nilearn/image/image.py:1106: FutureWarning: The parameter &quot;sessions&quot; will be removed in 0.9.0 release of Nilearn. Please use the parameter &quot;runs&quot; instead.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/nilearn/image/image.py:1106: FutureWarning: The parameter &quot;sessions&quot; will be removed in 0.9.0 release of Nilearn. Please use the parameter &quot;runs&quot; instead.
   data = signal.clean(
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/scipy/ndimage/_measurements.py:305: DeprecationWarning: In future, it will be an error for &#39;np.bool_&#39; scalars to be interpreted as an index
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/scipy/ndimage/_measurements.py:305: DeprecationWarning: In future, it will be an error for &#39;np.bool_&#39; scalars to be interpreted as an index
   return _nd_image.find_objects(input, max_label)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/nilearn/plotting/displays.py:101: UserWarning: linewidths is ignored by contourf
-  im = getattr(ax, type)(data_2d.copy(),
-/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/numpy/ma/core.py:2826: UserWarning: Warning: converting a masked element to nan.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/numpy/ma/core.py:2826: UserWarning: Warning: converting a masked element to nan.
   _data = np.array(data, dtype=dtype, copy=copy,
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/nilearn/plotting/displays.py:101: UserWarning: No contour levels were found within the data range.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/nilearn/plotting/displays.py:101: UserWarning: linewidths is ignored by contourf
+  im = getattr(ax, type)(data_2d.copy(),
+/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/nilearn/plotting/displays.py:101: UserWarning: No contour levels were found within the data range.
   im = getattr(ax, type)(data_2d.copy(),
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1452, 65)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1452, 67)
 </pre></div>
 </div>
 <img alt="_images/gcn_decoding_7_6.png" src="_images/gcn_decoding_7_6.png" />
@@ -790,9 +788,9 @@ print(&quot;test dataset: {}&quot;.format(test_dataset))
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>train dataset: 1016*(torch.Size([65, 1]), ())
-valid dataset: 290*(torch.Size([65, 1]), ())
-test dataset: 146*(torch.Size([65, 1]), ())
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>train dataset: 1016*(torch.Size([67, 1]), ())
+valid dataset: 290*(torch.Size([67, 1]), ())
+test dataset: 146*(torch.Size([67, 1]), ())
 </pre></div>
 </div>
 </div>
@@ -818,7 +816,7 @@ print(f&quot;Labels batch shape: {train_labels.size()}; mean {torch.mean(torch.T
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Feature batch shape: torch.Size([16, 65, 1]); mean 6.4189618065313425e-09
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Feature batch shape: torch.Size([16, 67, 1]); mean 8.89621531996454e-09
 Labels batch shape: torch.Size([16]); mean 3.8125
 </pre></div>
 </div>
@@ -853,7 +851,7 @@ gcn
   (conv1): ChebConv(1, 32, K=2, normalization=sym)
   (conv2): ChebConv(32, 32, K=2, normalization=sym)
   (conv3): ChebConv(32, 16, K=2, normalization=sym)
-  (fc1): Linear(in_features=1040, out_features=256, bias=True)
+  (fc1): Linear(in_features=1072, out_features=256, bias=True)
   (fc2): Linear(in_features=256, out_features=128, bias=True)
   (fc3): Linear(in_features=128, out_features=9, bias=True)
   (dropout): Dropout(p=0.2, inplace=False)
@@ -953,7 +951,7 @@ for t in range(epochs):
 <span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="c1"># Backpropagation</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/torch/nn/modules/module.py:1190,</span> in <span class="ni">Module._call_impl</span><span class="nt">(self, *input, **kwargs)</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/torch/nn/modules/module.py:1190,</span> in <span class="ni">Module._call_impl</span><span class="nt">(self, *input, **kwargs)</span>
 <span class="g g-Whitespace">   </span><span class="mi">1186</span> <span class="c1"># If we don&#39;t have any hooks, we want to skip the rest of the logic in</span>
 <span class="g g-Whitespace">   </span><span class="mi">1187</span> <span class="c1"># this function, and just call forward.</span>
 <span class="g g-Whitespace">   </span><span class="mi">1188</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_backward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_pre_hooks</span> <span class="ow">or</span> <span class="n">_global_backward_hooks</span>
@@ -971,19 +969,19 @@ for t in range(epochs):
 <span class="g g-Whitespace">     </span><span class="mi">39</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_roi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">40</span> <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/torch_geometric/nn/pool/glob.py:58,</span> in <span class="ni">global_mean_pool</span><span class="nt">(x, batch, size)</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/torch_geometric/nn/pool/glob.py:58,</span> in <span class="ni">global_mean_pool</span><span class="nt">(x, batch, size)</span>
 <span class="g g-Whitespace">     </span><span class="mi">56</span>     <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">dim</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">57</span> <span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">batch</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">size</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">size</span>
 <span class="ne">---&gt; </span><span class="mi">58</span> <span class="k">return</span> <span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span> <span class="n">reduce</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/torch_scatter/scatter.py:156,</span> in <span class="ni">scatter</span><span class="nt">(src, index, dim, out, dim_size, reduce)</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/torch_scatter/scatter.py:156,</span> in <span class="ni">scatter</span><span class="nt">(src, index, dim, out, dim_size, reduce)</span>
 <span class="g g-Whitespace">    </span><span class="mi">154</span>     <span class="k">return</span> <span class="n">scatter_mul</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">dim_size</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">155</span> <span class="k">elif</span> <span class="n">reduce</span> <span class="o">==</span> <span class="s1">&#39;mean&#39;</span><span class="p">:</span>
 <span class="ne">--&gt; </span><span class="mi">156</span>     <span class="k">return</span> <span class="n">scatter_mean</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">dim_size</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">157</span> <span class="k">elif</span> <span class="n">reduce</span> <span class="o">==</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span>
 <span class="g g-Whitespace">    </span><span class="mi">158</span>     <span class="k">return</span> <span class="n">scatter_min</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">dim_size</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/torch_scatter/scatter.py:41,</span> in <span class="ni">scatter_mean</span><span class="nt">(src, index, dim, out, dim_size)</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/torch_scatter/scatter.py:41,</span> in <span class="ni">scatter_mean</span><span class="nt">(src, index, dim, out, dim_size)</span>
 <span class="g g-Whitespace">     </span><span class="mi">38</span> <span class="k">def</span> <span class="nf">scatter_mean</span><span class="p">(</span><span class="n">src</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
 <span class="g g-Whitespace">     </span><span class="mi">39</span>                  <span class="n">out</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="g g-Whitespace">     </span><span class="mi">40</span>                  <span class="n">dim_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
@@ -991,7 +989,7 @@ for t in range(epochs):
 <span class="g g-Whitespace">     </span><span class="mi">42</span>     <span class="n">dim_size</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">44</span>     <span class="n">index_dim</span> <span class="o">=</span> <span class="n">dim</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/torch_scatter/scatter.py:11,</span> in <span class="ni">scatter_sum</span><span class="nt">(src, index, dim, out, dim_size)</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/torch_scatter/scatter.py:11,</span> in <span class="ni">scatter_sum</span><span class="nt">(src, index, dim, out, dim_size)</span>
 <span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="k">def</span> <span class="nf">scatter_sum</span><span class="p">(</span><span class="n">src</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
 <span class="g g-Whitespace">      </span><span class="mi">9</span>                 <span class="n">out</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="g g-Whitespace">     </span><span class="mi">10</span>                 <span class="n">dim_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
@@ -999,13 +997,13 @@ for t in range(epochs):
 <span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="k">if</span> <span class="n">out</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 <span class="g g-Whitespace">     </span><span class="mi">13</span>         <span class="n">size</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/torch_scatter/utils.py:12,</span> in <span class="ni">broadcast</span><span class="nt">(src, other, dim)</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/torch_scatter/utils.py:12,</span> in <span class="ni">broadcast</span><span class="nt">(src, other, dim)</span>
 <span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">dim</span><span class="p">(),</span> <span class="n">other</span><span class="o">.</span><span class="n">dim</span><span class="p">()):</span>
 <span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="n">src</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 <span class="ne">---&gt; </span><span class="mi">12</span> <span class="n">src</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
 <span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="k">return</span> <span class="n">src</span>
 
-<span class="ne">RuntimeError</span>: The expanded size of the tensor (65) must match the existing size (16) at non-singleton dimension 1.  Target sizes: [16, 65, 16].  Tensor sizes: [1, 16, 1]
+<span class="ne">RuntimeError</span>: The expanded size of the tensor (67) must match the existing size (16) at non-singleton dimension 1.  Target sizes: [16, 67, 16].  Tensor sizes: [1, 16, 1]
 </pre></div>
 </div>
 </div>
