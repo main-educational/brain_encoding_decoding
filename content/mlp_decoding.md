@@ -8,9 +8,9 @@ jupytext:
     format_version: 0.13
     jupytext_version: 1.11.5
 kernelspec:
-  display_name: main_edu_2022
+  display_name: Python 3
   language: python
-  name: main_edu_2022
+  name: python3
 ---
 
 # Brain decoding with MLP
