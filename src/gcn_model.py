@@ -33,9 +33,9 @@ class GCN(torch.nn.Module):
         x = self.conv3(x, self.edge_index, self.edge_weight)
         x = F.relu(x)
         x = self.dropout(x)
-        x = tg.nn.global_mean_pool(
-            x, torch.from_numpy(np.array(range(x.size(0)), dtype=int))
-        )
+        batch_vector = torch.arange(x.size(0), dtype=int)
+        x = torch.flatten(x, 1)
+        x = tg.nn.global_mean_pool(x, batch_vector)
         x = x.view(-1, self.n_roi * self.batch_size)
         x = self.fc1(x)
         x = self.dropout(x)
