@@ -237,6 +237,11 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#brain-graph-representation">
+   Brain graph representation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#graph-convolution-network-gcn">
    Graph Convolution Network (GCN)
   </a>
@@ -297,6 +302,11 @@
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#brain-graph-representation">
+   Brain graph representation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#graph-convolution-network-gcn">
    Graph Convolution Network (GCN)
   </a>
@@ -347,6 +357,14 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="brain-decoding-with-gcn">
 <h1>Brain decoding with GCN<a class="headerlink" href="#brain-decoding-with-gcn" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="brain-graph-representation">
+<h2>Brain graph representation<a class="headerlink" href="#brain-graph-representation" title="Permalink to this headline">¶</a></h2>
+<p>Graph signal processing is a new tool to model brain organization and function. The brain is composed of several Region of Interests(ROIs). Brain graphs provide an efficient way for modeling the human brain connectome, by associating nodes to the brain regions, and defining edges via anatomical or functional connections. These ROIs are connected to some regions of interests with the highest connectivity.
+<br/><br/></p>
+<a class="reference internal image-reference" href="_images/Brain_connectivity_graph.png"><img alt="_images/Brain_connectivity_graph.png" src="_images/Brain_connectivity_graph.png" style="width: 545px; height: 194px;" /></a>
+<p>Representation of Brain connectivity by graph theory.
+Image source:<a class="reference external" href="https://atcold.github.io/pytorch-Deep-Learning/en/week13/13-1/">https://atcold.github.io/pytorch-Deep-Learning/en/week13/13-1/</a></p>
+</div>
 <div class="section" id="graph-convolution-network-gcn">
 <h2>Graph Convolution Network (GCN)<a class="headerlink" href="#graph-convolution-network-gcn" title="Permalink to this headline">¶</a></h2>
 <p><br/><br/>
@@ -397,7 +415,7 @@ y = behavioral[&#39;labels&#39;]
 Downloading data from https://www.nitrc.org/frs/download.php/7868/mask.nii.gz ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from http://data.pymvpa.org/datasets/haxby2001/MD5SUMS ...
@@ -409,22 +427,31 @@ Downloading data from https://www.nitrc.org/frs/download.php/7868/mask.nii.gz ..
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from http://data.pymvpa.org/datasets/haxby2001/subj4-2010.01.14.tar.gz ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 38879232 of 329954386 bytes (11.8%,    7.6s remaining)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 16580608 of 329954386 bytes (5.0%,   19.1s remaining)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 97230848 of 329954386 bytes (29.5%,    4.8s remaining)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 53903360 of 329954386 bytes (16.3%,   10.4s remaining)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 156057600 of 329954386 bytes (47.3%,    3.4s remaining)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 91619328 of 329954386 bytes (27.8%,    7.9s remaining)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 214745088 of 329954386 bytes (65.1%,    2.2s remaining)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 129728512 of 329954386 bytes (39.3%,    6.2s remaining)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 273227776 of 329954386 bytes (82.8%,    1.0s remaining)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 168394752 of 329954386 bytes (51.0%,    4.8s remaining)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (6 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 206585856 of 329954386 bytes (62.6%,    3.6s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 245014528 of 329954386 bytes (74.3%,    2.4s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 283230208 of 329954386 bytes (85.8%,    1.3s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 322207744 of 329954386 bytes (97.7%,    0.2s remaining) ...done. (9 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Extracting data from ../data/haxby2001/622d4f5d4b8f14a567901606c924e90d/subj4-2010.01.14.tar.gz...
@@ -437,12 +464,15 @@ Downloading data from https://www.nitrc.org/frs/download.php/7868/mask.nii.gz ..
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
-Extracting data from ../data/haxby2001/5cd78c74b711572c7f41a5bddb69abca/stimuli-2010.01.14.tar.gz..... done.
+Extracting data from ../data/haxby2001/5cd78c74b711572c7f41a5bddb69abca/stimuli-2010.01.14.tar.gz...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>.. done.
 </pre></div>
 </div>
 </div>
 </div>
-<p>Let’s check the shape and the cognitive annotations of this data sample, which is necessary to check before start training any decoding model!</p>
+<p>Let’s check the shape of X and y and the cognitive annotations of this data sample.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>categories = y.unique()
@@ -470,9 +500,10 @@ Brain graph provides a network representation of brain organization by associati
 After generating time series, we will firstly use the nilearn function to geneate a correlation based functional connectome.</p>
 <div class="tip admonition">
 <p class="admonition-title">Basic of graph laplacian and graph convolutional networks.</p>
-<p>To get familiar with the basics of <code class="docutils literal notranslate"><span class="pre">graph</span> <span class="pre">laplacian</span></code> and <code class="docutils literal notranslate"><span class="pre">graph</span> <span class="pre">convolutional</span> <span class="pre">networks</span></code> and how to apply these tools to neuroimging data check the tutorial from MAIN 2019 conference presented by Dr. Zhang.</p>
-<p><a class="reference external" href="https://drive.google.com/file/d/1Gu28WcHXlwjXQSSmqZZwIcESHff_j-J4/view?usp=sharing">GCN_tutorial_slides</a><br />
-[graph-Laplacian_GCN notebook] (<a class="reference external" href="https://github.com/zhangyu2ustc/gcn_tutorial_test/blob/master/notebooks/Tutorials_GCN_practice2_graph-Laplacian_GCN.ipynb">https://github.com/zhangyu2ustc/gcn_tutorial_test/blob/master/notebooks/Tutorials_GCN_practice2_graph-Laplacian_GCN.ipynb</a>)</p>
+<p>To explore the basics of <code class="docutils literal notranslate"><span class="pre">graph</span> <span class="pre">laplacian</span></code> and <code class="docutils literal notranslate"><span class="pre">graph</span> <span class="pre">convolutional</span> <span class="pre">networks</span></code> and how to apply these tools to neuroimging data check the tutorial from MAIN 2019 conference presented by Dr. Zhang.</p>
+<p><a class="reference external" href="https://drive.google.com/file/d/1Gu28WcHXlwjXQSSmqZZwIcESHff_j-J4/view?usp=sharing">GCN_tutorial_slides:</a><br />
+<a class="reference external" href="https://github.com/zhangyu2ustc/gcn_tutorial_test.git">Github repo:</a>
+<a class="reference external" href="https://mybinder.org/v2/gh/zhangyu2ustc/gcn_tutorial_test/master?filepath=notebooks%2F">Binder projects:</a></p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -640,13 +671,13 @@ test dataset: 146*(torch.Size([675, 1]), ())
 </div>
 <p>Once the datasets are created, we can use the pytorch <a class="reference external" href="https://pytorch.org/tutorials/beginner/basics/data_tutorial.html#preparing-your-data-for-training-with-dataloaders">data loader</a> to iterate through the data during the model selection process.
 The <strong>batch size</strong> defines the number of samples that will be propagated through the neural network.
-We are separating the dataset into 16 time windows per batch.</p>
+We are separating the dataset into 10 time windows per batch.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import torch
 from torch.utils.data import DataLoader
 
-batch_size = 16
+batch_size = 10
 
 torch.manual_seed(random_seed)
 train_generator = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
@@ -659,8 +690,8 @@ print(f&quot;Labels batch shape: {train_labels.size()}; mean {torch.mean(torch.T
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Feature batch shape: torch.Size([16, 675, 1]); mean -3.885339605602667e-09
-Labels batch shape: torch.Size([16]); mean 3.8125
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Feature batch shape: torch.Size([10, 675, 1]); mean -5.08626296635839e-09
+Labels batch shape: torch.Size([10]); mean 2.5999999046325684
 </pre></div>
 </div>
 </div>
@@ -693,8 +724,8 @@ gcn
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GCN(
   (conv1): ChebConv(1, 32, K=2, normalization=sym)
   (conv2): ChebConv(32, 32, K=2, normalization=sym)
-  (conv3): ChebConv(32, 16, K=2, normalization=sym)
-  (fc1): Linear(in_features=10800, out_features=256, bias=True)
+  (conv3): ChebConv(32, 10, K=2, normalization=sym)
+  (fc1): Linear(in_features=6750, out_features=256, bias=True)
   (fc2): Linear(in_features=256, out_features=128, bias=True)
   (fc3): Linear(in_features=128, out_features=9, bias=True)
   (dropout): Dropout(p=0.2, inplace=False)
@@ -777,76 +808,929 @@ for t in range(epochs):
 -------------------------------
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">RuntimeError</span><span class="g g-Whitespace">                              </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch </span><span class="si">{</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">epochs</span><span class="si">}</span><span class="se">\n</span><span class="s2">-------------------------------&quot;</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">7</span>     <span class="n">train_loop</span><span class="p">(</span><span class="n">train_generator</span><span class="p">,</span> <span class="n">gcn</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">loss</span><span class="p">,</span> <span class="n">correct</span> <span class="o">=</span> <span class="n">valid_test_loop</span><span class="p">(</span><span class="n">valid_generator</span><span class="p">,</span> <span class="n">gcn</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Valid metrics:</span><span class="se">\n\t</span><span class="s2"> avg_loss: </span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="s2">&gt;8f</span><span class="si">}</span><span class="s2">;</span><span class="se">\t</span><span class="s2"> avg_accuracy: </span><span class="si">{</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">correct</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;0.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
-
-<span class="nn">Cell In[10], line 6,</span> in <span class="ni">train_loop</span><span class="nt">(dataloader, model, loss_fn, optimizer)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>    
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="k">for</span> <span class="n">batch</span><span class="p">,</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataloader</span><span class="p">):</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="c1"># Compute prediction and loss</span>
-<span class="ne">----&gt; </span><span class="mi">6</span>     <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="c1"># Backpropagation</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/torch/nn/modules/module.py:1190,</span> in <span class="ni">Module._call_impl</span><span class="nt">(self, *input, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1186</span> <span class="c1"># If we don&#39;t have any hooks, we want to skip the rest of the logic in</span>
-<span class="g g-Whitespace">   </span><span class="mi">1187</span> <span class="c1"># this function, and just call forward.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1188</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_backward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_pre_hooks</span> <span class="ow">or</span> <span class="n">_global_backward_hooks</span>
-<span class="g g-Whitespace">   </span><span class="mi">1189</span>         <span class="ow">or</span> <span class="n">_global_forward_hooks</span> <span class="ow">or</span> <span class="n">_global_forward_pre_hooks</span><span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">1190</span>     <span class="k">return</span> <span class="n">forward_call</span><span class="p">(</span><span class="o">*</span><span class="nb">input</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1191</span> <span class="c1"># Do not call functions when jit is used</span>
-<span class="g g-Whitespace">   </span><span class="mi">1192</span> <span class="n">full_backward_hooks</span><span class="p">,</span> <span class="n">non_full_backward_hooks</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
-
-<span class="nn">File ~/work/brain_encoding_decoding/brain_encoding_decoding/content/../src/gcn_model.py:36,</span> in <span class="ni">GCN.forward</span><span class="nt">(self, x)</span>
-<span class="g g-Whitespace">     </span><span class="mi">34</span> <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">35</span> <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">36</span> <span class="n">x</span> <span class="o">=</span> <span class="n">tg</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">global_mean_pool</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">37</span>     <span class="n">x</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">))</span>
-<span class="g g-Whitespace">     </span><span class="mi">38</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">39</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_roi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">40</span> <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/torch_geometric/nn/pool/glob.py:58,</span> in <span class="ni">global_mean_pool</span><span class="nt">(x, batch, size)</span>
-<span class="g g-Whitespace">     </span><span class="mi">56</span>     <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">dim</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">57</span> <span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">batch</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">size</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">size</span>
-<span class="ne">---&gt; </span><span class="mi">58</span> <span class="k">return</span> <span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span> <span class="n">reduce</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/torch_scatter/scatter.py:157,</span> in <span class="ni">scatter</span><span class="nt">(src, index, dim, out, dim_size, reduce)</span>
-<span class="g g-Whitespace">    </span><span class="mi">155</span>     <span class="k">return</span> <span class="n">scatter_mul</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">dim_size</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">156</span> <span class="k">elif</span> <span class="n">reduce</span> <span class="o">==</span> <span class="s1">&#39;mean&#39;</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">157</span>     <span class="k">return</span> <span class="n">scatter_mean</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">dim_size</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">158</span> <span class="k">elif</span> <span class="n">reduce</span> <span class="o">==</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">159</span>     <span class="k">return</span> <span class="n">scatter_min</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">dim_size</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/torch_scatter/scatter.py:42,</span> in <span class="ni">scatter_mean</span><span class="nt">(src, index, dim, out, dim_size)</span>
-<span class="g g-Whitespace">     </span><span class="mi">38</span> <span class="k">def</span> <span class="nf">scatter_mean</span><span class="p">(</span><span class="n">src</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">39</span>                  <span class="n">out</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">40</span>                  <span class="n">dim_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">42</span>     <span class="n">out</span> <span class="o">=</span> <span class="n">scatter_sum</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">dim_size</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">43</span>     <span class="n">dim_size</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">45</span>     <span class="n">index_dim</span> <span class="o">=</span> <span class="n">dim</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/torch_scatter/scatter.py:11,</span> in <span class="ni">scatter_sum</span><span class="nt">(src, index, dim, out, dim_size)</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="k">def</span> <span class="nf">scatter_sum</span><span class="p">(</span><span class="n">src</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span>                 <span class="n">out</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span>                 <span class="n">dim_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">11</span>     <span class="n">index</span> <span class="o">=</span> <span class="n">broadcast</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">dim</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="k">if</span> <span class="n">out</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span>         <span class="n">size</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/torch_scatter/utils.py:12,</span> in <span class="ni">broadcast</span><span class="nt">(src, other, dim)</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">dim</span><span class="p">(),</span> <span class="n">other</span><span class="o">.</span><span class="n">dim</span><span class="p">()):</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="n">src</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">12</span> <span class="n">src</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">expand_as</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="k">return</span> <span class="n">src</span>
-
-<span class="ne">RuntimeError</span>: The expanded size of the tensor (675) must match the existing size (16) at non-singleton dimension 1.  Target sizes: [16, 675, 16].  Tensor sizes: [1, 16, 1]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#    0;	train_loss: 2.210;	train_accuracy:  0.0%		[    0/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 1.862;	train_accuracy: 40.0%		[  100/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 1.909;	train_accuracy: 40.0%		[  200/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 1.880;	train_accuracy: 40.0%		[  300/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 2.055;	train_accuracy: 30.0%		[  400/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 1.545;	train_accuracy: 60.0%		[  500/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 1.644;	train_accuracy: 50.0%		[  600/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 1.511;	train_accuracy: 60.0%		[  700/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 2.151;	train_accuracy: 30.0%		[  800/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 1.991;	train_accuracy: 30.0%		[  900/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 1.822;	train_accuracy: 40.0%		[ 1000/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
+	 avg_loss: 0.177827;	 avg_accuracy: 43.4%
+Epoch 2/25
+-------------------------------
+#    0;	train_loss: 1.815;	train_accuracy: 30.0%		[    0/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 1.953;	train_accuracy: 30.0%		[  100/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 1.549;	train_accuracy: 40.0%		[  200/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 2.179;	train_accuracy: 20.0%		[  300/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 2.002;	train_accuracy: 40.0%		[  400/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 1.966;	train_accuracy: 20.0%		[  500/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 1.559;	train_accuracy: 60.0%		[  600/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 1.871;	train_accuracy: 40.0%		[  700/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 2.170;	train_accuracy: 30.0%		[  800/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 1.548;	train_accuracy: 60.0%		[  900/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 1.757;	train_accuracy: 50.0%		[ 1000/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
+	 avg_loss: 0.155729;	 avg_accuracy: 48.6%
+Epoch 3/25
+-------------------------------
+#    0;	train_loss: 1.833;	train_accuracy: 30.0%		[    0/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 1.531;	train_accuracy: 60.0%		[  100/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 1.439;	train_accuracy: 50.0%		[  200/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 1.271;	train_accuracy: 60.0%		[  300/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 1.097;	train_accuracy: 70.0%		[  400/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 1.350;	train_accuracy: 50.0%		[  500/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 1.045;	train_accuracy: 60.0%		[  600/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 2.200;	train_accuracy: 20.0%		[  700/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 1.559;	train_accuracy: 40.0%		[  800/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 1.638;	train_accuracy: 60.0%		[  900/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 1.644;	train_accuracy: 50.0%		[ 1000/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
+	 avg_loss: 0.134933;	 avg_accuracy: 56.9%
+Epoch 4/25
+-------------------------------
+#    0;	train_loss: 1.351;	train_accuracy: 70.0%		[    0/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 1.477;	train_accuracy: 40.0%		[  100/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 1.278;	train_accuracy: 70.0%		[  200/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.708;	train_accuracy: 80.0%		[  300/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.855;	train_accuracy: 80.0%		[  400/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 1.362;	train_accuracy: 60.0%		[  500/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 1.138;	train_accuracy: 60.0%		[  600/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 1.040;	train_accuracy: 70.0%		[  700/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 1.974;	train_accuracy: 50.0%		[  800/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.838;	train_accuracy: 70.0%		[  900/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 1.547;	train_accuracy: 30.0%		[ 1000/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
+	 avg_loss: 0.123758;	 avg_accuracy: 61.0%
+Epoch 5/25
+-------------------------------
+#    0;	train_loss: 1.023;	train_accuracy: 80.0%		[    0/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.754;	train_accuracy: 80.0%		[  100/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 1.136;	train_accuracy: 60.0%		[  200/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 1.043;	train_accuracy: 90.0%		[  300/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 1.439;	train_accuracy: 60.0%		[  400/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 1.184;	train_accuracy: 50.0%		[  500/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.730;	train_accuracy: 80.0%		[  600/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.860;	train_accuracy: 70.0%		[  700/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.882;	train_accuracy: 70.0%		[  800/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 1.734;	train_accuracy: 60.0%		[  900/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 1.106;	train_accuracy: 70.0%		[ 1000/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
+	 avg_loss: 0.106475;	 avg_accuracy: 65.5%
+Epoch 6/25
+-------------------------------
+#    0;	train_loss: 0.945;	train_accuracy: 70.0%		[    0/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.731;	train_accuracy: 70.0%		[  100/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 1.188;	train_accuracy: 70.0%		[  200/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.693;	train_accuracy: 80.0%		[  300/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.622;	train_accuracy: 80.0%		[  400/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.876;	train_accuracy: 80.0%		[  500/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.375;	train_accuracy: 90.0%		[  600/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.844;	train_accuracy: 80.0%		[  700/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.963;	train_accuracy: 60.0%		[  800/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 1.578;	train_accuracy: 50.0%		[  900/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.627;	train_accuracy: 80.0%		[ 1000/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
+	 avg_loss: 0.100943;	 avg_accuracy: 68.3%
+Epoch 7/25
+-------------------------------
+#    0;	train_loss: 0.399;	train_accuracy: 90.0%		[    0/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.661;	train_accuracy: 90.0%		[  100/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.555;	train_accuracy: 90.0%		[  200/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 1.038;	train_accuracy: 60.0%		[  300/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.352;	train_accuracy:100.0%		[  400/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.803;	train_accuracy: 70.0%		[  500/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.927;	train_accuracy: 80.0%		[  600/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.510;	train_accuracy: 90.0%		[  700/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 1.013;	train_accuracy: 70.0%		[  800/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.560;	train_accuracy: 80.0%		[  900/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 1.095;	train_accuracy: 60.0%		[ 1000/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
+	 avg_loss: 0.086678;	 avg_accuracy: 73.1%
+Epoch 8/25
+-------------------------------
+#    0;	train_loss: 0.818;	train_accuracy: 80.0%		[    0/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.572;	train_accuracy: 80.0%		[  100/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.549;	train_accuracy: 80.0%		[  200/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.561;	train_accuracy: 90.0%		[  300/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.316;	train_accuracy:100.0%		[  400/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.435;	train_accuracy: 90.0%		[  500/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 1.031;	train_accuracy: 60.0%		[  600/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.722;	train_accuracy: 70.0%		[  700/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.558;	train_accuracy: 70.0%		[  800/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.193;	train_accuracy: 90.0%		[  900/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.932;	train_accuracy: 60.0%		[ 1000/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
+	 avg_loss: 0.082206;	 avg_accuracy: 71.7%
+Epoch 9/25
+-------------------------------
+#    0;	train_loss: 0.449;	train_accuracy: 80.0%		[    0/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.479;	train_accuracy: 80.0%		[  100/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.448;	train_accuracy: 90.0%		[  200/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.685;	train_accuracy: 60.0%		[  300/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.447;	train_accuracy: 80.0%		[  400/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.217;	train_accuracy:100.0%		[  500/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.134;	train_accuracy:100.0%		[  600/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.081;	train_accuracy:100.0%		[  700/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 1.154;	train_accuracy: 70.0%		[  800/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.714;	train_accuracy: 80.0%		[  900/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.296;	train_accuracy: 90.0%		[ 1000/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
+	 avg_loss: 0.083765;	 avg_accuracy: 70.7%
+Epoch 10/25
+-------------------------------
+#    0;	train_loss: 0.336;	train_accuracy: 90.0%		[    0/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.295;	train_accuracy: 90.0%		[  100/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.335;	train_accuracy: 90.0%		[  200/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.280;	train_accuracy: 90.0%		[  300/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.296;	train_accuracy:100.0%		[  400/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.039;	train_accuracy:100.0%		[  500/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.135;	train_accuracy:100.0%		[  600/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.282;	train_accuracy: 90.0%		[  700/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.623;	train_accuracy: 80.0%		[  800/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.336;	train_accuracy: 90.0%		[  900/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.296;	train_accuracy: 80.0%		[ 1000/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
+	 avg_loss: 0.084374;	 avg_accuracy: 73.4%
+Epoch 11/25
+-------------------------------
+#    0;	train_loss: 0.263;	train_accuracy: 90.0%		[    0/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.206;	train_accuracy: 90.0%		[  100/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.601;	train_accuracy: 80.0%		[  200/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.361;	train_accuracy: 80.0%		[  300/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.391;	train_accuracy: 80.0%		[  400/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.030;	train_accuracy:100.0%		[  500/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.147;	train_accuracy:100.0%		[  600/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.282;	train_accuracy: 90.0%		[  700/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.069;	train_accuracy:100.0%		[  800/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.374;	train_accuracy: 90.0%		[  900/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.243;	train_accuracy: 90.0%		[ 1000/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
+	 avg_loss: 0.073717;	 avg_accuracy: 78.3%
+Epoch 12/25
+-------------------------------
+#    0;	train_loss: 0.677;	train_accuracy: 80.0%		[    0/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.326;	train_accuracy: 90.0%		[  100/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.446;	train_accuracy: 80.0%		[  200/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.211;	train_accuracy: 90.0%		[  300/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.191;	train_accuracy: 90.0%		[  400/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.018;	train_accuracy:100.0%		[  500/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.044;	train_accuracy:100.0%		[  600/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.347;	train_accuracy: 80.0%		[  700/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.027;	train_accuracy:100.0%		[  800/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.146;	train_accuracy:100.0%		[  900/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.136;	train_accuracy:100.0%		[ 1000/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
+	 avg_loss: 0.074506;	 avg_accuracy: 79.3%
+Epoch 13/25
+-------------------------------
+#    0;	train_loss: 0.134;	train_accuracy:100.0%		[    0/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.100;	train_accuracy:100.0%		[  100/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.245;	train_accuracy: 90.0%		[  200/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.335;	train_accuracy: 90.0%		[  300/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.109;	train_accuracy:100.0%		[  400/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.057;	train_accuracy:100.0%		[  500/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.125;	train_accuracy:100.0%		[  600/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.067;	train_accuracy:100.0%		[  700/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.160;	train_accuracy: 90.0%		[  800/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.062;	train_accuracy:100.0%		[  900/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.240;	train_accuracy: 90.0%		[ 1000/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
+	 avg_loss: 0.074166;	 avg_accuracy: 79.3%
+Epoch 14/25
+-------------------------------
+#    0;	train_loss: 0.193;	train_accuracy: 90.0%		[    0/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.022;	train_accuracy:100.0%		[  100/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.222;	train_accuracy:100.0%		[  200/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.029;	train_accuracy:100.0%		[  300/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.626;	train_accuracy: 80.0%		[  400/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.223;	train_accuracy: 90.0%		[  500/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.098;	train_accuracy:100.0%		[  600/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.627;	train_accuracy: 90.0%		[  700/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.063;	train_accuracy:100.0%		[  800/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.285;	train_accuracy: 80.0%		[  900/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.051;	train_accuracy:100.0%		[ 1000/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
+	 avg_loss: 0.087026;	 avg_accuracy: 76.6%
+Epoch 15/25
+-------------------------------
+#    0;	train_loss: 0.092;	train_accuracy:100.0%		[    0/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.040;	train_accuracy:100.0%		[  100/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.056;	train_accuracy:100.0%		[  200/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.032;	train_accuracy:100.0%		[  300/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.085;	train_accuracy:100.0%		[  400/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.114;	train_accuracy:100.0%		[  500/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.041;	train_accuracy:100.0%		[  600/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.087;	train_accuracy:100.0%		[  700/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.076;	train_accuracy:100.0%		[  800/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.011;	train_accuracy:100.0%		[  900/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.045;	train_accuracy:100.0%		[ 1000/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
+	 avg_loss: 0.070469;	 avg_accuracy: 82.8%
+Epoch 16/25
+-------------------------------
+#    0;	train_loss: 0.084;	train_accuracy:100.0%		[    0/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.068;	train_accuracy:100.0%		[  100/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.039;	train_accuracy:100.0%		[  200/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.014;	train_accuracy:100.0%		[  300/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.111;	train_accuracy:100.0%		[  400/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.019;	train_accuracy:100.0%		[  500/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.020;	train_accuracy:100.0%		[  600/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.107;	train_accuracy:100.0%		[  700/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.103;	train_accuracy:100.0%		[  800/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.007;	train_accuracy:100.0%		[  900/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.099;	train_accuracy:100.0%		[ 1000/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
+	 avg_loss: 0.080283;	 avg_accuracy: 79.7%
+Epoch 17/25
+-------------------------------
+#    0;	train_loss: 0.017;	train_accuracy:100.0%		[    0/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.035;	train_accuracy:100.0%		[  100/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.055;	train_accuracy:100.0%		[  200/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.017;	train_accuracy:100.0%		[  300/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.013;	train_accuracy:100.0%		[  400/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.079;	train_accuracy:100.0%		[  500/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.023;	train_accuracy:100.0%		[  600/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.024;	train_accuracy:100.0%		[  700/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.010;	train_accuracy:100.0%		[  800/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.166;	train_accuracy:100.0%		[  900/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.154;	train_accuracy: 90.0%		[ 1000/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
+	 avg_loss: 0.076704;	 avg_accuracy: 80.0%
+Epoch 18/25
+-------------------------------
+#    0;	train_loss: 0.020;	train_accuracy:100.0%		[    0/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.079;	train_accuracy:100.0%		[  100/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.012;	train_accuracy:100.0%		[  200/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.054;	train_accuracy:100.0%		[  300/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.054;	train_accuracy:100.0%		[  400/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.024;	train_accuracy:100.0%		[  500/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.028;	train_accuracy:100.0%		[  600/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.051;	train_accuracy:100.0%		[  700/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.055;	train_accuracy:100.0%		[  800/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.190;	train_accuracy: 90.0%		[  900/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.020;	train_accuracy:100.0%		[ 1000/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
+	 avg_loss: 0.083466;	 avg_accuracy: 82.4%
+Epoch 19/25
+-------------------------------
+#    0;	train_loss: 0.039;	train_accuracy:100.0%		[    0/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.028;	train_accuracy:100.0%		[  100/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.006;	train_accuracy:100.0%		[  200/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.246;	train_accuracy: 90.0%		[  300/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.136;	train_accuracy: 90.0%		[  400/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.082;	train_accuracy: 90.0%		[  500/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.037;	train_accuracy:100.0%		[  600/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.061;	train_accuracy:100.0%		[  700/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.016;	train_accuracy:100.0%		[  800/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.073;	train_accuracy:100.0%		[  900/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.004;	train_accuracy:100.0%		[ 1000/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
+	 avg_loss: 0.088363;	 avg_accuracy: 78.6%
+Epoch 20/25
+-------------------------------
+#    0;	train_loss: 0.044;	train_accuracy:100.0%		[    0/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.058;	train_accuracy:100.0%		[  100/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.034;	train_accuracy:100.0%		[  200/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.032;	train_accuracy:100.0%		[  300/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.267;	train_accuracy: 90.0%		[  400/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.003;	train_accuracy:100.0%		[  500/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.004;	train_accuracy:100.0%		[  600/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.393;	train_accuracy: 80.0%		[  700/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.010;	train_accuracy:100.0%		[  800/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.166;	train_accuracy: 90.0%		[  900/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.011;	train_accuracy:100.0%		[ 1000/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
+	 avg_loss: 0.096035;	 avg_accuracy: 78.6%
+Epoch 21/25
+-------------------------------
+#    0;	train_loss: 0.384;	train_accuracy: 90.0%		[    0/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.002;	train_accuracy:100.0%		[  100/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.004;	train_accuracy:100.0%		[  200/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.282;	train_accuracy: 90.0%		[  300/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.009;	train_accuracy:100.0%		[  400/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.073;	train_accuracy:100.0%		[  500/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.098;	train_accuracy: 90.0%		[  600/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.134;	train_accuracy:100.0%		[  700/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.015;	train_accuracy:100.0%		[  800/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.072;	train_accuracy:100.0%		[  900/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.040;	train_accuracy:100.0%		[ 1000/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
+	 avg_loss: 0.089699;	 avg_accuracy: 81.4%
+Epoch 22/25
+-------------------------------
+#    0;	train_loss: 0.003;	train_accuracy:100.0%		[    0/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.014;	train_accuracy:100.0%		[  100/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.010;	train_accuracy:100.0%		[  200/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.003;	train_accuracy:100.0%		[  300/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.010;	train_accuracy:100.0%		[  400/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.048;	train_accuracy:100.0%		[  500/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.002;	train_accuracy:100.0%		[  600/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.019;	train_accuracy:100.0%		[  700/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.108;	train_accuracy: 90.0%		[  800/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.083;	train_accuracy: 90.0%		[  900/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.020;	train_accuracy:100.0%		[ 1000/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
+	 avg_loss: 0.093855;	 avg_accuracy: 79.0%
+Epoch 23/25
+-------------------------------
+#    0;	train_loss: 0.110;	train_accuracy:100.0%		[    0/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.101;	train_accuracy:100.0%		[  100/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.002;	train_accuracy:100.0%		[  200/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.015;	train_accuracy:100.0%		[  300/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.035;	train_accuracy:100.0%		[  400/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.017;	train_accuracy:100.0%		[  500/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.074;	train_accuracy:100.0%		[  600/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.004;	train_accuracy:100.0%		[  700/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.058;	train_accuracy:100.0%		[  800/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.008;	train_accuracy:100.0%		[  900/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.034;	train_accuracy:100.0%		[ 1000/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
+	 avg_loss: 0.084976;	 avg_accuracy: 81.4%
+Epoch 24/25
+-------------------------------
+#    0;	train_loss: 0.156;	train_accuracy: 90.0%		[    0/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.004;	train_accuracy:100.0%		[  100/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.002;	train_accuracy:100.0%		[  200/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.002;	train_accuracy:100.0%		[  300/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.019;	train_accuracy:100.0%		[  400/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.049;	train_accuracy:100.0%		[  500/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.005;	train_accuracy:100.0%		[  600/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.008;	train_accuracy:100.0%		[  700/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.036;	train_accuracy:100.0%		[  800/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.028;	train_accuracy:100.0%		[  900/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.004;	train_accuracy:100.0%		[ 1000/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
+	 avg_loss: 0.097451;	 avg_accuracy: 79.7%
+Epoch 25/25
+-------------------------------
+#    0;	train_loss: 0.012;	train_accuracy:100.0%		[    0/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.005;	train_accuracy:100.0%		[  100/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.126;	train_accuracy:100.0%		[  200/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.101;	train_accuracy: 90.0%		[  300/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.037;	train_accuracy:100.0%		[  400/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.032;	train_accuracy:100.0%		[  500/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.012;	train_accuracy:100.0%		[  600/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.019;	train_accuracy:100.0%		[  700/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.002;	train_accuracy:100.0%		[  800/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.003;	train_accuracy:100.0%		[  900/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.001;	train_accuracy:100.0%		[ 1000/ 1016]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
+	 avg_loss: 0.098702;	 avg_accuracy: 79.7%
 </pre></div>
 </div>
 </div>
@@ -860,8 +1744,14 @@ print(f&quot;Test metrics:\n\t avg_loss: {loss:&gt;f};\t avg_accuracy: {(100*cor
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test metrics:
+	 avg_loss: 0.103384;	 avg_accuracy: 77.4%
+</pre></div>
 </div>
-<p>The performance is great but how could we still improve it?</p>
+</div>
+</div>
+<p>The performance is good but how could we still improve it?</p>
 </div>
 <div class="section" id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
