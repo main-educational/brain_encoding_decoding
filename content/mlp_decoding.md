@@ -149,7 +149,7 @@ And because we are creating a very simple `MLP` with only three `layers`, we alr
 model_mlp.add(Dense(len(categories), activation = 'softmax'))
 ```
 
-To get a nice overview of our `ANN`, we can now use the `.summary()` `function`, which will provide us with the `model type`, `model parameters` and for each `layer`, the its `type`, `shape` and `parameters`. 
+To get a nice overview of our `ANN`, we can now use the `.summary()` `function`, which will provide us with the `model type`, `model parameters` and for each `layer`, the its `type`, `shape` and `parameters`.
 
 ```{code-cell} ipython3
 model_mlp.summary()
@@ -161,7 +161,7 @@ With that, we already created our `MLP` `architecture`, which is now ready to be
 model_mlp.compile(optimizer = 'adam', loss = 'categorical_crossentropy', metrics = ['accuracy'])
 ```
 
-Now it's to `train` our `MLP`. Thus, we have to `fit` it to our `data`, specifically only the `training` `data`. Here, we are going to provide a few more `hyperparameters` that will define how our `MLP` is going to `learn`. This entails the `batch size`, the `epochs` and `split` of `validation sets`. We will assign the respective output to a variable so that we can investigate our `MLP`'s `learning process`. 
+Now it's to `train` our `MLP`. Thus, we have to `fit` it to our `data`, specifically only the `training` `data`. Here, we are going to provide a few more `hyperparameters` that will define how our `MLP` is going to `learn`. This entails the `batch size`, the `epochs` and `split` of `validation sets`. We will assign the respective output to a variable so that we can investigate our `MLP`'s `learning process`.
 
 ```{code-cell} ipython3
 history = model_mlp.fit(X_train, y_train, batch_size = 10,
@@ -193,7 +193,7 @@ sns.despine(offset=5)
 plt.show()
 ```
 
-And now the same for the `accuracy`. 
+And now the same for the `accuracy`.
 
 ```{code-cell} ipython3
 import matplotlib.pyplot as plt
@@ -245,7 +245,7 @@ print(classification_report(y_test.values.argmax(axis = 1), y_test_pred.argmax(a
 
 As you can see, the `scores`, ie `performance`, drops quite a bit. Do you know why and which you would report, e.g. in a `publication`?
 
-Beside checking the overall `scores`, there are other options to further evaluate our `MLP`'s (or basically any other model's) `performance`. One of the most commonly used ones is called `confusion matrix` (which you most likely have seen before in this course). A `confusion matrix` displays how often a given `sample` was `predicted` as a certain `label`, thus, for example, providing insights into differentiability, etc. . To implement this, we initially have to compute the `confusion matrix`: 
+Beside checking the overall `scores`, there are other options to further evaluate our `MLP`'s (or basically any other model's) `performance`. One of the most commonly used ones is called `confusion matrix` (which you most likely have seen before in this course). A `confusion matrix` displays how often a given `sample` was `predicted` as a certain `label`, thus, for example, providing insights into differentiability, etc. . To implement this, we initially have to compute the `confusion matrix`:
 
 ```{code-cell} ipython3
 import numpy as np
@@ -273,7 +273,7 @@ plt.ylabel("predicted labels", fontsize = 14, fontweight = 'bold')
 plt.show()
 ```
 
-Based on this outcome: how would you interpret the `confusion matrix`? Are some `categories` better `"decodable"` than others? Could even make such a statement? 
+Based on this outcome: how would you interpret the `confusion matrix`? Are some `categories` better `"decodable"` than others? Could even make such a statement?
 
 +++
 
@@ -290,11 +290,3 @@ Unfortunately, visualizing the features/transformations of an `ANN` is quite oft
  * What is the most difficult category to decode? Why?
  * The model seemed to overfit. Try adding a `Dropout` layer to regularize the model. You can read about dropout in keras in this [blog post](https://towardsdatascience.com/machine-learning-part-20-dropout-keras-layers-explained-8c9f6dc4c9ab).
  * Try to add layers or hidden units, and observe the impact on overfitting and training time.
-
-```{code-cell} ipython3
-
-```
-
-```{code-cell} ipython3
-
-```
