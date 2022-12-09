@@ -260,6 +260,11 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   Summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
    Exercises
   </a>
@@ -305,6 +310,11 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   Summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
    Exercises
   </a>
@@ -320,19 +330,34 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="brain-decoding-with-mlp">
 <h1>Brain decoding with MLP<a class="headerlink" href="#brain-decoding-with-mlp" title="Permalink to this headline">¶</a></h1>
+<p>This part of the <code class="docutils literal notranslate"><span class="pre">session</span></code> aims to make <code class="docutils literal notranslate"><span class="pre">participants</span></code> familiar with <a class="reference external" href="https://en.wikipedia.org/wiki/Multilayer_perceptron">Multilayer Peceptrons</a> as one possible <code class="docutils literal notranslate"><span class="pre">decoding</span> <span class="pre">model</span></code> that can be applied to <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">data</span></code>. The objectives 📍 are:</p>
+<ul class="simple">
+<li><p>get to know the basics of <code class="docutils literal notranslate"><span class="pre">Multilayer</span> <span class="pre">Peceptrons</span></code></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">model</span></code> creation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model</span></code> <code class="docutils literal notranslate"><span class="pre">training</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model</span></code> <code class="docutils literal notranslate"><span class="pre">testing</span></code></p></li>
+</ul>
+</li>
+</ul>
 <div class="section" id="multilayer-perceptron">
 <h2>Multilayer Perceptron<a class="headerlink" href="#multilayer-perceptron" title="Permalink to this headline">¶</a></h2>
 <div class="figure align-default" id="multilayer-perceptron-fig">
 <a class="reference internal image-reference" href="_images/multilayer-perceptron.png"><img alt="_images/multilayer-perceptron.png" src="_images/multilayer-perceptron.png" style="width: 800px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">A multilayer perceptron with 25 units on the input layer, a single hidden layer with 17 units, and an output layer with 9 units. Figure generated with the <a class="reference external" href="http://alexlenail.me/NN-SVG/index.html">NN-SVG</a> tool by [Alexander Lenail]. The figure is shared under a <a class="reference external" href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a> license.</span><a class="headerlink" href="#multilayer-perceptron-fig" title="Permalink to this image">¶</a></p>
 </div>
-<p>We are going to train a Multilayer Perceptron (MLP) classifier for brain decoding on the Haxby dataset. MLPs are one of the most basic architecture of artificial neural networks. MLPs consist of input and output layers as well as hidden layers that transform the input to the usable data for the output layer. Like other machine learning models for supervised learning, a MLP initially goes through a training phase. During this supervised phase, the network is taught what to look for and what is the desired output.
-In this tutorial, we are going to train the simplest MLP architecture featuring one input layer, one output layer and just one hidden layer.</p>
+<p>We are going to train a <code class="docutils literal notranslate"><span class="pre">Multilayer</span> <span class="pre">Perceptron</span></code> (<code class="docutils literal notranslate"><span class="pre">MLP</span></code>) <code class="docutils literal notranslate"><span class="pre">classifier</span></code> for <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">decoding</span></code> on the <a class="reference external" href="https://main-educational.github.io/brain_encoding_decoding/haxby_data.html">Haxby dataset</a>. <code class="docutils literal notranslate"><span class="pre">MLP</span></code>s are one of the most basic architecture of <a class="reference external" href="https://en.wikipedia.org/wiki/Artificial_neural_network">artificial neural networks</a>. As such, <code class="docutils literal notranslate"><span class="pre">MLP</span></code>s consist of <code class="docutils literal notranslate"><span class="pre">input</span></code> and <code class="docutils literal notranslate"><span class="pre">output</span></code> <code class="docutils literal notranslate"><span class="pre">layers</span></code> as well as <code class="docutils literal notranslate"><span class="pre">hidden</span> <span class="pre">layers</span></code> that process the <code class="docutils literal notranslate"><span class="pre">input</span></code> through a succession of <code class="docutils literal notranslate"><span class="pre">transformations</span></code> towards the <code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">layer</span></code> that performs the task at hand, e.g. a <code class="docutils literal notranslate"><span class="pre">classification</span></code> or <code class="docutils literal notranslate"><span class="pre">regression</span></code>. Like other <code class="docutils literal notranslate"><span class="pre">machine</span> <span class="pre">learning</span> <span class="pre">models</span></code> for <code class="docutils literal notranslate"><span class="pre">supervised</span> <span class="pre">learning</span></code>, an <code class="docutils literal notranslate"><span class="pre">MLP</span></code> initially goes through a <code class="docutils literal notranslate"><span class="pre">training</span> <span class="pre">phase</span></code>. During this <code class="docutils literal notranslate"><span class="pre">supervised</span> <span class="pre">phase</span></code>, the <code class="docutils literal notranslate"><span class="pre">network</span></code> is taught what to look for and what is the desired output via its <code class="docutils literal notranslate"><span class="pre">objective</span> <span class="pre">function</span></code>. This refers to, minimizing the <code class="docutils literal notranslate"><span class="pre">loss</span></code>, ie the deviation of <code class="docutils literal notranslate"><span class="pre">predictions</span></code> from the “ground truth”, and thus increasing its performance.</p>
+<p><code class="docutils literal notranslate"><span class="pre">MLP</span></code>s were actually among the first <code class="docutils literal notranslate"><span class="pre">ANN</span></code>s to appear, specifically the <a class="reference external" href="https://en.wikipedia.org/wiki/Perceptron">Mark I Peceptron</a> which you can see below.</p>
+<div class="figure align-default" id="marki-perceptron-fig">
+<a class="reference internal image-reference" href="https://preview.redd.it/wgzps0pvcny91.jpg?width=640&amp;crop=smart&amp;auto=webp&amp;s=0b2e56dc4eaa886ebd01ac0cd8e51fc4efdb1d01"><img alt="https://preview.redd.it/wgzps0pvcny91.jpg?width=640&amp;crop=smart&amp;auto=webp&amp;s=0b2e56dc4eaa886ebd01ac0cd8e51fc4efdb1d01" src="https://preview.redd.it/wgzps0pvcny91.jpg?width=640&amp;crop=smart&amp;auto=webp&amp;s=0b2e56dc4eaa886ebd01ac0cd8e51fc4efdb1d01" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">Frank Rosenblatt with a Mark I Perceptron computer in 1960.</span><a class="headerlink" href="#marki-perceptron-fig" title="Permalink to this image">¶</a></p>
+</div>
+<p>In this tutorial, we are going to train the simplest <code class="docutils literal notranslate"><span class="pre">MLP</span></code> architecture featuring one <code class="docutils literal notranslate"><span class="pre">input</span> <span class="pre">layer</span></code>, one <code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">layer</span></code> and just one <code class="docutils literal notranslate"><span class="pre">hidden</span> <span class="pre">layer</span></code>.</p>
 </div>
 <div class="section" id="getting-the-data">
 <h2>Getting the data<a class="headerlink" href="#getting-the-data" title="Permalink to this headline">¶</a></h2>
-<p>We are going to download the dataset from Haxby and colleagues (2001) <span id="id1">[<a class="reference internal" href="haxby_data.html#id6">HGF+01</a>]</span>. You can check section <a class="reference internal" href="haxby_data.html#haxby-dataset"><span class="std std-ref">An overview of the Haxby dataset</span></a> for more details on that dataset. Here we are going to quickly download it, and prepare it for machine learning applications with a set of predictive variable, the brain time series <code class="docutils literal notranslate"><span class="pre">X</span></code>, and a dependent variable, the annotation on cognition <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
-<div class="cell tag_hide_input docutils container">
+<p>We are going to work with the Haxby dataset <span id="id1">[<a class="reference internal" href="haxby_data.html#id6">HGF+01</a>]</span> again. You can check the section <a class="reference internal" href="haxby_data.html#haxby-dataset"><span class="std std-ref">An overview of the Haxby dataset</span></a> for more details on that <code class="docutils literal notranslate"><span class="pre">dataset</span></code>. Here we are going to quickly <code class="docutils literal notranslate"><span class="pre">download</span></code> and prepare it for <code class="docutils literal notranslate"><span class="pre">machine</span> <span class="pre">learning</span> <span class="pre">applications</span></code> with a set of <code class="docutils literal notranslate"><span class="pre">predictive</span> <span class="pre">variables</span></code>, the <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">time</span> <span class="pre">series</span></code> <code class="docutils literal notranslate"><span class="pre">X</span></code>, and a <code class="docutils literal notranslate"><span class="pre">dependent</span> <span class="pre">variable</span></code>, the respective <code class="docutils literal notranslate"><span class="pre">cognitive</span> <span class="pre">processes</span></code>/<code class="docutils literal notranslate"><span class="pre">function</span></code>/<code class="docutils literal notranslate"><span class="pre">percepts</span></code> <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
 import warnings
@@ -367,7 +392,7 @@ y = behavioral[&#39;labels&#39;]
 </div>
 </div>
 </div>
-<p>Let’s check the size of <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>:</p>
+<p>As an initial check, we’ll have a look at the size of <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>categories = y.unique()
@@ -386,8 +411,8 @@ print(X.shape)
 </div>
 </div>
 </div>
-<p>So we have 1452 time points, with one cognitive annotations each, and for each time point we have recordings of fMRI activity across 675 voxels. We can also see that the cognitive annotations span 9 different categories.</p>
-<p>We are going to use Keras for training the MLP, and we are going to convert the string categories into a one-hot encoder:</p>
+<p>So we have <code class="docutils literal notranslate"><span class="pre">1452</span></code> <code class="docutils literal notranslate"><span class="pre">time</span> <span class="pre">points</span></code>, with one <code class="docutils literal notranslate"><span class="pre">label</span></code> for the respective <code class="docutils literal notranslate"><span class="pre">stimulus</span> <span class="pre">percept</span></code> each, and for each <code class="docutils literal notranslate"><span class="pre">time</span> <span class="pre">point</span></code> we have <code class="docutils literal notranslate"><span class="pre">recordings</span></code> of <code class="docutils literal notranslate"><span class="pre">brain</span></code> activity obtained via  <code class="docutils literal notranslate"><span class="pre">fMRI</span></code> across <code class="docutils literal notranslate"><span class="pre">675</span> <span class="pre">voxels</span></code> (within the <code class="docutils literal notranslate"><span class="pre">VT</span></code> <code class="docutils literal notranslate"><span class="pre">mask</span></code>). We can also see that the <code class="docutils literal notranslate"><span class="pre">stimulus</span> <span class="pre">percept</span></code>s span <code class="docutils literal notranslate"><span class="pre">9</span></code> different <code class="docutils literal notranslate"><span class="pre">categories</span></code>.</p>
+<p>However, concerning our planned analyses, we need to convert our <code class="docutils literal notranslate"><span class="pre">categories</span></code> into a <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html">one-hot encoder</a>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># creating instance of one-hot-encoder
@@ -572,7 +597,7 @@ display(y)
 </div>
 <div class="section" id="training-a-model">
 <h2>Training a model<a class="headerlink" href="#training-a-model" title="Permalink to this headline">¶</a></h2>
-<p>We are going to start by splitting our dataset between train and test. We will keep 20% of the time points as test, and then set up a 10 fold cross validation for training/validation.</p>
+<p>As introduced in the prior <code class="docutils literal notranslate"><span class="pre">tutorials</span></code>, one of the most important aspects of <code class="docutils literal notranslate"><span class="pre">machine</span> <span class="pre">learning</span></code> is the split between <code class="docutils literal notranslate"><span class="pre">train</span></code> and <code class="docutils literal notranslate"><span class="pre">tests</span></code>. <code class="docutils literal notranslate"><span class="pre">MLP</span></code>s are no exception to that and thus we need to split our dataset accordingly. We will keep <code class="docutils literal notranslate"><span class="pre">20%</span></code> of the <code class="docutils literal notranslate"><span class="pre">time</span> <span class="pre">points</span></code> as <code class="docutils literal notranslate"><span class="pre">test</span></code>, and then set up a <code class="docutils literal notranslate"><span class="pre">10</span> <span class="pre">fold</span> <span class="pre">cross</span> <span class="pre">validation</span></code> for <code class="docutils literal notranslate"><span class="pre">training/validation</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from sklearn.model_selection import train_test_split
@@ -581,33 +606,90 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, rando
 </div>
 </div>
 </div>
-<p>Now we can build a MLP using Tensorflow and Keras:</p>
+<p>With that, we can already build our <code class="docutils literal notranslate"><span class="pre">MLP</span></code>. Here, we are going to use <a class="reference external" href="https://www.tensorflow.org/">Tensorflow</a> and <a class="reference external" href="https://keras.io/">Keras</a>. As with every other <code class="docutils literal notranslate"><span class="pre">ANN</span></code>, we need to <code class="docutils literal notranslate"><span class="pre">import</span></code> the respective components, here, the <code class="docutils literal notranslate"><span class="pre">model</span></code> and <code class="docutils literal notranslate"><span class="pre">layer</span></code> <code class="docutils literal notranslate"><span class="pre">type</span></code>. In our case we will use a <a class="reference external" href="https://keras.io/guides/sequential_model/"><code class="docutils literal notranslate"><span class="pre">Sequential</span></code> <code class="docutils literal notranslate"><span class="pre">model</span></code></a> and <a class="reference external" href="https://keras.io/api/layers/core_layers/dense/"><code class="docutils literal notranslate"><span class="pre">Dense</span></code></a> <code class="docutils literal notranslate"><span class="pre">layers</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from keras.models import Sequential
 from keras.layers import Dense
-
-# number of unique conditions that we have
-model_mlp = Sequential()
-
-# Adding the input layer and the first hidden layer
-model_mlp.add(Dense(50 , input_dim = 675, kernel_initializer=&quot;uniform&quot;, activation = &#39;relu&#39;))
-
-# Adding the second hidden layer
-model_mlp.add(Dense(30, kernel_initializer=&quot;uniform&quot;, activation = &#39;relu&#39;))
-
-# Using softmax at the end, length of categories shows the number of labels we have
-model_mlp.add(Dense(len(categories), activation = &#39;softmax&#39;))
-
-model_mlp.summary()
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-12-08 13:11:45.838802: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#39;libcudart.so.11.0&#39;; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory
-2022-12-08 13:11:45.838827: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-12-09 16:47:05.850172: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#39;libcudart.so.11.0&#39;; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory
+2022-12-09 16:47:05.850199: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/keras_preprocessing/image/utils.py:23: DeprecationWarning: NEAREST is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.NEAREST or Dither.NONE instead.
+  &#39;nearest&#39;: pil_image.NEAREST,
+/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/keras_preprocessing/image/utils.py:24: DeprecationWarning: BILINEAR is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.BILINEAR instead.
+  &#39;bilinear&#39;: pil_image.BILINEAR,
+/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/keras_preprocessing/image/utils.py:25: DeprecationWarning: BICUBIC is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.BICUBIC instead.
+  &#39;bicubic&#39;: pil_image.BICUBIC,
+/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/keras_preprocessing/image/utils.py:28: DeprecationWarning: HAMMING is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.HAMMING instead.
+  if hasattr(pil_image, &#39;HAMMING&#39;):
+/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/keras_preprocessing/image/utils.py:30: DeprecationWarning: BOX is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.BOX instead.
+  if hasattr(pil_image, &#39;BOX&#39;):
+/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/keras_preprocessing/image/utils.py:33: DeprecationWarning: LANCZOS is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.LANCZOS instead.
+  if hasattr(pil_image, &#39;LANCZOS&#39;):
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">A note regarding our MLP</p>
+<p>Please note that the example <code class="docutils literal notranslate"><span class="pre">MLP</span></code> we are going to <code class="docutils literal notranslate"><span class="pre">create</span></code> and <code class="docutils literal notranslate"><span class="pre">train</span></code> here is rather simple as we want to enable its application on machines with rather limited computational resources (ie your laptops or binder). “Real-world” models are usually more complex and might also entail different <code class="docutils literal notranslate"><span class="pre">types</span></code> and <code class="docutils literal notranslate"><span class="pre">layers</span></code>.</p>
+</div>
+<p>Initially, we need to create our, so far, <code class="docutils literal notranslate"><span class="pre">empty</span> <span class="pre">model</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># number of unique conditions that we have
+model_mlp = Sequential()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-12-09 16:47:07.181156: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#39;libcuda.so.1&#39;; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory
+2022-12-09 16:47:07.181179: W tensorflow/stream_executor/cuda/cuda_driver.cc:269] failed call to cuInit: UNKNOWN ERROR (303)
+2022-12-09 16:47:07.181200: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (fv-az309-420): /proc/driver/nvidia/version does not exist
+2022-12-09 16:47:07.181646: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we can add the <code class="docutils literal notranslate"><span class="pre">layers</span></code> to our <code class="docutils literal notranslate"><span class="pre">model</span></code>, starting with the <code class="docutils literal notranslate"><span class="pre">input</span> <span class="pre">layer</span></code>. Given this is a rather short introduction to the topic and does not focus on <code class="docutils literal notranslate"><span class="pre">ANN</span></code>s, we are going to set the <code class="docutils literal notranslate"><span class="pre">kernel</span> <span class="pre">initialization</span></code> and <code class="docutils literal notranslate"><span class="pre">activation</span> <span class="pre">function</span></code> to appropriate defaults (Please have a look at the <a class="reference external" href="https://main-educational.github.io/material.html#introduction-to-deep-learning-using-pytorch">Introduction to deep learning session</a> for more information.).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model_mlp.add(Dense(50 , input_dim = 675, kernel_initializer=&quot;uniform&quot;, activation = &#39;relu&#39;))
+</pre></div>
+</div>
+</div>
+</div>
+<p>As noted above, we are using <code class="docutils literal notranslate"><span class="pre">Dense</span></code> <code class="docutils literal notranslate"><span class="pre">layers</span></code> and as you can see, we set the <code class="docutils literal notranslate"><span class="pre">input</span> <span class="pre">dimensions</span></code> to <code class="docutils literal notranslate"><span class="pre">675</span></code>. You might have already notices that this is the number of <code class="docutils literal notranslate"><span class="pre">voxels</span></code> we have <code class="docutils literal notranslate"><span class="pre">data</span></code> from. Setting the <code class="docutils literal notranslate"><span class="pre">input</span> <span class="pre">dimension</span></code> according to the <code class="docutils literal notranslate"><span class="pre">data</span> <span class="pre">dimensions</span></code> is rather important is referred to as the <a class="reference external" href="https://en.wikipedia.org/wiki/Semantic_gap">semantic gap</a>: the transformation of <code class="docutils literal notranslate"><span class="pre">actions</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">percepts</span></code> conducted/perceived by <code class="docutils literal notranslate"><span class="pre">human</span></code>s into <code class="docutils literal notranslate"><span class="pre">computational</span> <span class="pre">representations</span></code>. For example, pictures are “nothing” but a huge <code class="docutils literal notranslate"><span class="pre">array</span></code> for a computer and what will be submitted to the input layer of an <code class="docutils literal notranslate"><span class="pre">ANN</span></code> (note: this also holds true for basically any other type of <code class="docutils literal notranslate"><span class="pre">data</span></code>). Here, our <code class="docutils literal notranslate"><span class="pre">MLP</span></code> receives the extracted <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">activity</span> <span class="pre">patterns</span></code> as <code class="docutils literal notranslate"><span class="pre">input</span></code> which are already in the right <code class="docutils literal notranslate"><span class="pre">array</span></code> format thanks to <code class="docutils literal notranslate"><span class="pre">nilearn</span></code>. Thus, always carefully think about what your <code class="docutils literal notranslate"><span class="pre">input</span></code> <code class="docutils literal notranslate"><span class="pre">data</span></code> entails and how it is structured to then setup your <code class="docutils literal notranslate"><span class="pre">input</span> <span class="pre">layer</span></code> accordingly.</p>
+<p>Next, we are going to add one <code class="docutils literal notranslate"><span class="pre">hidden</span> <span class="pre">layer</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model_mlp.add(Dense(30, kernel_initializer=&quot;uniform&quot;, activation = &#39;relu&#39;))
+</pre></div>
+</div>
+</div>
+</div>
+<p>And because we are creating a very simple <code class="docutils literal notranslate"><span class="pre">MLP</span></code> with only three <code class="docutils literal notranslate"><span class="pre">layers</span></code>, we already add our <code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">layer</span></code>, using the <code class="docutils literal notranslate"><span class="pre">softmax</span></code> <code class="docutils literal notranslate"><span class="pre">activation</span> <span class="pre">function</span></code> given that we aim to <code class="docutils literal notranslate"><span class="pre">train</span></code> our <code class="docutils literal notranslate"><span class="pre">MLP</span></code> to <code class="docutils literal notranslate"><span class="pre">predict</span></code> the different <code class="docutils literal notranslate"><span class="pre">categories</span></code> that were perceived by the <code class="docutils literal notranslate"><span class="pre">participants</span></code> from their <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">activity</span> <span class="pre">patterns</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model_mlp.add(Dense(len(categories), activation = &#39;softmax&#39;))
+</pre></div>
+</div>
+</div>
+</div>
+<p>To get a nice overview of our <code class="docutils literal notranslate"><span class="pre">ANN</span></code>, we can now use the <code class="docutils literal notranslate"><span class="pre">.summary()</span></code> <code class="docutils literal notranslate"><span class="pre">function</span></code>, which will provide us with the <code class="docutils literal notranslate"><span class="pre">model</span> <span class="pre">type</span></code>, <code class="docutils literal notranslate"><span class="pre">model</span> <span class="pre">parameters</span></code> and for each <code class="docutils literal notranslate"><span class="pre">layer</span></code>, the its <code class="docutils literal notranslate"><span class="pre">type</span></code>, <code class="docutils literal notranslate"><span class="pre">shape</span></code> and <code class="docutils literal notranslate"><span class="pre">parameters</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model_mlp.summary()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential&quot;
 </pre></div>
 </div>
@@ -653,34 +735,20 @@ model_mlp.summary()
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>_________________________________________________________________
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/keras_preprocessing/image/utils.py:23: DeprecationWarning: NEAREST is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.NEAREST or Dither.NONE instead.
-  &#39;nearest&#39;: pil_image.NEAREST,
-/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/keras_preprocessing/image/utils.py:24: DeprecationWarning: BILINEAR is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.BILINEAR instead.
-  &#39;bilinear&#39;: pil_image.BILINEAR,
-/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/keras_preprocessing/image/utils.py:25: DeprecationWarning: BICUBIC is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.BICUBIC instead.
-  &#39;bicubic&#39;: pil_image.BICUBIC,
-/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/keras_preprocessing/image/utils.py:28: DeprecationWarning: HAMMING is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.HAMMING instead.
-  if hasattr(pil_image, &#39;HAMMING&#39;):
-/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/keras_preprocessing/image/utils.py:30: DeprecationWarning: BOX is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.BOX instead.
-  if hasattr(pil_image, &#39;BOX&#39;):
-/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/keras_preprocessing/image/utils.py:33: DeprecationWarning: LANCZOS is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.LANCZOS instead.
-  if hasattr(pil_image, &#39;LANCZOS&#39;):
-2022-12-08 13:11:47.807581: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#39;libcuda.so.1&#39;; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory
-2022-12-08 13:11:47.807606: W tensorflow/stream_executor/cuda/cuda_driver.cc:269] failed call to cuInit: UNKNOWN ERROR (303)
-2022-12-08 13:11:47.807626: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (fv-az248-972): /proc/driver/nvidia/version does not exist
-2022-12-08 13:11:47.808283: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+</div>
+</div>
+<p>With that, we already created our <code class="docutils literal notranslate"><span class="pre">MLP</span></code> <code class="docutils literal notranslate"><span class="pre">architecture</span></code>, which is now ready to be <code class="docutils literal notranslate"><span class="pre">compiled</span></code>! Within this step, we will set the <code class="docutils literal notranslate"><span class="pre">optimizer</span></code>, <code class="docutils literal notranslate"><span class="pre">loss</span> <span class="pre">function</span></code> and <code class="docutils literal notranslate"><span class="pre">metric</span></code>, ie <code class="docutils literal notranslate"><span class="pre">components</span></code> that define how our <code class="docutils literal notranslate"><span class="pre">MLP</span></code> will <code class="docutils literal notranslate"><span class="pre">learn</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model_mlp.compile(optimizer = &#39;adam&#39;, loss = &#39;categorical_crossentropy&#39;, metrics = [&#39;accuracy&#39;])
 </pre></div>
 </div>
 </div>
 </div>
-<p>Time to train that model!</p>
-<div class="cell tag_hide-output docutils container">
+<p>Now it’s to <code class="docutils literal notranslate"><span class="pre">train</span></code> our <code class="docutils literal notranslate"><span class="pre">MLP</span></code>. Thus, we have to <code class="docutils literal notranslate"><span class="pre">fit</span></code> it to our <code class="docutils literal notranslate"><span class="pre">data</span></code>, specifically only the <code class="docutils literal notranslate"><span class="pre">training</span></code> <code class="docutils literal notranslate"><span class="pre">data</span></code>. Here, we are going to provide a few more <code class="docutils literal notranslate"><span class="pre">hyperparameters</span></code> that will define how our <code class="docutils literal notranslate"><span class="pre">MLP</span></code> is going to <code class="docutils literal notranslate"><span class="pre">learn</span></code>. This entails the <code class="docutils literal notranslate"><span class="pre">batch</span> <span class="pre">size</span></code>, the <code class="docutils literal notranslate"><span class="pre">epochs</span></code> and <code class="docutils literal notranslate"><span class="pre">split</span></code> of <code class="docutils literal notranslate"><span class="pre">validation</span> <span class="pre">sets</span></code>. We will assign the respective output to a variable so that we can investigate our <code class="docutils literal notranslate"><span class="pre">MLP</span></code>’s <code class="docutils literal notranslate"><span class="pre">learning</span> <span class="pre">process</span></code>.</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Compiling the model
-model_mlp.compile(optimizer = &#39;adam&#39;, loss = &#39;categorical_crossentropy&#39;, metrics = [&#39;accuracy&#39;])
-# Fitting the model on the Training set
-history = model_mlp.fit(X_train, y_train, batch_size = 10,
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>history = model_mlp.fit(X_train, y_train, batch_size = 10,
                              epochs = 10, validation_split = 0.2)
 </pre></div>
 </div>
@@ -689,186 +757,215 @@ history = model_mlp.fit(X_train, y_train, batch_size = 10,
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 37s - loss: 2.2327 - accuracy: 0.0000e+00
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 34s - loss: 2.2124 - accuracy: 0.2000
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-48/93 [==============&gt;...............] - ETA: 0s - loss: 1.8745 - accuracy: 0.4083     
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-89/93 [===========================&gt;..] - ETA: 0s - loss: 1.6883 - accuracy: 0.4584
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+44/93 [=============&gt;................] - ETA: 0s - loss: 1.9030 - accuracy: 0.3636 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 1s 3ms/step - loss: 1.6637 - accuracy: 0.4644 - val_loss: 1.4907 - val_accuracy: 0.4549
+90/93 [============================&gt;.] - ETA: 0s - loss: 1.7012 - accuracy: 0.4278
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+93/93 [==============================] - 1s 3ms/step - loss: 1.6885 - accuracy: 0.4310 - val_loss: 1.4980 - val_accuracy: 0.4721
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 2/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 1.4008 - accuracy: 0.4000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 1.5042 - accuracy: 0.4000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-49/93 [==============&gt;...............] - ETA: 0s - loss: 1.1776 - accuracy: 0.5939
+49/93 [==============&gt;...............] - ETA: 0s - loss: 1.1806 - accuracy: 0.6449
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 0s 1ms/step - loss: 1.1308 - accuracy: 0.6153 - val_loss: 1.2368 - val_accuracy: 0.5794
+93/93 [==============================] - 0s 1ms/step - loss: 1.1507 - accuracy: 0.6347 - val_loss: 1.1531 - val_accuracy: 0.5966
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 3/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.3220 - accuracy: 0.9000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.7704 - accuracy: 0.9000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-47/93 [==============&gt;...............] - ETA: 0s - loss: 0.8130 - accuracy: 0.7553
+50/93 [===============&gt;..............] - ETA: 0s - loss: 0.8369 - accuracy: 0.7340
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-92/93 [============================&gt;.] - ETA: 0s - loss: 0.7743 - accuracy: 0.7609
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 0s 1ms/step - loss: 0.7733 - accuracy: 0.7619 - val_loss: 1.0099 - val_accuracy: 0.6609
+93/93 [==============================] - 0s 1ms/step - loss: 0.7940 - accuracy: 0.7500 - val_loss: 0.9969 - val_accuracy: 0.6481
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 4/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.3224 - accuracy: 0.9000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.6896 - accuracy: 0.8000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-49/93 [==============&gt;...............] - ETA: 0s - loss: 0.5549 - accuracy: 0.8408
+48/93 [==============&gt;...............] - ETA: 0s - loss: 0.4981 - accuracy: 0.8583
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 0s 1ms/step - loss: 0.5322 - accuracy: 0.8459 - val_loss: 0.8995 - val_accuracy: 0.6695
+93/93 [==============================] - 0s 1ms/step - loss: 0.5147 - accuracy: 0.8459 - val_loss: 0.8749 - val_accuracy: 0.6996
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 5/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.3400 - accuracy: 0.9000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.2772 - accuracy: 1.0000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-47/93 [==============&gt;...............] - ETA: 0s - loss: 0.3583 - accuracy: 0.8936
+48/93 [==============&gt;...............] - ETA: 0s - loss: 0.3450 - accuracy: 0.9104
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - ETA: 0s - loss: 0.3454 - accuracy: 0.8966
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 0s 1ms/step - loss: 0.3454 - accuracy: 0.8966 - val_loss: 0.8805 - val_accuracy: 0.7253
+93/93 [==============================] - 0s 1ms/step - loss: 0.3405 - accuracy: 0.9095 - val_loss: 0.8278 - val_accuracy: 0.7296
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 6/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.4726 - accuracy: 0.9000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.5673 - accuracy: 0.8000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-47/93 [==============&gt;...............] - ETA: 0s - loss: 0.2122 - accuracy: 0.9617
+45/93 [=============&gt;................] - ETA: 0s - loss: 0.2213 - accuracy: 0.9578
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 0s 1ms/step - loss: 0.2159 - accuracy: 0.9623 - val_loss: 0.7594 - val_accuracy: 0.7682
+90/93 [============================&gt;.] - ETA: 0s - loss: 0.2145 - accuracy: 0.9544
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+93/93 [==============================] - 0s 2ms/step - loss: 0.2150 - accuracy: 0.9547 - val_loss: 0.7727 - val_accuracy: 0.7554
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 7/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.2450 - accuracy: 0.9000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.0703 - accuracy: 1.0000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-49/93 [==============&gt;...............] - ETA: 0s - loss: 0.1345 - accuracy: 0.9796
+49/93 [==============&gt;...............] - ETA: 0s - loss: 0.1458 - accuracy: 0.9714
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 0s 1ms/step - loss: 0.1270 - accuracy: 0.9774 - val_loss: 0.8097 - val_accuracy: 0.7339
+93/93 [==============================] - 0s 1ms/step - loss: 0.1270 - accuracy: 0.9774 - val_loss: 0.8074 - val_accuracy: 0.7425
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 8/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.0698 - accuracy: 1.0000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.0394 - accuracy: 1.0000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-47/93 [==============&gt;...............] - ETA: 0s - loss: 0.0709 - accuracy: 0.9872
+50/93 [===============&gt;..............] - ETA: 0s - loss: 0.0736 - accuracy: 0.9900
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - ETA: 0s - loss: 0.0749 - accuracy: 0.9892
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 0s 2ms/step - loss: 0.0749 - accuracy: 0.9892 - val_loss: 0.7464 - val_accuracy: 0.7725
+93/93 [==============================] - 0s 1ms/step - loss: 0.0685 - accuracy: 0.9903 - val_loss: 0.7568 - val_accuracy: 0.7811
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 9/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.1030 - accuracy: 1.0000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.0773 - accuracy: 1.0000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-48/93 [==============&gt;...............] - ETA: 0s - loss: 0.0556 - accuracy: 0.9958
+49/93 [==============&gt;...............] - ETA: 0s - loss: 0.0401 - accuracy: 1.0000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 0s 1ms/step - loss: 0.0479 - accuracy: 0.9968 - val_loss: 0.7368 - val_accuracy: 0.7639
+93/93 [==============================] - 0s 1ms/step - loss: 0.0400 - accuracy: 0.9989 - val_loss: 0.7964 - val_accuracy: 0.7768
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 10/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.0294 - accuracy: 1.0000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.0071 - accuracy: 1.0000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-50/93 [===============&gt;..............] - ETA: 0s - loss: 0.0274 - accuracy: 1.0000
+48/93 [==============&gt;...............] - ETA: 0s - loss: 0.0361 - accuracy: 0.9958
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 0s 1ms/step - loss: 0.0282 - accuracy: 1.0000 - val_loss: 0.7841 - val_accuracy: 0.7768
+93/93 [==============================] - 0s 1ms/step - loss: 0.0420 - accuracy: 0.9935 - val_loss: 0.8264 - val_accuracy: 0.7854
 </pre></div>
 </div>
 </div>
 </div>
+<p>This looks about and what we would expect the <code class="docutils literal notranslate"><span class="pre">learning</span> <span class="pre">process</span></code> to be: across <code class="docutils literal notranslate"><span class="pre">epochs</span></code>, the <code class="docutils literal notranslate"><span class="pre">loss</span></code> is decreasing and the <code class="docutils literal notranslate"><span class="pre">accuracy</span></code> is increasing.</p>
+<div class="tip admonition">
+<p class="admonition-title">A note regarding the learning process of our MLP</p>
+<p>Comparable to its architecture, our <code class="docutils literal notranslate"><span class="pre">MLP</span></code>’s <code class="docutils literal notranslate"><span class="pre">learning</span> <span class="pre">process</span></code> is also not really what you would see on the “real world”. Usually, <code class="docutils literal notranslate"><span class="pre">ANN</span></code>s are <code class="docutils literal notranslate"><span class="pre">trained</span></code> way more, for longer periods of times, more <code class="docutils literal notranslate"><span class="pre">epochs</span></code> and on more <code class="docutils literal notranslate"><span class="pre">data</span></code>. However, we keep it rather short as we want to enable its application on machines with rather limited computational resources (ie your laptops or binder).</p>
+</div>
+<p>While this is already informative, we can also plot the <code class="docutils literal notranslate"><span class="pre">loss</span></code> and <code class="docutils literal notranslate"><span class="pre">accuracy</span></code> in the <code class="docutils literal notranslate"><span class="pre">training</span></code> and <code class="docutils literal notranslate"><span class="pre">validation</span></code> <code class="docutils literal notranslate"><span class="pre">sets</span></code> respectively. Let’s start with the <code class="docutils literal notranslate"><span class="pre">loss</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import sys
-sys.path.append(&#39;../src&#39;)
-import visualization
-plot_history = visualization.classifier_history (history, &#39;MLP &#39;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
+import seaborn as sns
+
+plt.plot(history.history[&#39;loss&#39;], color=&#39;m&#39;)
+plt.plot(history.history[&#39;val_loss&#39;], color=&#39;c&#39;)
+plt.title(&#39;MLP loss&#39;)
+plt.ylabel(&#39;loss&#39;)
+plt.xlabel(&#39;epoch&#39;)
+plt.legend([&#39;train&#39;, &#39;validation&#39;], loc = &#39;upper right&#39;)
+
+sns.despine(offset=5)
+
+plt.show()
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;loss&#39;, &#39;accuracy&#39;, &#39;val_loss&#39;, &#39;val_accuracy&#39;])
+<img alt="_images/mlp_decoding_26_0.png" src="_images/mlp_decoding_26_0.png" />
+</div>
+</div>
+<p>And now the same for the <code class="docutils literal notranslate"><span class="pre">accuracy</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
+import seaborn as sns
+
+plt.plot(history.history[&#39;accuracy&#39;], color=&#39;m&#39;)
+plt.plot(history.history[&#39;val_accuracy&#39;], color=&#39;c&#39;)
+plt.title(&#39;MLP accuracy&#39;)
+plt.ylabel(&#39;accuracy&#39;)
+plt.xlabel(&#39;epoch&#39;)
+plt.legend([&#39;train&#39;, &#39;validation&#39;], loc = &#39;upper left&#39;)
+
+sns.despine(offset=5)
+
+plt.show()
 </pre></div>
 </div>
-<img alt="_images/mlp_decoding_12_1.png" src="_images/mlp_decoding_12_1.png" />
-<img alt="_images/mlp_decoding_12_2.png" src="_images/mlp_decoding_12_2.png" />
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/mlp_decoding_28_0.png" src="_images/mlp_decoding_28_0.png" />
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">How would you interpret these plots…</p>
+<p>concerning our <code class="docutils literal notranslate"><span class="pre">MLP</span></code>’s <code class="docutils literal notranslate"><span class="pre">learning</span> <span class="pre">process</span></code>? Does it make sense? If not, how should it look like? Could you use these plots to evaluate certain aspects of the <code class="docutils literal notranslate"><span class="pre">learning</span> <span class="pre">process</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">regularization</span></code>?</p>
 </div>
 </div>
 <div class="section" id="assessing-performance">
 <h2>Assessing performance<a class="headerlink" href="#assessing-performance" title="Permalink to this headline">¶</a></h2>
-<p>Let’s check the accuracy of the prediction on the training set:</p>
+<p>After evaluating the <code class="docutils literal notranslate"><span class="pre">training</span></code> of our <code class="docutils literal notranslate"><span class="pre">MLP</span></code>, we of course also need to evaluate its (<code class="docutils literal notranslate"><span class="pre">predictive</span></code>) <code class="docutils literal notranslate"><span class="pre">performance</span></code>. Here, this refers to the <code class="docutils literal notranslate"><span class="pre">accuracy</span></code> of our <code class="docutils literal notranslate"><span class="pre">MLP</span></code>’s outcomes, ie its <code class="docutils literal notranslate"><span class="pre">predictions</span></code>. We already saw this in the above plots and during the <code class="docutils literal notranslate"><span class="pre">training</span></code> across <code class="docutils literal notranslate"><span class="pre">epochs</span></code> but let’s check the <code class="docutils literal notranslate"><span class="pre">accuracy</span></code> of the <code class="docutils literal notranslate"><span class="pre">prediction</span></code> on the <code class="docutils literal notranslate"><span class="pre">training</span> <span class="pre">set</span></code> again:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Making the predictions and evaluating the model
-from sklearn.metrics import classification_report
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from sklearn.metrics import classification_report
 y_train_pred = model_mlp.predict(X_train)
 print(classification_report(y_train.values.argmax(axis = 1), y_train_pred.argmax(axis=1)))
 </pre></div>
@@ -877,24 +974,29 @@ print(classification_report(y_train.values.argmax(axis = 1), y_train_pred.argmax
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
-           0       0.83      0.96      0.89        85
-           1       0.97      0.98      0.97        88
-           2       0.99      0.88      0.93        90
-           3       0.99      0.96      0.97        81
-           4       1.00      0.96      0.98        91
+           0       0.94      0.92      0.93        85
+           1       0.97      0.97      0.97        88
+           2       0.96      0.91      0.94        90
+           3       0.94      0.96      0.95        81
+           4       0.98      0.96      0.97        91
            5       0.97      0.98      0.98       471
            6       0.90      0.93      0.91        81
-           7       0.96      0.97      0.96        90
-           8       0.93      0.88      0.90        84
+           7       0.95      0.98      0.96        90
+           8       0.91      0.92      0.91        84
 
     accuracy                           0.96      1161
-   macro avg       0.95      0.94      0.94      1161
+   macro avg       0.95      0.95      0.95      1161
 weighted avg       0.96      0.96      0.96      1161
 </pre></div>
 </div>
 </div>
 </div>
-<p>This is dangerously high. Let’s check on the test set:</p>
+<p>Why you might think: “Oh, that’s awesome, great performance.”, such outcomes are usually perceived as dangerously high and indicate that something is off…</p>
+<div class="tip admonition">
+<p class="admonition-title">Why should a close-to-perfect performance indicate that something is wrong?</p>
+<p>What do you think is the rationale to say that very high <code class="docutils literal notranslate"><span class="pre">scores</span></code> are actually “suspicious” and tells us that something is most likely wrong? Try thinking about the things you’ve learned so far: <code class="docutils literal notranslate"><span class="pre">training</span></code>/<code class="docutils literal notranslate"><span class="pre">test</span></code>/<code class="docutils literal notranslate"><span class="pre">validation</span></code> <code class="docutils literal notranslate"><span class="pre">datasets</span></code> and their size, <code class="docutils literal notranslate"><span class="pre">models</span></code>, <code class="docutils literal notranslate"><span class="pre">predictions</span></code>, etc. .</p>
+</div>
+<p>Luckily, we did <code class="docutils literal notranslate"><span class="pre">split</span></code> our <code class="docutils literal notranslate"><span class="pre">dataset</span></code> into <strong>independent</strong> <code class="docutils literal notranslate"><span class="pre">training</span></code> and <code class="docutils literal notranslate"><span class="pre">test</span></code> <code class="docutils literal notranslate"><span class="pre">sets</span></code>. So, let’s check our <code class="docutils literal notranslate"><span class="pre">MLP</span></code>’s performance on the <code class="docutils literal notranslate"><span class="pre">test</span> <span class="pre">set</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>y_test_pred = model_mlp.predict(X_test)
@@ -905,48 +1007,68 @@ print(classification_report(y_test.values.argmax(axis = 1), y_test_pred.argmax(a
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
-           0       0.65      0.87      0.74        23
-           1       0.81      0.85      0.83        20
-           2       0.75      0.67      0.71        18
-           3       0.96      1.00      0.98        27
-           4       0.88      0.88      0.88        17
-           5       0.91      0.92      0.92       117
-           6       0.78      0.67      0.72        27
-           7       1.00      0.94      0.97        18
-           8       0.63      0.50      0.56        24
+           0       0.71      0.65      0.68        23
+           1       0.89      0.85      0.87        20
+           2       0.80      0.67      0.73        18
+           3       0.90      0.96      0.93        27
+           4       0.94      0.94      0.94        17
+           5       0.91      0.91      0.91       117
+           6       0.59      0.59      0.59        27
+           7       0.95      1.00      0.97        18
+           8       0.64      0.75      0.69        24
 
-    accuracy                           0.85       291
+    accuracy                           0.84       291
    macro avg       0.82      0.81      0.81       291
-weighted avg       0.85      0.85      0.84       291
+weighted avg       0.84      0.84      0.84       291
 </pre></div>
 </div>
 </div>
 </div>
-<p>We can have a look at the confusion matrix:</p>
+<p>As you can see, the <code class="docutils literal notranslate"><span class="pre">scores</span></code>, ie <code class="docutils literal notranslate"><span class="pre">performance</span></code>, drops quite a bit. Do you know why and which you would report, e.g. in a <code class="docutils literal notranslate"><span class="pre">publication</span></code>?</p>
+<p>Beside checking the overall <code class="docutils literal notranslate"><span class="pre">scores</span></code>, there are other options to further evaluate our <code class="docutils literal notranslate"><span class="pre">MLP</span></code>’s (or basically any other model’s) <code class="docutils literal notranslate"><span class="pre">performance</span></code>. One of the most commonly used ones is called <code class="docutils literal notranslate"><span class="pre">confusion</span> <span class="pre">matrix</span></code> (which you most likely have seen before in this course). A <code class="docutils literal notranslate"><span class="pre">confusion</span> <span class="pre">matrix</span></code> displays how often a given <code class="docutils literal notranslate"><span class="pre">sample</span></code> was <code class="docutils literal notranslate"><span class="pre">predicted</span></code> as a certain <code class="docutils literal notranslate"><span class="pre">label</span></code>, thus, for example, providing insights into differentiability, etc. . To implement this, we initially have to compute the <code class="docutils literal notranslate"><span class="pre">confusion</span> <span class="pre">matrix</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># confusion matrix
-import sys
-import numpy as np
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
 from sklearn.metrics import confusion_matrix
-sys.path.append(&#39;../src&#39;)
-import visualization
+
 cm_svm = confusion_matrix(y_test.values.argmax(axis = 1), y_test_pred.argmax(axis=1))
 model_conf_matrix = cm_svm.astype(&#39;float&#39;) / cm_svm.sum(axis = 1)[:, np.newaxis]
+</pre></div>
+</div>
+</div>
+</div>
+<p>After that, we can <code class="docutils literal notranslate"><span class="pre">plot</span></code> it for evaluation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import pandas as pd
+import seaborn as sns
 
-visualization.conf_matrix(model_conf_matrix,
-                          categories,
-                          title=&#39;MLP decoding results on Haxby&#39;)
+df_cm = pd.DataFrame(model_conf_matrix, index = categories,
+                     columns = categories)
+
+plt.figure(figsize = (10,7))
+sns.heatmap(df_cm, annot = True, cmap = &#39;Blues&#39;, square = True)
+plt.xticks(rotation = 45)
+plt.title(&#39;MLP decoding results - confusion matrix&#39; , fontsize = 15, fontweight = &#39;bold&#39;)
+plt.xlabel(&quot;true labels&quot;, fontsize = 14, fontweight = &#39;bold&#39;)
+plt.ylabel(&quot;predicted labels&quot;, fontsize = 14, fontweight = &#39;bold&#39;)
+plt.show()
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/mlp_decoding_18_0.png" src="_images/mlp_decoding_18_0.png" />
+<img alt="_images/mlp_decoding_37_0.png" src="_images/mlp_decoding_37_0.png" />
 </div>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Unfortunately we don’t have a simple way to visualize the important features like we did with the linear SVM! You can check this fantastic <a class="reference external" href="https://distill.pub/2017/feature-visualization/">distill article</a> to learn more about feature visualization in artificial neural networks.</p>
+<p>Based on this outcome: how would you interpret the <code class="docutils literal notranslate"><span class="pre">confusion</span> <span class="pre">matrix</span></code>? Are some <code class="docutils literal notranslate"><span class="pre">categories</span></code> better <code class="docutils literal notranslate"><span class="pre">&quot;decodable&quot;</span></code> than others? Could even make such a statement?</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>With that, we already reached the end of this <code class="docutils literal notranslate"><span class="pre">tutorial</span></code> within which we talked about how to <code class="docutils literal notranslate"><span class="pre">create</span></code>, <code class="docutils literal notranslate"><span class="pre">train</span></code> and <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> a <code class="docutils literal notranslate"><span class="pre">MLP</span></code> as one possible <code class="docutils literal notranslate"><span class="pre">decoding</span> <span class="pre">model</span></code> that can be applied to <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">data</span></code>. As mentioned before, the <code class="docutils literal notranslate"><span class="pre">MLP</span></code> utilized here is rather simple and <code class="docutils literal notranslate"><span class="pre">models</span></code> you see (and maybe use) out in the “real world” will most likely be way more complex. However, their application to <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">data</span></code> concerning <code class="docutils literal notranslate"><span class="pre">input</span></code>, <code class="docutils literal notranslate"><span class="pre">hidden</span></code> and <code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">layers</span></code> follows the same outline.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Unfortunately, visualizing the features/transformations of an <code class="docutils literal notranslate"><span class="pre">ANN</span></code> is quite often not straightforward as it depends on the given <code class="docutils literal notranslate"><span class="pre">ANN</span></code> architecture. However, you can check this fantastic
+<a class="reference external" href="https://distill.pub/2017/feature-visualization/">distill article</a> to learn more about <code class="docutils literal notranslate"><span class="pre">feature</span> <span class="pre">visualization</span></code> in <code class="docutils literal notranslate"><span class="pre">artificial</span> <span class="pre">neural</span> <span class="pre">networks</span></code>.</p>
 </div>
 </div>
 <div class="section" id="exercises">

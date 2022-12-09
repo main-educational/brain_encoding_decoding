@@ -169,14 +169,11 @@
 
     <div class="dropdown-buttons">
         <!-- ipynb file if we had a myst markdown file -->
-        <a class="dropdown-buttons"
-            href="_sources/gcn_decoding.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
+        
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/gcn_decoding.md"><button type="button"
+        <a class="dropdown-buttons" href="_sources/gcn_decoding.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
+                data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
                 onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
@@ -197,7 +194,7 @@
             href="https://github.com/main-educational/brain_encoding_decoding/issues/new?title=Issue%20on%20page%20%2Fgcn_decoding.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/main-educational/brain_encoding_decoding/edit/main/content/gcn_decoding.md"><button
+        <a class="edit-button" href="https://github.com/main-educational/brain_encoding_decoding/edit/main/content/gcn_decoding.ipynb"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -217,7 +214,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/main-educational/brain_encoding_decoding/main?urlpath=tree/content/gcn_decoding.md"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/main-educational/brain_encoding_decoding/main?urlpath=tree/content/gcn_decoding.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -248,23 +245,6 @@
   <a class="reference internal nav-link" href="#getting-the-data">
    Getting the data
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#extract-time-series-from-a-full-brain-atlas">
-   Extract time series from a full brain atlas
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#dictionary-learning-for-estimating-brain-networks">
-     Dictionary learning for estimating brain networks
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#region-extraction-from-network-components">
-     Region extraction from network components
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#create-brain-graph-for-gcn">
@@ -327,23 +307,6 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#extract-time-series-from-a-full-brain-atlas">
-   Extract time series from a full brain atlas
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#dictionary-learning-for-estimating-brain-networks">
-     Dictionary learning for estimating brain networks
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#region-extraction-from-network-components">
-     Region extraction from network components
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#create-brain-graph-for-gcn">
    Create brain graph for GCN
   </a>
@@ -386,31 +349,38 @@
 <h1>Brain decoding with GCN<a class="headerlink" href="#brain-decoding-with-gcn" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="graph-convolution-network-gcn">
 <h2>Graph Convolution Network (GCN)<a class="headerlink" href="#graph-convolution-network-gcn" title="Permalink to this headline">¶</a></h2>
-<div class="figure align-default" id="gcn-pipeline-fig">
-<a class="reference internal image-reference" href="_images/GCN_pipeline.png"><img alt="_images/GCN_pipeline.png" src="_images/GCN_pipeline.png" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">Schematic of the analysis proposed in Zhang and colleagues (2021).
-The full time series are used to constrcut the brain graph to a network representation of brain organization by associating nodes to brain regions and defining edges via functional connections.</span><a class="headerlink" href="#gcn-pipeline-fig" title="Permalink to this image">¶</a></p>
-</div>
+<p><br/><br/>
+<a class="reference internal" href="_images/GCN_pipeline_main2022.png"><img alt="_images/GCN_pipeline_main2022.png" src="_images/GCN_pipeline_main2022.png" style="width: 680px; height: 335px;" /></a></p>
+<p>Schematic view of brain decoding using graph convolution network. Model is adapted from Zhang and colleagues (2021).
+<strong>a)</strong> Bold time series are used to construct the brain graph by associating nodes to predefined brain regions (parcels) and indicating edges between each pair of brain regions based on the strength of their connections. Then, both brain graph and time-series matrix are imported into the graph convolutional network
+<strong>b)</strong> The decoding model consists of three graph convolutional layers with 32 ChebNet graph filters at each layer,  followed by a global average pooling layer, two fully connected layers (MLP, consisting of 256-128 units) and softmax function. This pipeline generates task-specific representations of recorded brain activities and predicts the corresponding cognitive states.</p>
 </div>
 <div class="section" id="getting-the-data">
 <h2>Getting the data<a class="headerlink" href="#getting-the-data" title="Permalink to this headline">¶</a></h2>
-<p>We are going to download the dataset from Haxby and colleagues (2001) <span id="id1">[<a class="reference internal" href="haxby_data.html#id6">HGF+01</a>]</span>. You can check section <a class="reference internal" href="haxby_data.html#haxby-dataset"><span class="std std-ref">An overview of the Haxby dataset</span></a> for more details on that dataset. Here we are going to quickly download it, and prepare it for machine learning applications with a set of predictive variable, the brain time series, and a dependent variable, the annotation on cognition.</p>
+<p>We are going to download the dataset from Haxby and colleagues (2001) <span id="id1">[<a class="reference internal" href="haxby_data.html#id6">HGF+01</a>]</span>. You can check <a class="reference internal" href="haxby_data.html#haxby-dataset"><span class="std std-ref">An overview of the Haxby dataset</span></a> section for more details on that dataset. Here we are going to quickly download it, and prepare it for machine learning applications with a set of predictive variable, the brain time series, and a dependent variable, the annotation on cognition.</p>
 <div class="cell tag_hide_input tag_hide_output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
 import warnings
 warnings.filterwarnings(action=&#39;once&#39;)
+from nilearn.input_data import NiftiMasker
 
 from nilearn import datasets
+
 # We are fetching the data for subject 4
 data_dir = os.path.join(&#39;..&#39;, &#39;data&#39;)
 sub_no = 4
 haxby_dataset = datasets.fetch_haxby(subjects=[sub_no], fetch_stimuli=True, data_dir=data_dir)
 func_file = haxby_dataset.func[0]
 
+# Standardizing
+mask_vt_file = haxby_dataset.mask_vt[0]
+masker = NiftiMasker(mask_img=mask_vt_file, standardize=True)
+
 # cognitive annotations
 import pandas as pd
 behavioral = pd.read_csv(haxby_dataset.session_target[0], delimiter=&#39; &#39;)
+X = masker.fit_transform(func_file)
 y = behavioral[&#39;labels&#39;]
 </pre></div>
 </div>
@@ -435,10 +405,10 @@ Downloading data from https://www.nitrc.org/frs/download.php/7868/mask.nii.gz ..
 Downloading data from http://data.pymvpa.org/datasets/haxby2001/subj4-2010.01.14.tar.gz ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 97468416 of 329954386 bytes (29.5%,    2.4s remaining)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 122200064 of 329954386 bytes (37.0%,    1.7s remaining)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 226828288 of 329954386 bytes (68.7%,    0.9s remaining)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 263405568 of 329954386 bytes (79.8%,    0.5s remaining)
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (3 seconds, 0 min)
@@ -459,177 +429,38 @@ Extracting data from ../data/haxby2001/5cd78c74b711572c7f41a5bddb69abca/stimuli-
 </div>
 </div>
 </div>
-<p>Let’s check the size of dependent variable <code class="docutils literal notranslate"><span class="pre">y</span></code>:</p>
+<p>Let’s check the shape and the cognitive annotations of this data sample, which is necessary to check before start training any decoding model!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>categories = y.unique()
 print(categories)
-print(y.shape)
+print(&#39;y:&#39;, y.shape)
+print(&#39;X:&#39;, X.shape)
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;rest&#39; &#39;face&#39; &#39;chair&#39; &#39;scissors&#39; &#39;shoe&#39; &#39;scrambledpix&#39; &#39;house&#39; &#39;cat&#39;
  &#39;bottle&#39;]
-(1452,)
+y: (1452,)
+X: (1452, 675)
 </pre></div>
 </div>
 </div>
 </div>
-<p>The generation of brain time series is a little bit more complicated for the GCN framework.
-The GCN framework from Zhang and colleagues (2021) <span id="id2">[<a class="reference internal" href="#id7">ZTTB21</a>]</span> require a full brain graph.</p>
-</div>
-<div class="section" id="extract-time-series-from-a-full-brain-atlas">
-<h2>Extract time series from a full brain atlas<a class="headerlink" href="#extract-time-series-from-a-full-brain-atlas" title="Permalink to this headline">¶</a></h2>
-<p>There are two common approaches to define the brain regions: using predefined atlases from published studies or generate from own data.
-As the Haxby dataset is shipped in the native resolution, we cannot easily use an published atlas.<br />
-Here we will demostrate how to use nilearn to generate the brain regions, extract signals, and calculate the brain graph.</p>
-<div class="section" id="dictionary-learning-for-estimating-brain-networks">
-<h3>Dictionary learning for estimating brain networks<a class="headerlink" href="#dictionary-learning-for-estimating-brain-networks" title="Permalink to this headline">¶</a></h3>
-<p>Nilearn provides several methods for data-driven brain network estimation and dictionary learning is one of the robust method.
-Dictionary learning (or sparse coding) is a representation learning method aiming at finding a sparse representation of the input data as a linear combination of basic elements called atoms.
-The identification of these atoms composing the dictionary relies on a sparsity principle:
-maximally sparse representations of the dataset are sought for. Atoms are not required to be orthogonal.</p>
-<p>We use the nilearn function <code class="docutils literal notranslate"><span class="pre">DictLearning</span></code> to estimate networks on the haxby EPI data.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import warnings
-warnings.filterwarnings(action=&#39;once&#39;)
-from nilearn.decomposition import DictLearning
-
-# Initialize DictLearning object
-dict_learn = DictLearning(n_components=20, smoothing_fwhm=6.,
-                          low_pass=0.1, high_pass=0.01, t_r=2,
-                          detrend=True, standardize=True,
-                          memory=&quot;nilearn_cache&quot;, memory_level=2,
-                          random_state=0)
-# Fit to the data
-dict_learn.fit(func_file)
-# Resting state networks/maps in attribute `components_img_`
-components_img = dict_learn.components_img_
-
-# Visualization of functional networks
-# Show networks using plotting utilities
-from nilearn.image import mean_img
-from nilearn import plotting
-mean_haxby = mean_img(func_file)
-plotting.plot_prob_atlas(components_img, 
-                         bg_img=mean_haxby, 
-                         view_type=&#39;filled_contours&#39;,
-                         title=&#39;Dictionary Learning maps&#39;)
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/sklearn/linear_model/_ridge.py:157: DeprecationWarning: The &#39;sym_pos&#39; keyword is deprecated and should be replaced by using &#39;assume_a = &quot;pos&quot;&#39;. &#39;sym_pos&#39; will be removed in SciPy 1.11.0.
-  return linalg.solve(A, Xy, sym_pos=True, overwrite_a=True).T
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/nilearn/image/image.py:1106: FutureWarning: The parameter &quot;sessions&quot; will be removed in 0.9.0 release of Nilearn. Please use the parameter &quot;runs&quot; instead.
-  data = signal.clean(
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/scipy/ndimage/_measurements.py:305: DeprecationWarning: In future, it will be an error for &#39;np.bool_&#39; scalars to be interpreted as an index
-  return _nd_image.find_objects(input, max_label)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/nilearn/plotting/displays.py:101: UserWarning: linewidths is ignored by contourf
-  im = getattr(ax, type)(data_2d.copy(),
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/nilearn/plotting/displays.py:101: UserWarning: No contour levels were found within the data range.
-  im = getattr(ax, type)(data_2d.copy(),
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f581e35cf70&gt;
-</pre></div>
-</div>
-<img alt="_images/gcn_decoding_5_6.png" src="_images/gcn_decoding_5_6.png" />
-</div>
-</div>
-</div>
-<div class="section" id="region-extraction-from-network-components">
-<h3>Region extraction from network components<a class="headerlink" href="#region-extraction-from-network-components" title="Permalink to this headline">¶</a></h3>
-<p>This approach has been previously used in the neuroscience literature to study the intrinsic organization of brain anatomy and functions.
-The next step is to separate the learned networks into discrete regions.
-Nilearn provides an useful class <code class="docutils literal notranslate"><span class="pre">RegionExtractor</span></code> to extract isolated regions from statistical maps.
-As the networks generated from dictionary learning are denoted by probablilty rather than discrete values,
-we will use <code class="docutils literal notranslate"><span class="pre">RegionExtractor</span></code> to generate a parcellation scheme.</p>
-<div class="tip admonition">
-<p class="admonition-title">Extract connected regions from a brain atlas image defined by labels (integers). </p>
-<p>See function <code class="docutils literal notranslate"><span class="pre">nilearn.regions.connected_label_regions</span></code> and the tutorial on
-<a class="reference external" href="https://nilearn.github.io/auto_examples/06_manipulating_images/plot_extract_regions_labels_image.html#sphx-glr-auto-examples-06-manipulating-images-plot-extract-regions-labels-image-py">Yeo 7 networks</a></p>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import warnings
-warnings.filterwarnings(action=&#39;once&#39;)
-from nilearn.regions import RegionExtractor
-
-extractor = RegionExtractor(components_img, threshold=0.5,
-                            thresholding_strategy=&#39;ratio_n_voxels&#39;,
-                            extractor=&#39;local_regions&#39;,
-                            low_pass=0.1, high_pass=0.01, t_r=2,
-                            detrend=True, standardize=True)
-# Just call fit() to process for regions extraction
-extractor.fit()
-# Extracted regions are stored in regions_img_
-regions_extracted_img = extractor.regions_img_
-# Each region index is stored in index_
-regions_index = extractor.index_
-# Total number of regions extracted
-n_regions_extracted = regions_extracted_img.shape[-1]
-
-# Visualization of region extraction results
-title = (&#39;%d regions are extracted from %d components.&#39;
-         &#39;\nEach separate color of region indicates extracted region&#39;
-         % (n_regions_extracted, 20))
-plotting.plot_prob_atlas(regions_extracted_img, 
-                         bg_img=mean_haxby, 
-                         view_type=&#39;filled_contours&#39;,
-                         title=title)
-
-X = extractor.transform(func_file)
-print(X.shape)
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;decorator-gen-3&gt;:2: DeprecationWarning: scipy.sparse.linalg.cg called without specifying `atol`. The default value will be changed in a future release. For compatibility, specify a value for `atol` explicitly, e.g., ``cg(..., atol=0)``, or to retain the old behavior ``cg(..., atol=&#39;legacy&#39;)``
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/nilearn/image/image.py:1106: FutureWarning: The parameter &quot;sessions&quot; will be removed in 0.9.0 release of Nilearn. Please use the parameter &quot;runs&quot; instead.
-  data = signal.clean(
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/scipy/ndimage/_measurements.py:305: DeprecationWarning: In future, it will be an error for &#39;np.bool_&#39; scalars to be interpreted as an index
-  return _nd_image.find_objects(input, max_label)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/numpy/ma/core.py:2826: UserWarning: Warning: converting a masked element to nan.
-  _data = np.array(data, dtype=dtype, copy=copy,
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/nilearn/plotting/displays.py:101: UserWarning: linewidths is ignored by contourf
-  im = getattr(ax, type)(data_2d.copy(),
-/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/nilearn/plotting/displays.py:101: UserWarning: No contour levels were found within the data range.
-  im = getattr(ax, type)(data_2d.copy(),
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1452, 67)
-</pre></div>
-</div>
-<img alt="_images/gcn_decoding_7_6.png" src="_images/gcn_decoding_7_6.png" />
-</div>
-</div>
-<p>So we have 1452 time points in the imaging data, and for each time point we have recordings of fMRI activity across 68 brain regions.</p>
-</div>
+<p>So we have 1452 time points in the imaging data, and for each time point we have recordings of fMRI activity across 675 brain regions.</p>
 </div>
 <div class="section" id="create-brain-graph-for-gcn">
 <h2>Create brain graph for GCN<a class="headerlink" href="#create-brain-graph-for-gcn" title="Permalink to this headline">¶</a></h2>
 <p>A key component of GCN is brain graph.
 Brain graph provides a network representation of brain organization by associating nodes to brain regions and defining edges via anatomical or functional connections.
 After generating time series, we will firstly use the nilearn function to geneate a correlation based functional connectome.</p>
+<div class="tip admonition">
+<p class="admonition-title">Basic of graph laplacian and graph convolutional networks.</p>
+<p>To get familiar with the basics of <code class="docutils literal notranslate"><span class="pre">graph</span> <span class="pre">laplacian</span></code> and <code class="docutils literal notranslate"><span class="pre">graph</span> <span class="pre">convolutional</span> <span class="pre">networks</span></code> and how to apply these tools to neuroimging data check the tutorial from MAIN 2019 conference presented by Dr. Zhang.</p>
+<p><a class="reference external" href="https://drive.google.com/file/d/1Gu28WcHXlwjXQSSmqZZwIcESHff_j-J4/view?usp=sharing">GCN_tutorial_slides</a><br />
+[graph-Laplacian_GCN notebook] (<a class="reference external" href="https://github.com/zhangyu2ustc/gcn_tutorial_test/blob/master/notebooks/Tutorials_GCN_practice2_graph-Laplacian_GCN.ipynb">https://github.com/zhangyu2ustc/gcn_tutorial_test/blob/master/notebooks/Tutorials_GCN_practice2_graph-Laplacian_GCN.ipynb</a>)</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import warnings
@@ -641,16 +472,23 @@ import nilearn.connectome
 corr_measure = nilearn.connectome.ConnectivityMeasure(kind=&quot;correlation&quot;)
 conn = corr_measure.fit_transform([X])[0]
 
+n_regions_extracted = X.shape[-1]
 title = &#39;Correlation between %d regions&#39; % n_regions_extracted
 
+print(&#39;Correlation matrix shape:&#39;,conn.shape)
+
 # First plot the matrix
+from nilearn import plotting
 display = plotting.plot_matrix(conn, vmax=1, vmin=-1,
                                colorbar=True, title=title)
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/gcn_decoding_9_0.png" src="_images/gcn_decoding_9_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Correlation matrix shape: (675, 675)
+</pre></div>
+</div>
+<img alt="_images/gcn_decoding_5_1.png" src="_images/gcn_decoding_5_1.png" />
 </div>
 </div>
 <p>The next step is to construct the brain graph for GCN.</p>
@@ -739,10 +577,6 @@ label_df.to_csv(out_csv, index=False)
 </div>
 <p>Now we use a customised <code class="docutils literal notranslate"><span class="pre">pytorch</span></code> dataset generator class <code class="docutils literal notranslate"><span class="pre">TimeWindowsDataset</span></code> to split the data into training,
 validation, and testing sets for model selection.</p>
-<div class="tip admonition">
-<p class="admonition-title">Model selection</p>
-<p>For further details of model selection, please check out the material from <a class="reference external" href="https://github.com/neurodatascience/main-2021-ml-parts-1-2">this tutorial</a>.</p>
-</div>
 <p>The dataset generator defaults isolates 20% of the data as the validation set, and 10% as testing set.
 For more details of customising a dataset, please see <code class="docutils literal notranslate"><span class="pre">src/gcn_windows_dataset.py</span></code> and the
 official <a class="reference external" href="https://pytorch.org/tutorials/beginner/basics/data_tutorial.html#creating-a-custom-dataset-for-your-files"><code class="docutils literal notranslate"><span class="pre">pytorch</span></code> documentation</a>.</p>
@@ -784,9 +618,9 @@ print(&quot;test dataset: {}&quot;.format(test_dataset))
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>train dataset: 1016*(torch.Size([67, 1]), ())
-valid dataset: 290*(torch.Size([67, 1]), ())
-test dataset: 146*(torch.Size([67, 1]), ())
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>train dataset: 1016*(torch.Size([675, 1]), ())
+valid dataset: 290*(torch.Size([675, 1]), ())
+test dataset: 146*(torch.Size([675, 1]), ())
 </pre></div>
 </div>
 </div>
@@ -812,7 +646,7 @@ print(f&quot;Labels batch shape: {train_labels.size()}; mean {torch.mean(torch.T
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Feature batch shape: torch.Size([16, 67, 1]); mean 8.89621531996454e-09
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Feature batch shape: torch.Size([16, 675, 1]); mean -3.885339605602667e-09
 Labels batch shape: torch.Size([16]); mean 3.8125
 </pre></div>
 </div>
@@ -847,7 +681,7 @@ gcn
   (conv1): ChebConv(1, 32, K=2, normalization=sym)
   (conv2): ChebConv(32, 32, K=2, normalization=sym)
   (conv3): ChebConv(32, 16, K=2, normalization=sym)
-  (fc1): Linear(in_features=1072, out_features=256, bias=True)
+  (fc1): Linear(in_features=10800, out_features=256, bias=True)
   (fc2): Linear(in_features=256, out_features=128, bias=True)
   (fc3): Linear(in_features=128, out_features=9, bias=True)
   (dropout): Dropout(p=0.2, inplace=False)
@@ -909,14 +743,14 @@ def valid_test_loop(dataloader, model, loss_fn):
 </div>
 </div>
 <p>This whole procedure described above is called an <strong>epoch</strong>.
-We will repeat the process for 60 epochs.
+We will repeat the process for 25 epochs.
 Here the choice of loss function is <code class="docutils literal notranslate"><span class="pre">CrossEntropyLoss</span></code> and the optimizer to update the model is <code class="docutils literal notranslate"><span class="pre">Adam</span></code>.</p>
 <div class="cell tag_hide_output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>loss_fn = torch.nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(gcn.parameters(), lr=1e-4, weight_decay=5e-4)
 
-epochs = 60
+epochs = 25
 for t in range(epochs):
     print(f&quot;Epoch {t+1}/{epochs}\n-------------------------------&quot;)
     train_loop(train_generator, gcn, loss_fn, optimizer)
@@ -926,20 +760,20 @@ for t in range(epochs):
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/60
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/25
 -------------------------------
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">RuntimeError</span><span class="g g-Whitespace">                              </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
 <span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
 <span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch </span><span class="si">{</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">epochs</span><span class="si">}</span><span class="se">\n</span><span class="s2">-------------------------------&quot;</span><span class="p">)</span>
 <span class="ne">----&gt; </span><span class="mi">7</span>     <span class="n">train_loop</span><span class="p">(</span><span class="n">train_generator</span><span class="p">,</span> <span class="n">gcn</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">loss</span><span class="p">,</span> <span class="n">correct</span> <span class="o">=</span> <span class="n">valid_test_loop</span><span class="p">(</span><span class="n">valid_generator</span><span class="p">,</span> <span class="n">gcn</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Valid metrics:</span><span class="se">\n\t</span><span class="s2"> avg_loss: </span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="s2">&gt;8f</span><span class="si">}</span><span class="s2">;</span><span class="se">\t</span><span class="s2"> avg_accuracy: </span><span class="si">{</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">correct</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;0.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
 
-<span class="nn">Cell In[12], line 6,</span> in <span class="ni">train_loop</span><span class="nt">(dataloader, model, loss_fn, optimizer)</span>
+<span class="nn">Cell In[10], line 6,</span> in <span class="ni">train_loop</span><span class="nt">(dataloader, model, loss_fn, optimizer)</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>    
 <span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="k">for</span> <span class="n">batch</span><span class="p">,</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataloader</span><span class="p">):</span>
 <span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="c1"># Compute prediction and loss</span>
@@ -999,12 +833,12 @@ for t in range(epochs):
 <span class="ne">---&gt; </span><span class="mi">12</span> <span class="n">src</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
 <span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="k">return</span> <span class="n">src</span>
 
-<span class="ne">RuntimeError</span>: The expanded size of the tensor (67) must match the existing size (16) at non-singleton dimension 1.  Target sizes: [16, 67, 16].  Tensor sizes: [1, 16, 1]
+<span class="ne">RuntimeError</span>: The expanded size of the tensor (675) must match the existing size (16) at non-singleton dimension 1.  Target sizes: [16, 675, 16].  Tensor sizes: [1, 16, 1]
 </pre></div>
 </div>
 </div>
 </div>
-<p>After training the model for 60 epochs, we use the untouched test data to evaluate the model and conclude the results of training.</p>
+<p>After training the model for 25 epochs, we use the untouched test data to evaluate the model and conclude the results of training.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># results
@@ -1013,26 +847,30 @@ print(f&quot;Test metrics:\n\t avg_loss: {loss:&gt;f};\t avg_accuracy: {(100*cor
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test metrics:
+	 avg_loss: 0.050002;	 avg_accuracy: 78.8%
+</pre></div>
 </div>
-<p>The performance is not greate. How would you improve it?</p>
+</div>
+</div>
+<p>The performance is great but how could we still improve it?</p>
 </div>
 <div class="section" id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Try out different time window size, batch size for the dataset,</p></li>
+<li><p>Try out different time window sizes, batch size for the dataset,</p></li>
 <li><p>Try different brain graph construction methods.</p></li>
 <li><p>Try use different loss function or optimizer function.</p></li>
 <li><p><strong>Hard</strong>: Treat the parameters you changed, such as time window size and batch size, as parameters of part of the model training.</p></li>
+<li><p><strong>Hard</strong>: Try extracting regions from network components using dictionary learning for estimating brain networks.</p></li>
 </ul>
 </div>
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
-<p id="id3"><dl class="citation">
-<dt class="label" id="id5"><span class="brackets"><a class="fn-backref" href="#id1">HGF+01</a></span></dt>
+<p id="id2"><dl class="citation">
+<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id1">HGF+01</a></span></dt>
 <dd><p>J V Haxby, M I Gobbini, M L Furey, A Ishai, J L Schouten, and P Pietrini. Distributed and overlapping representations of faces and objects in ventral temporal cortex. <em>Science</em>, 293(5539):2425–2430, September 2001.</p>
-</dd>
-<dt class="label" id="id7"><span class="brackets"><a class="fn-backref" href="#id2">ZTTB21</a></span></dt>
-<dd><p>Yu Zhang, Loïc Tetrel, Bertrand Thirion, and Pierre Bellec. Functional annotation of human cognitive states using deep graph convolution. <em>NeuroImage</em>, 231:117847, May 2021.</p>
 </dd>
 </dl>
 </p>
