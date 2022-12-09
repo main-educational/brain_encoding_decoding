@@ -398,20 +398,33 @@ Downloading data from https://www.nitrc.org/frs/download.php/7868/mask.nii.gz ..
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
- ...done. (0 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from http://data.pymvpa.org/datasets/haxby2001/MD5SUMS ...
-Downloading data from http://data.pymvpa.org/datasets/haxby2001/subj4-2010.01.14.tar.gz ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 122200064 of 329954386 bytes (37.0%,    1.7s remaining)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 263405568 of 329954386 bytes (79.8%,    0.5s remaining)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from http://data.pymvpa.org/datasets/haxby2001/subj4-2010.01.14.tar.gz ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (3 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 38879232 of 329954386 bytes (11.8%,    7.6s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 97230848 of 329954386 bytes (29.5%,    4.8s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 156057600 of 329954386 bytes (47.3%,    3.4s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 214745088 of 329954386 bytes (65.1%,    2.2s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 273227776 of 329954386 bytes (82.8%,    1.0s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (6 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Extracting data from ../data/haxby2001/622d4f5d4b8f14a567901606c924e90d/subj4-2010.01.14.tar.gz...
@@ -423,7 +436,7 @@ Downloading data from http://data.pymvpa.org/datasets/haxby2001/subj4-2010.01.14
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from http://data.pymvpa.org/datasets/haxby2001/stimuli-2010.01.14.tar.gz ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 Extracting data from ../data/haxby2001/5cd78c74b711572c7f41a5bddb69abca/stimuli-2010.01.14.tar.gz..... done.
 </pre></div>
 </div>
@@ -804,20 +817,20 @@ for t in range(epochs):
 <span class="g g-Whitespace">     </span><span class="mi">57</span> <span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">batch</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">size</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">size</span>
 <span class="ne">---&gt; </span><span class="mi">58</span> <span class="k">return</span> <span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span> <span class="n">reduce</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/torch_scatter/scatter.py:156,</span> in <span class="ni">scatter</span><span class="nt">(src, index, dim, out, dim_size, reduce)</span>
-<span class="g g-Whitespace">    </span><span class="mi">154</span>     <span class="k">return</span> <span class="n">scatter_mul</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">dim_size</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">155</span> <span class="k">elif</span> <span class="n">reduce</span> <span class="o">==</span> <span class="s1">&#39;mean&#39;</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">156</span>     <span class="k">return</span> <span class="n">scatter_mean</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">dim_size</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">157</span> <span class="k">elif</span> <span class="n">reduce</span> <span class="o">==</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">158</span>     <span class="k">return</span> <span class="n">scatter_min</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">dim_size</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/torch_scatter/scatter.py:157,</span> in <span class="ni">scatter</span><span class="nt">(src, index, dim, out, dim_size, reduce)</span>
+<span class="g g-Whitespace">    </span><span class="mi">155</span>     <span class="k">return</span> <span class="n">scatter_mul</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">dim_size</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">156</span> <span class="k">elif</span> <span class="n">reduce</span> <span class="o">==</span> <span class="s1">&#39;mean&#39;</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">157</span>     <span class="k">return</span> <span class="n">scatter_mean</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">dim_size</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">158</span> <span class="k">elif</span> <span class="n">reduce</span> <span class="o">==</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">159</span>     <span class="k">return</span> <span class="n">scatter_min</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">dim_size</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/torch_scatter/scatter.py:41,</span> in <span class="ni">scatter_mean</span><span class="nt">(src, index, dim, out, dim_size)</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/torch_scatter/scatter.py:42,</span> in <span class="ni">scatter_mean</span><span class="nt">(src, index, dim, out, dim_size)</span>
 <span class="g g-Whitespace">     </span><span class="mi">38</span> <span class="k">def</span> <span class="nf">scatter_mean</span><span class="p">(</span><span class="n">src</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
 <span class="g g-Whitespace">     </span><span class="mi">39</span>                  <span class="n">out</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="g g-Whitespace">     </span><span class="mi">40</span>                  <span class="n">dim_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">41</span>     <span class="n">out</span> <span class="o">=</span> <span class="n">scatter_sum</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">dim_size</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">42</span>     <span class="n">dim_size</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">44</span>     <span class="n">index_dim</span> <span class="o">=</span> <span class="n">dim</span>
+<span class="ne">---&gt; </span><span class="mi">42</span>     <span class="n">out</span> <span class="o">=</span> <span class="n">scatter_sum</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">dim_size</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span>     <span class="n">dim_size</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">45</span>     <span class="n">index_dim</span> <span class="o">=</span> <span class="n">dim</span>
 
 <span class="nn">File /opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/torch_scatter/scatter.py:11,</span> in <span class="ni">scatter_sum</span><span class="nt">(src, index, dim, out, dim_size)</span>
 <span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="k">def</span> <span class="nf">scatter_sum</span><span class="p">(</span><span class="n">src</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
@@ -830,7 +843,7 @@ for t in range(epochs):
 <span class="nn">File /opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/torch_scatter/utils.py:12,</span> in <span class="ni">broadcast</span><span class="nt">(src, other, dim)</span>
 <span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">dim</span><span class="p">(),</span> <span class="n">other</span><span class="o">.</span><span class="n">dim</span><span class="p">()):</span>
 <span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="n">src</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">12</span> <span class="n">src</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+<span class="ne">---&gt; </span><span class="mi">12</span> <span class="n">src</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">expand_as</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="k">return</span> <span class="n">src</span>
 
 <span class="ne">RuntimeError</span>: The expanded size of the tensor (675) must match the existing size (16) at non-singleton dimension 1.  Target sizes: [16, 675, 16].  Tensor sizes: [1, 16, 1]
@@ -844,12 +857,6 @@ for t in range(epochs):
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># results
 loss, correct = valid_test_loop(test_generator, gcn, loss_fn)
 print(f&quot;Test metrics:\n\t avg_loss: {loss:&gt;f};\t avg_accuracy: {(100*correct):&gt;0.1f}%&quot;)
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test metrics:
-	 avg_loss: 0.050002;	 avg_accuracy: 78.8%
 </pre></div>
 </div>
 </div>

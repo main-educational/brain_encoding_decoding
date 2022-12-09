@@ -131,7 +131,7 @@ plotting.view_img(
 ```
 
 ## And now the easy way
-We can use the high-level `Decoder` object from Nilearn. See [Decoder object](https://nilearn.github.io/dev/modules/generated/nilearn.decoding.Decoder.html) for details. It reduces model specification and fit to two lines of code: 
+We can use the high-level `Decoder` object from Nilearn. See [Decoder object](https://nilearn.github.io/dev/modules/generated/nilearn.decoding.Decoder.html) for details. It reduces model specification and fit to two lines of code:
 
 ```{code-cell} ipython3
 from nilearn.decoding import Decoder
@@ -158,13 +158,12 @@ plotting.view_img(
     decoder.coef_img_['face'], bg_img=haxby_dataset.anat[0],
     title="SVM weights for face", dim=-1, resampling_interpolation='nearest'
 )
-
 ```
 
 Note: the Decoder implements a one-vs-all strategy. Note that this is a better choice in general than one-vs-one.
 
 ## Getting more meaningful weight maps with Frem
-It is often tempting to interpret regions with high weights as 'important' for the prediction task. However, there is no statistical guarantee on these maps. Moreover, they iften do not even exhibit very clear structure. To improve that, a regularization can be brought by using the so-called Fast Regularized Ensembles of models (FREM), that rely on simple averaging and clustering tools to provide smoother maps, yet with minimal computational overhead.  
+It is often tempting to interpret regions with high weights as 'important' for the prediction task. However, there is no statistical guarantee on these maps. Moreover, they iften do not even exhibit very clear structure. To improve that, a regularization can be brought by using the so-called Fast Regularized Ensembles of models (FREM), that rely on simple averaging and clustering tools to provide smoother maps, yet with minimal computational overhead.
 
 ```{code-cell} ipython3
 from nilearn.decoding import FREMClassifier
