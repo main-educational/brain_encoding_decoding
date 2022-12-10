@@ -48,6 +48,8 @@
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script src="_static/design-tabs.js"></script>
+    <script>window.MathJax = {"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -245,6 +247,11 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#theoretical-motivation">
+   Theoretical motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#getting-the-data">
    Getting the data
   </a>
@@ -292,6 +299,11 @@
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#multilayer-perceptron">
    Multilayer Perceptron
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#theoretical-motivation">
+   Theoretical motivation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -353,6 +365,29 @@
 <p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">Frank Rosenblatt with a Mark I Perceptron computer in 1960.</span><a class="headerlink" href="#marki-perceptron-fig" title="Permalink to this image">¶</a></p>
 </div>
 <p>In this tutorial, we are going to train the simplest <code class="docutils literal notranslate"><span class="pre">MLP</span></code> architecture featuring one <code class="docutils literal notranslate"><span class="pre">input</span> <span class="pre">layer</span></code>, one <code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">layer</span></code> and just one <code class="docutils literal notranslate"><span class="pre">hidden</span> <span class="pre">layer</span></code>.</p>
+</div>
+<div class="section" id="theoretical-motivation">
+<h2>Theoretical motivation<a class="headerlink" href="#theoretical-motivation" title="Permalink to this headline">¶</a></h2>
+<p>The previous tutorial on <a class="reference external" href="https://main-educational.github.io/brain_encoding_decoding/svm_decoding.html">brain decoding with SVM</a>
+shows how to use a linear combination of brain features to train a predictor.</p>
+<p>Let’s take a moment to consider this: a 1-layer perceptron with a sigmoid activation function
+models the relation between <code class="docutils literal notranslate"><span class="pre">X</span></code> (the input data) and <code class="docutils literal notranslate"><span class="pre">y</span></code> (the predicted data)
+the same way a logistic regression would:
+<span class="math notranslate nohighlight">\(\hat{y} = \sigma(X \beta + \beta_0)\)</span></p>
+<div class="figure align-default" id="logistic-regression-fig">
+<a class="reference internal image-reference" href="_images/logistic_regression.png"><img alt="_images/logistic_regression.png" src="_images/logistic_regression.png" style="width: 200px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">A fitted logistic regression function classifying two different classes. Courtesy of <a class="reference external" href="https://jeromedockes.github.io/">Jérôme Dockès</a>.</span><a class="headerlink" href="#logistic-regression-fig" title="Permalink to this image">¶</a></p>
+</div>
+<p>If one optimizes the parameters of this MLP to minimize a cross-entropy loss,
+they’re actually optimizing for the same objective function as in a classical logistic regression problem:
+<span class="math notranslate nohighlight">\(\underset{\beta, \beta_0}{\min} \sum_k y_k \log(\hat{y_k}) + (1 - y_k) \log(1 - \hat{y_k})\)</span></p>
+<p>As a rule of thumb, one can consider that a 1-layer perceptron
+(and therefore any last layer of a multi-layer perceptron)
+works similarly to an SVC.</p>
+<p>A big motivation for using multiple-layer perceptrons is that they can introduce non-linearities
+in our data. When training such models, the hope is that the hidden layers of the model
+will find meaningful non-linear combinations of the input features which help us solve
+our decoding problem.</p>
 </div>
 <div class="section" id="getting-the-data">
 <h2>Getting the data<a class="headerlink" href="#getting-the-data" title="Permalink to this headline">¶</a></h2>
@@ -422,7 +457,7 @@ enc = OneHotEncoder(handle_unknown=&#39;ignore&#39;)
 y_onehot = enc.fit_transform(np.array(y).reshape(-1, 1))
 # turn the sparse matrix into a pandas dataframe
 y = pd.DataFrame(y_onehot.toarray())
-display(y)
+display(y[:10])
 </pre></div>
 </div>
 </div>
@@ -518,19 +553,7 @@ display(y)
       <td>0.0</td>
     </tr>
     <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>1447</th>
+      <th>5</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -542,56 +565,55 @@ display(y)
       <td>0.0</td>
     </tr>
     <tr>
-      <th>1448</th>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>6</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
     </tr>
     <tr>
-      <th>1449</th>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>7</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
     </tr>
     <tr>
-      <th>1450</th>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>8</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
     </tr>
     <tr>
-      <th>1451</th>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>9</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
     </tr>
   </tbody>
 </table>
-<p>1452 rows × 9 columns</p>
 </div></div></div>
 </div>
 </div>
@@ -615,8 +637,8 @@ from keras.layers import Dense
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-12-09 22:05:43.670741: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#39;libcudart.so.11.0&#39;; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory
-2022-12-09 22:05:43.670776: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-12-10 18:55:05.994707: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#39;libcudart.so.11.0&#39;; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory
+2022-12-10 18:55:05.994734: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/keras_preprocessing/image/utils.py:23: DeprecationWarning: NEAREST is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.NEAREST or Dither.NONE instead.
@@ -648,10 +670,10 @@ model_mlp = Sequential()
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-12-09 22:05:45.318830: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#39;libcuda.so.1&#39;; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory
-2022-12-09 22:05:45.318860: W tensorflow/stream_executor/cuda/cuda_driver.cc:269] failed call to cuInit: UNKNOWN ERROR (303)
-2022-12-09 22:05:45.318904: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (fv-az455-149): /proc/driver/nvidia/version does not exist
-2022-12-09 22:05:45.319544: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-12-10 18:55:07.313462: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#39;libcuda.so.1&#39;; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory
+2022-12-10 18:55:07.313486: W tensorflow/stream_executor/cuda/cuda_driver.cc:269] failed call to cuInit: UNKNOWN ERROR (303)
+2022-12-10 18:55:07.313508: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (fv-az359-603): /proc/driver/nvidia/version does not exist
+2022-12-10 18:55:07.313922: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F FMA
 To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
 </pre></div>
 </div>
@@ -757,209 +779,173 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 40s - loss: 2.1581 - accuracy: 0.4000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 34s - loss: 2.2317 - accuracy: 0.0000e+00
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-28/93 [========&gt;.....................] - ETA: 0s - loss: 1.9030 - accuracy: 0.4250 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-58/93 [=================&gt;............] - ETA: 0s - loss: 1.7740 - accuracy: 0.4138
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+43/93 [============&gt;.................] - ETA: 0s - loss: 1.8812 - accuracy: 0.3651     
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-88/93 [===========================&gt;..] - ETA: 0s - loss: 1.6413 - accuracy: 0.4443
+89/93 [===========================&gt;..] - ETA: 0s - loss: 1.6774 - accuracy: 0.4213
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 1s 4ms/step - loss: 1.6378 - accuracy: 0.4472 - val_loss: 1.4977 - val_accuracy: 0.4721
+93/93 [==============================] - 1s 3ms/step - loss: 1.6612 - accuracy: 0.4278 - val_loss: 1.4732 - val_accuracy: 0.4592
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 2/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 1.4506 - accuracy: 0.5000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 1.1605 - accuracy: 0.6000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-31/93 [=========&gt;....................] - ETA: 0s - loss: 1.2469 - accuracy: 0.6161
+46/93 [=============&gt;................] - ETA: 0s - loss: 1.2162 - accuracy: 0.5739
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-59/93 [==================&gt;...........] - ETA: 0s - loss: 1.1853 - accuracy: 0.6220
+92/93 [============================&gt;.] - ETA: 0s - loss: 1.1021 - accuracy: 0.6185
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-89/93 [===========================&gt;..] - ETA: 0s - loss: 1.1288 - accuracy: 0.6258
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 0s 3ms/step - loss: 1.1187 - accuracy: 0.6282 - val_loss: 1.1991 - val_accuracy: 0.5665
+93/93 [==============================] - 0s 1ms/step - loss: 1.0995 - accuracy: 0.6196 - val_loss: 1.1412 - val_accuracy: 0.6009
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 3/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.9879 - accuracy: 0.6000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.6876 - accuracy: 0.8000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-32/93 [=========&gt;....................] - ETA: 0s - loss: 0.8632 - accuracy: 0.7188
+50/93 [===============&gt;..............] - ETA: 0s - loss: 0.7936 - accuracy: 0.7480
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-63/93 [===================&gt;..........] - ETA: 0s - loss: 0.7773 - accuracy: 0.7540
+93/93 [==============================] - ETA: 0s - loss: 0.7539 - accuracy: 0.7608
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 0s 2ms/step - loss: 0.7781 - accuracy: 0.7478 - val_loss: 1.0590 - val_accuracy: 0.6266
+93/93 [==============================] - 0s 2ms/step - loss: 0.7539 - accuracy: 0.7608 - val_loss: 1.0137 - val_accuracy: 0.6395
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 4/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.5185 - accuracy: 0.9000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.3305 - accuracy: 0.9000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-27/93 [=======&gt;......................] - ETA: 0s - loss: 0.5949 - accuracy: 0.8259
+48/93 [==============&gt;...............] - ETA: 0s - loss: 0.5290 - accuracy: 0.8354
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-51/93 [===============&gt;..............] - ETA: 0s - loss: 0.5528 - accuracy: 0.8373
+93/93 [==============================] - ETA: 0s - loss: 0.5242 - accuracy: 0.8362
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-81/93 [=========================&gt;....] - ETA: 0s - loss: 0.5207 - accuracy: 0.8370
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 0s 2ms/step - loss: 0.5201 - accuracy: 0.8362 - val_loss: 0.8861 - val_accuracy: 0.7167
+93/93 [==============================] - 0s 1ms/step - loss: 0.5242 - accuracy: 0.8362 - val_loss: 0.9145 - val_accuracy: 0.7082
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 5/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.7804 - accuracy: 0.8000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.3873 - accuracy: 0.9000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-31/93 [=========&gt;....................] - ETA: 0s - loss: 0.3372 - accuracy: 0.9065
+46/93 [=============&gt;................] - ETA: 0s - loss: 0.3239 - accuracy: 0.9261
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-58/93 [=================&gt;............] - ETA: 0s - loss: 0.3324 - accuracy: 0.9017
+92/93 [============================&gt;.] - ETA: 0s - loss: 0.3246 - accuracy: 0.9152
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-87/93 [===========================&gt;..] - ETA: 0s - loss: 0.3330 - accuracy: 0.9057
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 0s 2ms/step - loss: 0.3277 - accuracy: 0.9062 - val_loss: 0.8901 - val_accuracy: 0.7253
+93/93 [==============================] - 0s 1ms/step - loss: 0.3232 - accuracy: 0.9159 - val_loss: 0.8900 - val_accuracy: 0.6867
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 6/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.2671 - accuracy: 0.9000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.1384 - accuracy: 1.0000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-31/93 [=========&gt;....................] - ETA: 0s - loss: 0.2110 - accuracy: 0.9452
+46/93 [=============&gt;................] - ETA: 0s - loss: 0.2379 - accuracy: 0.9326
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-62/93 [===================&gt;..........] - ETA: 0s - loss: 0.2223 - accuracy: 0.9435
+90/93 [============================&gt;.] - ETA: 0s - loss: 0.2275 - accuracy: 0.9333
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 0s 3ms/step - loss: 0.2181 - accuracy: 0.9494 - val_loss: 0.8996 - val_accuracy: 0.7210
+93/93 [==============================] - 0s 2ms/step - loss: 0.2247 - accuracy: 0.9353 - val_loss: 0.8467 - val_accuracy: 0.7511
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 7/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.1617 - accuracy: 1.0000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.0914 - accuracy: 1.0000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-32/93 [=========&gt;....................] - ETA: 0s - loss: 0.1417 - accuracy: 0.9750
+49/93 [==============&gt;...............] - ETA: 0s - loss: 0.1526 - accuracy: 0.9531
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-63/93 [===================&gt;..........] - ETA: 0s - loss: 0.1328 - accuracy: 0.9810
+90/93 [============================&gt;.] - ETA: 0s - loss: 0.1379 - accuracy: 0.9667
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - ETA: 0s - loss: 0.1274 - accuracy: 0.9795
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 0s 3ms/step - loss: 0.1274 - accuracy: 0.9795 - val_loss: 0.8230 - val_accuracy: 0.7725
+93/93 [==============================] - 0s 2ms/step - loss: 0.1385 - accuracy: 0.9677 - val_loss: 0.7506 - val_accuracy: 0.7554
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 8/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.0726 - accuracy: 1.0000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.0513 - accuracy: 1.0000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-31/93 [=========&gt;....................] - ETA: 0s - loss: 0.0897 - accuracy: 0.9903
+49/93 [==============&gt;...............] - ETA: 0s - loss: 0.0621 - accuracy: 0.9939
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-63/93 [===================&gt;..........] - ETA: 0s - loss: 0.0805 - accuracy: 0.9937
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 0s 3ms/step - loss: 0.0850 - accuracy: 0.9881 - val_loss: 0.8430 - val_accuracy: 0.7725
+93/93 [==============================] - 0s 1ms/step - loss: 0.0723 - accuracy: 0.9935 - val_loss: 0.7802 - val_accuracy: 0.7639
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 9/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.0150 - accuracy: 1.0000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.0273 - accuracy: 1.0000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-31/93 [=========&gt;....................] - ETA: 0s - loss: 0.0846 - accuracy: 0.9839
+49/93 [==============&gt;...............] - ETA: 0s - loss: 0.0394 - accuracy: 1.0000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-60/93 [==================&gt;...........] - ETA: 0s - loss: 0.0697 - accuracy: 0.9917
+93/93 [==============================] - ETA: 0s - loss: 0.0421 - accuracy: 0.9968
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-87/93 [===========================&gt;..] - ETA: 0s - loss: 0.0648 - accuracy: 0.9908
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 0s 3ms/step - loss: 0.0646 - accuracy: 0.9914 - val_loss: 0.8970 - val_accuracy: 0.7554
+93/93 [==============================] - 0s 1ms/step - loss: 0.0421 - accuracy: 0.9968 - val_loss: 0.8278 - val_accuracy: 0.7639
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 10/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.0521 - accuracy: 1.0000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.0250 - accuracy: 1.0000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-29/93 [========&gt;.....................] - ETA: 0s - loss: 0.0346 - accuracy: 0.9966
+48/93 [==============&gt;...............] - ETA: 0s - loss: 0.0322 - accuracy: 0.9979
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-60/93 [==================&gt;...........] - ETA: 0s - loss: 0.0300 - accuracy: 0.9983
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-85/93 [==========================&gt;...] - ETA: 0s - loss: 0.0294 - accuracy: 0.9988
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 0s 3ms/step - loss: 0.0307 - accuracy: 0.9978 - val_loss: 0.8519 - val_accuracy: 0.7811
+93/93 [==============================] - 0s 1ms/step - loss: 0.0271 - accuracy: 0.9989 - val_loss: 0.7860 - val_accuracy: 0.7811
 </pre></div>
 </div>
 </div>
@@ -1034,18 +1020,18 @@ print(classification_report(y_train.values.argmax(axis = 1), y_train_pred.argmax
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
-           0       0.87      0.93      0.90        85
-           1       0.96      0.98      0.97        88
-           2       1.00      0.88      0.93        90
-           3       0.96      0.98      0.97        81
-           4       1.00      0.96      0.98        91
-           5       0.97      0.99      0.98       471
-           6       0.88      0.95      0.91        81
-           7       0.98      0.96      0.97        90
-           8       0.94      0.87      0.90        84
+           0       0.90      0.94      0.92        85
+           1       0.97      0.99      0.98        88
+           2       0.95      0.89      0.92        90
+           3       0.99      0.96      0.97        81
+           4       0.99      0.98      0.98        91
+           5       0.97      0.98      0.98       471
+           6       0.88      0.94      0.91        81
+           7       0.97      0.96      0.96        90
+           8       0.90      0.88      0.89        84
 
     accuracy                           0.96      1161
-   macro avg       0.95      0.94      0.94      1161
+   macro avg       0.95      0.95      0.95      1161
 weighted avg       0.96      0.96      0.96      1161
 </pre></div>
 </div>
@@ -1067,19 +1053,19 @@ print(classification_report(y_test.values.argmax(axis = 1), y_test_pred.argmax(a
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
-           0       0.70      0.70      0.70        23
-           1       0.89      0.80      0.84        20
-           2       0.75      0.67      0.71        18
-           3       0.87      0.96      0.91        27
+           0       0.73      0.83      0.78        23
+           1       0.76      0.65      0.70        20
+           2       0.74      0.78      0.76        18
+           3       0.93      0.93      0.93        27
            4       0.88      0.88      0.88        17
-           5       0.89      0.91      0.90       117
-           6       0.61      0.70      0.66        27
-           7       0.94      0.94      0.94        18
-           8       0.72      0.54      0.62        24
+           5       0.91      0.91      0.91       117
+           6       0.80      0.74      0.77        27
+           7       1.00      0.94      0.97        18
+           8       0.69      0.75      0.72        24
 
-    accuracy                           0.83       291
-   macro avg       0.81      0.79      0.80       291
-weighted avg       0.83      0.83      0.83       291
+    accuracy                           0.85       291
+   macro avg       0.83      0.82      0.82       291
+weighted avg       0.85      0.85      0.85       291
 </pre></div>
 </div>
 </div>
@@ -1186,6 +1172,8 @@ plt.show()
     </div>
     <footer class="footer">
   <p>
+    
+      By Peer Herholz, Pierre Bellec, Shima Rastegarnia, Hao-Ting Wang, Loic Tetrel, Bertrand Thirion, Alexis Thual, Isil Bilgin, Alexandre Pasquiou, Pravish Sainath<br/>
     
         &copy; Copyright 2022.<br/>
   </p>

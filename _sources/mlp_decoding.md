@@ -8,7 +8,7 @@ jupytext:
     format_version: 0.13
     jupytext_version: 1.11.5
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 ---
@@ -46,6 +46,37 @@ Frank Rosenblatt with a Mark I Perceptron computer in 1960.
 
 
 In this tutorial, we are going to train the simplest `MLP` architecture featuring one `input layer`, one `output layer` and just one `hidden layer`.
+
+## Theoretical motivation
+
+The previous tutorial on [brain decoding with SVM](https://main-educational.github.io/brain_encoding_decoding/svm_decoding.html)
+shows how to use a linear combination of brain features to train a predictor.
+
+Let's take a moment to consider this: a 1-layer perceptron with a sigmoid activation function
+models the relation between `X` (the input data) and `y` (the predicted data)
+the same way a logistic regression would:
+$\hat{y} = \sigma(X \beta + \beta_0)$
+
+```{figure} mlp_decoding/logistic_regression.png
+---
+width: 200px
+name: logistic-regression-fig
+---
+A fitted logistic regression function classifying two different classes. Courtesy of [Jérôme Dockès](https://jeromedockes.github.io/).
+```
+
+If one optimizes the parameters of this MLP to minimize a cross-entropy loss,
+they're actually optimizing for the same objective function as in a classical logistic regression problem:
+$\underset{\beta, \beta_0}{\min} \sum_k y_k \log(\hat{y_k}) + (1 - y_k) \log(1 - \hat{y_k})$
+
+As a rule of thumb, one can consider that a 1-layer perceptron
+(and therefore any last layer of a multi-layer perceptron)
+works similarly to an SVC.
+
+A big motivation for using multiple-layer perceptrons is that they can introduce non-linearities
+in our data. When training such models, the hope is that the hidden layers of the model
+will find meaningful non-linear combinations of the input features which help us solve
+our decoding problem.
 
 ## Getting the data
 
@@ -96,7 +127,7 @@ enc = OneHotEncoder(handle_unknown='ignore')
 y_onehot = enc.fit_transform(np.array(y).reshape(-1, 1))
 # turn the sparse matrix into a pandas dataframe
 y = pd.DataFrame(y_onehot.toarray())
-display(y)
+display(y[:10])
 ```
 
 ## Training a model
@@ -287,6 +318,7 @@ Unfortunately, visualizing the features/transformations of an `ANN` is quite oft
 ```
 
 ## Exercises
+
  * What is the most difficult category to decode? Why?
  * The model seemed to overfit. Try adding a `Dropout` layer to regularize the model. You can read about dropout in keras in this [blog post](https://towardsdatascience.com/machine-learning-part-20-dropout-keras-layers-explained-8c9f6dc4c9ab).
  * Try to add layers or hidden units, and observe the impact on overfitting and training time.
