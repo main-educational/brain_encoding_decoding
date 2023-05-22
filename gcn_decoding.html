@@ -30,7 +30,7 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
     
   <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
@@ -378,43 +378,47 @@ Image source:<a class="reference external" href="https://atcold.github.io/pytorc
 <p>We are going to download the dataset from Haxby and colleagues (2001) <span id="id1">[<a class="reference internal" href="haxby_data.html#id6">HGF+01</a>]</span>. You can check <a class="reference internal" href="haxby_data.html#haxby-dataset"><span class="std std-ref">An overview of the Haxby dataset</span></a> section for more details on that dataset. Here we are going to quickly download it, and prepare it for machine learning applications with a set of predictive variable, the brain time series, and a dependent variable, the annotation on cognition.</p>
 <div class="cell tag_hide_input tag_hide_output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
-import warnings
-warnings.filterwarnings(action=&#39;once&#39;)
-from nilearn.input_data import NiftiMasker
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;once&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">nilearn.input_data</span> <span class="kn">import</span> <span class="n">NiftiMasker</span>
 
-from nilearn import datasets
+<span class="kn">from</span> <span class="nn">nilearn</span> <span class="kn">import</span> <span class="n">datasets</span>
 
-# We are fetching the data for subject 4
-data_dir = os.path.join(&#39;..&#39;, &#39;data&#39;)
-sub_no = 4
-haxby_dataset = datasets.fetch_haxby(subjects=[sub_no], fetch_stimuli=True, data_dir=data_dir)
-func_file = haxby_dataset.func[0]
+<span class="c1"># We are fetching the data for subject 4</span>
+<span class="n">data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">)</span>
+<span class="n">sub_no</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">haxby_dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">fetch_haxby</span><span class="p">(</span><span class="n">subjects</span><span class="o">=</span><span class="p">[</span><span class="n">sub_no</span><span class="p">],</span> <span class="n">fetch_stimuli</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">)</span>
+<span class="n">func_file</span> <span class="o">=</span> <span class="n">haxby_dataset</span><span class="o">.</span><span class="n">func</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-# Standardizing
-mask_vt_file = haxby_dataset.mask_vt[0]
-masker = NiftiMasker(mask_img=mask_vt_file, standardize=True)
+<span class="c1"># Standardizing</span>
+<span class="n">mask_vt_file</span> <span class="o">=</span> <span class="n">haxby_dataset</span><span class="o">.</span><span class="n">mask_vt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">masker</span> <span class="o">=</span> <span class="n">NiftiMasker</span><span class="p">(</span><span class="n">mask_img</span><span class="o">=</span><span class="n">mask_vt_file</span><span class="p">,</span> <span class="n">standardize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-# cognitive annotations
-import pandas as pd
-behavioral = pd.read_csv(haxby_dataset.session_target[0], delimiter=&#39; &#39;)
-X = masker.fit_transform(func_file)
-y = behavioral[&#39;labels&#39;]
+<span class="c1"># cognitive annotations</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">behavioral</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">haxby_dataset</span><span class="o">.</span><span class="n">session_target</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">masker</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">func_file</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">behavioral</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/nilearn/datasets/func.py:20: DeprecationWarning: Please use `MatReadError` from the `scipy.io.matlab` namespace, the `scipy.io.matlab.miobase` namespace is deprecated.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/nilearn/datasets/func.py:20: DeprecationWarning: Please use `MatReadError` from the `scipy.io.matlab` namespace, the `scipy.io.matlab.miobase` namespace is deprecated.
   from scipy.io.matlab.miobase import MatReadError
-/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/nilearn/datasets/__init__.py:93: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/nilearn/datasets/__init__.py:93: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
   warn(&quot;Fetchers from the nilearn.datasets module will be &quot;
- ...done. (0 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dataset created in ../data/haxby2001
 
 Downloading data from https://www.nitrc.org/frs/download.php/7868/mask.nii.gz ...
-Downloading data from http://data.pymvpa.org/datasets/haxby2001/MD5SUMS ...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from http://data.pymvpa.org/datasets/haxby2001/MD5SUMS ...
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
@@ -423,13 +427,25 @@ Downloading data from http://data.pymvpa.org/datasets/haxby2001/MD5SUMS ...
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from http://data.pymvpa.org/datasets/haxby2001/subj4-2010.01.14.tar.gz ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 120250368 of 329954386 bytes (36.4%,    1.7s remaining)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 38535168 of 329954386 bytes (11.7%,    7.6s remaining)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 257130496 of 329954386 bytes (77.9%,    0.6s remaining)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 92831744 of 329954386 bytes (28.1%,    5.2s remaining)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (3 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 136232960 of 329954386 bytes (41.3%,    4.3s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 179044352 of 329954386 bytes (54.3%,    3.4s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 226803712 of 329954386 bytes (68.7%,    2.3s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 283230208 of 329954386 bytes (85.8%,    1.0s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (7 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Extracting data from ../data/haxby2001/622d4f5d4b8f14a567901606c924e90d/subj4-2010.01.14.tar.gz...
@@ -441,7 +457,7 @@ Downloading data from http://data.pymvpa.org/datasets/haxby2001/MD5SUMS ...
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from http://data.pymvpa.org/datasets/haxby2001/stimuli-2010.01.14.tar.gz ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 Extracting data from ../data/haxby2001/5cd78c74b711572c7f41a5bddb69abca/stimuli-2010.01.14.tar.gz..... done.
 </pre></div>
 </div>
@@ -450,10 +466,10 @@ Extracting data from ../data/haxby2001/5cd78c74b711572c7f41a5bddb69abca/stimuli-
 <p>Let’s check the shape of X and y and the cognitive annotations of this data sample.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>categories = y.unique()
-print(categories)
-print(&#39;y:&#39;, y.shape)
-print(&#39;X:&#39;, X.shape)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">categories</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">categories</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;y:&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;X:&#39;</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -482,24 +498,24 @@ After generating time series, we will firstly use the nilearn function to geneat
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import warnings
-warnings.filterwarnings(action=&#39;once&#39;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;once&#39;</span><span class="p">)</span>
 
-import nilearn.connectome
+<span class="kn">import</span> <span class="nn">nilearn.connectome</span>
 
-# Estimating connectomes and save for pytorch to load
-corr_measure = nilearn.connectome.ConnectivityMeasure(kind=&quot;correlation&quot;)
-conn = corr_measure.fit_transform([X])[0]
+<span class="c1"># Estimating connectomes and save for pytorch to load</span>
+<span class="n">corr_measure</span> <span class="o">=</span> <span class="n">nilearn</span><span class="o">.</span><span class="n">connectome</span><span class="o">.</span><span class="n">ConnectivityMeasure</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;correlation&quot;</span><span class="p">)</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">corr_measure</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="n">X</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
 
-n_regions_extracted = X.shape[-1]
-title = &#39;Correlation between %d regions&#39; % n_regions_extracted
+<span class="n">n_regions_extracted</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Correlation between </span><span class="si">%d</span><span class="s1"> regions&#39;</span> <span class="o">%</span> <span class="n">n_regions_extracted</span>
 
-print(&#39;Correlation matrix shape:&#39;,conn.shape)
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Correlation matrix shape:&#39;</span><span class="p">,</span><span class="n">conn</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
-# First plot the matrix
-from nilearn import plotting
-display = plotting.plot_matrix(conn, vmax=1, vmin=-1,
-                               colorbar=True, title=title)
+<span class="c1"># First plot the matrix</span>
+<span class="kn">from</span> <span class="nn">nilearn</span> <span class="kn">import</span> <span class="n">plotting</span>
+<span class="n">display</span> <span class="o">=</span> <span class="n">plotting</span><span class="o">.</span><span class="n">plot_matrix</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+                               <span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -518,12 +534,12 @@ For the purpose of demostration, we constrain the graph to from clusters with <s
 <p>For more details you please check out <strong><em>src/graph_construction.py</em></strong> script.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import sys
-sys.path.append(&#39;../src&#39;)
-from graph_construction import make_group_graph
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../src&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">graph_construction</span> <span class="kn">import</span> <span class="n">make_group_graph</span>
 
-# make a graph for the subject
-graph = make_group_graph([conn], self_loops=False, k=8, symmetric=True)
+<span class="c1"># make a graph for the subject</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">make_group_graph</span><span class="p">([</span><span class="n">conn</span><span class="p">],</span> <span class="n">self_loops</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -535,16 +551,16 @@ graph = make_group_graph([conn], self_loops=False, k=8, symmetric=True)
 Firstly we will concatenated the volumes of the same category together.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># generate data
-import pandas as pd
-import numpy as np
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate data</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-# cancatenate the same type of trials
-concat_bold = {}
-for label in categories:
-    cur_label_index = y.index[y == label].tolist()
-    curr_bold_seg = X[cur_label_index]    
-    concat_bold[label] = curr_bold_seg
+<span class="c1"># cancatenate the same type of trials</span>
+<span class="n">concat_bold</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">categories</span><span class="p">:</span>
+    <span class="n">cur_label_index</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">y</span> <span class="o">==</span> <span class="n">label</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">curr_bold_seg</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">cur_label_index</span><span class="p">]</span>    
+    <span class="n">concat_bold</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">curr_bold_seg</span>
 </pre></div>
 </div>
 </div>
@@ -557,39 +573,39 @@ the file names and the associated label are stored in the same directory,
 under a file named <code class="docutils literal notranslate"><span class="pre">label.csv</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># split the data by time window size and save to file
-window_length = 1
-dic_labels = {name: i for i, name in enumerate(categories)}
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># split the data by time window size and save to file</span>
+<span class="n">window_length</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">dic_labels</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">categories</span><span class="p">)}</span>
 
-# set output paths
-split_path = os.path.join(data_dir, &#39;haxby_split_win/&#39;)
-if not os.path.exists(split_path):
-    os.makedirs(split_path)
-out_file = os.path.join(split_path, &#39;{}_{:04d}.npy&#39;)
-out_csv = os.path.join(split_path, &#39;labels.csv&#39;)
+<span class="c1"># set output paths</span>
+<span class="n">split_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">&#39;haxby_split_win/&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">split_path</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">split_path</span><span class="p">)</span>
+<span class="n">out_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">split_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_</span><span class="si">{:04d}</span><span class="s1">.npy&#39;</span><span class="p">)</span>
+<span class="n">out_csv</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">split_path</span><span class="p">,</span> <span class="s1">&#39;labels.csv&#39;</span><span class="p">)</span>
 
-label_df = pd.DataFrame(columns=[&#39;label&#39;, &#39;filename&#39;])
-for label, ts_data in concat_bold.items():
-    ts_duration = len(ts_data)
-    ts_filename = f&quot;{label}_seg&quot;
-    valid_label = dic_labels[label]
+<span class="n">label_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="s1">&#39;filename&#39;</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">ts_data</span> <span class="ow">in</span> <span class="n">concat_bold</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">ts_duration</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ts_data</span><span class="p">)</span>
+    <span class="n">ts_filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">_seg&quot;</span>
+    <span class="n">valid_label</span> <span class="o">=</span> <span class="n">dic_labels</span><span class="p">[</span><span class="n">label</span><span class="p">]</span>
 
-    # Split the timeseries
-    rem = ts_duration % window_length
-    n_splits = int(np.floor(ts_duration / window_length))
+    <span class="c1"># Split the timeseries</span>
+    <span class="n">rem</span> <span class="o">=</span> <span class="n">ts_duration</span> <span class="o">%</span> <span class="n">window_length</span>
+    <span class="n">n_splits</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">ts_duration</span> <span class="o">/</span> <span class="n">window_length</span><span class="p">))</span>
 
-    ts_data = ts_data[:(ts_duration - rem), :]   
+    <span class="n">ts_data</span> <span class="o">=</span> <span class="n">ts_data</span><span class="p">[:(</span><span class="n">ts_duration</span> <span class="o">-</span> <span class="n">rem</span><span class="p">),</span> <span class="p">:]</span>   
 
-    for j, split_ts in enumerate(np.split(ts_data, n_splits)):
-        ts_output_file_name = out_file.format(ts_filename, j)
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">split_ts</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">ts_data</span><span class="p">,</span> <span class="n">n_splits</span><span class="p">)):</span>
+        <span class="n">ts_output_file_name</span> <span class="o">=</span> <span class="n">out_file</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ts_filename</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
 
-        split_ts = np.swapaxes(split_ts, 0, 1)
-        np.save(ts_output_file_name, split_ts)
+        <span class="n">split_ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">split_ts</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">ts_output_file_name</span><span class="p">,</span> <span class="n">split_ts</span><span class="p">)</span>
 
-        curr_label = {&#39;label&#39;: valid_label, &#39;filename&#39;: os.path.basename(ts_output_file_name)}
-        label_df = label_df.append(curr_label, ignore_index=True)
+        <span class="n">curr_label</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">valid_label</span><span class="p">,</span> <span class="s1">&#39;filename&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">ts_output_file_name</span><span class="p">)}</span>
+        <span class="n">label_df</span> <span class="o">=</span> <span class="n">label_df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">curr_label</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         
-label_df.to_csv(out_csv, index=False)  
+<span class="n">label_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">out_csv</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  
 </pre></div>
 </div>
 </div>
@@ -601,38 +617,38 @@ For more details of customising a dataset, please see <code class="docutils lite
 official <a class="reference external" href="https://pytorch.org/tutorials/beginner/basics/data_tutorial.html#creating-a-custom-dataset-for-your-files"><code class="docutils literal notranslate"><span class="pre">pytorch</span></code> documentation</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># split dataset
-from gcn_windows_dataset import TimeWindowsDataset
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># split dataset</span>
+<span class="kn">from</span> <span class="nn">gcn_windows_dataset</span> <span class="kn">import</span> <span class="n">TimeWindowsDataset</span>
 
-random_seed = 0
+<span class="n">random_seed</span> <span class="o">=</span> <span class="mi">0</span>
 
-train_dataset = TimeWindowsDataset(
-    data_dir=split_path, 
-    partition=&quot;train&quot;, 
-    random_seed=random_seed, 
-    pin_memory=True, 
-    normalize=True,
-    shuffle=True)
+<span class="n">train_dataset</span> <span class="o">=</span> <span class="n">TimeWindowsDataset</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="o">=</span><span class="n">split_path</span><span class="p">,</span> 
+    <span class="n">partition</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">,</span> 
+    <span class="n">random_seed</span><span class="o">=</span><span class="n">random_seed</span><span class="p">,</span> 
+    <span class="n">pin_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+    <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-valid_dataset = TimeWindowsDataset(
-    data_dir=split_path, 
-    partition=&quot;valid&quot;, 
-    random_seed=random_seed, 
-    pin_memory=True, 
-    normalize=True,
-    shuffle=True)
+<span class="n">valid_dataset</span> <span class="o">=</span> <span class="n">TimeWindowsDataset</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="o">=</span><span class="n">split_path</span><span class="p">,</span> 
+    <span class="n">partition</span><span class="o">=</span><span class="s2">&quot;valid&quot;</span><span class="p">,</span> 
+    <span class="n">random_seed</span><span class="o">=</span><span class="n">random_seed</span><span class="p">,</span> 
+    <span class="n">pin_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+    <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-test_dataset = TimeWindowsDataset(
-    data_dir=split_path, 
-    partition=&quot;test&quot;, 
-    random_seed=random_seed, 
-    pin_memory=True, 
-    normalize=True,
-    shuffle=True)
+<span class="n">test_dataset</span> <span class="o">=</span> <span class="n">TimeWindowsDataset</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="o">=</span><span class="n">split_path</span><span class="p">,</span> 
+    <span class="n">partition</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> 
+    <span class="n">random_seed</span><span class="o">=</span><span class="n">random_seed</span><span class="p">,</span> 
+    <span class="n">pin_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+    <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-print(&quot;train dataset: {}&quot;.format(train_dataset))
-print(&quot;valid dataset: {}&quot;.format(valid_dataset))
-print(&quot;test dataset: {}&quot;.format(test_dataset))
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;train dataset: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;valid dataset: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">valid_dataset</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;test dataset: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_dataset</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -649,18 +665,18 @@ The <strong>batch size</strong> defines the number of samples that will be propa
 We are separating the dataset into 10 time windows per batch.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import torch
-from torch.utils.data import DataLoader
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
 
-batch_size = 10
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">10</span>
 
-torch.manual_seed(random_seed)
-train_generator = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
-valid_generator = DataLoader(valid_dataset, batch_size=batch_size, shuffle=True)
-test_generator = DataLoader(test_dataset, batch_size=batch_size, shuffle=True)
-train_features, train_labels = next(iter(train_generator))
-print(f&quot;Feature batch shape: {train_features.size()}; mean {torch.mean(train_features)}&quot;)
-print(f&quot;Labels batch shape: {train_labels.size()}; mean {torch.mean(torch.Tensor.float(train_labels))}&quot;)
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="n">random_seed</span><span class="p">)</span>
+<span class="n">train_generator</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">valid_generator</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">valid_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">test_generator</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">test_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">train_features</span><span class="p">,</span> <span class="n">train_labels</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">train_generator</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Feature batch shape: </span><span class="si">{</span><span class="n">train_features</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="si">}</span><span class="s2">; mean </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">train_features</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Labels batch shape: </span><span class="si">{</span><span class="n">train_labels</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="si">}</span><span class="s2">; mean </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="o">.</span><span class="n">float</span><span class="p">(</span><span class="n">train_labels</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -683,15 +699,15 @@ Labels batch shape: torch.Size([10]); mean 2.5999999046325684
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from gcn_model import GCN
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gcn_model</span> <span class="kn">import</span> <span class="n">GCN</span>
 
-gcn = GCN(graph.edge_index, 
-          graph.edge_attr, 
-          n_roi=X.shape[1],
-          batch_size=batch_size,
-          n_timepoints=window_length, 
-          n_classes=len(categories))
-gcn
+<span class="n">gcn</span> <span class="o">=</span> <span class="n">GCN</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">edge_index</span><span class="p">,</span> 
+          <span class="n">graph</span><span class="o">.</span><span class="n">edge_attr</span><span class="p">,</span> 
+          <span class="n">n_roi</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+          <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+          <span class="n">n_timepoints</span><span class="o">=</span><span class="n">window_length</span><span class="p">,</span> 
+          <span class="n">n_classes</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">categories</span><span class="p">))</span>
+<span class="n">gcn</span>
 </pre></div>
 </div>
 </div>
@@ -722,41 +738,41 @@ One can use their own choice of optimizer for backpropagation and estimator for 
 These metrics will serve as the reference for model performance of this round of training.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def train_loop(dataloader, model, loss_fn, optimizer):
-    size = len(dataloader.dataset)    
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_loop</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">):</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>    
 
-    for batch, (X, y) in enumerate(dataloader):
-        # Compute prediction and loss
-        pred = model(X)
-        loss = loss_fn(pred, y)
+    <span class="k">for</span> <span class="n">batch</span><span class="p">,</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataloader</span><span class="p">):</span>
+        <span class="c1"># Compute prediction and loss</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
-        # Backpropagation
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
+        <span class="c1"># Backpropagation</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
         
-        loss, current = loss.item(), batch * dataloader.batch_size
+        <span class="n">loss</span><span class="p">,</span> <span class="n">current</span> <span class="o">=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="n">batch</span> <span class="o">*</span> <span class="n">dataloader</span><span class="o">.</span><span class="n">batch_size</span>
 
-        correct = (pred.argmax(1) == y).type(torch.float).sum().item()
-        correct /= X.shape[0]
-        if (batch % 10 == 0) or (current == size):
-            print(f&quot;#{batch:&gt;5};\ttrain_loss: {loss:&gt;0.3f};\ttrain_accuracy:{(100*correct):&gt;5.1f}%\t\t[{current:&gt;5d}/{size:&gt;5d}]&quot;)
+        <span class="n">correct</span> <span class="o">=</span> <span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="n">correct</span> <span class="o">/=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">batch</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">current</span> <span class="o">==</span> <span class="n">size</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;#</span><span class="si">{</span><span class="n">batch</span><span class="si">:</span><span class="s2">&gt;5</span><span class="si">}</span><span class="s2">;</span><span class="se">\t</span><span class="s2">train_loss: </span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="s2">&gt;0.3f</span><span class="si">}</span><span class="s2">;</span><span class="se">\t</span><span class="s2">train_accuracy:</span><span class="si">{</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">correct</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;5.1f</span><span class="si">}</span><span class="s2">%</span><span class="se">\t\t</span><span class="s2">[</span><span class="si">{</span><span class="n">current</span><span class="si">:</span><span class="s2">&gt;5d</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">size</span><span class="si">:</span><span class="s2">&gt;5d</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
 
         
-def valid_test_loop(dataloader, model, loss_fn):
-    size = len(dataloader.dataset)
-    loss, correct = 0, 0
+<span class="k">def</span> <span class="nf">valid_test_loop</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">):</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
+    <span class="n">loss</span><span class="p">,</span> <span class="n">correct</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
 
-    with torch.no_grad():
-        for X, y in dataloader:
-            pred = model.forward(X)
-            loss += loss_fn(pred, y).item()
-            correct += (pred.argmax(1) == y).type(torch.float).sum().item()
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">dataloader</span><span class="p">:</span>
+            <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+            <span class="n">loss</span> <span class="o">+=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+            <span class="n">correct</span> <span class="o">+=</span> <span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
 
-    loss /= size
-    correct /= size
+    <span class="n">loss</span> <span class="o">/=</span> <span class="n">size</span>
+    <span class="n">correct</span> <span class="o">/=</span> <span class="n">size</span>
 
-    return loss, correct
+    <span class="k">return</span> <span class="n">loss</span><span class="p">,</span> <span class="n">correct</span>
 </pre></div>
 </div>
 </div>
@@ -766,15 +782,15 @@ We will repeat the process for 25 epochs.
 Here the choice of loss function is <code class="docutils literal notranslate"><span class="pre">CrossEntropyLoss</span></code> and the optimizer to update the model is <code class="docutils literal notranslate"><span class="pre">Adam</span></code>.</p>
 <div class="cell tag_hide_output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>loss_fn = torch.nn.CrossEntropyLoss()
-optimizer = torch.optim.Adam(gcn.parameters(), lr=1e-4, weight_decay=5e-4)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loss_fn</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">gcn</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">weight_decay</span><span class="o">=</span><span class="mf">5e-4</span><span class="p">)</span>
 
-epochs = 25
-for t in range(epochs):
-    print(f&quot;Epoch {t+1}/{epochs}\n-------------------------------&quot;)
-    train_loop(train_generator, gcn, loss_fn, optimizer)
-    loss, correct = valid_test_loop(valid_generator, gcn, loss_fn)
-    print(f&quot;Valid metrics:\n\t avg_loss: {loss:&gt;8f};\t avg_accuracy: {(100*correct):&gt;0.1f}%&quot;)
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch </span><span class="si">{</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">epochs</span><span class="si">}</span><span class="se">\n</span><span class="s2">-------------------------------&quot;</span><span class="p">)</span>
+    <span class="n">train_loop</span><span class="p">(</span><span class="n">train_generator</span><span class="p">,</span> <span class="n">gcn</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">)</span>
+    <span class="n">loss</span><span class="p">,</span> <span class="n">correct</span> <span class="o">=</span> <span class="n">valid_test_loop</span><span class="p">(</span><span class="n">valid_generator</span><span class="p">,</span> <span class="n">gcn</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Valid metrics:</span><span class="se">\n\t</span><span class="s2"> avg_loss: </span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="s2">&gt;8f</span><span class="si">}</span><span class="s2">;</span><span class="se">\t</span><span class="s2"> avg_accuracy: </span><span class="si">{</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">correct</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;0.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -836,7 +852,7 @@ Epoch 2/25
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 1.966;	train_accuracy: 20.0%		[  500/ 1016]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 1.559;	train_accuracy: 60.0%		[  600/ 1016]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 1.560;	train_accuracy: 60.0%		[  600/ 1016]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 1.871;	train_accuracy: 40.0%		[  700/ 1016]
@@ -852,7 +868,7 @@ Epoch 2/25
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.155729;	 avg_accuracy: 48.6%
+	 avg_loss: 0.155730;	 avg_accuracy: 48.6%
 Epoch 3/25
 -------------------------------
 #    0;	train_loss: 1.833;	train_accuracy: 30.0%		[    0/ 1016]
@@ -926,7 +942,7 @@ Epoch 4/25
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.123758;	 avg_accuracy: 61.0%
+	 avg_loss: 0.123757;	 avg_accuracy: 61.0%
 Epoch 5/25
 -------------------------------
 #    0;	train_loss: 1.023;	train_accuracy: 80.0%		[    0/ 1016]
@@ -963,7 +979,7 @@ Epoch 5/25
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.106475;	 avg_accuracy: 65.5%
+	 avg_loss: 0.106478;	 avg_accuracy: 65.5%
 Epoch 6/25
 -------------------------------
 #    0;	train_loss: 0.945;	train_accuracy: 70.0%		[    0/ 1016]
@@ -1000,7 +1016,7 @@ Epoch 6/25
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.100945;	 avg_accuracy: 68.3%
+	 avg_loss: 0.100944;	 avg_accuracy: 68.3%
 Epoch 7/25
 -------------------------------
 #    0;	train_loss: 0.399;	train_accuracy: 90.0%		[    0/ 1016]
@@ -1046,7 +1062,7 @@ Epoch 8/25
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.572;	train_accuracy: 80.0%		[  100/ 1016]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.549;	train_accuracy: 80.0%		[  200/ 1016]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.550;	train_accuracy: 80.0%		[  200/ 1016]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.561;	train_accuracy: 90.0%		[  300/ 1016]
@@ -1074,7 +1090,7 @@ Epoch 8/25
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.082209;	 avg_accuracy: 71.7%
+	 avg_loss: 0.082211;	 avg_accuracy: 71.7%
 Epoch 9/25
 -------------------------------
 #    0;	train_loss: 0.449;	train_accuracy: 80.0%		[    0/ 1016]
@@ -1086,7 +1102,7 @@ Epoch 9/25
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.448;	train_accuracy: 90.0%		[  200/ 1016]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.685;	train_accuracy: 60.0%		[  300/ 1016]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.686;	train_accuracy: 60.0%		[  300/ 1016]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.447;	train_accuracy: 80.0%		[  400/ 1016]
@@ -1111,13 +1127,13 @@ Epoch 9/25
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.083764;	 avg_accuracy: 70.7%
+	 avg_loss: 0.083768;	 avg_accuracy: 70.7%
 Epoch 10/25
 -------------------------------
 #    0;	train_loss: 0.336;	train_accuracy: 90.0%		[    0/ 1016]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.295;	train_accuracy: 90.0%		[  100/ 1016]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.296;	train_accuracy: 90.0%		[  100/ 1016]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.335;	train_accuracy: 90.0%		[  200/ 1016]
@@ -1148,7 +1164,7 @@ Epoch 10/25
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.084388;	 avg_accuracy: 73.4%
+	 avg_loss: 0.084382;	 avg_accuracy: 73.4%
 Epoch 11/25
 -------------------------------
 #    0;	train_loss: 0.263;	train_accuracy: 90.0%		[    0/ 1016]
@@ -1185,7 +1201,7 @@ Epoch 11/25
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.073709;	 avg_accuracy: 78.3%
+	 avg_loss: 0.073708;	 avg_accuracy: 78.3%
 Epoch 12/25
 -------------------------------
 #    0;	train_loss: 0.677;	train_accuracy: 80.0%		[    0/ 1016]
@@ -1194,7 +1210,7 @@ Epoch 12/25
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.326;	train_accuracy: 90.0%		[  100/ 1016]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.447;	train_accuracy: 80.0%		[  200/ 1016]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.446;	train_accuracy: 80.0%		[  200/ 1016]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.211;	train_accuracy: 90.0%		[  300/ 1016]
@@ -1222,7 +1238,7 @@ Epoch 12/25
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.074502;	 avg_accuracy: 79.3%
+	 avg_loss: 0.074493;	 avg_accuracy: 79.3%
 Epoch 13/25
 -------------------------------
 #    0;	train_loss: 0.134;	train_accuracy:100.0%		[    0/ 1016]
@@ -1259,7 +1275,7 @@ Epoch 13/25
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.074169;	 avg_accuracy: 79.3%
+	 avg_loss: 0.074170;	 avg_accuracy: 79.3%
 Epoch 14/25
 -------------------------------
 #    0;	train_loss: 0.193;	train_accuracy: 90.0%		[    0/ 1016]
@@ -1296,7 +1312,7 @@ Epoch 14/25
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.087011;	 avg_accuracy: 76.6%
+	 avg_loss: 0.087010;	 avg_accuracy: 76.6%
 Epoch 15/25
 -------------------------------
 #    0;	train_loss: 0.092;	train_accuracy:100.0%		[    0/ 1016]
@@ -1333,7 +1349,7 @@ Epoch 15/25
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.070469;	 avg_accuracy: 82.8%
+	 avg_loss: 0.070460;	 avg_accuracy: 82.8%
 Epoch 16/25
 -------------------------------
 #    0;	train_loss: 0.084;	train_accuracy:100.0%		[    0/ 1016]
@@ -1370,7 +1386,7 @@ Epoch 16/25
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.080267;	 avg_accuracy: 79.7%
+	 avg_loss: 0.080264;	 avg_accuracy: 79.7%
 Epoch 17/25
 -------------------------------
 #    0;	train_loss: 0.017;	train_accuracy:100.0%		[    0/ 1016]
@@ -1407,7 +1423,7 @@ Epoch 17/25
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.076710;	 avg_accuracy: 80.0%
+	 avg_loss: 0.076702;	 avg_accuracy: 80.0%
 Epoch 18/25
 -------------------------------
 #    0;	train_loss: 0.020;	train_accuracy:100.0%		[    0/ 1016]
@@ -1444,7 +1460,7 @@ Epoch 18/25
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.083491;	 avg_accuracy: 82.4%
+	 avg_loss: 0.083478;	 avg_accuracy: 82.4%
 Epoch 19/25
 -------------------------------
 #    0;	train_loss: 0.039;	train_accuracy:100.0%		[    0/ 1016]
@@ -1456,7 +1472,7 @@ Epoch 19/25
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.006;	train_accuracy:100.0%		[  200/ 1016]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.247;	train_accuracy: 90.0%		[  300/ 1016]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.246;	train_accuracy: 90.0%		[  300/ 1016]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.137;	train_accuracy: 90.0%		[  400/ 1016]
@@ -1487,7 +1503,7 @@ Epoch 20/25
 #    0;	train_loss: 0.044;	train_accuracy:100.0%		[    0/ 1016]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.057;	train_accuracy:100.0%		[  100/ 1016]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.058;	train_accuracy:100.0%		[  100/ 1016]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.034;	train_accuracy:100.0%		[  200/ 1016]
@@ -1518,7 +1534,7 @@ Epoch 20/25
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.096023;	 avg_accuracy: 78.6%
+	 avg_loss: 0.096033;	 avg_accuracy: 78.6%
 Epoch 21/25
 -------------------------------
 #    0;	train_loss: 0.383;	train_accuracy: 90.0%		[    0/ 1016]
@@ -1530,7 +1546,7 @@ Epoch 21/25
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.004;	train_accuracy:100.0%		[  200/ 1016]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.281;	train_accuracy: 90.0%		[  300/ 1016]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.282;	train_accuracy: 90.0%		[  300/ 1016]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.009;	train_accuracy:100.0%		[  400/ 1016]
@@ -1539,7 +1555,7 @@ Epoch 21/25
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.073;	train_accuracy:100.0%		[  500/ 1016]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.098;	train_accuracy: 90.0%		[  600/ 1016]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.097;	train_accuracy: 90.0%		[  600/ 1016]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.134;	train_accuracy:100.0%		[  700/ 1016]
@@ -1592,13 +1608,13 @@ Epoch 22/25
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.093824;	 avg_accuracy: 79.0%
+	 avg_loss: 0.093829;	 avg_accuracy: 79.0%
 Epoch 23/25
 -------------------------------
 #    0;	train_loss: 0.110;	train_accuracy:100.0%		[    0/ 1016]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.100;	train_accuracy:100.0%		[  100/ 1016]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.101;	train_accuracy:100.0%		[  100/ 1016]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.002;	train_accuracy:100.0%		[  200/ 1016]
@@ -1625,11 +1641,11 @@ Epoch 23/25
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.008;	train_accuracy:100.0%		[  900/ 1016]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.034;	train_accuracy:100.0%		[ 1000/ 1016]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.035;	train_accuracy:100.0%		[ 1000/ 1016]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.084973;	 avg_accuracy: 81.4%
+	 avg_loss: 0.084978;	 avg_accuracy: 81.4%
 Epoch 24/25
 -------------------------------
 #    0;	train_loss: 0.156;	train_accuracy: 90.0%		[    0/ 1016]
@@ -1666,7 +1682,7 @@ Epoch 24/25
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.097458;	 avg_accuracy: 79.7%
+	 avg_loss: 0.097474;	 avg_accuracy: 79.7%
 Epoch 25/25
 -------------------------------
 #    0;	train_loss: 0.012;	train_accuracy:100.0%		[    0/ 1016]
@@ -1678,13 +1694,13 @@ Epoch 25/25
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.126;	train_accuracy:100.0%		[  200/ 1016]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.100;	train_accuracy: 90.0%		[  300/ 1016]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.100;	train_accuracy:100.0%		[  300/ 1016]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.037;	train_accuracy:100.0%		[  400/ 1016]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.033;	train_accuracy:100.0%		[  500/ 1016]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.032;	train_accuracy:100.0%		[  500/ 1016]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.012;	train_accuracy:100.0%		[  600/ 1016]
@@ -1703,7 +1719,7 @@ Epoch 25/25
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.098673;	 avg_accuracy: 79.7%
+	 avg_loss: 0.098691;	 avg_accuracy: 79.7%
 </pre></div>
 </div>
 </div>
@@ -1711,15 +1727,15 @@ Epoch 25/25
 <p>After training the model for 25 epochs, we use the untouched test data to evaluate the model and conclude the results of training.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># results
-loss, correct = valid_test_loop(test_generator, gcn, loss_fn)
-print(f&quot;Test metrics:\n\t avg_loss: {loss:&gt;f};\t avg_accuracy: {(100*correct):&gt;0.1f}%&quot;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># results</span>
+<span class="n">loss</span><span class="p">,</span> <span class="n">correct</span> <span class="o">=</span> <span class="n">valid_test_loop</span><span class="p">(</span><span class="n">test_generator</span><span class="p">,</span> <span class="n">gcn</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test metrics:</span><span class="se">\n\t</span><span class="s2"> avg_loss: </span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="s2">&gt;f</span><span class="si">}</span><span class="s2">;</span><span class="se">\t</span><span class="s2"> avg_accuracy: </span><span class="si">{</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">correct</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;0.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test metrics:
-	 avg_loss: 0.103413;	 avg_accuracy: 77.4%
+	 avg_loss: 0.103379;	 avg_accuracy: 77.4%
 </pre></div>
 </div>
 </div>

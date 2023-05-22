@@ -30,7 +30,7 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
     
   <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
@@ -394,34 +394,34 @@ our decoding problem.</p>
 <p>We are going to work with the Haxby dataset <span id="id1">[<a class="reference internal" href="haxby_data.html#id6">HGF+01</a>]</span> again. You can check the section <a class="reference internal" href="haxby_data.html#haxby-dataset"><span class="std std-ref">An overview of the Haxby dataset</span></a> for more details on that <code class="docutils literal notranslate"><span class="pre">dataset</span></code>. Here we are going to quickly <code class="docutils literal notranslate"><span class="pre">download</span></code> and prepare it for <code class="docutils literal notranslate"><span class="pre">machine</span> <span class="pre">learning</span> <span class="pre">applications</span></code> with a set of <code class="docutils literal notranslate"><span class="pre">predictive</span> <span class="pre">variables</span></code>, the <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">time</span> <span class="pre">series</span></code> <code class="docutils literal notranslate"><span class="pre">X</span></code>, and a <code class="docutils literal notranslate"><span class="pre">dependent</span> <span class="pre">variable</span></code>, the respective <code class="docutils literal notranslate"><span class="pre">cognitive</span> <span class="pre">processes</span></code>/<code class="docutils literal notranslate"><span class="pre">function</span></code>/<code class="docutils literal notranslate"><span class="pre">percepts</span></code> <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
-import warnings
-warnings.filterwarnings(action=&#39;once&#39;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;once&#39;</span><span class="p">)</span>
 
-from nilearn import datasets
-# We are fetching the data for subject 4
-data_dir = os.path.join(&#39;..&#39;, &#39;data&#39;)
-sub_no = 4
-haxby_dataset = datasets.fetch_haxby(subjects=[sub_no], fetch_stimuli=True, data_dir=data_dir)
-func_file = haxby_dataset.func[0]
+<span class="kn">from</span> <span class="nn">nilearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="c1"># We are fetching the data for subject 4</span>
+<span class="n">data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">)</span>
+<span class="n">sub_no</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">haxby_dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">fetch_haxby</span><span class="p">(</span><span class="n">subjects</span><span class="o">=</span><span class="p">[</span><span class="n">sub_no</span><span class="p">],</span> <span class="n">fetch_stimuli</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">)</span>
+<span class="n">func_file</span> <span class="o">=</span> <span class="n">haxby_dataset</span><span class="o">.</span><span class="n">func</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-# mask the data
-from nilearn.input_data import NiftiMasker
-mask_filename = haxby_dataset.mask_vt[0]
-masker = NiftiMasker(mask_img=mask_filename, standardize=True, detrend=True)
-X = masker.fit_transform(func_file)
+<span class="c1"># mask the data</span>
+<span class="kn">from</span> <span class="nn">nilearn.input_data</span> <span class="kn">import</span> <span class="n">NiftiMasker</span>
+<span class="n">mask_filename</span> <span class="o">=</span> <span class="n">haxby_dataset</span><span class="o">.</span><span class="n">mask_vt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">masker</span> <span class="o">=</span> <span class="n">NiftiMasker</span><span class="p">(</span><span class="n">mask_img</span><span class="o">=</span><span class="n">mask_filename</span><span class="p">,</span> <span class="n">standardize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">detrend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">masker</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">func_file</span><span class="p">)</span>
 
-# cognitive annotations
-import pandas as pd
-behavioral = pd.read_csv(haxby_dataset.session_target[0], delimiter=&#39; &#39;)
-y = behavioral[&#39;labels&#39;]
+<span class="c1"># cognitive annotations</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">behavioral</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">haxby_dataset</span><span class="o">.</span><span class="n">session_target</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">behavioral</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/nilearn/datasets/func.py:20: DeprecationWarning: Please use `MatReadError` from the `scipy.io.matlab` namespace, the `scipy.io.matlab.miobase` namespace is deprecated.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/nilearn/datasets/func.py:20: DeprecationWarning: Please use `MatReadError` from the `scipy.io.matlab` namespace, the `scipy.io.matlab.miobase` namespace is deprecated.
   from scipy.io.matlab.miobase import MatReadError
-/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/nilearn/datasets/__init__.py:93: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/nilearn/datasets/__init__.py:93: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
   warn(&quot;Fetchers from the nilearn.datasets module will be &quot;
 </pre></div>
 </div>
@@ -430,10 +430,10 @@ y = behavioral[&#39;labels&#39;]
 <p>As an initial check, we’ll have a look at the size of <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>categories = y.unique()
-print(categories)
-print(y.shape)
-print(X.shape)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">categories</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">categories</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -450,14 +450,14 @@ print(X.shape)
 <p>However, concerning our planned analyses, we need to convert our <code class="docutils literal notranslate"><span class="pre">categories</span></code> into a <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html">one-hot encoder</a>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># creating instance of one-hot-encoder
-from sklearn.preprocessing import OneHotEncoder
-import numpy as np
-enc = OneHotEncoder(handle_unknown=&#39;ignore&#39;)
-y_onehot = enc.fit_transform(np.array(y).reshape(-1, 1))
-# turn the sparse matrix into a pandas dataframe
-y = pd.DataFrame(y_onehot.toarray())
-display(y[:10])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># creating instance of one-hot-encoder</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">OneHotEncoder</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">enc</span> <span class="o">=</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+<span class="n">y_onehot</span> <span class="o">=</span> <span class="n">enc</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="c1"># turn the sparse matrix into a pandas dataframe</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">y_onehot</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">y</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -622,8 +622,8 @@ display(y[:10])
 <p>As introduced in the prior <code class="docutils literal notranslate"><span class="pre">tutorials</span></code>, one of the most important aspects of <code class="docutils literal notranslate"><span class="pre">machine</span> <span class="pre">learning</span></code> is the split between <code class="docutils literal notranslate"><span class="pre">train</span></code> and <code class="docutils literal notranslate"><span class="pre">tests</span></code>. <code class="docutils literal notranslate"><span class="pre">MLP</span></code>s are no exception to that and thus we need to split our dataset accordingly. We will keep <code class="docutils literal notranslate"><span class="pre">20%</span></code> of the <code class="docutils literal notranslate"><span class="pre">time</span> <span class="pre">points</span></code> as <code class="docutils literal notranslate"><span class="pre">test</span></code>, and then set up a <code class="docutils literal notranslate"><span class="pre">10</span> <span class="pre">fold</span> <span class="pre">cross</span> <span class="pre">validation</span></code> for <code class="docutils literal notranslate"><span class="pre">training/validation</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)   
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>   
 </pre></div>
 </div>
 </div>
@@ -631,28 +631,14 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, rando
 <p>With that, we can already build our <code class="docutils literal notranslate"><span class="pre">MLP</span></code>. Here, we are going to use <a class="reference external" href="https://www.tensorflow.org/">Tensorflow</a> and <a class="reference external" href="https://keras.io/">Keras</a>. As with every other <code class="docutils literal notranslate"><span class="pre">ANN</span></code>, we need to <code class="docutils literal notranslate"><span class="pre">import</span></code> the respective components, here, the <code class="docutils literal notranslate"><span class="pre">model</span></code> and <code class="docutils literal notranslate"><span class="pre">layer</span></code> <code class="docutils literal notranslate"><span class="pre">type</span></code>. In our case we will use a <a class="reference external" href="https://keras.io/guides/sequential_model/"><code class="docutils literal notranslate"><span class="pre">Sequential</span></code> <code class="docutils literal notranslate"><span class="pre">model</span></code></a> and <a class="reference external" href="https://keras.io/api/layers/core_layers/dense/"><code class="docutils literal notranslate"><span class="pre">Dense</span></code></a> <code class="docutils literal notranslate"><span class="pre">layers</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from keras.models import Sequential
-from keras.layers import Dense
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-12-10 18:55:05.994707: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#39;libcudart.so.11.0&#39;; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory
-2022-12-10 18:55:05.994734: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/keras_preprocessing/image/utils.py:23: DeprecationWarning: NEAREST is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.NEAREST or Dither.NONE instead.
-  &#39;nearest&#39;: pil_image.NEAREST,
-/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/keras_preprocessing/image/utils.py:24: DeprecationWarning: BILINEAR is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.BILINEAR instead.
-  &#39;bilinear&#39;: pil_image.BILINEAR,
-/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/keras_preprocessing/image/utils.py:25: DeprecationWarning: BICUBIC is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.BICUBIC instead.
-  &#39;bicubic&#39;: pil_image.BICUBIC,
-/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/keras_preprocessing/image/utils.py:28: DeprecationWarning: HAMMING is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.HAMMING instead.
-  if hasattr(pil_image, &#39;HAMMING&#39;):
-/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/keras_preprocessing/image/utils.py:30: DeprecationWarning: BOX is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.BOX instead.
-  if hasattr(pil_image, &#39;BOX&#39;):
-/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/keras_preprocessing/image/utils.py:33: DeprecationWarning: LANCZOS is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.LANCZOS instead.
-  if hasattr(pil_image, &#39;LANCZOS&#39;):
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2023-05-22 08:57:18.709929: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#39;libcudart.so.11.0&#39;; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory
+2023-05-22 08:57:18.709957: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
 </pre></div>
 </div>
 </div>
@@ -664,16 +650,16 @@ from keras.layers import Dense
 <p>Initially, we need to create our, so far, <code class="docutils literal notranslate"><span class="pre">empty</span> <span class="pre">model</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># number of unique conditions that we have
-model_mlp = Sequential()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># number of unique conditions that we have</span>
+<span class="n">model_mlp</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-12-10 18:55:07.313462: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#39;libcuda.so.1&#39;; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory
-2022-12-10 18:55:07.313486: W tensorflow/stream_executor/cuda/cuda_driver.cc:269] failed call to cuInit: UNKNOWN ERROR (303)
-2022-12-10 18:55:07.313508: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (fv-az359-603): /proc/driver/nvidia/version does not exist
-2022-12-10 18:55:07.313922: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F FMA
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2023-05-22 08:57:20.117988: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#39;libcuda.so.1&#39;; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory
+2023-05-22 08:57:20.118014: W tensorflow/stream_executor/cuda/cuda_driver.cc:269] failed call to cuInit: UNKNOWN ERROR (303)
+2023-05-22 08:57:20.118035: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (fv-az1102-220): /proc/driver/nvidia/version does not exist
+2023-05-22 08:57:20.118486: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F FMA
 To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
 </pre></div>
 </div>
@@ -682,7 +668,7 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 <p>Next, we can add the <code class="docutils literal notranslate"><span class="pre">layers</span></code> to our <code class="docutils literal notranslate"><span class="pre">model</span></code>, starting with the <code class="docutils literal notranslate"><span class="pre">input</span> <span class="pre">layer</span></code>. Given this is a rather short introduction to the topic and does not focus on <code class="docutils literal notranslate"><span class="pre">ANN</span></code>s, we are going to set the <code class="docutils literal notranslate"><span class="pre">kernel</span> <span class="pre">initialization</span></code> and <code class="docutils literal notranslate"><span class="pre">activation</span> <span class="pre">function</span></code> to appropriate defaults (Please have a look at the <a class="reference external" href="https://main-educational.github.io/material.html#introduction-to-deep-learning-using-pytorch">Introduction to deep learning session</a> for more information.).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model_mlp.add(Dense(50 , input_dim = 675, kernel_initializer=&quot;uniform&quot;, activation = &#39;relu&#39;))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_mlp</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">50</span> <span class="p">,</span> <span class="n">input_dim</span> <span class="o">=</span> <span class="mi">675</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s1">&#39;relu&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -691,7 +677,7 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 <p>Next, we are going to add one <code class="docutils literal notranslate"><span class="pre">hidden</span> <span class="pre">layer</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model_mlp.add(Dense(30, kernel_initializer=&quot;uniform&quot;, activation = &#39;relu&#39;))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_mlp</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s1">&#39;relu&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -699,7 +685,7 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 <p>And because we are creating a very simple <code class="docutils literal notranslate"><span class="pre">MLP</span></code> with only three <code class="docutils literal notranslate"><span class="pre">layers</span></code>, we already add our <code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">layer</span></code>, using the <code class="docutils literal notranslate"><span class="pre">softmax</span></code> <code class="docutils literal notranslate"><span class="pre">activation</span> <span class="pre">function</span></code> given that we aim to <code class="docutils literal notranslate"><span class="pre">train</span></code> our <code class="docutils literal notranslate"><span class="pre">MLP</span></code> to <code class="docutils literal notranslate"><span class="pre">predict</span></code> the different <code class="docutils literal notranslate"><span class="pre">categories</span></code> that were perceived by the <code class="docutils literal notranslate"><span class="pre">participants</span></code> from their <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">activity</span> <span class="pre">patterns</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model_mlp.add(Dense(len(categories), activation = &#39;softmax&#39;))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_mlp</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">categories</span><span class="p">),</span> <span class="n">activation</span> <span class="o">=</span> <span class="s1">&#39;softmax&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -707,7 +693,7 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 <p>To get a nice overview of our <code class="docutils literal notranslate"><span class="pre">ANN</span></code>, we can now use the <code class="docutils literal notranslate"><span class="pre">.summary()</span></code> <code class="docutils literal notranslate"><span class="pre">function</span></code>, which will provide us with the <code class="docutils literal notranslate"><span class="pre">model</span> <span class="pre">type</span></code>, <code class="docutils literal notranslate"><span class="pre">model</span> <span class="pre">parameters</span></code> and for each <code class="docutils literal notranslate"><span class="pre">layer</span></code>, the its <code class="docutils literal notranslate"><span class="pre">type</span></code>, <code class="docutils literal notranslate"><span class="pre">shape</span></code> and <code class="docutils literal notranslate"><span class="pre">parameters</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model_mlp.summary()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_mlp</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -762,7 +748,7 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 <p>With that, we already created our <code class="docutils literal notranslate"><span class="pre">MLP</span></code> <code class="docutils literal notranslate"><span class="pre">architecture</span></code>, which is now ready to be <code class="docutils literal notranslate"><span class="pre">compiled</span></code>! Within this step, we will set the <code class="docutils literal notranslate"><span class="pre">optimizer</span></code>, <code class="docutils literal notranslate"><span class="pre">loss</span> <span class="pre">function</span></code> and <code class="docutils literal notranslate"><span class="pre">metric</span></code>, ie <code class="docutils literal notranslate"><span class="pre">components</span></code> that define how our <code class="docutils literal notranslate"><span class="pre">MLP</span></code> will <code class="docutils literal notranslate"><span class="pre">learn</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model_mlp.compile(optimizer = &#39;adam&#39;, loss = &#39;categorical_crossentropy&#39;, metrics = [&#39;accuracy&#39;])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_mlp</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span> <span class="o">=</span> <span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">loss</span> <span class="o">=</span> <span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -770,8 +756,8 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 <p>Now it’s to <code class="docutils literal notranslate"><span class="pre">train</span></code> our <code class="docutils literal notranslate"><span class="pre">MLP</span></code>. Thus, we have to <code class="docutils literal notranslate"><span class="pre">fit</span></code> it to our <code class="docutils literal notranslate"><span class="pre">data</span></code>, specifically only the <code class="docutils literal notranslate"><span class="pre">training</span></code> <code class="docutils literal notranslate"><span class="pre">data</span></code>. Here, we are going to provide a few more <code class="docutils literal notranslate"><span class="pre">hyperparameters</span></code> that will define how our <code class="docutils literal notranslate"><span class="pre">MLP</span></code> is going to <code class="docutils literal notranslate"><span class="pre">learn</span></code>. This entails the <code class="docutils literal notranslate"><span class="pre">batch</span> <span class="pre">size</span></code>, the <code class="docutils literal notranslate"><span class="pre">epochs</span></code> and <code class="docutils literal notranslate"><span class="pre">split</span></code> of <code class="docutils literal notranslate"><span class="pre">validation</span> <span class="pre">sets</span></code>. We will assign the respective output to a variable so that we can investigate our <code class="docutils literal notranslate"><span class="pre">MLP</span></code>’s <code class="docutils literal notranslate"><span class="pre">learning</span> <span class="pre">process</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>history = model_mlp.fit(X_train, y_train, batch_size = 10,
-                             epochs = 10, validation_split = 0.2)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">history</span> <span class="o">=</span> <span class="n">model_mlp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+                             <span class="n">epochs</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">validation_split</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -779,173 +765,177 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 34s - loss: 2.2317 - accuracy: 0.0000e+00
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 35s - loss: 2.2229 - accuracy: 0.1000
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-43/93 [============&gt;.................] - ETA: 0s - loss: 1.8812 - accuracy: 0.3651     
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-89/93 [===========================&gt;..] - ETA: 0s - loss: 1.6774 - accuracy: 0.4213
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+42/93 [============&gt;.................] - ETA: 0s - loss: 1.9819 - accuracy: 0.3429 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 1s 3ms/step - loss: 1.6612 - accuracy: 0.4278 - val_loss: 1.4732 - val_accuracy: 0.4592
+87/93 [===========================&gt;..] - ETA: 0s - loss: 1.7037 - accuracy: 0.4138
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+93/93 [==============================] - 1s 3ms/step - loss: 1.6752 - accuracy: 0.4224 - val_loss: 1.4664 - val_accuracy: 0.4506
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 2/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 1.1605 - accuracy: 0.6000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 1.5577 - accuracy: 0.4000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-46/93 [=============&gt;................] - ETA: 0s - loss: 1.2162 - accuracy: 0.5739
+48/93 [==============&gt;...............] - ETA: 0s - loss: 1.1682 - accuracy: 0.6000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-92/93 [============================&gt;.] - ETA: 0s - loss: 1.1021 - accuracy: 0.6185
+92/93 [============================&gt;.] - ETA: 0s - loss: 1.1279 - accuracy: 0.6217
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 0s 1ms/step - loss: 1.0995 - accuracy: 0.6196 - val_loss: 1.1412 - val_accuracy: 0.6009
+93/93 [==============================] - 0s 1ms/step - loss: 1.1285 - accuracy: 0.6207 - val_loss: 1.2011 - val_accuracy: 0.5665
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 3/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.6876 - accuracy: 0.8000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.3257 - accuracy: 1.0000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-50/93 [===============&gt;..............] - ETA: 0s - loss: 0.7936 - accuracy: 0.7480
+47/93 [==============&gt;...............] - ETA: 0s - loss: 0.8161 - accuracy: 0.7447
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - ETA: 0s - loss: 0.7539 - accuracy: 0.7608
+93/93 [==============================] - ETA: 0s - loss: 0.8159 - accuracy: 0.7392
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 0s 2ms/step - loss: 0.7539 - accuracy: 0.7608 - val_loss: 1.0137 - val_accuracy: 0.6395
+93/93 [==============================] - 0s 1ms/step - loss: 0.8159 - accuracy: 0.7392 - val_loss: 1.0526 - val_accuracy: 0.6266
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 4/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.3305 - accuracy: 0.9000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.2624 - accuracy: 1.0000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-48/93 [==============&gt;...............] - ETA: 0s - loss: 0.5290 - accuracy: 0.8354
+46/93 [=============&gt;................] - ETA: 0s - loss: 0.5678 - accuracy: 0.8196
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - ETA: 0s - loss: 0.5242 - accuracy: 0.8362
+88/93 [===========================&gt;..] - ETA: 0s - loss: 0.5670 - accuracy: 0.8330
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 0s 1ms/step - loss: 0.5242 - accuracy: 0.8362 - val_loss: 0.9145 - val_accuracy: 0.7082
+93/93 [==============================] - 0s 2ms/step - loss: 0.5575 - accuracy: 0.8394 - val_loss: 0.9237 - val_accuracy: 0.6781
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 5/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.3873 - accuracy: 0.9000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.2386 - accuracy: 1.0000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-46/93 [=============&gt;................] - ETA: 0s - loss: 0.3239 - accuracy: 0.9261
+45/93 [=============&gt;................] - ETA: 0s - loss: 0.3832 - accuracy: 0.8844
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-92/93 [============================&gt;.] - ETA: 0s - loss: 0.3246 - accuracy: 0.9152
+91/93 [============================&gt;.] - ETA: 0s - loss: 0.3663 - accuracy: 0.8912
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 0s 1ms/step - loss: 0.3232 - accuracy: 0.9159 - val_loss: 0.8900 - val_accuracy: 0.6867
+93/93 [==============================] - 0s 2ms/step - loss: 0.3661 - accuracy: 0.8912 - val_loss: 0.8652 - val_accuracy: 0.7124
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 6/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.1384 - accuracy: 1.0000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.3449 - accuracy: 0.9000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-46/93 [=============&gt;................] - ETA: 0s - loss: 0.2379 - accuracy: 0.9326
+46/93 [=============&gt;................] - ETA: 0s - loss: 0.2661 - accuracy: 0.9261
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-90/93 [============================&gt;.] - ETA: 0s - loss: 0.2275 - accuracy: 0.9333
+91/93 [============================&gt;.] - ETA: 0s - loss: 0.2419 - accuracy: 0.9363
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 0s 2ms/step - loss: 0.2247 - accuracy: 0.9353 - val_loss: 0.8467 - val_accuracy: 0.7511
+93/93 [==============================] - 0s 2ms/step - loss: 0.2418 - accuracy: 0.9364 - val_loss: 0.8276 - val_accuracy: 0.7554
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 7/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.0914 - accuracy: 1.0000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.1631 - accuracy: 1.0000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-49/93 [==============&gt;...............] - ETA: 0s - loss: 0.1526 - accuracy: 0.9531
+47/93 [==============&gt;...............] - ETA: 0s - loss: 0.1334 - accuracy: 0.9745
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-90/93 [============================&gt;.] - ETA: 0s - loss: 0.1379 - accuracy: 0.9667
+91/93 [============================&gt;.] - ETA: 0s - loss: 0.1356 - accuracy: 0.9747
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 0s 2ms/step - loss: 0.1385 - accuracy: 0.9677 - val_loss: 0.7506 - val_accuracy: 0.7554
+93/93 [==============================] - 0s 2ms/step - loss: 0.1345 - accuracy: 0.9752 - val_loss: 0.7945 - val_accuracy: 0.7639
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 8/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.0513 - accuracy: 1.0000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.0720 - accuracy: 1.0000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-49/93 [==============&gt;...............] - ETA: 0s - loss: 0.0621 - accuracy: 0.9939
+48/93 [==============&gt;...............] - ETA: 0s - loss: 0.0707 - accuracy: 0.9958
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 0s 1ms/step - loss: 0.0723 - accuracy: 0.9935 - val_loss: 0.7802 - val_accuracy: 0.7639
+92/93 [============================&gt;.] - ETA: 0s - loss: 0.0737 - accuracy: 0.9946
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+93/93 [==============================] - 0s 2ms/step - loss: 0.0738 - accuracy: 0.9946 - val_loss: 0.8261 - val_accuracy: 0.7468
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 9/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.0273 - accuracy: 1.0000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.1264 - accuracy: 0.9000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-49/93 [==============&gt;...............] - ETA: 0s - loss: 0.0394 - accuracy: 1.0000
+48/93 [==============&gt;...............] - ETA: 0s - loss: 0.0799 - accuracy: 0.9833
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - ETA: 0s - loss: 0.0421 - accuracy: 0.9968
+92/93 [============================&gt;.] - ETA: 0s - loss: 0.0833 - accuracy: 0.9804
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 0s 1ms/step - loss: 0.0421 - accuracy: 0.9968 - val_loss: 0.8278 - val_accuracy: 0.7639
+93/93 [==============================] - 0s 1ms/step - loss: 0.0827 - accuracy: 0.9806 - val_loss: 0.8526 - val_accuracy: 0.7639
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 10/10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.0250 - accuracy: 1.0000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/93 [..............................] - ETA: 0s - loss: 0.0169 - accuracy: 1.0000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-48/93 [==============&gt;...............] - ETA: 0s - loss: 0.0322 - accuracy: 0.9979
+47/93 [==============&gt;...............] - ETA: 0s - loss: 0.0302 - accuracy: 1.0000
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-93/93 [==============================] - 0s 1ms/step - loss: 0.0271 - accuracy: 0.9989 - val_loss: 0.7860 - val_accuracy: 0.7811
+93/93 [==============================] - 0s 1ms/step - loss: 0.0321 - accuracy: 0.9989 - val_loss: 0.8581 - val_accuracy: 0.7639
 </pre></div>
 </div>
 </div>
@@ -958,19 +948,19 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 <p>While this is already informative, we can also plot the <code class="docutils literal notranslate"><span class="pre">loss</span></code> and <code class="docutils literal notranslate"><span class="pre">accuracy</span></code> in the <code class="docutils literal notranslate"><span class="pre">training</span></code> and <code class="docutils literal notranslate"><span class="pre">validation</span></code> <code class="docutils literal notranslate"><span class="pre">sets</span></code> respectively. Let’s start with the <code class="docutils literal notranslate"><span class="pre">loss</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
-import seaborn as sns
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 
-plt.plot(history.history[&#39;loss&#39;], color=&#39;m&#39;)
-plt.plot(history.history[&#39;val_loss&#39;], color=&#39;c&#39;)
-plt.title(&#39;MLP loss&#39;)
-plt.ylabel(&#39;loss&#39;)
-plt.xlabel(&#39;epoch&#39;)
-plt.legend([&#39;train&#39;, &#39;validation&#39;], loc = &#39;upper right&#39;)
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;m&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_loss&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;MLP loss&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;loss&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;epoch&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="s1">&#39;validation&#39;</span><span class="p">],</span> <span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
 
-sns.despine(offset=5)
+<span class="n">sns</span><span class="o">.</span><span class="n">despine</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
-plt.show()
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -981,19 +971,19 @@ plt.show()
 <p>And now the same for the <code class="docutils literal notranslate"><span class="pre">accuracy</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
-import seaborn as sns
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 
-plt.plot(history.history[&#39;accuracy&#39;], color=&#39;m&#39;)
-plt.plot(history.history[&#39;val_accuracy&#39;], color=&#39;c&#39;)
-plt.title(&#39;MLP accuracy&#39;)
-plt.ylabel(&#39;accuracy&#39;)
-plt.xlabel(&#39;epoch&#39;)
-plt.legend([&#39;train&#39;, &#39;validation&#39;], loc = &#39;upper left&#39;)
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;m&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_accuracy&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;MLP accuracy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;accuracy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;epoch&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="s1">&#39;validation&#39;</span><span class="p">],</span> <span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
 
-sns.despine(offset=5)
+<span class="n">sns</span><span class="o">.</span><span class="n">despine</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
-plt.show()
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1011,28 +1001,28 @@ plt.show()
 <p>After evaluating the <code class="docutils literal notranslate"><span class="pre">training</span></code> of our <code class="docutils literal notranslate"><span class="pre">MLP</span></code>, we of course also need to evaluate its (<code class="docutils literal notranslate"><span class="pre">predictive</span></code>) <code class="docutils literal notranslate"><span class="pre">performance</span></code>. Here, this refers to the <code class="docutils literal notranslate"><span class="pre">accuracy</span></code> of our <code class="docutils literal notranslate"><span class="pre">MLP</span></code>’s outcomes, ie its <code class="docutils literal notranslate"><span class="pre">predictions</span></code>. We already saw this in the above plots and during the <code class="docutils literal notranslate"><span class="pre">training</span></code> across <code class="docutils literal notranslate"><span class="pre">epochs</span></code> but let’s check the <code class="docutils literal notranslate"><span class="pre">accuracy</span></code> of the <code class="docutils literal notranslate"><span class="pre">prediction</span></code> on the <code class="docutils literal notranslate"><span class="pre">training</span> <span class="pre">set</span></code> again:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from sklearn.metrics import classification_report
-y_train_pred = model_mlp.predict(X_train)
-print(classification_report(y_train.values.argmax(axis = 1), y_train_pred.argmax(axis=1)))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span>
+<span class="n">y_train_pred</span> <span class="o">=</span> <span class="n">model_mlp</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_train</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">),</span> <span class="n">y_train_pred</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
-           0       0.90      0.94      0.92        85
-           1       0.97      0.99      0.98        88
-           2       0.95      0.89      0.92        90
+           0       0.84      0.91      0.87        85
+           1       0.97      0.97      0.97        88
+           2       0.99      0.88      0.93        90
            3       0.99      0.96      0.97        81
-           4       0.99      0.98      0.98        91
-           5       0.97      0.98      0.98       471
-           6       0.88      0.94      0.91        81
-           7       0.97      0.96      0.96        90
-           8       0.90      0.88      0.89        84
+           4       0.99      0.95      0.97        91
+           5       0.97      0.98      0.97       471
+           6       0.87      0.96      0.91        81
+           7       0.97      0.97      0.97        90
+           8       0.93      0.88      0.90        84
 
-    accuracy                           0.96      1161
-   macro avg       0.95      0.95      0.95      1161
-weighted avg       0.96      0.96      0.96      1161
+    accuracy                           0.95      1161
+   macro avg       0.94      0.94      0.94      1161
+weighted avg       0.95      0.95      0.95      1161
 </pre></div>
 </div>
 </div>
@@ -1045,27 +1035,27 @@ weighted avg       0.96      0.96      0.96      1161
 <p>Luckily, we did <code class="docutils literal notranslate"><span class="pre">split</span></code> our <code class="docutils literal notranslate"><span class="pre">dataset</span></code> into <strong>independent</strong> <code class="docutils literal notranslate"><span class="pre">training</span></code> and <code class="docutils literal notranslate"><span class="pre">test</span></code> <code class="docutils literal notranslate"><span class="pre">sets</span></code>. So, let’s check our <code class="docutils literal notranslate"><span class="pre">MLP</span></code>’s performance on the <code class="docutils literal notranslate"><span class="pre">test</span> <span class="pre">set</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>y_test_pred = model_mlp.predict(X_test)
-print(classification_report(y_test.values.argmax(axis = 1), y_test_pred.argmax(axis=1)))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_test_pred</span> <span class="o">=</span> <span class="n">model_mlp</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">),</span> <span class="n">y_test_pred</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
-           0       0.73      0.83      0.78        23
-           1       0.76      0.65      0.70        20
-           2       0.74      0.78      0.76        18
-           3       0.93      0.93      0.93        27
-           4       0.88      0.88      0.88        17
-           5       0.91      0.91      0.91       117
-           6       0.80      0.74      0.77        27
-           7       1.00      0.94      0.97        18
-           8       0.69      0.75      0.72        24
+           0       0.61      0.74      0.67        23
+           1       1.00      0.55      0.71        20
+           2       0.69      0.61      0.65        18
+           3       0.93      0.96      0.95        27
+           4       1.00      0.82      0.90        17
+           5       0.87      0.91      0.89       117
+           6       0.67      0.81      0.73        27
+           7       0.94      0.89      0.91        18
+           8       0.68      0.62      0.65        24
 
-    accuracy                           0.85       291
-   macro avg       0.83      0.82      0.82       291
-weighted avg       0.85      0.85      0.85       291
+    accuracy                           0.82       291
+   macro avg       0.82      0.77      0.78       291
+weighted avg       0.83      0.82      0.82       291
 </pre></div>
 </div>
 </div>
@@ -1074,11 +1064,11 @@ weighted avg       0.85      0.85      0.85       291
 <p>Beside checking the overall <code class="docutils literal notranslate"><span class="pre">scores</span></code>, there are other options to further evaluate our <code class="docutils literal notranslate"><span class="pre">MLP</span></code>’s (or basically any other model’s) <code class="docutils literal notranslate"><span class="pre">performance</span></code>. One of the most commonly used ones is called <code class="docutils literal notranslate"><span class="pre">confusion</span> <span class="pre">matrix</span></code> (which you most likely have seen before in this course). A <code class="docutils literal notranslate"><span class="pre">confusion</span> <span class="pre">matrix</span></code> displays how often a given <code class="docutils literal notranslate"><span class="pre">sample</span></code> was <code class="docutils literal notranslate"><span class="pre">predicted</span></code> as a certain <code class="docutils literal notranslate"><span class="pre">label</span></code>, thus, for example, providing insights into differentiability, etc. . To implement this, we initially have to compute the <code class="docutils literal notranslate"><span class="pre">confusion</span> <span class="pre">matrix</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
-from sklearn.metrics import confusion_matrix
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
 
-cm_svm = confusion_matrix(y_test.values.argmax(axis = 1), y_test_pred.argmax(axis=1))
-model_conf_matrix = cm_svm.astype(&#39;float&#39;) / cm_svm.sum(axis = 1)[:, np.newaxis]
+<span class="n">cm_svm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">),</span> <span class="n">y_test_pred</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">model_conf_matrix</span> <span class="o">=</span> <span class="n">cm_svm</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="n">cm_svm</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1086,19 +1076,19 @@ model_conf_matrix = cm_svm.astype(&#39;float&#39;) / cm_svm.sum(axis = 1)[:, np.
 <p>After that, we can <code class="docutils literal notranslate"><span class="pre">plot</span></code> it for evaluation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import pandas as pd
-import seaborn as sns
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 
-df_cm = pd.DataFrame(model_conf_matrix, index = categories,
-                     columns = categories)
+<span class="n">df_cm</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">model_conf_matrix</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">categories</span><span class="p">,</span>
+                     <span class="n">columns</span> <span class="o">=</span> <span class="n">categories</span><span class="p">)</span>
 
-plt.figure(figsize = (10,7))
-sns.heatmap(df_cm, annot = True, cmap = &#39;Blues&#39;, square = True)
-plt.xticks(rotation = 45)
-plt.title(&#39;MLP decoding results - confusion matrix&#39; , fontsize = 15, fontweight = &#39;bold&#39;)
-plt.xlabel(&quot;true labels&quot;, fontsize = 14, fontweight = &#39;bold&#39;)
-plt.ylabel(&quot;predicted labels&quot;, fontsize = 14, fontweight = &#39;bold&#39;)
-plt.show()
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">df_cm</span><span class="p">,</span> <span class="n">annot</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;Blues&#39;</span><span class="p">,</span> <span class="n">square</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span> <span class="o">=</span> <span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;MLP decoding results - confusion matrix&#39;</span> <span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;true labels&quot;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;predicted labels&quot;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>

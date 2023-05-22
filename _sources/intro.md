@@ -55,7 +55,7 @@ More information and their application can be found in the respective sections o
 :margin: 3
 :class-body: text-center
 :class-header: bg-light text-center
-:link: https://main-educational.github.io/brain_decoding/haxby_data.html
+:link: https://main-educational.github.io/brain_encoding_decoding/haxby_data.html
 **An overview of the Haxby Dataset**
 ^^^
 ```{image} https://main-educational.github.io/brain_encoding_decoding/_images/haxby_data_52_0.png

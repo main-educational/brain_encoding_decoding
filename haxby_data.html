@@ -30,7 +30,7 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
     
   <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
@@ -409,13 +409,13 @@ Just imagine we have way more <code class="docutils literal notranslate"><span c
 <p>We are going to start with one <code class="docutils literal notranslate"><span class="pre">subject</span></code>, number <code class="docutils literal notranslate"><span class="pre">4</span></code>. To get the <code class="docutils literal notranslate"><span class="pre">data</span></code>, we can simply use <a class="reference external" href="https://nilearn.github.io/stable/modules/datasets.html">nilearn’s dataset module</a>. At first, we need to import the respective <code class="docutils literal notranslate"><span class="pre">module</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
-from nilearn import datasets
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">nilearn</span> <span class="kn">import</span> <span class="n">datasets</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/nilearn/datasets/__init__.py:93: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/nilearn/datasets/__init__.py:93: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
   warn(&quot;Fetchers from the nilearn.datasets module will be &quot;
 </pre></div>
 </div>
@@ -424,8 +424,8 @@ from nilearn import datasets
 <p>Next, we get the <code class="docutils literal notranslate"><span class="pre">data</span></code> and going to save it in a directory called <code class="docutils literal notranslate"><span class="pre">data</span></code>. Depending on your machine and internet connection, this might take a minute or so.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>data_dir = os.path.join(&#39;..&#39;, &#39;data&#39;)
-haxby_dataset = datasets.fetch_haxby(subjects=[4], fetch_stimuli=True, data_dir=data_dir)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">)</span>
+<span class="n">haxby_dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">fetch_haxby</span><span class="p">(</span><span class="n">subjects</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">fetch_stimuli</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -433,7 +433,7 @@ haxby_dataset = datasets.fetch_haxby(subjects=[4], fetch_stimuli=True, data_dir=
 <p>What do we have now? Lets have a look!</p>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>haxby_dataset
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">haxby_dataset</span>
 </pre></div>
 </div>
 </div>
@@ -448,54 +448,54 @@ haxby_dataset = datasets.fetch_haxby(subjects=[4], fetch_stimuli=True, data_dir=
  &#39;mask_house_little&#39;: [&#39;../data/haxby2001/subj4/mask8_house_vt.nii.gz&#39;],
  &#39;mask&#39;: &#39;../data/haxby2001/mask.nii.gz&#39;,
  &#39;description&#39;: b&#39;Haxby 2001 results\n\n\nNotes\n-----\nResults from a classical fMRI study that investigated the differences between\nthe neural correlates of face versus object processing in the ventral visual\nstream. Face and object stimuli showed widely distributed and overlapping\nresponse patterns.\n\nContent\n-------\nThe &quot;simple&quot; dataset includes\n    :\&#39;func\&#39;: Nifti images with bold data\n    :\&#39;session_target\&#39;: Text file containing session data\n    :\&#39;mask\&#39;: Nifti images with employed mask\n    :\&#39;session\&#39;: Text file with condition labels\n\n\nThe full dataset additionally includes\n    :\&#39;anat\&#39;: Nifti images with anatomical image\n    :\&#39;func\&#39;: Nifti images with bold data\n    :\&#39;mask_vt\&#39;: Nifti images with mask for ventral visual/temporal cortex\n    :\&#39;mask_face\&#39;: Nifti images with face-reponsive brain regions\n    :\&#39;mask_house\&#39;: Nifti images with house-reponsive brain regions\n    :\&#39;mask_face_little\&#39;: Spatially more constrained version of the above\n    :\&#39;mask_house_little\&#39;: Spatially more constrained version of the above\n\n\nReferences\n----------\nFor more information see:\nPyMVPA provides a tutorial using this dataset :\nhttp://www.pymvpa.org/tutorial.html\n\nMore information about its structure :\nhttp://dev.pymvpa.org/datadb/haxby2001.html\n\n\n`Haxby, J., Gobbini, M., Furey, M., Ishai, A., Schouten, J.,\nand Pietrini, P. (2001). Distributed and overlapping representations of\nfaces and objects in ventral temporal cortex. Science 293, 2425-2430.`\n\n\nLicence: unknown.\n&#39;,
- &#39;stimuli&#39;: {&#39;chairs&#39;: [&#39;../data/haxby2001/stimuli/chairs/d23a.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d23b.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d23c.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d23d.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d25a.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d25b.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d25c.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d25d.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d30a.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d30b.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d30c.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d30d.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d37a.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d37b.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d37c.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d37d.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d38a.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d38b.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d38c.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d38d.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d39a.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d39b.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d39c.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d39d.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d62a.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d62b.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d62c.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d62d.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d63a.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d63b.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d63c.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d63d.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d67a.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d67b.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d67c.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d67d.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d79a.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d79b.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d79c.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d79d.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d85a.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d85b.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d85c.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d85d.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d9a.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d9b.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d9c.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/chairs/d9d.jpg&#39;],
+ &#39;stimuli&#39;: {&#39;houses&#39;: [&#39;../data/haxby2001/stimuli/houses/house1.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house1.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house1.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house1.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house10.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house10.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house10.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house10.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house11.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house11.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house11.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house11.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house12.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house12.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house12.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house12.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house2.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house2.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house2.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house2.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house3.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house3.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house3.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house3.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house4.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house4.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house4.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house4.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house5.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house5.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house5.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house5.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house6.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house6.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house6.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house6.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house7.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house7.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house7.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house7.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house8.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house8.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house8.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house8.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house9.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house9.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house9.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/houses/house9.4.jpg&#39;],
   &#39;scissors&#39;: [&#39;../data/haxby2001/stimuli/scissors/scissor1.1.jpg&#39;,
    &#39;../data/haxby2001/stimuli/scissors/scissor1.2.jpg&#39;,
    &#39;../data/haxby2001/stimuli/scissors/scissor1.3.jpg&#39;,
@@ -544,150 +544,6 @@ haxby_dataset = datasets.fetch_haxby(subjects=[4], fetch_stimuli=True, data_dir=
    &#39;../data/haxby2001/stimuli/scissors/scissor9.2.jpg&#39;,
    &#39;../data/haxby2001/stimuli/scissors/scissor9.3.jpg&#39;,
    &#39;../data/haxby2001/stimuli/scissors/scissor9.4.jpg&#39;],
-  &#39;bottles&#39;: [&#39;../data/haxby2001/stimuli/bottles/bottle1.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle1.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle1.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle1.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle10.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle10.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle10.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle10.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle11.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle11.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle11.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle11.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle12.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle12.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle12.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle12.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle2.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle2.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle2.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle2.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle3.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle3.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle3.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle3.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle4.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle4.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle4.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle4.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle5.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle5.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle5.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle5.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle6.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle6.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle6.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle6.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle7.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle7.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle7.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle7.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle8.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle8.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle8.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle8.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle9.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle9.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle9.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/bottles/bottle9.4.jpg&#39;],
-  &#39;cats&#39;: [&#39;../data/haxby2001/stimuli/cats/MISTY3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/MISTY4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/MISTY5.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/MISTY6.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/SPOTZ1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/SPOTZ4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/SPOTZ5.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/SPOTZ8.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/brenda1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/brenda2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/brenda4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/brenda5.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/bugs4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/bugs5.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/bugs7.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/bugs8.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/lucky12.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/lucky13.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/lucky4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/lucky7.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/majellan1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/majellan2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/majellan3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/majellan4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/mickey1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/mickey2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/mickey3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/mickey4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/orange1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/orange2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/orange3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/orange4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/pepper1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/pepper2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/pepper3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/pepper5.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/robo1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/robo2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/robo4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/robo5.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/stripes2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/stripes3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/stripes5.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/stripes6.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/wookie6.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/wookie7.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/wookie8.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/cats/wookie9.jpg&#39;],
-  &#39;houses&#39;: [&#39;../data/haxby2001/stimuli/houses/house1.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house1.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house1.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house1.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house10.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house10.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house10.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house10.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house11.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house11.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house11.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house11.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house12.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house12.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house12.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house12.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house2.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house2.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house2.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house2.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house3.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house3.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house3.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house3.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house4.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house4.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house4.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house4.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house5.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house5.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house5.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house5.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house6.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house6.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house6.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house6.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house7.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house7.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house7.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house7.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house8.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house8.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house8.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house8.4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house9.1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house9.2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house9.3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/houses/house9.4.jpg&#39;],
   &#39;controls&#39;: [(&#39;scrambled_bottles&#39;,
     [&#39;../data/haxby2001/stimuli/controls/scrambled_bottles/scrambled_bottle1.1.jpg&#39;,
      &#39;../data/haxby2001/stimuli/controls/scrambled_bottles/scrambled_bottle1.2.jpg&#39;,
@@ -1023,53 +879,6 @@ haxby_dataset = datasets.fetch_haxby(subjects=[4], fetch_stimuli=True, data_dir=
      &#39;../data/haxby2001/stimuli/controls/scrambled_shoes/scrambled_shoev2.jpg&#39;,
      &#39;../data/haxby2001/stimuli/controls/scrambled_shoes/scrambled_shoev3.jpg&#39;,
      &#39;../data/haxby2001/stimuli/controls/scrambled_shoes/scrambled_shoev4.jpg&#39;])],
-  &#39;shoes&#39;: [&#39;../data/haxby2001/stimuli/shoes/shoea1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoea2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoea3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoea5.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoeb1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoeb2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoeb4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoec1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoec2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoec3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoec5.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoed1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoed2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoed3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoed5.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoee1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoee2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoee3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoee5.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoef1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoef2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoef3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoef5.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoeg1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoeg2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoeg3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoeg4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoeh1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoeh2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoeh3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoeh4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoei1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoei2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoei3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoei4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoep1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoep2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoep3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoep4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoeu1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoeu2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoeu3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoeu4.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoev1.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoev2.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoev3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/shoes/shoev4.jpg&#39;],
   &#39;faces&#39;: [&#39;../data/haxby2001/stimuli/faces/Annie_1.jpg&#39;,
    &#39;../data/haxby2001/stimuli/faces/Annie_2.jpg&#39;,
    &#39;../data/haxby2001/stimuli/faces/Annie_3.jpg&#39;,
@@ -1117,7 +926,198 @@ haxby_dataset = datasets.fetch_haxby(subjects=[4], fetch_stimuli=True, data_dir=
    &#39;../data/haxby2001/stimuli/faces/Wallace_1.jpg&#39;,
    &#39;../data/haxby2001/stimuli/faces/Wallace_2.jpg&#39;,
    &#39;../data/haxby2001/stimuli/faces/Wallace_3.jpg&#39;,
-   &#39;../data/haxby2001/stimuli/faces/Wallace_4.jpg&#39;]}}
+   &#39;../data/haxby2001/stimuli/faces/Wallace_4.jpg&#39;],
+  &#39;shoes&#39;: [&#39;../data/haxby2001/stimuli/shoes/shoea1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoea2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoea3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoea5.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoeb1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoeb2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoeb4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoec1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoec2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoec3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoec5.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoed1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoed2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoed3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoed5.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoee1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoee2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoee3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoee5.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoef1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoef2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoef3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoef5.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoeg1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoeg2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoeg3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoeg4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoeh1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoeh2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoeh3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoeh4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoei1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoei2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoei3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoei4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoep1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoep2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoep3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoep4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoeu1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoeu2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoeu3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoeu4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoev1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoev2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoev3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/shoes/shoev4.jpg&#39;],
+  &#39;cats&#39;: [&#39;../data/haxby2001/stimuli/cats/MISTY3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/MISTY4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/MISTY5.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/MISTY6.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/SPOTZ1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/SPOTZ4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/SPOTZ5.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/SPOTZ8.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/brenda1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/brenda2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/brenda4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/brenda5.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/bugs4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/bugs5.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/bugs7.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/bugs8.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/lucky12.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/lucky13.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/lucky4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/lucky7.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/majellan1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/majellan2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/majellan3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/majellan4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/mickey1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/mickey2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/mickey3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/mickey4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/orange1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/orange2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/orange3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/orange4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/pepper1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/pepper2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/pepper3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/pepper5.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/robo1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/robo2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/robo4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/robo5.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/stripes2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/stripes3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/stripes5.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/stripes6.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/wookie6.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/wookie7.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/wookie8.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/cats/wookie9.jpg&#39;],
+  &#39;bottles&#39;: [&#39;../data/haxby2001/stimuli/bottles/bottle1.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle1.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle1.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle1.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle10.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle10.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle10.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle10.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle11.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle11.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle11.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle11.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle12.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle12.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle12.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle12.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle2.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle2.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle2.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle2.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle3.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle3.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle3.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle3.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle4.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle4.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle4.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle4.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle5.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle5.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle5.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle5.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle6.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle6.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle6.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle6.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle7.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle7.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle7.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle7.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle8.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle8.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle8.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle8.4.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle9.1.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle9.2.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle9.3.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/bottles/bottle9.4.jpg&#39;],
+  &#39;chairs&#39;: [&#39;../data/haxby2001/stimuli/chairs/d23a.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d23b.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d23c.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d23d.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d25a.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d25b.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d25c.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d25d.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d30a.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d30b.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d30c.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d30d.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d37a.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d37b.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d37c.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d37d.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d38a.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d38b.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d38c.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d38d.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d39a.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d39b.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d39c.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d39d.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d62a.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d62b.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d62c.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d62d.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d63a.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d63b.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d63c.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d63d.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d67a.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d67b.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d67c.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d67d.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d79a.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d79b.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d79c.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d79d.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d85a.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d85b.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d85c.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d85d.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d9a.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d9b.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d9c.jpg&#39;,
+   &#39;../data/haxby2001/stimuli/chairs/d9d.jpg&#39;]}}
 </pre></div>
 </div>
 </div>
@@ -1145,14 +1145,14 @@ haxby_dataset = datasets.fetch_haxby(subjects=[4], fetch_stimuli=True, data_dir=
 Using <code class="docutils literal notranslate"><span class="pre">nilearn</span></code>, we can either <code class="docutils literal notranslate"><span class="pre">load</span></code> and then <code class="docutils literal notranslate"><span class="pre">plot</span></code> it or directly <code class="docutils literal notranslate"><span class="pre">plot</span></code> it. Here we are going to do the first option as it will allow us to check the properties of the <code class="docutils literal notranslate"><span class="pre">image</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from nilearn.image import load_img
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nilearn.image</span> <span class="kn">import</span> <span class="n">load_img</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>anat_image = load_img(haxby_dataset.anat)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anat_image</span> <span class="o">=</span> <span class="n">load_img</span><span class="p">(</span><span class="n">haxby_dataset</span><span class="o">.</span><span class="n">anat</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1160,7 +1160,7 @@ Using <code class="docutils literal notranslate"><span class="pre">nilearn</span
 <p>Now we can access basically all parts of the <code class="docutils literal notranslate"><span class="pre">image</span></code>, including the <code class="docutils literal notranslate"><span class="pre">header</span></code></p>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(anat_image.header)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">anat_image</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1216,7 +1216,7 @@ magic           : b&#39;n+1&#39;
 <p>and actual <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>anat_image.dataobj
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anat_image</span><span class="o">.</span><span class="n">dataobj</span>
 </pre></div>
 </div>
 </div>
@@ -1534,7 +1534,7 @@ magic           : b&#39;n+1&#39;
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>anat_image.dataobj.shape
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anat_image</span><span class="o">.</span><span class="n">dataobj</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -1547,19 +1547,19 @@ magic           : b&#39;n+1&#39;
 <p>As you can see, this is basically a <code class="docutils literal notranslate"><span class="pre">numpy</span> <span class="pre">array</span></code> that has the same <code class="docutils literal notranslate"><span class="pre">dimensions</span></code> as our <code class="docutils literal notranslate"><span class="pre">image</span></code> and the <code class="docutils literal notranslate"><span class="pre">data</span></code> reflect <code class="docutils literal notranslate"><span class="pre">values</span></code> for a given <code class="docutils literal notranslate"><span class="pre">voxel</span></code>. So far so good but how does it actually look? We can make use of one of <code class="docutils literal notranslate"><span class="pre">nilearn</span></code>’s many <a class="reference external" href="https://nilearn.github.io/stable/modules/plotting.html">plotting functions</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from nilearn import plotting
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nilearn</span> <span class="kn">import</span> <span class="n">plotting</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plotting.plot_anat(anat_image)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plotting</span><span class="o">.</span><span class="n">plot_anat</span><span class="p">(</span><span class="n">anat_image</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f2371a7f9a0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7fcc2be50220&gt;
 </pre></div>
 </div>
 <img alt="_images/haxby_data_19_1.png" src="_images/haxby_data_19_1.png" />
@@ -1568,16 +1568,16 @@ magic           : b&#39;n+1&#39;
 <p>We can even create an <code class="docutils literal notranslate"><span class="pre">interactive</span> <span class="pre">plot</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plotting.view_img(anat_image, symmetric_cmap=False, cmap=&#39;Greys_r&#39;, colorbar=False)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plotting</span><span class="o">.</span><span class="n">view_img</span><span class="p">(</span><span class="n">anat_image</span><span class="p">,</span> <span class="n">symmetric_cmap</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greys_r&#39;</span><span class="p">,</span> <span class="n">colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/nilearn/plotting/html_stat_map.py:217: FutureWarning: Default resolution of the MNI template will change from 2mm to 1mm in version 0.10.0
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/nilearn/plotting/html_stat_map.py:217: FutureWarning: Default resolution of the MNI template will change from 2mm to 1mm in version 0.10.0
   bg_img = load_mni152_template()
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.15/x64/lib/python3.8/site-packages/nilearn/image/resampling.py:531: UserWarning: Casting data from int32 to float32
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/nilearn/image/resampling.py:531: UserWarning: Casting data from int32 to float32
   warnings.warn(&quot;Casting data from %s to %s&quot; % (data.dtype.name, aux))
 </pre></div>
 </div>
@@ -1625,7 +1625,7 @@ magic           : b&#39;n+1&#39;
 <p>Comparably, we can do the same things with the <code class="docutils literal notranslate"><span class="pre">functional</span></code> <code class="docutils literal notranslate"><span class="pre">image</span></code>. That is <code class="docutils literal notranslate"><span class="pre">load</span></code>ing the <code class="docutils literal notranslate"><span class="pre">image</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>func_image = load_img(haxby_dataset.func)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">func_image</span> <span class="o">=</span> <span class="n">load_img</span><span class="p">(</span><span class="n">haxby_dataset</span><span class="o">.</span><span class="n">func</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1633,7 +1633,7 @@ magic           : b&#39;n+1&#39;
 <p>and inspect its <code class="docutils literal notranslate"><span class="pre">header</span></code>:</p>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(func_image.header)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">func_image</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1689,332 +1689,35 @@ magic           : b&#39;n+1&#39;
 <p>and <code class="docutils literal notranslate"><span class="pre">data</span></code>:</p>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>func_image.get_data()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">func_image</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2784/1789311566.py:1: DeprecationWarning: get_data() is deprecated in favor of get_fdata(), which has a more predictable return type. To obtain get_data() behavior going forward, use numpy.asanyarray(img.dataobj).
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>---------------------------------------------------------------------------
+ExpiredDeprecationError                   Traceback (most recent call last)
+Cell In[14], line 1
+----&gt; 1 func_image.get_data()
+
+File /opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/nibabel/deprecator.py:208, in Deprecator.__call__.&lt;locals&gt;.deprecator.&lt;locals&gt;.deprecated_func(*args, **kwargs)
+    205 @functools.wraps(func)
+    206 def deprecated_func(*args: P.args, **kwargs: P.kwargs) -&gt; T:
+    207     if until and self.is_bad_version(until):
+--&gt; 208         raise exception(message)
+    209     warnings.warn(message, warning, stacklevel=2)
+    210     return func(*args, **kwargs)
+
+ExpiredDeprecationError: get_data() is deprecated in favor of get_fdata(), which has a more predictable return type. To obtain get_data() behavior going forward, use numpy.asanyarray(img.dataobj).
 
 * deprecated from version: 3.0
-* Will raise &lt;class &#39;nibabel.deprecator.ExpiredDeprecationError&#39;&gt; as of version: 5.0
-  func_image.get_data()
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[[[ 0,  0,  0, ...,  0,  0,  0],
-         [ 0,  0,  0, ...,  0,  0,  0],
-         [ 0,  0,  0, ...,  0,  0,  0],
-         ...,
-         [ 0,  0,  0, ...,  0,  0,  0],
-         [ 0,  0,  0, ...,  0,  0,  0],
-         [ 0,  0,  0, ...,  0,  0,  0]],
-
-        [[10, 11, 10, ...,  0,  0,  0],
-         [16, 28, 14, ...,  0,  0,  0],
-         [17, 23, 28, ...,  0,  0,  0],
-         ...,
-         [ 0,  0,  0, ..., 13,  7,  8],
-         [ 0,  0,  0, ..., 21, 18, 13],
-         [ 0,  0,  0, ...,  0,  0,  0]],
-
-        [[ 4, 11, 11, ...,  0,  0,  0],
-         [17, 26, 16, ...,  0,  0,  0],
-         [35, 32, 35, ...,  0,  0,  0],
-         ...,
-         [ 0,  0,  0, ..., 24, 14, 11],
-         [ 0,  0,  0, ..., 22, 24, 23],
-         [ 0,  0,  0, ...,  0,  0,  0]],
-
-        ...,
-
-        [[ 0,  0,  0, ...,  0,  0,  0],
-         [10, 11, 17, ...,  0,  0,  0],
-         [21, 14, 29, ...,  0,  0,  0],
-         ...,
-         [ 0,  0,  0, ..., 10, 14, 10],
-         [ 0,  0,  0, ...,  4,  7,  4],
-         [ 0,  0,  0, ...,  0,  0,  0]],
-
-        [[ 0,  0,  0, ...,  0,  0,  0],
-         [ 8, 13, 15, ...,  0,  0,  0],
-         [23, 21, 31, ...,  0,  0,  0],
-         ...,
-         [ 0,  0,  0, ...,  9,  7, 11],
-         [ 0,  0,  0, ...,  6,  3,  3],
-         [ 0,  0,  0, ...,  0,  0,  0]],
-
-        [[ 0,  0,  0, ...,  0,  0,  0],
-         [10, 28, 21, ...,  0,  0,  0],
-         [17, 35, 36, ...,  0,  0,  0],
-         ...,
-         [ 0,  0,  0, ..., 12, 15, 13],
-         [ 0,  0,  0, ...,  7, 13,  9],
-         [ 0,  0,  0, ...,  0,  0,  0]]],
-
-
-       [[[ 0,  0,  0, ..., 18, 24, 13],
-         [ 0,  0,  0, ..., 20, 24, 24],
-         [ 0,  0,  0, ..., 34, 33, 25],
-         ...,
-         [15, 24, 18, ...,  0,  0,  0],
-         [ 7,  9, 11, ...,  0,  0,  0],
-         [ 0,  0,  0, ...,  0,  0,  0]],
-
-        [[10,  9, 14, ...,  7, 24, 25],
-         [14, 14, 14, ..., 17, 28, 26],
-         [12, 14, 21, ..., 15, 17, 35],
-         ...,
-         [ 8, 16, 18, ..., 19,  8,  9],
-         [ 9,  7, 10, ..., 12,  9, 17],
-         [ 0,  0,  0, ...,  0,  0,  0]],
-
-        [[ 8,  6, 10, ..., 20, 23, 25],
-         [12,  6, 14, ..., 22, 24, 21],
-         [22, 18, 16, ..., 21, 18, 43],
-         ...,
-         [20, 28, 17, ..., 11, 26, 16],
-         [ 9, 12,  8, ..., 14, 14,  8],
-         [ 0,  0,  0, ...,  0,  0,  0]],
-
-        ...,
-
-        [[ 0,  0,  0, ..., 23, 18, 12],
-         [20, 23, 32, ..., 28, 37, 14],
-         [30, 22, 32, ..., 24, 37, 11],
-         ...,
-         [22, 17, 23, ..., 22, 10, 17],
-         [22, 19, 15, ...,  5,  4,  6],
-         [ 7,  9, 12, ...,  0,  0,  0]],
-
-        [[ 0,  0,  0, ..., 12, 24, 17],
-         [17, 14, 17, ..., 32, 43, 25],
-         [20,  9, 17, ..., 36, 37, 20],
-         ...,
-         [19, 34, 20, ..., 13, 15, 10],
-         [20, 33, 21, ...,  6, 10,  6],
-         [17, 22, 18, ...,  0,  0,  0]],
-
-        [[ 0,  0,  0, ...,  0,  0,  0],
-         [18, 22, 19, ...,  0,  0,  0],
-         [29, 39, 24, ...,  0,  0,  0],
-         ...,
-         [ 0,  0,  0, ..., 15, 16, 20],
-         [ 0,  0,  0, ...,  6,  7,  9],
-         [ 0,  0,  0, ...,  0,  0,  0]]],
-
-
-       [[[ 0,  0,  0, ..., 21, 29, 28],
-         [ 0,  0,  0, ..., 23, 34, 29],
-         [ 0,  0,  0, ..., 22, 49, 29],
-         ...,
-         [18, 15, 21, ...,  0,  0,  0],
-         [12,  3, 10, ...,  0,  0,  0],
-         [ 0,  0,  0, ...,  0,  0,  0]],
-
-        [[21, 23, 16, ..., 13,  8, 11],
-         [28, 23, 11, ..., 17, 20, 19],
-         [29, 35, 19, ...,  7, 21, 55],
-         ...,
-         [25, 23, 14, ..., 12, 17, 35],
-         [15,  6, 10, ..., 22, 18, 13],
-         [ 0,  0,  0, ...,  0,  0,  0]],
-
-        [[12, 16, 17, ..., 16, 14, 11],
-         [20, 15, 16, ..., 11,  7, 14],
-         [32, 44, 11, ...,  5, 18, 40],
-         ...,
-         [31, 34, 23, ...,  2, 16, 18],
-         [18, 12, 20, ...,  9, 10, 19],
-         [ 0,  0,  0, ...,  0,  0,  0]],
-
-        ...,
-
-        [[ 0,  0,  0, ..., 24, 26, 44],
-         [20, 21, 23, ..., 21, 28, 45],
-         [21, 24, 20, ..., 22, 31, 28],
-         ...,
-         [14, 27, 21, ..., 19, 17, 32],
-         [20, 29, 22, ...,  4, 11, 16],
-         [11, 17, 12, ...,  0,  0,  0]],
-
-        [[ 0,  0,  0, ..., 23, 25, 38],
-         [21, 20, 21, ..., 24, 24, 46],
-         [20, 13, 20, ..., 23, 16, 31],
-         ...,
-         [29, 25, 24, ..., 25, 32, 47],
-         [20, 30, 18, ..., 12, 18, 21],
-         [15, 21, 15, ...,  0,  0,  0]],
-
-        [[ 0,  0,  0, ...,  0,  0,  0],
-         [14, 13, 20, ...,  0,  0,  0],
-         [19, 12, 23, ...,  0,  0,  0],
-         ...,
-         [ 0,  0,  0, ..., 31, 32, 46],
-         [ 0,  0,  0, ..., 13, 19, 19],
-         [ 0,  0,  0, ...,  0,  0,  0]]],
-
-
-       ...,
-
-
-       [[[ 0,  0,  0, ...,  0,  0,  0],
-         [ 0,  0,  0, ..., 32, 13, 20],
-         [ 0,  0,  0, ..., 15, 22, 41],
-         ...,
-         [26, 37, 20, ...,  0,  0,  0],
-         [16, 18, 17, ...,  0,  0,  0],
-         [ 0,  0,  0, ...,  0,  0,  0]],
-
-        [[23, 26, 34, ...,  0,  0,  0],
-         [37, 28, 31, ..., 43, 30, 41],
-         [37, 28, 34, ..., 12, 20, 27],
-         ...,
-         [26, 21, 20, ..., 22, 17, 20],
-         [22, 11, 24, ..., 25, 19, 10],
-         [ 0,  0,  0, ...,  1,  0,  0]],
-
-        [[12, 10, 28, ...,  0, 24,  0],
-         [31, 18, 23, ..., 31, 32, 29],
-         [25, 23, 19, ..., 20, 30, 33],
-         ...,
-         [34, 26, 22, ..., 30, 15, 35],
-         [32, 17, 18, ..., 18, 18, 20],
-         [ 0,  0,  0, ...,  0,  0,  0]],
-
-        ...,
-
-        [[ 0,  0,  0, ..., 20, 12,  7],
-         [31, 24, 34, ..., 33, 16, 19],
-         [36, 26, 37, ..., 22, 24, 26],
-         ...,
-         [18, 28, 19, ..., 19, 21, 21],
-         [22, 23, 19, ...,  8,  9,  9],
-         [ 9, 13, 15, ...,  0,  0,  0]],
-
-        [[ 0,  0,  0, ..., 27, 22, 10],
-         [34, 20, 29, ..., 34, 16, 22],
-         [35, 20, 32, ..., 23, 20, 38],
-         ...,
-         [32, 40, 18, ..., 18, 21, 17],
-         [29, 32, 12, ...,  5, 12, 12],
-         [12, 20, 13, ...,  0,  0,  0]],
-
-        [[ 0,  0,  0, ...,  0,  0,  0],
-         [31, 26, 29, ...,  0,  0,  0],
-         [32, 30, 24, ...,  0,  0,  0],
-         ...,
-         [ 0,  0,  0, ..., 29, 19, 21],
-         [ 0,  0,  0, ..., 14,  4, 11],
-         [ 0,  0,  0, ...,  0,  0,  0]]],
-
-
-       [[[ 0,  0,  0, ...,  0,  0,  0],
-         [ 0,  0,  0, ..., 32, 19, 29],
-         [ 0,  0,  0, ..., 27, 16, 32],
-         ...,
-         [20, 27, 21, ...,  0,  0,  0],
-         [14, 20, 17, ...,  0,  0,  0],
-         [ 0,  0,  0, ...,  0,  0,  0]],
-
-        [[23, 24, 18, ...,  0,  0,  0],
-         [39, 24, 20, ..., 25, 26, 32],
-         [29, 40, 32, ..., 33, 17, 28],
-         ...,
-         [17, 18, 20, ..., 31,  9, 38],
-         [10, 10, 13, ..., 16, 18, 11],
-         [ 0,  0,  0, ...,  0,  0,  0]],
-
-        [[16, 16, 13, ...,  0, 10,  0],
-         [24, 26, 19, ..., 29, 18, 29],
-         [27, 32, 20, ..., 24, 20, 25],
-         ...,
-         [21, 12, 16, ..., 13, 11, 25],
-         [14,  9, 16, ..., 24, 11,  8],
-         [ 0,  0,  0, ...,  0,  0,  0]],
-
-        ...,
-
-        [[ 0,  0,  0, ..., 18, 16, 14],
-         [11, 16, 13, ..., 22, 16, 16],
-         [19, 23, 11, ..., 13, 14, 17],
-         ...,
-         [24, 28, 14, ..., 24, 11,  6],
-         [20, 18, 10, ..., 16, 11,  2],
-         [10,  8,  7, ...,  0,  0,  0]],
-
-        [[ 0,  0,  0, ..., 17, 24, 28],
-         [16, 13, 16, ..., 12, 30, 26],
-         [27, 22, 18, ..., 16, 31, 26],
-         ...,
-         [21, 31, 16, ..., 18, 20, 17],
-         [22, 31, 15, ..., 11, 17, 12],
-         [11, 21, 15, ...,  0,  0,  0]],
-
-        [[ 0,  0,  0, ...,  0,  0,  0],
-         [18, 24, 19, ...,  0,  0,  0],
-         [26, 16, 18, ...,  0,  0,  0],
-         ...,
-         [ 0,  0,  0, ..., 17, 18, 16],
-         [ 0,  0,  0, ..., 13, 17,  9],
-         [ 0,  0,  0, ...,  0,  0,  0]]],
-
-
-       [[[ 0,  0,  0, ...,  0,  0,  0],
-         [ 0,  0,  0, ..., 26, 14, 19],
-         [ 0,  0,  0, ..., 30, 21, 21],
-         ...,
-         [22, 24, 12, ...,  0,  0,  0],
-         [ 7, 14,  6, ...,  0,  0,  0],
-         [ 0,  0,  0, ...,  0,  0,  0]],
-
-        [[ 0,  0,  0, ...,  0,  0,  0],
-         [ 0,  0,  0, ..., 35,  9, 20],
-         [ 0,  0,  0, ..., 24, 18, 20],
-         ...,
-         [25, 20, 18, ...,  0,  0,  0],
-         [10, 10,  7, ...,  0,  0,  0],
-         [ 0,  0,  0, ...,  0,  0,  0]],
-
-        [[ 0,  0,  0, ...,  0,  7,  0],
-         [ 0,  0,  0, ..., 20, 24, 11],
-         [ 0,  0,  0, ..., 16, 30, 21],
-         ...,
-         [28, 17, 17, ...,  0,  0,  0],
-         [16, 10, 12, ...,  0,  0,  0],
-         [ 0,  0,  0, ...,  0,  0,  0]],
-
-        ...,
-
-        [[ 0,  0,  0, ..., 14, 20, 16],
-         [ 0,  0,  0, ..., 19, 29, 15],
-         [ 0,  0,  0, ..., 18, 29, 21],
-         ...,
-         [22, 19, 24, ...,  0,  0,  0],
-         [11, 13, 13, ...,  0,  0,  0],
-         [ 6,  6,  9, ...,  0,  0,  0]],
-
-        [[ 0,  0,  0, ..., 13, 12, 13],
-         [ 0,  0,  0, ..., 17, 12, 16],
-         [ 0,  0,  0, ..., 15, 15, 25],
-         ...,
-         [24, 24, 23, ...,  0,  0,  0],
-         [ 9, 16, 17, ...,  0,  0,  0],
-         [ 5,  5,  9, ...,  0,  0,  0]],
-
-        [[ 0,  0,  0, ...,  0,  0,  0],
-         [ 0,  0,  0, ...,  0,  0,  0],
-         [ 0,  0,  0, ...,  0,  0,  0],
-         ...,
-         [ 0,  0,  0, ...,  0,  0,  0],
-         [ 0,  0,  0, ...,  0,  0,  0],
-         [ 0,  0,  0, ...,  0,  0,  0]]]], dtype=int16)
+* Raises &lt;class &#39;nibabel.deprecator.ExpiredDeprecationError&#39;&gt; as of version: 5.0
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>func_image.dataobj.shape
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">func_image</span><span class="o">.</span><span class="n">dataobj</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -2031,14 +1734,14 @@ magic           : b&#39;n+1&#39;
 <p>As we have a <code class="docutils literal notranslate"><span class="pre">4D</span></code> <code class="docutils literal notranslate"><span class="pre">image</span></code>, that is <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">volumes</span></code> acquired over time (the <code class="docutils literal notranslate"><span class="pre">4th</span> <span class="pre">dimension</span></code>), we need to adapt the <code class="docutils literal notranslate"><span class="pre">plotting</span></code> a bit. More precisely, we need to either <code class="docutils literal notranslate"><span class="pre">plot</span></code> a <code class="docutils literal notranslate"><span class="pre">3D</span> <span class="pre">image</span></code> at a given <code class="docutils literal notranslate"><span class="pre">time</span> <span class="pre">point</span></code> or e.g. compute the <code class="docutils literal notranslate"><span class="pre">mean</span> <span class="pre">image</span></code> over <code class="docutils literal notranslate"><span class="pre">time</span></code> and <code class="docutils literal notranslate"><span class="pre">plot</span></code> that. The latter might be more informative and additional shows you how easy this can be done using <code class="docutils literal notranslate"><span class="pre">nilearn</span></code>’s <a class="reference external" href="https://nilearn.github.io/stable/modules/image.html">image functions</a>. Thus, we, at first, <code class="docutils literal notranslate"><span class="pre">import</span></code> the respective <code class="docutils literal notranslate"><span class="pre">function</span></code> and compute the <code class="docutils literal notranslate"><span class="pre">mean</span> <span class="pre">image</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from nilearn.image import mean_img
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nilearn.image</span> <span class="kn">import</span> <span class="n">mean_img</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>func_image_mean = mean_img(func_image)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">func_image_mean</span> <span class="o">=</span> <span class="n">mean_img</span><span class="p">(</span><span class="n">func_image</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2046,7 +1749,7 @@ magic           : b&#39;n+1&#39;
 <p>We can check if this worked via the approach we followed above, ie checking the <code class="docutils literal notranslate"><span class="pre">data</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>func_image_mean.dataobj.shape
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">func_image_mean</span><span class="o">.</span><span class="n">dataobj</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -2059,12 +1762,12 @@ magic           : b&#39;n+1&#39;
 <p>That seems about right and we can give the plot a try:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plotting.plot_epi(func_image_mean, cmap=&#39;magma&#39;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plotting</span><span class="o">.</span><span class="n">plot_epi</span><span class="p">(</span><span class="n">func_image_mean</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;magma&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f237135b8e0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7fde97f6da60&gt;
 </pre></div>
 </div>
 <img alt="_images/haxby_data_36_1.png" src="_images/haxby_data_36_1.png" />
@@ -2073,7 +1776,7 @@ magic           : b&#39;n+1&#39;
 <p>and of course, this also works for <code class="docutils literal notranslate"><span class="pre">interactive</span></code> plots.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plotting.view_img(func_image_mean, cmap=&#39;magma&#39;, symmetric_cmap=False)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plotting</span><span class="o">.</span><span class="n">view_img</span><span class="p">(</span><span class="n">func_image_mean</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;magma&#39;</span><span class="p">,</span> <span class="n">symmetric_cmap</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2122,7 +1825,7 @@ magic           : b&#39;n+1&#39;
 <p>The last type of <code class="docutils literal notranslate"><span class="pre">neuroimaging</span></code> file we need to check are the (<code class="docutils literal notranslate"><span class="pre">binary</span></code>) <code class="docutils literal notranslate"><span class="pre">masks</span></code>, so let’s do it for one example <code class="docutils literal notranslate"><span class="pre">mask</span></code>: the <code class="docutils literal notranslate"><span class="pre">ventral</span> <span class="pre">temporal</span> <span class="pre">cortex</span></code>. This mask has been generated as part of the Haxby et al. (2001) study <span id="id2">[<a class="reference internal" href="#id6">HGF+01</a>]</span>, and highlights a part of the brain specialized in the processing of visual information, and which contains areas sensitive to different types of image categories <span id="id3">[<a class="reference internal" href="#id5">GSW14</a>]</span> . As with the types before, we can <code class="docutils literal notranslate"><span class="pre">load</span></code>,</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>vt_mask = load_img(haxby_dataset.mask_vt)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vt_mask</span> <span class="o">=</span> <span class="n">load_img</span><span class="p">(</span><span class="n">haxby_dataset</span><span class="o">.</span><span class="n">mask_vt</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2130,7 +1833,7 @@ magic           : b&#39;n+1&#39;
 <p><code class="docutils literal notranslate"><span class="pre">inspect</span></code></p>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(vt_mask.header)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">vt_mask</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2185,12 +1888,12 @@ magic           : b&#39;n+1&#39;
 </div>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>vt_mask.get_data()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vt_mask</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2784/2751075843.py:1: DeprecationWarning: get_data() is deprecated in favor of get_fdata(), which has a more predictable return type. To obtain get_data() behavior going forward, use numpy.asanyarray(img.dataobj).
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/61/0lj9r7px3k52gv9yfyx6ky300000gn/T/ipykernel_23749/2751075843.py:1: DeprecationWarning: get_data() is deprecated in favor of get_fdata(), which has a more predictable return type. To obtain get_data() behavior going forward, use numpy.asanyarray(img.dataobj).
 
 * deprecated from version: 3.0
 * Will raise &lt;class &#39;nibabel.deprecator.ExpiredDeprecationError&#39;&gt; as of version: 5.0
@@ -2510,7 +2213,7 @@ magic           : b&#39;n+1&#39;
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>vt_mask.dataobj.shape
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vt_mask</span><span class="o">.</span><span class="n">dataobj</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -2523,13 +2226,13 @@ magic           : b&#39;n+1&#39;
 <p>and <code class="docutils literal notranslate"><span class="pre">visualize</span></code> it (Here, we are going to plot it as an overlay on the <code class="docutils literal notranslate"><span class="pre">anatomical</span> <span class="pre">image</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plotting.plot_roi(vt_mask, bg_img=anat_image,
-                  cmap=&#39;Paired&#39;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plotting</span><span class="o">.</span><span class="n">plot_roi</span><span class="p">(</span><span class="n">vt_mask</span><span class="p">,</span> <span class="n">bg_img</span><span class="o">=</span><span class="n">anat_image</span><span class="p">,</span>
+                  <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Paired&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f2370dd07c0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7fde17f88fd0&gt;
 </pre></div>
 </div>
 <img alt="_images/haxby_data_46_1.png" src="_images/haxby_data_46_1.png" />
@@ -2544,15 +2247,15 @@ magic           : b&#39;n+1&#39;
 <p>Within our <code class="docutils literal notranslate"><span class="pre">tutorial</span> <span class="pre">dataset</span></code>, this information is included in the <code class="docutils literal notranslate"><span class="pre">session_target</span></code> file. Using <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/index.html">pandas</a> we can easily <code class="docutils literal notranslate"><span class="pre">load</span></code> and <code class="docutils literal notranslate"><span class="pre">inspect</span></code> this file:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import pandas as pd
-stimulus_annotations = pd.read_csv(haxby_dataset.session_target[0], delimiter=&#39; &#39;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">stimulus_annotations</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">haxby_dataset</span><span class="o">.</span><span class="n">session_target</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>stimulus_annotations.head(n=40)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stimulus_annotations</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2787,14 +2490,14 @@ stimulus_annotations = pd.read_csv(haxby_dataset.session_target[0], delimiter=&#
 <p>While this is already informative, let’s plot it to get a better intuition.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import seaborn as sns
-import matplotlib.pyplot as plt
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-ax = sns.scatterplot(x=stimulus_annotations.index, y=stimulus_annotations[&#39;labels&#39;], 
-                     hue=stimulus_annotations[&#39;labels&#39;], legend=False, palette=&#39;colorblind&#39;)
-plt.title(&#39;Categories shown across time&#39;)
-ax.set_xlabel(&#39;Time point/fMRI scan&#39;)
-sns.despine(offset=5)
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">stimulus_annotations</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">stimulus_annotations</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">],</span> 
+                     <span class="n">hue</span><span class="o">=</span><span class="n">stimulus_annotations</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">],</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;colorblind&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Categories shown across time&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time point/fMRI scan&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">despine</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2848,29 +2551,29 @@ sns.despine(offset=5)
 <p>We can examine one functional volume using nilearn’s plotting tools. Because fmri data are 4D we use <a class="reference external" href="https://nilearn.github.io/modules/generated/nilearn.image.mean_img.html#nilearn.image.mean_img">nilearn.image.mean_img</a> to extract the average brain volume.</p>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-from nilearn import datasets
-from nilearn.plotting import show
+<span class="kn">from</span> <span class="nn">nilearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">nilearn.plotting</span> <span class="kn">import</span> <span class="n">show</span>
 
-stimulus_information = haxby_dataset.stimuli
+<span class="n">stimulus_information</span> <span class="o">=</span> <span class="n">haxby_dataset</span><span class="o">.</span><span class="n">stimuli</span>
 
-for stim_type in stimulus_information:
-  # skip control images, there are too many
-  if stim_type != &#39;controls&#39;:
+<span class="k">for</span> <span class="n">stim_type</span> <span class="ow">in</span> <span class="n">stimulus_information</span><span class="p">:</span>
+  <span class="c1"># skip control images, there are too many</span>
+  <span class="k">if</span> <span class="n">stim_type</span> <span class="o">!=</span> <span class="s1">&#39;controls&#39;</span><span class="p">:</span>
 
-     file_names = stimulus_information[stim_type]
-     file_names = file_names[0:16]
-     fig, axes = plt.subplots(4, 4)
-     fig.suptitle(stim_type)
+     <span class="n">file_names</span> <span class="o">=</span> <span class="n">stimulus_information</span><span class="p">[</span><span class="n">stim_type</span><span class="p">]</span>
+     <span class="n">file_names</span> <span class="o">=</span> <span class="n">file_names</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">16</span><span class="p">]</span>
+     <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+     <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">stim_type</span><span class="p">)</span>
 
-     for img_path, ax in zip(file_names, axes.ravel()):
-         ax.imshow(plt.imread(img_path), cmap=plt.cm.gray)
+     <span class="k">for</span> <span class="n">img_path</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">file_names</span><span class="p">,</span> <span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">()):</span>
+         <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">img_path</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">)</span>
 
-     for ax in axes.ravel():
-         ax.axis(&quot;off&quot;)
+     <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">():</span>
+         <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
 
-show()
+<span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -2887,20 +2590,20 @@ show()
 <p>Please note that for each <code class="docutils literal notranslate"><span class="pre">image</span></code> <code class="docutils literal notranslate"><span class="pre">category</span></code>, a number of <code class="docutils literal notranslate"><span class="pre">scrambled</span> <span class="pre">images</span></code> were also presented.</p>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for stim_num in range(len(stimulus_information[&#39;controls&#39;])):
-    stim_type = stimulus_information[&#39;controls&#39;][stim_num][0]
-    file_names = stimulus_information[&#39;controls&#39;][stim_num][1]  
-    file_names = file_names[0:16]
-    fig, axes = plt.subplots(4, 4)
-    fig.suptitle(stim_type)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">stim_num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">stimulus_information</span><span class="p">[</span><span class="s1">&#39;controls&#39;</span><span class="p">])):</span>
+    <span class="n">stim_type</span> <span class="o">=</span> <span class="n">stimulus_information</span><span class="p">[</span><span class="s1">&#39;controls&#39;</span><span class="p">][</span><span class="n">stim_num</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">file_names</span> <span class="o">=</span> <span class="n">stimulus_information</span><span class="p">[</span><span class="s1">&#39;controls&#39;</span><span class="p">][</span><span class="n">stim_num</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>  
+    <span class="n">file_names</span> <span class="o">=</span> <span class="n">file_names</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">16</span><span class="p">]</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">stim_type</span><span class="p">)</span>
 
-    for img_path, ax in zip(file_names, axes.ravel()):
-     ax.imshow(plt.imread(img_path), cmap=plt.cm.gray)
+    <span class="k">for</span> <span class="n">img_path</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">file_names</span><span class="p">,</span> <span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">()):</span>
+     <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">img_path</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">)</span>
 
-    for ax in axes.ravel():
-     ax.axis(&quot;off&quot;)
+    <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">():</span>
+     <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
 
-show()
+<span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>

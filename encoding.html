@@ -30,7 +30,7 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
     
   <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
@@ -585,13 +585,13 @@
 <h2>Basic Imports<a class="headerlink" href="#basic-imports" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-import matplotlib.pyplot as plt 
-%matplotlib inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> 
+<span class="o">%</span><span class="k">matplotlib</span> inline
 
-import warnings
-warnings.filterwarnings(&quot;ignore&quot;)
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -603,9 +603,9 @@ warnings.filterwarnings(&quot;ignore&quot;)
 <p>It can be loaded in the following way.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from nilearn.datasets import fetch_miyawaki2008
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nilearn.datasets</span> <span class="kn">import</span> <span class="n">fetch_miyawaki2008</span>
 
-dataset = fetch_miyawaki2008()
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">fetch_miyawaki2008</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -615,7 +615,28 @@ dataset = fetch_miyawaki2008()
 Downloading data from https://www.nitrc.org/frs/download.php/8486/miyawaki2008.tgz ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 15974400 of 161069109 bytes (9.9%,    9.1s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 39960576 of 161069109 bytes (24.8%,    6.1s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 62767104 of 161069109 bytes (39.0%,    4.7s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 84787200 of 161069109 bytes (52.6%,    3.6s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 105357312 of 161069109 bytes (65.4%,    2.6s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 128557056 of 161069109 bytes (79.8%,    1.5s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 150183936 of 161069109 bytes (93.2%,    0.5s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (8 seconds, 0 min)
 Extracting data from /home/runner/nilearn_data/miyawaki2008/18b67c55cebe5e71427c5ffdcfafd948/miyawaki2008.tgz...
 </pre></div>
 </div>
@@ -626,7 +647,7 @@ Extracting data from /home/runner/nilearn_data/miyawaki2008/18b67c55cebe5e71427c
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>dataset
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span>
 </pre></div>
 </div>
 </div>
@@ -749,17 +770,17 @@ Extracting data from /home/runner/nilearn_data/miyawaki2008/18b67c55cebe5e71427c
 where random binary images were shown.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Training data starts after the first 12 files
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Training data starts after the first 12 files</span>
 
-fmri_random_runs_filenames = dataset.func[12:]
-stimuli_random_runs_filenames = dataset.label[12:]
+<span class="n">fmri_random_runs_filenames</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">func</span><span class="p">[</span><span class="mi">12</span><span class="p">:]</span>
+<span class="n">stimuli_random_runs_filenames</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">label</span><span class="p">[</span><span class="mi">12</span><span class="p">:]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fmri_random_runs_filenames
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fmri_random_runs_filenames</span>
 </pre></div>
 </div>
 </div>
@@ -790,7 +811,7 @@ stimuli_random_runs_filenames = dataset.label[12:]
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>stimuli_random_runs_filenames
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stimuli_random_runs_filenames</span>
 </pre></div>
 </div>
 </div>
@@ -826,13 +847,13 @@ stimuli_random_runs_filenames = dataset.label[12:]
 data, clean and mask it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
-from nilearn.input_data import MultiNiftiMasker
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">nilearn.input_data</span> <span class="kn">import</span> <span class="n">MultiNiftiMasker</span>
 
-masker = MultiNiftiMasker(mask_img=dataset.mask, detrend=True,
-                          standardize=True)
-masker.fit()
-fmri_data = masker.transform(fmri_random_runs_filenames)
+<span class="n">masker</span> <span class="o">=</span> <span class="n">MultiNiftiMasker</span><span class="p">(</span><span class="n">mask_img</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">mask</span><span class="p">,</span> <span class="n">detrend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                          <span class="n">standardize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">masker</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">fmri_data</span> <span class="o">=</span> <span class="n">masker</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">fmri_random_runs_filenames</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -841,7 +862,7 @@ fmri_data = masker.transform(fmri_random_runs_filenames)
 <p><code class="docutils literal notranslate"><span class="pre">#samples</span></code> x <code class="docutils literal notranslate"><span class="pre">#voxels</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(&#39;# runs in fmri data = &#39;,len(fmri_data))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;# runs in fmri data = &#39;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">fmri_data</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -853,7 +874,7 @@ fmri_data = masker.transform(fmri_random_runs_filenames)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(&#39;Dimensions of fmri data (#samples, #voxels) = &#39;, fmri_data[0].shape)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dimensions of fmri data (#samples, #voxels) = &#39;</span><span class="p">,</span> <span class="n">fmri_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -866,21 +887,21 @@ fmri_data = masker.transform(fmri_random_runs_filenames)
 <p>Let’s take a look at some of these BOLD response timecourses:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-runs = [5,10]
-voxels = [100,200]
+<span class="n">runs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">voxels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span><span class="mi">200</span><span class="p">]</span>
 
-num_voxels = len(voxels)
+<span class="n">num_voxels</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">voxels</span><span class="p">)</span>
 
-plt.figure(figsize=(16,6*num_voxels))
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">6</span><span class="o">*</span><span class="n">num_voxels</span><span class="p">))</span>
 
-for i in range(num_voxels):
-  plt.subplot(num_voxels, 1, i+1)
-  plt.xlabel(&#39;TR&#39;)
-  plt.ylabel(&#39;Normalized BOLD&#39;)
-  plt.title(&#39;Run {:d}, Voxel {:d}&#39;.format(runs[i],voxels[i]))
-  plt.plot(fmri_data[runs[i]][:,voxels[i]]);
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_voxels</span><span class="p">):</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">num_voxels</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;TR&#39;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Normalized BOLD&#39;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Run </span><span class="si">{:d}</span><span class="s1">, Voxel </span><span class="si">{:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">runs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">voxels</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fmri_data</span><span class="p">[</span><span class="n">runs</span><span class="p">[</span><span class="n">i</span><span class="p">]][:,</span><span class="n">voxels</span><span class="p">[</span><span class="n">i</span><span class="p">]]);</span>
 </pre></div>
 </div>
 </div>
@@ -893,14 +914,14 @@ for i in range(num_voxels):
 <h3>Stimuli data: Data Extraction<a class="headerlink" href="#stimuli-data-data-extraction" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>stimulus_shape = (10, 10)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stimulus_shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 
-# We load the visual stimuli from csv files
-stimuli_data = []
-for stimulus_run in stimuli_random_runs_filenames:
-    stimuli_data.append(np.reshape(np.loadtxt(stimulus_run,
-                              dtype=np.int, delimiter=&#39;,&#39;),
-                              (-1,) + stimulus_shape, order=&#39;F&#39;))
+<span class="c1"># We load the visual stimuli from csv files</span>
+<span class="n">stimuli_data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">stimulus_run</span> <span class="ow">in</span> <span class="n">stimuli_random_runs_filenames</span><span class="p">:</span>
+    <span class="n">stimuli_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">stimulus_run</span><span class="p">,</span>
+                              <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">),</span>
+                              <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,)</span> <span class="o">+</span> <span class="n">stimulus_shape</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -909,7 +930,7 @@ for stimulus_run in stimuli_random_runs_filenames:
 <p><code class="docutils literal notranslate"><span class="pre">#samples</span></code> x <code class="docutils literal notranslate"><span class="pre">#voxels</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(&#39;# runs in stimuli data = &#39;,len(stimuli_data))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;# runs in stimuli data = &#39;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">stimuli_data</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -921,7 +942,7 @@ for stimulus_run in stimuli_random_runs_filenames:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(&#39;Dimensions of stimuli data (#samples, image_height, image_width) = &#39;, stimuli_data[0].shape)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dimensions of stimuli data (#samples, image_height, image_width) = &#39;</span><span class="p">,</span> <span class="n">stimuli_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -934,27 +955,27 @@ for stimulus_run in stimuli_random_runs_filenames:
 <p>Let’s take a look at some of these binary images:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-runs = [1,3,8]
-trials = [27,125,102]
+<span class="n">runs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">]</span>
+<span class="n">trials</span> <span class="o">=</span> <span class="p">[</span><span class="mi">27</span><span class="p">,</span><span class="mi">125</span><span class="p">,</span><span class="mi">102</span><span class="p">]</span>
 
-num_runs = len(runs)
-num_images = len(trials)
+<span class="n">num_runs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">runs</span><span class="p">)</span>
+<span class="n">num_images</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">trials</span><span class="p">)</span>
 
-subplot_index = 1
+<span class="n">subplot_index</span> <span class="o">=</span> <span class="mi">1</span>
 
-plt.figure(figsize=(4*num_images, 4*num_runs))
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">num_images</span><span class="p">,</span> <span class="mi">4</span><span class="o">*</span><span class="n">num_runs</span><span class="p">))</span>
 
-for i in range(num_runs):
-  for j in range(num_images):
-    plt.subplot(num_runs, num_images, subplot_index)
-    plt.imshow(stimuli_data[runs[i]][trials[j]], interpolation=&#39;nearest&#39;, cmap=&#39;gray&#39;)
-    plt.axis(&#39;off&#39;)
-    plt.title(&#39;Run {}, Stimulus Trial {}&#39;.format(runs[i],trials[j]))
-    subplot_index += 1
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_runs</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_images</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">num_runs</span><span class="p">,</span> <span class="n">num_images</span><span class="p">,</span> <span class="n">subplot_index</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">stimuli_data</span><span class="p">[</span><span class="n">runs</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="n">trials</span><span class="p">[</span><span class="n">j</span><span class="p">]],</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Run </span><span class="si">{}</span><span class="s1">, Stimulus Trial </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">runs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">trials</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
+    <span class="n">subplot_index</span> <span class="o">+=</span> <span class="mi">1</span>
 
-plt.subplots_adjust(wspace=0.5)
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -974,12 +995,12 @@ plt.subplots_adjust(wspace=0.5)
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Delay chosen based on the TR duration to expect a hemodynamic response
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Delay chosen based on the TR duration to expect a hemodynamic response</span>
 
-delay_trials = 2
+<span class="n">delay_trials</span> <span class="o">=</span> <span class="mi">2</span>
 
-fmri_data = np.vstack([fmri_run[delay_trials:] for fmri_run in fmri_data])
-stimuli_data = np.vstack([stimuli_run[:-delay_trials] for stimuli_run in stimuli_data]).astype(float)
+<span class="n">fmri_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">fmri_run</span><span class="p">[</span><span class="n">delay_trials</span><span class="p">:]</span> <span class="k">for</span> <span class="n">fmri_run</span> <span class="ow">in</span> <span class="n">fmri_data</span><span class="p">])</span>
+<span class="n">stimuli_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">stimuli_run</span><span class="p">[:</span><span class="o">-</span><span class="n">delay_trials</span><span class="p">]</span> <span class="k">for</span> <span class="n">stimuli_run</span> <span class="ow">in</span> <span class="n">stimuli_data</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -987,8 +1008,8 @@ stimuli_data = np.vstack([stimuli_run[:-delay_trials] for stimuli_run in stimuli
 <p>Shape of the feature (data) and target matrices</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(&#39;stimuli_data.shape =&#39;,stimuli_data.shape)
-print(&#39;fmri_data.shape =&#39;,fmri_data.shape)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;stimuli_data.shape =&#39;</span><span class="p">,</span><span class="n">stimuli_data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;fmri_data.shape =&#39;</span><span class="p">,</span><span class="n">fmri_data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1003,11 +1024,11 @@ fmri_data.shape = (2860, 5438)
 <p><code class="docutils literal notranslate"><span class="pre">(10,10)</span></code> dimensions need to be flattened into 100-dimensional vectors.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Flatten the stimuli
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Flatten the stimuli</span>
 
-stimuli_data = np.reshape(stimuli_data, (-1, stimulus_shape[0] * stimulus_shape[1]))
+<span class="n">stimuli_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">stimuli_data</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">stimulus_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">stimulus_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
 
-print(&#39;stimuli_data.shape =&#39;,stimuli_data.shape)
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;stimuli_data.shape =&#39;</span><span class="p">,</span><span class="n">stimuli_data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1066,8 +1087,8 @@ $<span class="math notranslate nohighlight">\( \mathbf{\beta} =  (\mathbf{X}^{T}
 <h3>Training the model<a class="headerlink" href="#training-the-model" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from sklearn.linear_model import Ridge
-from sklearn.model_selection import KFold
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Ridge</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
 </pre></div>
 </div>
 </div>
@@ -1077,49 +1098,51 @@ from sklearn.model_selection import KFold
 <p>In each fold, we compute the <span class="math notranslate nohighlight">\(R^2\)</span> scores of the predictions at each voxel and store the values for further analysis.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from sklearn.metrics import r2_score
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span>
 
-cv = KFold(n_splits=10)
+<span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
-scores = []
-for fold, (train, test) in enumerate(cv.split(X=stimuli_data)):
-    print(&#39;fold = [{:d}] :: #train samples = {:d}, #test samples = {:d}&#39;.format(fold,len(train),len(test)))
+<span class="n">scores</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">fold</span><span class="p">,</span> <span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cv</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">stimuli_data</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;fold = [</span><span class="si">{:d}</span><span class="s1">] :: #train samples = </span><span class="si">{:d}</span><span class="s1">, #test samples = </span><span class="si">{:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fold</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">train</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">)))</span>
 
-    # create a ridge model
-    model = Ridge(alpha=100.)
+    <span class="c1"># create a ridge model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">100.</span><span class="p">)</span>
 
-    # train the Ridge model on the training set
-    model.fit(stimuli_data[train], fmri_data[train])
+    <span class="c1"># train the Ridge model on the training set</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">stimuli_data</span><span class="p">[</span><span class="n">train</span><span class="p">],</span> <span class="n">fmri_data</span><span class="p">[</span><span class="n">train</span><span class="p">])</span>
 
-    # and predict the fMRI activity for the test set
-    predictions = model.predict(stimuli_data[test])
+    <span class="c1"># and predict the fMRI activity for the test set</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">stimuli_data</span><span class="p">[</span><span class="n">test</span><span class="p">])</span>
 
-    # we compute how much variance our encoding model explains in each voxel
-    scores.append(r2_score(fmri_data[test], predictions, multioutput=&#39;raw_values&#39;))
+    <span class="c1"># we compute how much variance our encoding model explains in each voxel</span>
+    <span class="n">scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r2_score</span><span class="p">(</span><span class="n">fmri_data</span><span class="p">[</span><span class="n">test</span><span class="p">],</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">multioutput</span><span class="o">=</span><span class="s1">&#39;raw_values&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fold = [0] :: #train samples = 2574, #test samples = 286
-fold = [1] :: #train samples = 2574, #test samples = 286
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fold = [1] :: #train samples = 2574, #test samples = 286
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fold = [2] :: #train samples = 2574, #test samples = 286
-fold = [3] :: #train samples = 2574, #test samples = 286
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fold = [4] :: #train samples = 2574, #test samples = 286
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fold = [3] :: #train samples = 2574, #test samples = 286
+fold = [4] :: #train samples = 2574, #test samples = 286
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fold = [5] :: #train samples = 2574, #test samples = 286
+fold = [6] :: #train samples = 2574, #test samples = 286
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fold = [6] :: #train samples = 2574, #test samples = 286
-fold = [7] :: #train samples = 2574, #test samples = 286
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fold = [7] :: #train samples = 2574, #test samples = 286
+fold = [8] :: #train samples = 2574, #test samples = 286
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fold = [8] :: #train samples = 2574, #test samples = 286
-fold = [9] :: #train samples = 2574, #test samples = 286
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fold = [9] :: #train samples = 2574, #test samples = 286
 </pre></div>
 </div>
 </div>
@@ -1131,14 +1154,14 @@ fold = [9] :: #train samples = 2574, #test samples = 286
 <p>From this we will consider 1 run from the test set of the final fold (which contains 2 runs).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>#Extract only the first run from the test set and predictions
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Extract only the first run from the test set and predictions</span>
 
-actual = fmri_data[test[:len(test)//2]]
+<span class="n">actual</span> <span class="o">=</span> <span class="n">fmri_data</span><span class="p">[</span><span class="n">test</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">]]</span>
 
-predicted = predictions[:len(predictions)//2,:]
+<span class="n">predicted</span> <span class="o">=</span> <span class="n">predictions</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">,:]</span>
 
-print(&#39;   actual.shape (#TRs,#voxels) = &#39;,actual.shape)
-print(&#39;predicted.shape (#TRs,#voxels) = &#39;,predicted.shape)
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   actual.shape (#TRs,#voxels) = &#39;</span><span class="p">,</span><span class="n">actual</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;predicted.shape (#TRs,#voxels) = &#39;</span><span class="p">,</span><span class="n">predicted</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1153,22 +1176,22 @@ predicted.shape (#TRs,#voxels) =  (143, 5438)
 <p>Note that some voxels have a relatively better prediction (voxels 1950, 1951, 1952,etc.), while few others have very bad predictions (voxels 0, 1, 2, 840, 841, etc).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-voxels = [1951,2272,841]
+<span class="n">voxels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1951</span><span class="p">,</span><span class="mi">2272</span><span class="p">,</span><span class="mi">841</span><span class="p">]</span>
 
-num_voxels = len(voxels)
+<span class="n">num_voxels</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">voxels</span><span class="p">)</span>
 
-plt.figure(figsize=(16,6*num_voxels))
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">6</span><span class="o">*</span><span class="n">num_voxels</span><span class="p">))</span>
 
-for i in range(num_voxels):
-  plt.subplot(num_voxels, 1, i+1)
-  plt.xlabel(&#39;TR&#39;)
-  plt.ylabel(&#39;Normalized BOLD&#39;)
-  plt.title(&#39;Voxel {:d}&#39;.format(voxels[i]))
-  plt.plot(actual[:,voxels[i]], label=&#39;actual&#39;)
-  plt.plot(predicted[:,voxels[i]], label=&#39;predicted&#39;)
-  plt.legend();
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_voxels</span><span class="p">):</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">num_voxels</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;TR&#39;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Normalized BOLD&#39;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Voxel </span><span class="si">{:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">voxels</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">actual</span><span class="p">[:,</span><span class="n">voxels</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;actual&#39;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">predicted</span><span class="p">[:,</span><span class="n">voxels</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;predicted&#39;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -1180,21 +1203,21 @@ for i in range(num_voxels):
 <h4>Scatter Plot of actual vs predicted values<a class="headerlink" href="#scatter-plot-of-actual-vs-predicted-values" title="Permalink to this headline">¶</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>voxel = 1956
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">voxel</span> <span class="o">=</span> <span class="mi">1956</span>
 
-plt.figure(figsize=(6,6))
-plt.ylabel(&#39;predicted BOLD&#39;)
-plt.xlabel(&#39;actual BOLD&#39;)
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;predicted BOLD&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;actual BOLD&#39;</span><span class="p">)</span>
 
-lims = [
-    np.min([plt.xlim(), plt.ylim()]),  # min of both axes
-    np.max([plt.xlim(), plt.ylim()]),  # max of both axes
-]
+<span class="n">lims</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">([</span><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(),</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">()]),</span>  <span class="c1"># min of both axes</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(),</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">()]),</span>  <span class="c1"># max of both axes</span>
+<span class="p">]</span>
 
-# x=y line for reference
-plt.plot(lims, lims, &#39;--&#39;, alpha=0.75, zorder=0)
+<span class="c1"># x=y line for reference</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lims</span><span class="p">,</span> <span class="n">lims</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-plt.scatter(actual[:,voxel],predicted[:,voxel]);
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">actual</span><span class="p">[:,</span><span class="n">voxel</span><span class="p">],</span><span class="n">predicted</span><span class="p">[:,</span><span class="n">voxel</span><span class="p">]);</span>
 </pre></div>
 </div>
 </div>
@@ -1206,15 +1229,15 @@ plt.scatter(actual[:,voxel],predicted[:,voxel]);
 <p>The Pearson r is also computed for reference.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from scipy.stats import pearsonr
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">pearsonr</span>
 
-voxel = 1951
+<span class="n">voxel</span> <span class="o">=</span> <span class="mi">1951</span>
 
-pearson_r, _  = pearsonr(actual[:,voxel],predicted[:,voxel])
-r2 = r2_score(actual[:,voxel],predicted[:,voxel])
+<span class="n">pearson_r</span><span class="p">,</span> <span class="n">_</span>  <span class="o">=</span> <span class="n">pearsonr</span><span class="p">(</span><span class="n">actual</span><span class="p">[:,</span><span class="n">voxel</span><span class="p">],</span><span class="n">predicted</span><span class="p">[:,</span><span class="n">voxel</span><span class="p">])</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">actual</span><span class="p">[:,</span><span class="n">voxel</span><span class="p">],</span><span class="n">predicted</span><span class="p">[:,</span><span class="n">voxel</span><span class="p">])</span>
 
-print(&#39;Pearson r at voxel {} = {:.3f}&#39;.format(voxel,pearson_r))
-print(&#39;R2 score at voxel  {} = {:.3f}&#39;.format(voxel,r2))
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Pearson r at voxel </span><span class="si">{}</span><span class="s1"> = </span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">voxel</span><span class="p">,</span><span class="n">pearson_r</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;R2 score at voxel  </span><span class="si">{}</span><span class="s1"> = </span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">voxel</span><span class="p">,</span><span class="n">r2</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1236,18 +1259,18 @@ R2 score at voxel  1951 = 0.657
 <p>The <code class="docutils literal notranslate"><span class="pre">masker</span></code> object used to map the voxels to the data matrix is reused to inverse transform the score matrix to the brain volumne.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from nilearn.image import threshold_img
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nilearn.image</span> <span class="kn">import</span> <span class="n">threshold_img</span>
 
-# Average the score maps accross folds
-score_map = np.mean(scores, axis=0)
+<span class="c1"># Average the score maps accross folds</span>
+<span class="n">score_map</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-# Ignore the negative score values 
-score_map[score_map &lt; 0] = 0
+<span class="c1"># Ignore the negative score values </span>
+<span class="n">score_map</span><span class="p">[</span><span class="n">score_map</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 
-# Bring the scores into the shape of the background brain
-score_map_img = masker.inverse_transform(score_map)
+<span class="c1"># Bring the scores into the shape of the background brain</span>
+<span class="n">score_map_img</span> <span class="o">=</span> <span class="n">masker</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">score_map</span><span class="p">)</span>
 
-thresholded_score_map_img = threshold_img(score_map_img, threshold=1e-6, copy=False)
+<span class="n">thresholded_score_map_img</span> <span class="o">=</span> <span class="n">threshold_img</span><span class="p">(</span><span class="n">score_map_img</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1255,7 +1278,7 @@ thresholded_score_map_img = threshold_img(score_map_img, threshold=1e-6, copy=Fa
 <p>The size of the <code class="docutils literal notranslate"><span class="pre">score_map</span></code> represents the number of voxels for which the scores have been computed.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(&#39;The score_map is of size = &#39;,score_map.shape)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The score_map is of size = &#39;</span><span class="p">,</span><span class="n">score_map</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1268,10 +1291,10 @@ thresholded_score_map_img = threshold_img(score_map_img, threshold=1e-6, copy=Fa
 <p>Finding the voxel with the best prediction</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>best_score = np.max(score_map)
-best_voxel_ix = np.argmax(score_map)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">score_map</span><span class="p">)</span>
+<span class="n">best_voxel_ix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">score_map</span><span class="p">)</span>
 
-print(&#39;Best voxel {} with score {:.4f}&#39;.format(best_voxel_ix,best_score))
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Best voxel </span><span class="si">{}</span><span class="s1"> with score </span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">best_voxel_ix</span><span class="p">,</span><span class="n">best_score</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1284,21 +1307,21 @@ print(&#39;Best voxel {} with score {:.4f}&#39;.format(best_voxel_ix,best_score)
 <p>Finding top k voxels with the best predictive scores.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import pandas as pd
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-# Number of top/bottom voxels to select
-k = 10
+<span class="c1"># Number of top/bottom voxels to select</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">10</span>
 
-# Pick the top voxel indexes and their scores
-top_voxels = np.argsort(score_map)[:-(k+1):-1]
-top_scores = score_map[top_voxels]
+<span class="c1"># Pick the top voxel indexes and their scores</span>
+<span class="n">top_voxels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">score_map</span><span class="p">)[:</span><span class="o">-</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">top_scores</span> <span class="o">=</span> <span class="n">score_map</span><span class="p">[</span><span class="n">top_voxels</span><span class="p">]</span>
 
-# Organize the data into a dataframe for better visualization
-df = pd.DataFrame()
-df[&#39;voxel&#39;] = top_voxels.astype(int)
-df[&#39;score&#39;] = top_scores.round(2)
-df.index += 1
-df
+<span class="c1"># Organize the data into a dataframe for better visualization</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;voxel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">top_voxels</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;score&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">top_scores</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">df</span>
 </pre></div>
 </div>
 </div>
@@ -1385,11 +1408,11 @@ df
 <p>We notice that only a small minority of voxels have higher <span class="math notranslate nohighlight">\(R^2\)</span> score and these are the voxels that are more predictive for the input features.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.figure(figsize=(6,6))
-plt.xlabel(r&#39;$R^2$ value&#39;)
-plt.ylabel(&#39;#voxels&#39;)
-plt.title(r&#39;Histogram of $R^2$ values across voxels&#39;)
-plt.hist(score_map);
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$R^2$ value&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;#voxels&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Histogram of $R^2$ values across voxels&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">score_map</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -1404,11 +1427,11 @@ plt.hist(score_map);
 <p>We can plot first plot the statistical map of the <span class="math notranslate nohighlight">\(R^2\)</span> scores in an interactive plot.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from nilearn import image
-from nilearn import plotting
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nilearn</span> <span class="kn">import</span> <span class="n">image</span>
+<span class="kn">from</span> <span class="nn">nilearn</span> <span class="kn">import</span> <span class="n">plotting</span>
 
-plot = plotting.view_img(thresholded_score_map_img, draw_cross=False, symmetric_cmap=False, cmap=plotting.cm.black_red)
-plot
+<span class="n">plot</span> <span class="o">=</span> <span class="n">plotting</span><span class="o">.</span><span class="n">view_img</span><span class="p">(</span><span class="n">thresholded_score_map_img</span><span class="p">,</span> <span class="n">draw_cross</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">symmetric_cmap</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plotting</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">black_red</span><span class="p">)</span>
+<span class="n">plot</span>
 </pre></div>
 </div>
 </div>
@@ -1458,34 +1481,34 @@ plot
 We mark four voxels (with outlines blue, green, red, pink) which we will inspect more closely in the next section.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from nilearn.plotting import plot_stat_map
-from nilearn.image import coord_transform
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nilearn.plotting</span> <span class="kn">import</span> <span class="n">plot_stat_map</span>
+<span class="kn">from</span> <span class="nn">nilearn.image</span> <span class="kn">import</span> <span class="n">coord_transform</span>
 
-def index_to_xy_coord(x, y, z=10):
-    &#39;&#39;&#39;Transforms data index to coordinates of the background + offset&#39;&#39;&#39;
-    coords = coord_transform(x, y, z,
-                             affine=thresholded_score_map_img.affine)
-    return np.array(coords)[np.newaxis, :] + np.array([0, 1, 0])
-
-
-xy_indices_of_special_voxels = [(30, 10), (32, 10), (31, 9), (31, 10)]
-
-display = plot_stat_map(thresholded_score_map_img, bg_img=dataset.background,
-                        cut_coords=[-8], display_mode=&#39;z&#39;)
-
-# creating a marker for each voxel and adding it to the statistical map
-
-for i, (x, y) in enumerate(xy_indices_of_special_voxels):
-    display.add_markers(index_to_xy_coord(x, y), marker_color=&#39;none&#39;,
-                        edgecolor=[&#39;b&#39;, &#39;r&#39;, &#39;magenta&#39;, &#39;g&#39;][i],
-                        marker_size=140, marker=&#39;s&#39;,
-                        facecolor=&#39;none&#39;, lw=4.5)
+<span class="k">def</span> <span class="nf">index_to_xy_coord</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Transforms data index to coordinates of the background + offset&#39;&#39;&#39;</span>
+    <span class="n">coords</span> <span class="o">=</span> <span class="n">coord_transform</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span>
+                             <span class="n">affine</span><span class="o">=</span><span class="n">thresholded_score_map_img</span><span class="o">.</span><span class="n">affine</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">coords</span><span class="p">)[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
 
 
-# Re-set figure size after construction so colorbar gets rescaled too
-fig = plt.gcf()
-fig.set_size_inches(8, 8)
-#fig.suptitle(&#39;Receptive fields of the marked voxels&#39;, fontsize=25)
+<span class="n">xy_indices_of_special_voxels</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="mi">31</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="mi">31</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
+
+<span class="n">display</span> <span class="o">=</span> <span class="n">plot_stat_map</span><span class="p">(</span><span class="n">thresholded_score_map_img</span><span class="p">,</span> <span class="n">bg_img</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">background</span><span class="p">,</span>
+                        <span class="n">cut_coords</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">8</span><span class="p">],</span> <span class="n">display_mode</span><span class="o">=</span><span class="s1">&#39;z&#39;</span><span class="p">)</span>
+
+<span class="c1"># creating a marker for each voxel and adding it to the statistical map</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">xy_indices_of_special_voxels</span><span class="p">):</span>
+    <span class="n">display</span><span class="o">.</span><span class="n">add_markers</span><span class="p">(</span><span class="n">index_to_xy_coord</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">marker_color</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span>
+                        <span class="n">edgecolor</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;magenta&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span>
+                        <span class="n">marker_size</span><span class="o">=</span><span class="mi">140</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span>
+                        <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">4.5</span><span class="p">)</span>
+
+
+<span class="c1"># Re-set figure size after construction so colorbar gets rescaled too</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="c1">#fig.suptitle(&#39;Receptive fields of the marked voxels&#39;, fontsize=25)</span>
 </pre></div>
 </div>
 </div>
@@ -1511,24 +1534,24 @@ like a white instead of a black pixel, results in a change in activity in the vo
 <p>For a given voxel, the coefficients of the linear model can be accessed to obtain 100 dimensional weights that can be visulaized on 10x10 grid corresponding to the stimulus image.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 
-voxels = [1952,1424,1780,0]
+<span class="n">voxels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1952</span><span class="p">,</span><span class="mi">1424</span><span class="p">,</span><span class="mi">1780</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
 
-num_images = len(voxels)
+<span class="n">num_images</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">voxels</span><span class="p">)</span>
 
-plt.figure(figsize=(6*num_images, 6))
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="o">*</span><span class="n">num_images</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 
-for j in range(num_images):
-    plt.subplot(1, num_images, j+1)
-    plt.imshow(model.coef_[voxels[j]].reshape(10,10))
-    plt.axis(&#39;off&#39;)
-    plt.title(&#39;Voxel {}&#39;.format(voxels[j]))
-    plt.colorbar()
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_images</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_images</span><span class="p">,</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="n">voxels</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Voxel </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">voxels</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
 
-plt.subplots_adjust(wspace=0.25)
-plt.suptitle(&#39;Receptive fields of some random voxels predicted by the Ridge model&#39;);
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Receptive fields of some random voxels predicted by the Ridge model&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -1541,24 +1564,24 @@ plt.suptitle(&#39;Receptive fields of some random voxels predicted by the Ridge 
 <p>Let us now take a look at the receptive fields of the four marked voxels:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 
-voxels = [1780, 1951, 2131, 1935] 
+<span class="n">voxels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1780</span><span class="p">,</span> <span class="mi">1951</span><span class="p">,</span> <span class="mi">2131</span><span class="p">,</span> <span class="mi">1935</span><span class="p">]</span> 
 
-num_images = len(voxels)
+<span class="n">num_images</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">voxels</span><span class="p">)</span>
 
-plt.figure(figsize=(6*num_images, 6))
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="o">*</span><span class="n">num_images</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 
-for j in range(num_images):
-    plt.subplot(1, num_images, j+1)
-    plt.imshow(model.coef_[voxels[j]].reshape(10,10))
-    plt.axis(&#39;off&#39;)
-    plt.title(&#39;Voxel {}&#39;.format(voxels[j]))
-    plt.colorbar()
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_images</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_images</span><span class="p">,</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="n">voxels</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Voxel </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">voxels</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
 
-plt.subplots_adjust(wspace=0.25)
-plt.suptitle(&#39;Receptive fields of the 4 marked voxels predicted by the Ridge model&#39;);
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Receptive fields of the 4 marked voxels predicted by the Ridge model&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -1577,66 +1600,66 @@ set of regression coefficients. We do so to eliminate any insignficant weights t
 <p>We will use the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LassoLarsCV.html"><code class="docutils literal notranslate"><span class="pre">LassoLarsCV</span></code></a> model from scikit-learn for this and plot the receptive fields of the 4 selected voxels. This procedure is very similar to the Ridge fit, but it is done automatically.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from sklearn.linear_model import LassoLarsCV
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LassoLarsCV</span>
 
-# Automatically estimate the sparsity by cross-validation
-lasso = LassoLarsCV(max_iter=10)
+<span class="c1"># Automatically estimate the sparsity by cross-validation</span>
+<span class="n">lasso</span> <span class="o">=</span> <span class="n">LassoLarsCV</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
-# Index values of the voxels marked above
-voxels = [1780, 1951, 2131, 1935]
+<span class="c1"># Index values of the voxels marked above</span>
+<span class="n">voxels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1780</span><span class="p">,</span> <span class="mi">1951</span><span class="p">,</span> <span class="mi">2131</span><span class="p">,</span> <span class="mi">1935</span><span class="p">]</span>
 
-# Mark the same pixel in each receptive field
-marked_pixel = (4, 2)
+<span class="c1"># Mark the same pixel in each receptive field</span>
+<span class="n">marked_pixel</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 
-from matplotlib import gridspec
-from matplotlib.patches import Rectangle
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">gridspec</span>
+<span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="kn">import</span> <span class="n">Rectangle</span>
 
-fig = plt.figure(figsize=(12, 8))
-fig.suptitle(&#39;Receptive fields of the marked voxels&#39;, fontsize=25)
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Receptive fields of the marked voxels&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
 
-# GridSpec allows us to do subplots with more control of the spacing
-gs = gridspec.GridSpec(2, 3)
+<span class="c1"># GridSpec allows us to do subplots with more control of the spacing</span>
+<span class="n">gs</span> <span class="o">=</span> <span class="n">gridspec</span><span class="o">.</span><span class="n">GridSpec</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 
-# Fit the Lasso for each of the three voxels of the upper row
-for i, index in enumerate(voxels[:3]):
+<span class="c1"># Fit the Lasso for each of the three voxels of the upper row</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">voxels</span><span class="p">[:</span><span class="mi">3</span><span class="p">]):</span>
 
-    ax = plt.subplot(gs[0, i])
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
 
-    # Compute receptive field by fitting a lasso model for the encoding 
-    # Reshape the coefficients into the form of the original images
+    <span class="c1"># Compute receptive field by fitting a lasso model for the encoding </span>
+    <span class="c1"># Reshape the coefficients into the form of the original images</span>
 
-    lasso_fit = lasso.fit(stimuli_data, fmri_data[:, index])
-    rf = lasso_fit.coef_.reshape((10, 10))
+    <span class="n">lasso_fit</span> <span class="o">=</span> <span class="n">lasso</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">stimuli_data</span><span class="p">,</span> <span class="n">fmri_data</span><span class="p">[:,</span> <span class="n">index</span><span class="p">])</span>
+    <span class="n">rf</span> <span class="o">=</span> <span class="n">lasso_fit</span><span class="o">.</span><span class="n">coef_</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 
-    # add a black background
-    ax.imshow(np.zeros_like(rf), vmin=0., vmax=1., cmap=&#39;gray&#39;)
-    ax_im = ax.imshow(np.ma.masked_less(rf, 0.1), interpolation=&quot;nearest&quot;,
-                      cmap=[&#39;Blues&#39;, &#39;Greens&#39;, &#39;Reds&#39;][i], vmin=0., vmax=0.75)
-    # add the marked pixel
-    ax.add_patch(Rectangle(
-        (marked_pixel[1] - .5, marked_pixel[0] - .5), 1, 1,
-        facecolor=&#39;none&#39;, edgecolor=&#39;r&#39;, lw=4))
-    plt.axis(&#39;off&#39;)
-    plt.colorbar(ax_im, ax=ax)
+    <span class="c1"># add a black background</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">rf</span><span class="p">),</span> <span class="n">vmin</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    <span class="n">ax_im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_less</span><span class="p">(</span><span class="n">rf</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">,</span>
+                      <span class="n">cmap</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span> <span class="s1">&#39;Greens&#39;</span><span class="p">,</span> <span class="s1">&#39;Reds&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">vmin</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
+    <span class="c1"># add the marked pixel</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">Rectangle</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">marked_pixel</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mf">.5</span><span class="p">,</span> <span class="n">marked_pixel</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mf">.5</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">ax_im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 
-# and then for the voxel at the bottom
+<span class="c1"># and then for the voxel at the bottom</span>
 
-gs.update(left=0., right=1., wspace=0.1)
-ax = plt.subplot(gs[1, 1])
-# Reshape the coefficients into the form of the original images
-lasso_fit = lasso.fit(stimuli_data, fmri_data[:, voxels[3]])
-rf = lasso_fit.coef_.reshape((10, 10))
+<span class="n">gs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="c1"># Reshape the coefficients into the form of the original images</span>
+<span class="n">lasso_fit</span> <span class="o">=</span> <span class="n">lasso</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">stimuli_data</span><span class="p">,</span> <span class="n">fmri_data</span><span class="p">[:,</span> <span class="n">voxels</span><span class="p">[</span><span class="mi">3</span><span class="p">]])</span>
+<span class="n">rf</span> <span class="o">=</span> <span class="n">lasso_fit</span><span class="o">.</span><span class="n">coef_</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 
-ax.imshow(np.zeros_like(rf), vmin=0., vmax=1., cmap=&#39;gray&#39;)
-ax_im = ax.imshow(np.ma.masked_less(rf, 0.1), interpolation=&quot;nearest&quot;,
-                  cmap=&#39;RdPu&#39;, vmin=0., vmax=0.75)
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">rf</span><span class="p">),</span> <span class="n">vmin</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">ax_im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_less</span><span class="p">(</span><span class="n">rf</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">,</span>
+                  <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdPu&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
 
-# add the marked pixel
-ax.add_patch(Rectangle(
-    (marked_pixel[1] - .5, marked_pixel[0] - .5), 1, 1,
-    facecolor=&#39;none&#39;, edgecolor=&#39;r&#39;, lw=4))
-plt.axis(&#39;off&#39;)
-plt.colorbar(ax_im, ax=ax);
+<span class="c1"># add the marked pixel</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">Rectangle</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">marked_pixel</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mf">.5</span><span class="p">,</span> <span class="n">marked_pixel</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mf">.5</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">ax_im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -1661,9 +1684,9 @@ its location in the brain.</p>
 <p>Getting the file paths of these data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Training data is the first 12 files
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Training data is the first 12 files</span>
 
-fmri_figure_runs_filenames, stimuli_figure_runs_filenames = dataset.func[:12], dataset.label[:12]
+<span class="n">fmri_figure_runs_filenames</span><span class="p">,</span> <span class="n">stimuli_figure_runs_filenames</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">func</span><span class="p">[:</span><span class="mi">12</span><span class="p">],</span> <span class="n">dataset</span><span class="o">.</span><span class="n">label</span><span class="p">[:</span><span class="mi">12</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1671,7 +1694,7 @@ fmri_figure_runs_filenames, stimuli_figure_runs_filenames = dataset.func[:12], d
 <p>Using the masker to extract the fmri time series data of the “figure” runs.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fmri_figure_data = masker.transform(fmri_figure_runs_filenames)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fmri_figure_data</span> <span class="o">=</span> <span class="n">masker</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">fmri_figure_runs_filenames</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1679,41 +1702,41 @@ fmri_figure_runs_filenames, stimuli_figure_runs_filenames = dataset.func[:12], d
 <p>Extract the stimulus images of the “figure” runs.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>stimulus_shape = (10, 10)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stimulus_shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 
-# We load the visual stimuli from csv files
-stimuli_figure_data = []
-for stimulus_run in stimuli_figure_runs_filenames:
-    stimuli_figure_data.append(np.reshape(np.loadtxt(stimulus_run,
-                              dtype=np.int, delimiter=&#39;,&#39;),
-                              (-1,) + stimulus_shape, order=&#39;F&#39;))
+<span class="c1"># We load the visual stimuli from csv files</span>
+<span class="n">stimuli_figure_data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">stimulus_run</span> <span class="ow">in</span> <span class="n">stimuli_figure_runs_filenames</span><span class="p">:</span>
+    <span class="n">stimuli_figure_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">stimulus_run</span><span class="p">,</span>
+                              <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">),</span>
+                              <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,)</span> <span class="o">+</span> <span class="n">stimulus_shape</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import pylab as plt
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pylab</span> <span class="k">as</span> <span class="nn">plt</span>
 
-runs = [1,3,8]
-trials = [27,82,118]
+<span class="n">runs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">]</span>
+<span class="n">trials</span> <span class="o">=</span> <span class="p">[</span><span class="mi">27</span><span class="p">,</span><span class="mi">82</span><span class="p">,</span><span class="mi">118</span><span class="p">]</span>
 
-num_runs = len(runs)
-num_images = len(trials)
+<span class="n">num_runs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">runs</span><span class="p">)</span>
+<span class="n">num_images</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">trials</span><span class="p">)</span>
 
-subplot_index = 1
+<span class="n">subplot_index</span> <span class="o">=</span> <span class="mi">1</span>
 
-plt.figure(figsize=(4*num_images, 4*num_runs))
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">num_images</span><span class="p">,</span> <span class="mi">4</span><span class="o">*</span><span class="n">num_runs</span><span class="p">))</span>
 
-for i in range(num_runs):
-  for j in range(num_images):
-    plt.subplot(num_runs, num_images, subplot_index)
-    plt.imshow(stimuli_figure_data[runs[i]][trials[j]], interpolation=&#39;nearest&#39;, cmap=&#39;gray&#39;)
-    plt.axis(&#39;off&#39;)
-    plt.title(&#39;Run {}, Stimulus Trial {}&#39;.format(runs[i],trials[j]))
-    subplot_index += 1
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_runs</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_images</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">num_runs</span><span class="p">,</span> <span class="n">num_images</span><span class="p">,</span> <span class="n">subplot_index</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">stimuli_figure_data</span><span class="p">[</span><span class="n">runs</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="n">trials</span><span class="p">[</span><span class="n">j</span><span class="p">]],</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Run </span><span class="si">{}</span><span class="s1">, Stimulus Trial </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">runs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">trials</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
+    <span class="n">subplot_index</span> <span class="o">+=</span> <span class="mi">1</span>
 
-plt.subplots_adjust(wspace=0.5)
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1724,11 +1747,11 @@ plt.subplots_adjust(wspace=0.5)
 <p>To account for the hemodynamic delay, shift the data by a certain number.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Delay chosen based on the TR duration to expect a hemodynamic response
-delay_trials = 2
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Delay chosen based on the TR duration to expect a hemodynamic response</span>
+<span class="n">delay_trials</span> <span class="o">=</span> <span class="mi">2</span>
 
-fmri_figure_data = np.vstack([fmri_run[delay_trials:] for fmri_run in fmri_figure_data])
-stimuli_figure_data = np.vstack([stimuli_run[:-delay_trials] for stimuli_run in stimuli_figure_data]).astype(float)
+<span class="n">fmri_figure_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">fmri_run</span><span class="p">[</span><span class="n">delay_trials</span><span class="p">:]</span> <span class="k">for</span> <span class="n">fmri_run</span> <span class="ow">in</span> <span class="n">fmri_figure_data</span><span class="p">])</span>
+<span class="n">stimuli_figure_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">stimuli_run</span><span class="p">[:</span><span class="o">-</span><span class="n">delay_trials</span><span class="p">]</span> <span class="k">for</span> <span class="n">stimuli_run</span> <span class="ow">in</span> <span class="n">stimuli_figure_data</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1736,12 +1759,12 @@ stimuli_figure_data = np.vstack([stimuli_run[:-delay_trials] for stimuli_run in 
 <p>Flatten the stimuli and verify that inputs and targets are equal in number.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Flatten the stimuli
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Flatten the stimuli</span>
 
-stimuli_figure_data = np.reshape(stimuli_figure_data, (-1, stimulus_shape[0] * stimulus_shape[1]))
+<span class="n">stimuli_figure_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">stimuli_figure_data</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">stimulus_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">stimulus_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
 
-print(&#39;fmri_figure_data.shape =&#39;,fmri_figure_data.shape) 
-print(&#39;stimuli_figure_data.shape =&#39;,stimuli_figure_data.shape)
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;fmri_figure_data.shape =&#39;</span><span class="p">,</span><span class="n">fmri_figure_data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;stimuli_figure_data.shape =&#39;</span><span class="p">,</span><span class="n">stimuli_figure_data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1759,12 +1782,12 @@ stimuli_figure_data.shape = (1536, 100)
 <p>Consider the actual fmri data extracted for the test set and compute the R2 score.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from sklearn.metrics import r2_score
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span>
 
-actual = fmri_figure_data
-predicted = model.predict(stimuli_figure_data)
+<span class="n">actual</span> <span class="o">=</span> <span class="n">fmri_figure_data</span>
+<span class="n">predicted</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">stimuli_figure_data</span><span class="p">)</span>
 
-test_score_map = r2_score(actual, predicted, multioutput=&#39;raw_values&#39;)
+<span class="n">test_score_map</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">predicted</span><span class="p">,</span> <span class="n">multioutput</span><span class="o">=</span><span class="s1">&#39;raw_values&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1772,26 +1795,26 @@ test_score_map = r2_score(actual, predicted, multioutput=&#39;raw_values&#39;)
 <p>Create the thresholded image for plotting.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from nilearn.image import threshold_img
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nilearn.image</span> <span class="kn">import</span> <span class="n">threshold_img</span>
 
-# Ignore the negative score values 
-test_score_map[test_score_map &lt; 0] = 0
+<span class="c1"># Ignore the negative score values </span>
+<span class="n">test_score_map</span><span class="p">[</span><span class="n">test_score_map</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 
-# Bring the scores into the shape of the background brain
-test_score_map_img = masker.inverse_transform(test_score_map)
+<span class="c1"># Bring the scores into the shape of the background brain</span>
+<span class="n">test_score_map_img</span> <span class="o">=</span> <span class="n">masker</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">test_score_map</span><span class="p">)</span>
 
-thresholded_test_score_map_img = threshold_img(test_score_map_img, threshold=1e-6, copy=False)
+<span class="n">thresholded_test_score_map_img</span> <span class="o">=</span> <span class="n">threshold_img</span><span class="p">(</span><span class="n">test_score_map_img</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from nilearn import image
-from nilearn import plotting
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nilearn</span> <span class="kn">import</span> <span class="n">image</span>
+<span class="kn">from</span> <span class="nn">nilearn</span> <span class="kn">import</span> <span class="n">plotting</span>
 
-plot = plotting.view_img(thresholded_test_score_map_img, draw_cross=False, symmetric_cmap=False, cmap=plotting.cm.black_red)
-plot
+<span class="n">plot</span> <span class="o">=</span> <span class="n">plotting</span><span class="o">.</span><span class="n">view_img</span><span class="p">(</span><span class="n">thresholded_test_score_map_img</span><span class="p">,</span> <span class="n">draw_cross</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">symmetric_cmap</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plotting</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">black_red</span><span class="p">)</span>
+<span class="n">plot</span>
 </pre></div>
 </div>
 </div>
@@ -1839,17 +1862,17 @@ plot
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from nilearn.plotting import plot_stat_map
-from nilearn.image import coord_transform
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nilearn.plotting</span> <span class="kn">import</span> <span class="n">plot_stat_map</span>
+<span class="kn">from</span> <span class="nn">nilearn.image</span> <span class="kn">import</span> <span class="n">coord_transform</span>
 
-display = plot_stat_map(thresholded_test_score_map_img, bg_img=dataset.background,
-                        cut_coords=[-8], display_mode=&#39;z&#39;)
+<span class="n">display</span> <span class="o">=</span> <span class="n">plot_stat_map</span><span class="p">(</span><span class="n">thresholded_test_score_map_img</span><span class="p">,</span> <span class="n">bg_img</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">background</span><span class="p">,</span>
+                        <span class="n">cut_coords</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">8</span><span class="p">],</span> <span class="n">display_mode</span><span class="o">=</span><span class="s1">&#39;z&#39;</span><span class="p">)</span>
 
-# creating a marker for each voxel and adding it to the statistical map
+<span class="c1"># creating a marker for each voxel and adding it to the statistical map</span>
 
-# Re-set figure size after construction so colorbar gets rescaled too
-fig = plt.gcf()
-fig.set_size_inches(8, 8)
+<span class="c1"># Re-set figure size after construction so colorbar gets rescaled too</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

@@ -1,0 +1,44 @@
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+func_image.get_data()
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mExpiredDeprecationError[0m                   Traceback (most recent call last)
+Cell [0;32mIn[14], line 1[0m
+[0;32m----> 1[0m [43mfunc_image[49m[38;5;241;43m.[39;49m[43mget_data[49m[43m([49m[43m)[49m
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/nibabel/deprecator.py:208[0m, in [0;36mDeprecator.__call__.<locals>.deprecator.<locals>.deprecated_func[0;34m(*args, **kwargs)[0m
+[1;32m    205[0m [38;5;129m@functools[39m[38;5;241m.[39mwraps(func)
+[1;32m    206[0m [38;5;28;01mdef[39;00m [38;5;21mdeprecated_func[39m([38;5;241m*[39margs: P[38;5;241m.[39margs, [38;5;241m*[39m[38;5;241m*[39mkwargs: P[38;5;241m.[39mkwargs) [38;5;241m-[39m[38;5;241m>[39m T:
+[1;32m    207[0m     [38;5;28;01mif[39;00m until [38;5;129;01mand[39;00m [38;5;28mself[39m[38;5;241m.[39mis_bad_version(until):
+[0;32m--> 208[0m         [38;5;28;01mraise[39;00m exception(message)
+[1;32m    209[0m     warnings[38;5;241m.[39mwarn(message, warning, stacklevel[38;5;241m=[39m[38;5;241m2[39m)
+[1;32m    210[0m     [38;5;28;01mreturn[39;00m func([38;5;241m*[39margs, [38;5;241m*[39m[38;5;241m*[39mkwargs)
+
+[0;31mExpiredDeprecationError[0m: get_data() is deprecated in favor of get_fdata(), which has a more predictable return type. To obtain get_data() behavior going forward, use numpy.asanyarray(img.dataobj).
+
+* deprecated from version: 3.0
+* Raises <class 'nibabel.deprecator.ExpiredDeprecationError'> as of version: 5.0
+ExpiredDeprecationError: get_data() is deprecated in favor of get_fdata(), which has a more predictable return type. To obtain get_data() behavior going forward, use numpy.asanyarray(img.dataobj).
+
+* deprecated from version: 3.0
+* Raises <class 'nibabel.deprecator.ExpiredDeprecationError'> as of version: 5.0
+
