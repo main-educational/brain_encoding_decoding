@@ -58,7 +58,7 @@ More information and their application can be found in the respective sections o
 :link: https://main-educational.github.io/brain_decoding/haxby_data.html
 **An overview of the Haxby Dataset**
 ^^^
-```{image} https://main-educational.github.io/brain_encoding_decoding/_images/haxby_data_52_0.png
+```{image} https://main-educational.github.io/brain_encoding_decoding/_images/d3731383fc66953ff04a680a4d6671e6cfbaa19d6fda5f0089239e37c384ac71.png
 :height: 100
 ```
 
@@ -75,7 +75,7 @@ Explore this tutorial {fas}`arrow-right`
 
 **Brain decoding with SVM**
 ^^^
-```{image} https://main-educational.github.io/brain_encoding_decoding/_images/svm_decoding_13_0.png
+```{image} https://main-educational.github.io/brain_encoding_decoding/_images/2021c085709559df545bf08eb2ee051f9098c2f5619e666dceeb879ff1801dfb.png
 :height: 100
 ```
 
