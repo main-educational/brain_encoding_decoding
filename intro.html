@@ -1,333 +1,459 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="./" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome &#8212; Introduction to brain decoding &amp; encoding in fMRI</title>
-    
-  <link href="_static/css/theme.css" rel="stylesheet">
-  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+    <title>Welcome &#8212; Introduction to brain decodin in fMRI</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    
-      
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
-    
-  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script src="_static/design-tabs.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="canonical" href="https://main-educational.github.io/brain_encoding_decoding/intro.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="An overview of the Haxby dataset" href="haxby_data.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="index.html">
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
         
       
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+    
+    
       
-      <img src="_static/neurolibre-logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Introduction to brain decoding & encoding in fMRI</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="_static/neurolibre-logo.png" class="logo__image only-light" alt="Introduction to brain decodin in fMRI - Home"/>
+    <script>document.write(`<img src="_static/neurolibre-logo.png" class="logo__image only-dark" alt="Introduction to brain decodin in fMRI - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1 current active">
+                <a class="reference internal" href="#">
+                    Welcome
+                </a>
+            </li>
+        </ul>
         <ul class="nav bd-sidenav">
- <li class="toctree-l1 current">
-  <a class="reference internal" href="#">
-   Welcome
-  </a>
- </li>
-</ul>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="haxby_data.html">
-   An overview of the Haxby dataset
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="svm_decoding.html">
-   Brain decoding with SVM
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="mlp_decoding.html">
-   Brain decoding with MLP
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="gcn_decoding.html">
-   Brain decoding with GCN
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="encoding.html">
-   Brain encoding
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="haxby_data.html">An overview of the Haxby dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="svm_decoding.html">Brain decoding with SVM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mlp_decoding.html">Brain decoding with MLP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gcn_decoding.html">Brain decoding with GCN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encoding.html">Brain encoding</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
         
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/intro.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
     </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/main-educational/brain_encoding_decoding" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/main-educational/brain_encoding_decoding/edit/main/content/intro.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/main-educational/brain_encoding_decoding/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
-            <!-- Source interaction buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/main-educational/brain_encoding_decoding"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/main-educational/brain_encoding_decoding/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/main-educational/brain_encoding_decoding/edit/main/content/intro.md"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/intro.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
 </div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
 
-            <!-- Launch buttons -->
 
-        </div>
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Welcome</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#brain-decoding-vs-encoding">
-   Brain decoding vs. encoding
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#setup">
-   Setup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#instructors">
-   Instructors
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#thanks-and-acknowledgements">
-   Thanks and acknowledgements
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#references">
-   References
-  </a>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brain-decoding-vs-encoding">Brain decoding vs. encoding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructors">Instructors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thanks-and-acknowledgements">Thanks and acknowledgements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Welcome</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#brain-decoding-vs-encoding">
-   Brain decoding vs. encoding
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#setup">
-   Setup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#instructors">
-   Instructors
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#thanks-and-acknowledgements">
-   Thanks and acknowledgements
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#references">
-   References
-  </a>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <!-- #region -->
-<div class="tex2jax_ignore mathjax_ignore section" id="welcome">
-<h1>Welcome<a class="headerlink" href="#welcome" title="Permalink to this headline">¶</a></h1>
-<p><strong>“Introduction to brain decoding &amp; encoding in fMRI”</strong></p>
-<p>This <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">book</span></code> presents an introduction to <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">decoding</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">encoding</span></code> using <code class="docutils literal notranslate"><span class="pre">fMRI</span></code>. It was developed within the <a class="reference external" href="https://main-educational.github.io">educational courses</a>, conducted as part of the <a class="reference external" href="https://www.main2022.org/">Montreal AI and Neuroscience (MAIN) conference</a> in November 2022.</p>
+<section class="tex2jax_ignore mathjax_ignore" id="welcome">
+<h1>Welcome<a class="headerlink" href="#welcome" title="Link to this heading">#</a></h1>
+<p><strong>“Introduction to brain decoding in fMRI”</strong></p>
+<p>This <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">book</span></code> presents an introduction to <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">decoding</span></code> using <code class="docutils literal notranslate"><span class="pre">fMRI</span></code>. It was developed within the <a class="reference external" href="https://main-educational.github.io">educational courses</a>, conducted as part of the <a class="reference external" href="https://www.main2024.org/">Montreal AI and Neuroscience (MAIN) conference</a> in October 2024.</p>
 <p><a class="reference external" href="https://main-educational.github.io/brain_encoding_decoding/intro.html"><img alt="Jupyter Book Badge" src="https://jupyterbook.org/badge.svg" /></a>
 <a class="reference external" href="https://mybinder.org/v2/gh/main-educational/brain_encoding_decoding/HEAD"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a>
-<span class="xref myst"><img alt="Docker Hub" src="https://img.shields.io/docker/pulls/user/repo" /></span>
+<a class="reference internal" href="#"><span class="xref myst"><img alt="Docker Hub" src="https://img.shields.io/docker/pulls/user/repo" /></span></a>
 <a class="reference external" href="https://github.com/main-educational/brain_encoding_decoding/archive/master.zip"><img alt="GitHub size" src="https://img.shields.io/github/repo-size/main-educational/brain_encoding_decoding" /></a>
 <a class="reference external" href="https://github.com/main-educational/brain_encoding_decoding"><img alt="GitHub issues" src="https://img.shields.io/github/issues/main-educational/brain_encoding_decoding?style=plastic" /></a>
 <a class="reference external" href="https://github.com/main-educational/brain_encoding_decoding/pulls"><img alt="GitHub PR" src="https://img.shields.io/github/issues-pr/main-educational/brain_encoding_decoding" /></a>
 <a class="reference external" href="https://github.com/main-educational/brain_encoding_decoding"><img alt="License" src="https://img.shields.io/github/license/main-educational/brain_encoding_decoding" /></a>
 <a class="reference external" href="https://conp.ca/"><img alt="CONP" src="https://img.shields.io/badge/Supported%20by-%20CONP%2FPCNO-red" /></a></p>
-<p>Building upon the prior sections of the <a class="reference external" href="https://main-educational.github.io">educational courses</a>, the here presented resources aim to provide an overview of how <code class="docutils literal notranslate"><span class="pre">decoding</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">encoding</span></code> <code class="docutils literal notranslate"><span class="pre">models</span></code> can be applied to <code class="docutils literal notranslate"><span class="pre">fMRI</span></code> data in order to investigate <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">function</span></code>. Importantly, the respective methods cannot only be utilized to analyze data from <code class="docutils literal notranslate"><span class="pre">biological</span> <span class="pre">agents</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">humans</span></code>, <code class="docutils literal notranslate"><span class="pre">non-human</span> <span class="pre">primates</span></code>, etc.) but also <code class="docutils literal notranslate"><span class="pre">artificial</span> <span class="pre">neural</span> <span class="pre">networks</span></code>, as well as presenting the opportunity to compare processing in both. They are thus core approaches that are prominently used at the intersection of <code class="docutils literal notranslate"><span class="pre">neuroscience</span></code> and <code class="docutils literal notranslate"><span class="pre">AI</span></code>.</p>
-<div class="figure align-default" id="brain-encoding-decoding-fig">
+<p>Building upon the prior sections of the <a class="reference external" href="https://main-educational.github.io">educational courses</a>, the here presented resources aim to provide an overview of how <code class="docutils literal notranslate"><span class="pre">decoding</span> <span class="pre">models</span></code> can be applied to <code class="docutils literal notranslate"><span class="pre">fMRI</span></code> data in order to investigate <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">function</span></code>. Importantly, the respective methods cannot only be utilized to analyze data from <code class="docutils literal notranslate"><span class="pre">biological</span> <span class="pre">agents</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">humans</span></code>, <code class="docutils literal notranslate"><span class="pre">non-human</span> <span class="pre">primates</span></code>, etc.) but also <code class="docutils literal notranslate"><span class="pre">artificial</span> <span class="pre">neural</span> <span class="pre">networks</span></code>, as well as presenting the opportunity to compare processing in both. They are thus core approaches that are prominently used at the intersection of <code class="docutils literal notranslate"><span class="pre">neuroscience</span></code> and <code class="docutils literal notranslate"><span class="pre">AI</span></code>.</p>
+<figure class="align-default" id="brain-encoding-decoding-fig">
 <a class="reference internal image-reference" href="_images/brain-encoding-decoding.png"><img alt="_images/brain-encoding-decoding.png" src="_images/brain-encoding-decoding.png" style="width: 800px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">To test the consistency of representations in artificial neural networks (ANNs) and the brain, it is possible to <strong>encode</strong> brain activity based on ANN presented with similar stimuli, or <strong>decode</strong> brain activity by predicting the expected ANN activity and corresponding annotation of cognitive states. Figure from <a class="reference external" href="https://doi.org/10.1101/407007">Schrimpf et al. (2020)</a> <span id="id1">[<a class="reference internal" href="#id5">SKH+20</a>]</span>, under a <a class="reference external" href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a> license.</span><a class="headerlink" href="#brain-encoding-decoding-fig" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">To test the consistency of representations in artificial neural networks (ANNs) and the brain, it is possible to <strong>encode</strong> brain activity based on ANN presented with similar stimuli, or <strong>decode</strong> brain activity by predicting the expected ANN activity and corresponding annotation of cognitive states. Figure from <a class="reference external" href="https://doi.org/10.1101/407007">Schrimpf et al. (2020)</a> <span id="id1">[<a class="reference internal" href="#id5" title="Martin Schrimpf, Jonas Kubilius, Ha Hong, Najib J Majaj, Rishi Rajalingham, Elias B Issa, Kohitij Kar, Pouya Bashivan, Jonathan Prescott-Roy, Franziska Geiger, Kailyn Schmidt, Daniel L K Yamins, and James J DiCarlo. Brain-Score: which artificial neural network for object recognition is most Brain-Like? bioRxiv, pages 407007, January 2020.">SKH+20</a>]</span>, under a <a class="reference external" href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a> license.</span><a class="headerlink" href="#brain-encoding-decoding-fig" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>The tutorials make heavy use of <a class="reference external" href="https://nilearn.github.io/stable/index.html">nilearn</a> concerning
-manipulating and processing <code class="docutils literal notranslate"><span class="pre">fMRI</span></code> data, as well as <a class="reference external" href="https://scikit-learn.org/stable/">scikit-learn</a> and <a class="reference external" href="https://pytorch.org/">pytorch</a> to apply <code class="docutils literal notranslate"><span class="pre">decoding</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">encoding</span></code> <code class="docutils literal notranslate"><span class="pre">models</span></code> on the data.</p>
-<p>We used the <a class="reference external" href="https://jupyterbook.org/en/stable/intro.html">Jupyter Book</a> framework to provide all materials in an open, structured and interactive manner. ALl pages and section you see here are built from <code class="docutils literal notranslate"><span class="pre">markdown</span></code> files or <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">notebooks</span></code>, allowing you to read through the materials and/or run them, locally or in the cloud. The three symbols on the top right allow to enable full screen mode, link to the underlying <a class="reference external" href="https://github.com/main-educational/brain_encoding_decoding">GitHub repository</a> and allow you to download the respective sections as a <code class="docutils literal notranslate"><span class="pre">pdf</span></code> or <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">notebook</span></code> respectively. Some sections will additionally have a little rocket in that row which will allow you to interactively rerun certain parts via cloud computing (please see the <a class="reference external" href="#Binder">Binder</a> section for more information).</p>
-<div class="section" id="brain-decoding-vs-encoding">
-<h2>Brain decoding vs. encoding<a class="headerlink" href="#brain-decoding-vs-encoding" title="Permalink to this headline">¶</a></h2>
+manipulating and processing <code class="docutils literal notranslate"><span class="pre">fMRI</span></code> data, as well as <a class="reference external" href="https://scikit-learn.org/stable/">scikit-learn</a> and <a class="reference external" href="https://pytorch.org/">pytorch</a> to apply <code class="docutils literal notranslate"><span class="pre">decoding</span> <span class="pre">models</span></code> on the data.</p>
+<p>We used the <a class="reference external" href="https://jupyterbook.org/en/stable/intro.html">Jupyter Book</a> framework to provide all materials in an open, structured and interactive manner. ALl pages and section you see here are built from <code class="docutils literal notranslate"><span class="pre">markdown</span></code> files or <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">notebooks</span></code>, allowing you to read through the materials and/or run them, locally or in the cloud. The three symbols on the top right allow to enable full screen mode, link to the underlying <a class="reference external" href="https://github.com/main-educational/brain_encoding_decoding">GitHub repository</a> and allow you to download the respective sections as a <code class="docutils literal notranslate"><span class="pre">pdf</span></code> or <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">notebook</span></code> respectively. Some sections will additionally have a little rocket in that row which will allow you to interactively rerun certain parts via cloud computing (please see the <a class="reference internal" href="#Binder"><span class="xref myst">Binder</span></a> section for more information).</p>
+<section id="brain-decoding-vs-encoding">
+<h2>Brain decoding vs. encoding<a class="headerlink" href="#brain-decoding-vs-encoding" title="Link to this heading">#</a></h2>
 <p>In short, <code class="docutils literal notranslate"><span class="pre">encoding</span></code> and <code class="docutils literal notranslate"><span class="pre">decoding</span></code> entail contrary operations that can yet be utilized in a complementary manner. <code class="docutils literal notranslate"><span class="pre">Encoding</span> <span class="pre">models</span></code> applied to <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">data</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">fMRI</span></code>, aim to predict <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">responses</span></code>/<code class="docutils literal notranslate"><span class="pre">activity</span></code> based on <code class="docutils literal notranslate"><span class="pre">annotations</span></code> or <code class="docutils literal notranslate"><span class="pre">features</span></code> of the <code class="docutils literal notranslate"><span class="pre">stimuli</span></code> perceived by the <code class="docutils literal notranslate"><span class="pre">participant</span></code>. These can be obtained from a multitude of options, including <code class="docutils literal notranslate"><span class="pre">artificial</span> <span class="pre">neural</span> <span class="pre">networks</span></code> which would allow to relate their <code class="docutils literal notranslate"><span class="pre">processing</span></code> of the <code class="docutils literal notranslate"><span class="pre">stimuli</span></code> to that of <code class="docutils literal notranslate"><span class="pre">biological</span> <span class="pre">agents</span></code>, ie <code class="docutils literal notranslate"><span class="pre">brains</span></code>.
 <code class="docutils literal notranslate"><span class="pre">Decoding</span> <span class="pre">models</span></code> on the other hand comprise <code class="docutils literal notranslate"><span class="pre">models</span></code> with which we aim to <code class="docutils literal notranslate"><span class="pre">estimate</span></code>/<code class="docutils literal notranslate"><span class="pre">predict</span></code> what a <code class="docutils literal notranslate"><span class="pre">participant</span></code> is <code class="docutils literal notranslate"><span class="pre">perceiving</span></code> or <code class="docutils literal notranslate"><span class="pre">doing</span></code> based on <code class="docutils literal notranslate"><span class="pre">recordings</span></code> of <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">responses</span></code>/<code class="docutils literal notranslate"><span class="pre">activity</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">fMRI</span></code>.</p>
-<div class="figure align-default" id="brain-encoding-decoding-example-fig">
+<figure class="align-default" id="brain-encoding-decoding-example-fig">
 <a class="reference internal image-reference" href="_images/brain_encoding_decoding_example.png"><img alt="_images/brain_encoding_decoding_example.png" src="_images/brain_encoding_decoding_example.png" style="width: 800px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">Encoding</span></code> and <code class="docutils literal notranslate"><span class="pre">decoding</span></code> present contrary, yet complementary operations. While the former targets the prediction of <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">activity</span></code>/<code class="docutils literal notranslate"><span class="pre">responses</span></code> based on stimulus percepts/features (e.g. vision &amp; audition), cognitive states or behavior, the latter aims to predict those aspects based on <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">activity</span></code>/<code class="docutils literal notranslate"><span class="pre">responses</span></code>.</span><a class="headerlink" href="#brain-encoding-decoding-example-fig" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">Encoding</span></code> and <code class="docutils literal notranslate"><span class="pre">decoding</span></code> present contrary, yet complementary operations. While the former targets the prediction of <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">activity</span></code>/<code class="docutils literal notranslate"><span class="pre">responses</span></code> based on stimulus percepts/features (e.g. vision &amp; audition), cognitive states or behavior, the latter aims to predict those aspects based on <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">activity</span></code>/<code class="docutils literal notranslate"><span class="pre">responses</span></code>.</span><a class="headerlink" href="#brain-encoding-decoding-example-fig" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>More information and their application can be found in the respective sections of this resource. You can either use the <code class="docutils literal notranslate"><span class="pre">ToC</span></code> on the left or the links below to navigate accordingly.</p>
-<div class="sd-sphinx-override sd-cards-carousel sd-card-cols-3 docutils">
+<div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
 <div class="sd-card sd-sphinx-override sd-m-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header bg-light text-center docutils">
 <p class="sd-card-text"><strong>An overview of the Haxby Dataset</strong></p>
@@ -339,7 +465,7 @@ manipulating and processing <code class="docutils literal notranslate"><span cla
 <div class="sd-card-footer docutils">
 <p class="sd-card-text">Explore this tutorial <span class="fas fa-arrow-right"></span></p>
 </div>
-<a class="sd-stretched-link reference external" href="https://main-educational.github.io/brain_encoding_decoding/haxby_data.html"></a></div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://main-educational.github.io/brain_encoding_decoding/haxby_data.html"><span>https://main-educational.github.io/brain_encoding_decoding/haxby_data.html</span></a></div>
 <div class="sd-card sd-sphinx-override sd-m-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header bg-light text-center docutils">
 <p class="sd-card-text"><strong>Brain decoding with SVM</strong></p>
@@ -351,7 +477,9 @@ manipulating and processing <code class="docutils literal notranslate"><span cla
 <div class="sd-card-footer docutils">
 <p class="sd-card-text">Explore this tutorial <span class="fas fa-arrow-right"></span></p>
 </div>
-<a class="sd-stretched-link reference external" href="https://main-educational.github.io/brain_decoding/svm_decoding.html"></a></div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://main-educational.github.io/brain_decoding/svm_decoding.html"><span>https://main-educational.github.io/brain_decoding/svm_decoding.html</span></a></div>
+</div>
+<div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
 <div class="sd-card sd-sphinx-override sd-m-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header bg-light text-center docutils">
 <p class="sd-card-text"><strong>Brain decoding with MLP</strong></p>
@@ -363,53 +491,39 @@ manipulating and processing <code class="docutils literal notranslate"><span cla
 <div class="sd-card-footer docutils">
 <p class="sd-card-text">Explore this tutorial <span class="fas fa-arrow-right"></span></p>
 </div>
-<a class="sd-stretched-link reference external" href="https://main-educational.github.io/brain_decoding/mlp_decoding.html"></a></div>
-</div>
-<div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://main-educational.github.io/brain_decoding/mlp_decoding.html"><span>https://main-educational.github.io/brain_decoding/mlp_decoding.html</span></a></div>
 <div class="sd-card sd-sphinx-override sd-m-3 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header bg-light text-center docutils">
 <p class="sd-card-text"><strong>Brain decoding with GCN</strong></p>
 </div>
 <div class="sd-card-body text-center docutils">
-<a class="reference internal image-reference" href="https://main-educational.github.io/brain_encoding_decoding/_images/gcn_decoding_9_0.png"><img alt="https://main-educational.github.io/brain_encoding_decoding/_images/gcn_decoding_9_0.png" src="https://main-educational.github.io/brain_encoding_decoding/_images/gcn_decoding_9_0.png" style="height: 100px;" /></a>
+<a class="reference internal image-reference" href="https://main-educational.github.io/brain_encoding_decoding/_images/GCN_pipeline_main2022.png"><img alt="https://main-educational.github.io/brain_encoding_decoding/_images/GCN_pipeline_main2022.png" src="https://main-educational.github.io/brain_encoding_decoding/_images/GCN_pipeline_main2022.png" style="height: 100px;" /></a>
 <p class="sd-card-text">Graph convolutional networks for brain decoding.</p>
 </div>
 <div class="sd-card-footer docutils">
 <p class="sd-card-text">Explore this tutorial <span class="fas fa-arrow-right"></span></p>
 </div>
-<a class="sd-stretched-link reference external" href="https://main-educational.github.io/brain_encoding_decoding/gcn_decoding.html"></a></div>
-<div class="sd-card sd-sphinx-override sd-m-3 sd-shadow-sm sd-card-hover docutils">
-<div class="sd-card-header bg-light text-center docutils">
-<p class="sd-card-text"><strong>Brain encoding</strong></p>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://main-educational.github.io/brain_encoding_decoding/gcn_decoding.html"><span>https://main-educational.github.io/brain_encoding_decoding/gcn_decoding.html</span></a></div>
 </div>
-<div class="sd-card-body text-center docutils">
-<a class="reference internal image-reference" href="https://main-educational.github.io/brain_encoding_decoding/_images/encoding_87_0.png"><img alt="https://main-educational.github.io/brain_encoding_decoding/_images/encoding_87_0.png" src="https://main-educational.github.io/brain_encoding_decoding/_images/encoding_87_0.png" style="height: 100px;" /></a>
-<p class="sd-card-text">Brain encoding using ridge regression.</p>
-</div>
-<div class="sd-card-footer docutils">
-<p class="sd-card-text">Explore this tutorial <span class="fas fa-arrow-right"></span></p>
-</div>
-<a class="sd-stretched-link reference external" href="https://main-educational.github.io/brain_encoding_decoding/gcn_decoding.html"></a></div>
-</div>
-</div>
-<div class="section" id="setup">
-<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <p>There are two ways to run the tutorials: <code class="docutils literal notranslate"><span class="pre">local</span> <span class="pre">installation</span></code> and using free cloud computing provided by <a class="reference external" href="https://mybinder.org/">Binder</a>. As noted below, we strongly recommend the <code class="docutils literal notranslate"><span class="pre">local</span> <span class="pre">installation</span></code>, as the <code class="docutils literal notranslate"><span class="pre">Binder</span></code> option comes with limited computational resources, as well as the missed possibility to directly further explore the <code class="docutils literal notranslate"><span class="pre">approaches</span></code> presented in this tutorial on your own machine.</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-0">
+<label class="sd-tab-label" for="sd-tab-item-0">
 Local installation (Recommended)</label><div class="sd-tab-content docutils">
 <p>For the <code class="docutils literal notranslate"><span class="pre">local</span> <span class="pre">installation</span></code> to work, you need two things: the fitting <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">environment</span></code> and the <code class="docutils literal notranslate"><span class="pre">content</span></code>. Concerning <code class="docutils literal notranslate"><span class="pre">python</span></code>, please have a look at the hint below.</p>
 <div class="tip admonition" id="python-install-tip">
 <p class="admonition-title">Install python</p>
-<p>You need to have access to a terminal with Python 3.
+<p>You need to have access to a <code class="docutils literal notranslate"><span class="pre">terminal</span></code> with <code class="docutils literal notranslate"><span class="pre">Python</span> <span class="pre">3</span></code>.
 If you have setup your environment based on instructions of <a class="reference external" href="https://main-educational.github.io/installation.html">MAIN educational installation guide</a>, you are good to go 🎉</p>
 <p>If it not already the case,
 <a class="reference external" href="https://realpython.com/installing-python/#how-to-check-your-python-version-on-windows">here</a>
 is a quick guide to install python 3 on any OS.</p>
 </div>
 <p>After making sure you have a working <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">installation</span></code>, you need to get the <code class="docutils literal notranslate"><span class="pre">content</span></code> that is going to presented during the tutorial. In more detail, this is done via interactive <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">notebooks</span></code> which you can obtain by following the steps below:</p>
-<ol>
+<ol class="arabic">
 <li><p>Clone/download this repository to your machine and navigate to the directory.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/main-educational/brain_encoding_decoding.git
 <span class="nb">cd</span><span class="w"> </span>brain_encoding_decoding
@@ -419,16 +533,16 @@ is a quick guide to install python 3 on any OS.</p>
 <li><p>We encourage you to use a <code class="docutils literal notranslate"><span class="pre">virtual</span> <span class="pre">environment</span></code> for this tutorial
 (and for all your projects, that’s a good practice).
 To do this, run the following commands in your terminal, it will create the
-<code class="docutils literal notranslate"><span class="pre">environment</span></code> in a folder named <code class="docutils literal notranslate"><span class="pre">env_tuto</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>env_tuto
+<code class="docutils literal notranslate"><span class="pre">environment</span></code> in a folder named <code class="docutils literal notranslate"><span class="pre">main_edu_brain_decoding</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>main_edu_brain_decoding
 </pre></div>
 </div>
 <p>Then the following <code class="docutils literal notranslate"><span class="pre">command</span></code> will <code class="docutils literal notranslate"><span class="pre">activate</span></code> the <code class="docutils literal notranslate"><span class="pre">environment</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>env_tuto/bin/activate
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>main_edu_brain_decoding/bin/activate
 </pre></div>
 </div>
 <p>Finally, you can install the required <code class="docutils literal notranslate"><span class="pre">libraries</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>binder/requirements.txt
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
 </pre></div>
 </div>
 </li>
@@ -443,9 +557,15 @@ To do this, run the following commands in your terminal, it will create the
 <p>Click on the <code class="docutils literal notranslate"><span class="pre">.md</span></code> files. They will be rendered as jupyter notebooks 🎉</p>
 </li>
 </ol>
+<p>Alternatively, you can use <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/index.html">conda/miniconda</a> to create the needed <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">environment</span></code> like so:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/main-educational/brain_encoding_decoding.git
+cd brain_encoding_decoding
+conda env create -f environment.yml
+</pre></div>
+</div>
 </div>
 <input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-1">
+<label class="sd-tab-label" for="sd-tab-item-1">
 Cloud computing with Binder</label><div class="sd-tab-content docutils">
 <p>If you wish to run the tutorial in <code class="docutils literal notranslate"><span class="pre">Binder</span></code>, click on the rocket icon 🚀 in the top right of a given <code class="docutils literal notranslate"><span class="pre">notebook</span></code> to launch it on <code class="docutils literal notranslate"><span class="pre">Binder</span></code>.</p>
 <div class="admonition warning">
@@ -456,33 +576,27 @@ For the full experience, we recommend using the local set up instruction.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="instructors">
-<h2>Instructors<a class="headerlink" href="#instructors" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="instructors">
+<h2>Instructors<a class="headerlink" href="#instructors" title="Link to this heading">#</a></h2>
 <p>This tutorial was prepared and presented by</p>
-<div class="sd-sphinx-override sd-cards-carousel sd-card-cols-3 docutils">
-<div class="sd-card sd-sphinx-override sd-m-1 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-sphinx-override sd-cards-carousel sd-card-cols-2 docutils">
+<div class="sd-card sd-sphinx-override sd-m-3 sd-shadow-sm sd-card-hover docutils">
+<img alt="" class="sd-card-img-top" src="https://avatars.githubusercontent.com/u/104081777?v=4" />
+<div class="sd-card-body text-center docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Pierre-Louis Barbarant</div>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/pbarbarant"><span>https://github.com/pbarbarant</span></a></div>
+<div class="sd-card sd-sphinx-override sd-m-3 sd-shadow-sm sd-card-hover docutils">
 <img alt="" class="sd-card-img-top" src="https://avatars.githubusercontent.com/u/20129524?v=4?s=100" />
 <div class="sd-card-body text-center docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Peer Herholz</div>
 </div>
-<a class="sd-stretched-link reference external" href="https://github.com/PeerHerholz"></a></div>
-<div class="sd-card sd-sphinx-override sd-m-3 sd-shadow-sm sd-card-hover docutils">
-<img alt="" class="sd-card-img-top" src="https://avatars.githubusercontent.com/u/64853244?v=4" />
-<div class="sd-card-body text-center docutils">
-<div class="sd-card-title sd-font-weight-bold docutils">
-Shima Rastegarnia</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/PeerHerholz"><span>https://github.com/PeerHerholz</span></a></div>
 </div>
-<a class="sd-stretched-link reference external" href="https://github.com/srastegarnia"></a></div>
-<div class="sd-card sd-sphinx-override sd-m-3 sd-shadow-sm sd-card-hover docutils">
-<img alt="" class="sd-card-img-top" src="https://pbs.twimg.com/profile_images/1347298788382273536/r9JpUkVT_400x400.jpg" />
-<div class="sd-card-body text-center docutils">
-<div class="sd-card-title sd-font-weight-bold docutils">
-Bertrand Thirion</div>
-</div>
-<a class="sd-stretched-link reference external" href="https://twitter.com/BertrandThirion"></a></div>
-</div>
+<p>It is based on earlier versions created by:</p>
 <div class="sd-sphinx-override sd-cards-carousel sd-card-cols-3 docutils">
 <div class="sd-card sd-sphinx-override sd-m-3 sd-shadow-sm sd-card-hover docutils">
 <img alt="" class="sd-card-img-top" src="https://avatars.githubusercontent.com/u/45263281?v=4" />
@@ -490,26 +604,26 @@ Bertrand Thirion</div>
 <div class="sd-card-title sd-font-weight-bold docutils">
 Isil Bilgin</div>
 </div>
-<a class="sd-stretched-link reference external" href="https://github.com/complexbrains"></a></div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/complexbrains"><span>https://github.com/complexbrains</span></a></div>
 <div class="sd-card sd-sphinx-override sd-m-3 sd-shadow-sm sd-card-hover docutils">
 <img alt="" class="sd-card-img-top" src="https://pbs.twimg.com/profile_images/1542505896386764800/pyC2rgHp_400x400.jpg" />
 <div class="sd-card-body text-center docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Alexandre Pasquiou</div>
 </div>
-<a class="sd-stretched-link reference external" href="https://twitter.com/a_pasquiou"></a></div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://twitter.com/a_pasquiou"><span>https://twitter.com/a_pasquiou</span></a></div>
 <div class="sd-card sd-sphinx-override sd-m-3 sd-shadow-sm sd-card-hover docutils">
 <img alt="" class="sd-card-img-top" src="https://avatars.githubusercontent.com/u/13696562?v=4" />
 <div class="sd-card-body text-center docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 Pravish Sainath</div>
 </div>
-<a class="sd-stretched-link reference external" href="https://github.com/pravishsainath"></a></div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="https://github.com/pravishsainath"><span>https://github.com/pravishsainath</span></a></div>
 </div>
-</div>
-<div class="section" id="thanks-and-acknowledgements">
-<h2>Thanks and acknowledgements<a class="headerlink" href="#thanks-and-acknowledgements" title="Permalink to this headline">¶</a></h2>
-<p>Parts of the tutorial are directly adapted from a <a class="reference external" href="https://nilearn.github.io/auto_examples/plot_decoding_tutorial.html">nilearn tutorial</a> on the so-called <span class="xref myst">Haxby dataset</span>.</p>
+</section>
+<section id="thanks-and-acknowledgements">
+<h2>Thanks and acknowledgements<a class="headerlink" href="#thanks-and-acknowledgements" title="Link to this heading">#</a></h2>
+<p>Parts of the tutorial are directly adapted from a <a class="reference external" href="https://nilearn.github.io/auto_examples/plot_decoding_tutorial.html">nilearn tutorial</a> on the so-called <a class="reference internal" href="#"><span class="xref myst">Haxby dataset</span></a>.</p>
 <p>It was adapted from a prior version which was prepared and presented by
 <a class="reference external" href="https://github.com/pravishsainath">Pravish Sainath</a>
 <a class="reference external" href="https://github.com/srastegarnia">Shima Rastegarnia</a>,
@@ -518,21 +632,23 @@ Pravish Sainath</div>
 <p>Furthermore, some <code class="docutils literal notranslate"><span class="pre">images</span></code> and <code class="docutils literal notranslate"><span class="pre">code</span></code> are used from a previous iteration of this <code class="docutils literal notranslate"><span class="pre">tutorial</span></code>, prepared by <a class="reference external" href="https://github.com/zhangyu2ustc">Dr Yu Zhang</a>.</p>
 <p>We would like to thank the Jupyter community, specifically, the Executable/Jupyter Book and mybinder project for enabling us to create this tutorial. Furthermore, we are grateful for the entire open neuroscience community and the amazing support and resources it provides. This includes the community driven development of data and processing standards, as well as unbelievable amount of software packages that make the here introduced approaches possible to begin with.</p>
 <p>The tutorial is rendered here using <a class="reference external" href="https://github.com/jupyter/jupyter-book">Jupyter Book</a>.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<div class="docutils container" id="id2">
+<div role="list" class="citation-list">
+<div class="citation" id="id5" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">SKH+20</a><span class="fn-bracket">]</span></span>
+<p>Martin Schrimpf, Jonas Kubilius, Ha Hong, Najib J Majaj, Rishi Rajalingham, Elias B Issa, Kohitij Kar, Pouya Bashivan, Jonathan Prescott-Roy, Franziska Geiger, Kailyn Schmidt, Daniel L K Yamins, and James J DiCarlo. Brain-Score: which artificial neural network for object recognition is most Brain-Like? <em>bioRxiv</em>, pages 407007, January 2020.</p>
 </div>
-<div class="section" id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
-<p id="id2"><dl class="citation">
-<dt class="label" id="id5"><span class="brackets"><a class="fn-backref" href="#id1">SKH+20</a></span></dt>
-<dd><p>Martin Schrimpf, Jonas Kubilius, Ha Hong, Najib J Majaj, Rishi Rajalingham, Elias B Issa, Kohitij Kar, Pouya Bashivan, Jonathan Prescott-Roy, Franziska Geiger, Kailyn Schmidt, Daniel L K Yamins, and James J DiCarlo. Brain-Score: which artificial neural network for object recognition is most Brain-Like? <em>bioRxiv</em>, pages 407007, January 2020.</p>
-</dd>
-</dl>
-</p>
+</div>
+</div>
 <hr class="docutils" />
 <!-- #endregion -->
-</div>
+</section>
 <div class="toctree-wrapper compound">
 </div>
-</div>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -546,7 +662,7 @@ Pravish Sainath</div>
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -554,37 +670,98 @@ Pravish Sainath</div>
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="haxby_data.html" title="next page">
-    <div class="prev-next-info">
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="right-next"
+       href="haxby_data.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">An overview of the Haxby dataset</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
+                </footer>
+              
+            </div>
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Peer Herholz, Pierre Bellec, Shima Rastegarnia, Hao-Ting Wang, Loic Tetrel, Bertrand Thirion, Alexis Thual, Isil Bilgin, Alexandre Pasquiou, Pravish Sainath<br/>
-    
-        &copy; Copyright 2022.<br/>
-  </p>
-</footer>
-</main>
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-      </div>
-    </div>
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brain-decoding-vs-encoding">Brain decoding vs. encoding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructors">Instructors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thanks-and-acknowledgements">Thanks and acknowledgements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By The MAIN Educational Team
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

@@ -1,0 +1,52 @@
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.11.10/x64/lib/python3.11/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/opt/hostedtoolcache/Python/3.11.10/x64/lib/python3.11/site-packages/nbclient/client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.10/x64/lib/python3.11/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.10/x64/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.10/x64/lib/python3.11/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/opt/hostedtoolcache/Python/3.11.10/x64/lib/python3.11/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.11.10/x64/lib/python3.11/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import sys
+sys.path.append('../src')
+from graph_construction import make_group_graph
+
+# make a graph for the subject
+graph = make_group_graph([conn], self_loops=False, k=8, symmetric=True)
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [0;32mIn[4], line 3[0m
+[1;32m      1[0m [38;5;28;01mimport[39;00m [38;5;21;01msys[39;00m
+[1;32m      2[0m sys[38;5;241m.[39mpath[38;5;241m.[39mappend([38;5;124m'[39m[38;5;124m../src[39m[38;5;124m'[39m)
+[0;32m----> 3[0m [38;5;28;01mfrom[39;00m [38;5;21;01mgraph_construction[39;00m [38;5;28;01mimport[39;00m make_group_graph
+[1;32m      5[0m [38;5;66;03m# make a graph for the subject[39;00m
+[1;32m      6[0m graph [38;5;241m=[39m make_group_graph([conn], self_loops[38;5;241m=[39m[38;5;28;01mFalse[39;00m, k[38;5;241m=[39m[38;5;241m8[39m, symmetric[38;5;241m=[39m[38;5;28;01mTrue[39;00m)
+
+File [0;32m~/work/brain_encoding_decoding/brain_encoding_decoding/content/../src/graph_construction.py:3[0m
+[1;32m      1[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
+[1;32m      2[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch[39;00m
+[0;32m----> 3[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch_geometric[39;00m [38;5;28;01mas[39;00m [38;5;21;01mtg[39;00m
+[1;32m      6[0m [38;5;28;01mdef[39;00m [38;5;21m_make_undirected[39m(mat):
+[1;32m      7[0m [38;5;250m    [39m[38;5;124;03m"""[39;00m
+[1;32m      8[0m [38;5;124;03m    Takes an input adjacency matrix and makes it undirected (symmetric).[39;00m
+[1;32m      9[0m 
+[0;32m   (...)[0m
+[1;32m     13[0m [38;5;124;03m        Square adjacency matrix.[39;00m
+[1;32m     14[0m [38;5;124;03m    """[39;00m
+
+[0;31mModuleNotFoundError[0m: No module named 'torch_geometric'
+

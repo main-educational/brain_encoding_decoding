@@ -1,381 +1,477 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="./" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Brain decoding with GCN &#8212; Introduction to brain decoding &amp; encoding in fMRI</title>
-    
-  <link href="_static/css/theme.css" rel="stylesheet">
-  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+    <title>Brain decoding with GCN &#8212; Introduction to brain decodin in fMRI</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    
-      
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
-    
-  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script src="_static/design-tabs.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'gcn_decoding';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="canonical" href="https://main-educational.github.io/brain_encoding_decoding/gcn_decoding.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Brain encoding" href="encoding.html" />
     <link rel="prev" title="Brain decoding with MLP" href="mlp_decoding.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="index.html">
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="_static/neurolibre-logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Introduction to brain decoding & encoding in fMRI</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="intro.html">
-   Welcome
-  </a>
- </li>
+    
+    
+    <img src="_static/neurolibre-logo.png" class="logo__image only-light" alt="Introduction to brain decodin in fMRI - Home"/>
+    <script>document.write(`<img src="_static/neurolibre-logo.png" class="logo__image only-dark" alt="Introduction to brain decodin in fMRI - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="haxby_data.html">An overview of the Haxby dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="svm_decoding.html">Brain decoding with SVM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mlp_decoding.html">Brain decoding with MLP</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Brain decoding with GCN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encoding.html">Brain encoding</a></li>
 </ul>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="haxby_data.html">
-   An overview of the Haxby dataset
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="svm_decoding.html">
-   Brain decoding with SVM
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="mlp_decoding.html">
-   Brain decoding with MLP
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Brain decoding with GCN
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="encoding.html">
-   Brain encoding
-  </a>
- </li>
-</ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/gcn_decoding.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+</nav></div>
     </div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
-            <!-- Source interaction buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/main-educational/brain_encoding_decoding"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/main-educational/brain_encoding_decoding/issues/new?title=Issue%20on%20page%20%2Fgcn_decoding.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/main-educational/brain_encoding_decoding/edit/main/content/gcn_decoding.ipynb"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
     </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/main-educational/brain_encoding_decoding/main?urlpath=tree/content/gcn_decoding.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
 
-            <!-- Launch buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/main-educational/brain_encoding_decoding/main?urlpath=tree/content/gcn_decoding.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/main-educational/brain_encoding_decoding" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/main-educational/brain_encoding_decoding/edit/main/content/gcn_decoding.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/main-educational/brain_encoding_decoding/issues/new?title=Issue%20on%20page%20%2Fgcn_decoding.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/gcn_decoding.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
     </div>
+  
 </div>
+</div>
+              
+              
 
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Brain decoding with GCN</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#brain-graph-representation">
-   Brain graph representation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#graph-convolution-network-gcn">
-   Graph Convolution Network (GCN)
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#getting-the-data">
-   Getting the data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#create-brain-graph-for-gcn">
-   Create brain graph for GCN
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#preparing-the-dataset-for-model-training">
-   Preparing the dataset for model training
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#generating-a-gcn-model">
-   Generating a GCN model
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#train-and-evaluating-the-model">
-   Train and evaluating the model
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   Exercises
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#references">
-   References
-  </a>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brain-graph-representation">Brain graph representation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-convolution-network-gcn">Graph Convolution Network (GCN)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-data">Getting the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-brain-graph-for-gcn">Create brain graph for GCN</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-dataset-for-model-training">Preparing the dataset for model training</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-a-gcn-model">Generating a GCN model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-and-evaluating-the-model">Train and evaluating the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Brain decoding with GCN</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#brain-graph-representation">
-   Brain graph representation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#graph-convolution-network-gcn">
-   Graph Convolution Network (GCN)
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#getting-the-data">
-   Getting the data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#create-brain-graph-for-gcn">
-   Create brain graph for GCN
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#preparing-the-dataset-for-model-training">
-   Preparing the dataset for model training
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#generating-a-gcn-model">
-   Generating a GCN model
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#train-and-evaluating-the-model">
-   Train and evaluating the model
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   Exercises
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#references">
-   References
-  </a>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="brain-decoding-with-gcn">
-<h1>Brain decoding with GCN<a class="headerlink" href="#brain-decoding-with-gcn" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="brain-graph-representation">
-<h2>Brain graph representation<a class="headerlink" href="#brain-graph-representation" title="Permalink to this headline">¶</a></h2>
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="brain-decoding-with-gcn">
+<h1>Brain decoding with GCN<a class="headerlink" href="#brain-decoding-with-gcn" title="Link to this heading">#</a></h1>
+<section id="brain-graph-representation">
+<h2>Brain graph representation<a class="headerlink" href="#brain-graph-representation" title="Link to this heading">#</a></h2>
 <p>Graph signal processing is a new tool to model brain organization and function. The brain is composed of several Region of Interests(ROIs). Brain graphs provide an efficient way for modeling the human brain connectome, by associating nodes to the brain regions, and defining edges via anatomical or functional connections. These ROIs are connected to some regions of interests with the highest connectivity.
 <br/><br/></p>
 <a class="reference internal image-reference" href="_images/Brain_connectivity_graph.png"><img alt="_images/Brain_connectivity_graph.png" src="_images/Brain_connectivity_graph.png" style="width: 545px; height: 194px;" /></a>
 <p>Representation of Brain connectivity by graph theory.
 Image source:<a class="reference external" href="https://atcold.github.io/pytorch-Deep-Learning/en/week13/13-1/">https://atcold.github.io/pytorch-Deep-Learning/en/week13/13-1/</a></p>
-</div>
-<div class="section" id="graph-convolution-network-gcn">
-<h2>Graph Convolution Network (GCN)<a class="headerlink" href="#graph-convolution-network-gcn" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="graph-convolution-network-gcn">
+<h2>Graph Convolution Network (GCN)<a class="headerlink" href="#graph-convolution-network-gcn" title="Link to this heading">#</a></h2>
 <p><br/><br/>
 <a class="reference internal" href="_images/GCN_pipeline_main2022.png"><img alt="_images/GCN_pipeline_main2022.png" src="_images/GCN_pipeline_main2022.png" style="width: 680px; height: 335px;" /></a></p>
 <p>Schematic view of brain decoding using graph convolution network. Model is adapted from Zhang and colleagues (2021).
 <strong>a)</strong> Bold time series are used to construct the brain graph by associating nodes to predefined brain regions (parcels) and indicating edges between each pair of brain regions based on the strength of their connections. Then, both brain graph and time-series matrix are imported into the graph convolutional network
 <strong>b)</strong> The decoding model consists of three graph convolutional layers with 32 ChebNet graph filters at each layer,  followed by a global average pooling layer, two fully connected layers (MLP, consisting of 256-128 units) and softmax function. This pipeline generates task-specific representations of recorded brain activities and predicts the corresponding cognitive states.</p>
-</div>
-<div class="section" id="getting-the-data">
-<h2>Getting the data<a class="headerlink" href="#getting-the-data" title="Permalink to this headline">¶</a></h2>
-<p>We are going to download the dataset from Haxby and colleagues (2001) <span id="id1">[<a class="reference internal" href="haxby_data.html#id6">HGF+01</a>]</span>. You can check <a class="reference internal" href="haxby_data.html#haxby-dataset"><span class="std std-ref">An overview of the Haxby dataset</span></a> section for more details on that dataset. Here we are going to quickly download it, and prepare it for machine learning applications with a set of predictive variable, the brain time series, and a dependent variable, the annotation on cognition.</p>
+</section>
+<section id="getting-the-data">
+<h2>Getting the data<a class="headerlink" href="#getting-the-data" title="Link to this heading">#</a></h2>
+<p>We are going to download the dataset from Haxby and colleagues (2001) <span id="id1">[<a class="reference internal" href="haxby_data.html#id6" title="J V Haxby, M I Gobbini, M L Furey, A Ishai, J L Schouten, and P Pietrini. Distributed and overlapping representations of faces and objects in ventral temporal cortex. Science, 293(5539):2425–2430, September 2001.">HGF+01</a>]</span>. You can check <a class="reference internal" href="haxby_data.html#haxby-dataset"><span class="std std-ref">An overview of the Haxby dataset</span></a> section for more details on that dataset. Here we are going to quickly download it, and prepare it for machine learning applications with a set of predictive variable, the brain time series, and a dependent variable, the annotation on cognition.</p>
 <div class="cell tag_hide_input tag_hide_output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -404,13 +500,14 @@ Image source:<a class="reference external" href="https://atcold.github.io/pytorc
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/nilearn/datasets/func.py:20: DeprecationWarning: Please use `MatReadError` from the `scipy.io.matlab` namespace, the `scipy.io.matlab.miobase` namespace is deprecated.
-  from scipy.io.matlab.miobase import MatReadError
-/opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/nilearn/datasets/__init__.py:93: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
-  warn(&quot;Fetchers from the nilearn.datasets module will be &quot;
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.11.10/x64/lib/python3.11/site-packages/nilearn/input_data/__init__.py:23: DeprecationWarning: The import path &#39;nilearn.input_data&#39; is deprecated in version 0.9. Importing from &#39;nilearn.input_data&#39; will be possible at least until release 0.13.0. Please import from &#39;nilearn.maskers&#39; instead.
+  warnings.warn(message, DeprecationWarning)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dataset created in ../data/haxby2001
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Added README.md to ../data
+
+
+Dataset created in ../data/haxby2001
 
 Downloading data from https://www.nitrc.org/frs/download.php/7868/mask.nii.gz ...
 </pre></div>
@@ -427,25 +524,31 @@ Downloading data from https://www.nitrc.org/frs/download.php/7868/mask.nii.gz ..
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from http://data.pymvpa.org/datasets/haxby2001/subj4-2010.01.14.tar.gz ...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 38535168 of 329954386 bytes (11.7%,    7.6s remaining)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 15908864 of 329954386 bytes (4.8%,   20.3s remaining)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 92831744 of 329954386 bytes (28.1%,    5.2s remaining)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 47423488 of 329954386 bytes (14.4%,   12.5s remaining)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 136232960 of 329954386 bytes (41.3%,    4.3s remaining)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 69558272 of 329954386 bytes (21.1%,   11.8s remaining)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 179044352 of 329954386 bytes (54.3%,    3.4s remaining)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 111304704 of 329954386 bytes (33.7%,    8.2s remaining)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 226803712 of 329954386 bytes (68.7%,    2.3s remaining)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 157245440 of 329954386 bytes (47.7%,    5.7s remaining)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 283230208 of 329954386 bytes (85.8%,    1.0s remaining)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 206807040 of 329954386 bytes (62.7%,    3.7s remaining)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (7 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 255582208 of 329954386 bytes (77.5%,    2.1s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 304947200 of 329954386 bytes (92.4%,    0.7s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (9 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Extracting data from ../data/haxby2001/622d4f5d4b8f14a567901606c924e90d/subj4-2010.01.14.tar.gz...
@@ -459,6 +562,12 @@ Downloading data from https://www.nitrc.org/frs/download.php/7868/mask.nii.gz ..
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 Extracting data from ../data/haxby2001/5cd78c74b711572c7f41a5bddb69abca/stimuli-2010.01.14.tar.gz..... done.
+/opt/hostedtoolcache/Python/3.11.10/x64/lib/python3.11/site-packages/nilearn/image/resampling.py:492: UserWarning: The provided image has no sform in its header. Please check the provided file. Results may not be as expected.
+  warnings.warn(
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.11.10/x64/lib/python3.11/site-packages/joblib/memory.py:312: DeprecationWarning: The default strategy for standardize is currently &#39;zscore&#39; which incorrectly uses population std to calculate sample zscores. The new strategy &#39;zscore_sample&#39; corrects this behavior by using the sample std. In release 0.13, the default strategy will be replaced by the new strategy and the &#39;zscore&#39; option will be removed. Please use &#39;zscore_sample&#39; instead.
+  return self.func(*args, **kwargs)
 </pre></div>
 </div>
 </div>
@@ -483,9 +592,9 @@ X: (1452, 675)
 </div>
 </div>
 <p>So we have 1452 time points in the imaging data, and for each time point we have recordings of fMRI activity across 675 brain regions.</p>
-</div>
-<div class="section" id="create-brain-graph-for-gcn">
-<h2>Create brain graph for GCN<a class="headerlink" href="#create-brain-graph-for-gcn" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="create-brain-graph-for-gcn">
+<h2>Create brain graph for GCN<a class="headerlink" href="#create-brain-graph-for-gcn" title="Link to this heading">#</a></h2>
 <p>A key component of GCN is brain graph.
 Brain graph provides a network representation of brain organization by associating nodes to brain regions and defining edges via anatomical or functional connections.
 After generating time series, we will firstly use the nilearn function to geneate a correlation based functional connectome.</p>
@@ -520,10 +629,14 @@ After generating time series, we will firstly use the nilearn function to geneat
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.11.10/x64/lib/python3.11/site-packages/nilearn/connectome/connectivity_matrices.py:507: DeprecationWarning: The default strategy for standardize is currently &#39;zscore&#39; which incorrectly uses population std to calculate sample zscores. The new strategy &#39;zscore_sample&#39; corrects this behavior by using the sample std. In release 0.13, the default strategy will be replaced by the new strategy and the &#39;zscore&#39; option will be removed. Please use &#39;zscore_sample&#39; instead.
+  covariances_std = [
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Correlation matrix shape: (675, 675)
 </pre></div>
 </div>
-<img alt="_images/gcn_decoding_5_1.png" src="_images/gcn_decoding_5_1.png" />
+<img alt="_images/736b82156e36a0a3652f7ab309ce03b84f9d019a25fd60d88434fad30b1daf68.png" src="_images/736b82156e36a0a3652f7ab309ce03b84f9d019a25fd60d88434fad30b1daf68.png" />
 </div>
 </div>
 <p>The next step is to construct the brain graph for GCN.</p>
@@ -543,10 +656,36 @@ For the purpose of demostration, we constrain the graph to from clusters with <s
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">sys</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../src&#39;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">graph_construction</span> <span class="kn">import</span> <span class="n">make_group_graph</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># make a graph for the subject</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">graph</span> <span class="o">=</span> <span class="n">make_group_graph</span><span class="p">([</span><span class="n">conn</span><span class="p">],</span> <span class="n">self_loops</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">File</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">brain_encoding_decoding</span><span class="o">/</span><span class="n">brain_encoding_decoding</span><span class="o">/</span><span class="n">content</span><span class="o">/../</span><span class="n">src</span><span class="o">/</span><span class="n">graph_construction</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">torch</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">torch_geometric</span> <span class="k">as</span> <span class="nn">tg</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="k">def</span> <span class="nf">_make_undirected</span><span class="p">(</span><span class="n">mat</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span><span class="sd">     Takes an input adjacency matrix and makes it undirected (symmetric).</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span><span class="sd">         Square adjacency matrix.</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span><span class="sd">     &quot;&quot;&quot;</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;torch_geometric&#39;
+</pre></div>
 </div>
 </div>
-<div class="section" id="preparing-the-dataset-for-model-training">
-<h2>Preparing the dataset for model training<a class="headerlink" href="#preparing-the-dataset-for-model-training" title="Permalink to this headline">¶</a></h2>
+</div>
+</section>
+<section id="preparing-the-dataset-for-model-training">
+<h2>Preparing the dataset for model training<a class="headerlink" href="#preparing-the-dataset-for-model-training" title="Link to this heading">#</a></h2>
 <p>The trials for different object categories are scattered in the experiment.
 Firstly we will concatenated the volumes of the same category together.</p>
 <div class="cell docutils container">
@@ -687,9 +826,9 @@ Labels batch shape: torch.Size([10]); mean 2.5999999046325684
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="generating-a-gcn-model">
-<h2>Generating a GCN model<a class="headerlink" href="#generating-a-gcn-model" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="generating-a-gcn-model">
+<h2>Generating a GCN model<a class="headerlink" href="#generating-a-gcn-model" title="Link to this heading">#</a></h2>
 <p>We have created a GCN of the following property:</p>
 <ul class="simple">
 <li><p><strong>3</strong> graph convolutional layers</p></li>
@@ -725,9 +864,9 @@ Labels batch shape: torch.Size([10]); mean 2.5999999046325684
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="train-and-evaluating-the-model">
-<h2>Train and evaluating the model<a class="headerlink" href="#train-and-evaluating-the-model" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="train-and-evaluating-the-model">
+<h2>Train and evaluating the model<a class="headerlink" href="#train-and-evaluating-the-model" title="Link to this heading">#</a></h2>
 <p>We will use a procedure called backpropagation to train the model.
 When we training the model with the first batch of data, the accuarcy and loss will be pretty poor.
 Backpropagation is an algorithm to update the model based on the rate of loss.
@@ -798,928 +937,382 @@ Here the choice of loss function is <code class="docutils literal notranslate"><
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/25
 -------------------------------
 #    0;	train_loss: 2.210;	train_accuracy:  0.0%		[    0/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 1.862;	train_accuracy: 40.0%		[  100/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 1.909;	train_accuracy: 40.0%		[  200/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 1.880;	train_accuracy: 40.0%		[  300/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 2.055;	train_accuracy: 30.0%		[  400/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 1.545;	train_accuracy: 60.0%		[  500/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 1.644;	train_accuracy: 50.0%		[  600/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 1.511;	train_accuracy: 60.0%		[  700/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 2.151;	train_accuracy: 30.0%		[  800/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 1.991;	train_accuracy: 30.0%		[  900/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 1.822;	train_accuracy: 40.0%		[ 1000/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
+#   10;	train_loss: 1.862;	train_accuracy: 40.0%		[  100/ 1016]
+#   20;	train_loss: 1.909;	train_accuracy: 40.0%		[  200/ 1016]
+#   30;	train_loss: 1.880;	train_accuracy: 40.0%		[  300/ 1016]
+#   40;	train_loss: 2.055;	train_accuracy: 30.0%		[  400/ 1016]
+#   50;	train_loss: 1.545;	train_accuracy: 60.0%		[  500/ 1016]
+#   60;	train_loss: 1.644;	train_accuracy: 50.0%		[  600/ 1016]
+#   70;	train_loss: 1.511;	train_accuracy: 60.0%		[  700/ 1016]
+#   80;	train_loss: 2.151;	train_accuracy: 30.0%		[  800/ 1016]
+#   90;	train_loss: 1.991;	train_accuracy: 30.0%		[  900/ 1016]
+#  100;	train_loss: 1.822;	train_accuracy: 40.0%		[ 1000/ 1016]
+Valid metrics:
 	 avg_loss: 0.177827;	 avg_accuracy: 43.4%
 Epoch 2/25
 -------------------------------
 #    0;	train_loss: 1.815;	train_accuracy: 30.0%		[    0/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 1.953;	train_accuracy: 30.0%		[  100/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 1.549;	train_accuracy: 40.0%		[  200/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 2.179;	train_accuracy: 20.0%		[  300/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 2.002;	train_accuracy: 40.0%		[  400/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 1.966;	train_accuracy: 20.0%		[  500/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 1.560;	train_accuracy: 60.0%		[  600/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 1.871;	train_accuracy: 40.0%		[  700/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 2.170;	train_accuracy: 30.0%		[  800/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 1.548;	train_accuracy: 60.0%		[  900/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 1.757;	train_accuracy: 50.0%		[ 1000/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.155730;	 avg_accuracy: 48.6%
+#   10;	train_loss: 1.953;	train_accuracy: 30.0%		[  100/ 1016]
+#   20;	train_loss: 1.549;	train_accuracy: 40.0%		[  200/ 1016]
+#   30;	train_loss: 2.179;	train_accuracy: 20.0%		[  300/ 1016]
+#   40;	train_loss: 2.002;	train_accuracy: 40.0%		[  400/ 1016]
+#   50;	train_loss: 1.966;	train_accuracy: 20.0%		[  500/ 1016]
+#   60;	train_loss: 1.559;	train_accuracy: 60.0%		[  600/ 1016]
+#   70;	train_loss: 1.871;	train_accuracy: 40.0%		[  700/ 1016]
+#   80;	train_loss: 2.170;	train_accuracy: 30.0%		[  800/ 1016]
+#   90;	train_loss: 1.548;	train_accuracy: 60.0%		[  900/ 1016]
+#  100;	train_loss: 1.757;	train_accuracy: 50.0%		[ 1000/ 1016]
+Valid metrics:
+	 avg_loss: 0.155729;	 avg_accuracy: 48.6%
 Epoch 3/25
 -------------------------------
 #    0;	train_loss: 1.833;	train_accuracy: 30.0%		[    0/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 1.531;	train_accuracy: 60.0%		[  100/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 1.439;	train_accuracy: 50.0%		[  200/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 1.271;	train_accuracy: 60.0%		[  300/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 1.097;	train_accuracy: 70.0%		[  400/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 1.350;	train_accuracy: 50.0%		[  500/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 1.045;	train_accuracy: 60.0%		[  600/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 2.200;	train_accuracy: 20.0%		[  700/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 1.559;	train_accuracy: 40.0%		[  800/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 1.638;	train_accuracy: 60.0%		[  900/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 1.644;	train_accuracy: 50.0%		[ 1000/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.134934;	 avg_accuracy: 56.9%
+#   10;	train_loss: 1.531;	train_accuracy: 60.0%		[  100/ 1016]
+#   20;	train_loss: 1.439;	train_accuracy: 50.0%		[  200/ 1016]
+#   30;	train_loss: 1.271;	train_accuracy: 60.0%		[  300/ 1016]
+#   40;	train_loss: 1.097;	train_accuracy: 70.0%		[  400/ 1016]
+#   50;	train_loss: 1.350;	train_accuracy: 50.0%		[  500/ 1016]
+#   60;	train_loss: 1.045;	train_accuracy: 60.0%		[  600/ 1016]
+#   70;	train_loss: 2.200;	train_accuracy: 20.0%		[  700/ 1016]
+#   80;	train_loss: 1.559;	train_accuracy: 40.0%		[  800/ 1016]
+#   90;	train_loss: 1.638;	train_accuracy: 60.0%		[  900/ 1016]
+#  100;	train_loss: 1.644;	train_accuracy: 50.0%		[ 1000/ 1016]
+Valid metrics:
+	 avg_loss: 0.134931;	 avg_accuracy: 56.9%
 Epoch 4/25
 -------------------------------
 #    0;	train_loss: 1.351;	train_accuracy: 70.0%		[    0/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 1.477;	train_accuracy: 40.0%		[  100/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 1.278;	train_accuracy: 70.0%		[  200/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.708;	train_accuracy: 80.0%		[  300/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.855;	train_accuracy: 80.0%		[  400/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 1.362;	train_accuracy: 60.0%		[  500/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 1.138;	train_accuracy: 60.0%		[  600/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 1.040;	train_accuracy: 70.0%		[  700/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 1.974;	train_accuracy: 50.0%		[  800/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.838;	train_accuracy: 70.0%		[  900/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 1.547;	train_accuracy: 30.0%		[ 1000/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.123757;	 avg_accuracy: 61.0%
+#   10;	train_loss: 1.477;	train_accuracy: 40.0%		[  100/ 1016]
+#   20;	train_loss: 1.278;	train_accuracy: 70.0%		[  200/ 1016]
+#   30;	train_loss: 0.708;	train_accuracy: 80.0%		[  300/ 1016]
+#   40;	train_loss: 0.855;	train_accuracy: 80.0%		[  400/ 1016]
+#   50;	train_loss: 1.362;	train_accuracy: 60.0%		[  500/ 1016]
+#   60;	train_loss: 1.138;	train_accuracy: 60.0%		[  600/ 1016]
+#   70;	train_loss: 1.040;	train_accuracy: 70.0%		[  700/ 1016]
+#   80;	train_loss: 1.974;	train_accuracy: 50.0%		[  800/ 1016]
+#   90;	train_loss: 0.838;	train_accuracy: 70.0%		[  900/ 1016]
+#  100;	train_loss: 1.547;	train_accuracy: 30.0%		[ 1000/ 1016]
+Valid metrics:
+	 avg_loss: 0.123752;	 avg_accuracy: 61.0%
 Epoch 5/25
 -------------------------------
 #    0;	train_loss: 1.023;	train_accuracy: 80.0%		[    0/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.753;	train_accuracy: 80.0%		[  100/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 1.136;	train_accuracy: 60.0%		[  200/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 1.043;	train_accuracy: 90.0%		[  300/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 1.439;	train_accuracy: 60.0%		[  400/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 1.184;	train_accuracy: 50.0%		[  500/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.730;	train_accuracy: 80.0%		[  600/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.860;	train_accuracy: 70.0%		[  700/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.882;	train_accuracy: 70.0%		[  800/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 1.734;	train_accuracy: 60.0%		[  900/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 1.106;	train_accuracy: 70.0%		[ 1000/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.106478;	 avg_accuracy: 65.5%
+#   10;	train_loss: 0.753;	train_accuracy: 80.0%		[  100/ 1016]
+#   20;	train_loss: 1.136;	train_accuracy: 60.0%		[  200/ 1016]
+#   30;	train_loss: 1.043;	train_accuracy: 90.0%		[  300/ 1016]
+#   40;	train_loss: 1.439;	train_accuracy: 60.0%		[  400/ 1016]
+#   50;	train_loss: 1.184;	train_accuracy: 50.0%		[  500/ 1016]
+#   60;	train_loss: 0.730;	train_accuracy: 80.0%		[  600/ 1016]
+#   70;	train_loss: 0.860;	train_accuracy: 70.0%		[  700/ 1016]
+#   80;	train_loss: 0.882;	train_accuracy: 70.0%		[  800/ 1016]
+#   90;	train_loss: 1.734;	train_accuracy: 60.0%		[  900/ 1016]
+#  100;	train_loss: 1.106;	train_accuracy: 70.0%		[ 1000/ 1016]
+Valid metrics:
+	 avg_loss: 0.106471;	 avg_accuracy: 65.5%
 Epoch 6/25
 -------------------------------
 #    0;	train_loss: 0.945;	train_accuracy: 70.0%		[    0/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.731;	train_accuracy: 70.0%		[  100/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 1.188;	train_accuracy: 70.0%		[  200/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.693;	train_accuracy: 80.0%		[  300/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.622;	train_accuracy: 80.0%		[  400/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.876;	train_accuracy: 80.0%		[  500/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.375;	train_accuracy: 90.0%		[  600/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.844;	train_accuracy: 80.0%		[  700/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.963;	train_accuracy: 60.0%		[  800/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 1.578;	train_accuracy: 50.0%		[  900/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.627;	train_accuracy: 80.0%		[ 1000/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.100944;	 avg_accuracy: 68.3%
+#   10;	train_loss: 0.731;	train_accuracy: 70.0%		[  100/ 1016]
+#   20;	train_loss: 1.188;	train_accuracy: 70.0%		[  200/ 1016]
+#   30;	train_loss: 0.693;	train_accuracy: 80.0%		[  300/ 1016]
+#   40;	train_loss: 0.622;	train_accuracy: 80.0%		[  400/ 1016]
+#   50;	train_loss: 0.876;	train_accuracy: 80.0%		[  500/ 1016]
+#   60;	train_loss: 0.375;	train_accuracy: 90.0%		[  600/ 1016]
+#   70;	train_loss: 0.844;	train_accuracy: 80.0%		[  700/ 1016]
+#   80;	train_loss: 0.963;	train_accuracy: 60.0%		[  800/ 1016]
+#   90;	train_loss: 1.578;	train_accuracy: 50.0%		[  900/ 1016]
+#  100;	train_loss: 0.627;	train_accuracy: 80.0%		[ 1000/ 1016]
+Valid metrics:
+	 avg_loss: 0.100941;	 avg_accuracy: 68.3%
 Epoch 7/25
 -------------------------------
 #    0;	train_loss: 0.399;	train_accuracy: 90.0%		[    0/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.661;	train_accuracy: 90.0%		[  100/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.555;	train_accuracy: 90.0%		[  200/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 1.038;	train_accuracy: 60.0%		[  300/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.352;	train_accuracy:100.0%		[  400/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.803;	train_accuracy: 70.0%		[  500/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.927;	train_accuracy: 80.0%		[  600/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.510;	train_accuracy: 90.0%		[  700/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 1.013;	train_accuracy: 70.0%		[  800/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.560;	train_accuracy: 80.0%		[  900/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 1.095;	train_accuracy: 60.0%		[ 1000/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.086678;	 avg_accuracy: 73.1%
+#   10;	train_loss: 0.661;	train_accuracy: 90.0%		[  100/ 1016]
+#   20;	train_loss: 0.555;	train_accuracy: 90.0%		[  200/ 1016]
+#   30;	train_loss: 1.038;	train_accuracy: 60.0%		[  300/ 1016]
+#   40;	train_loss: 0.352;	train_accuracy:100.0%		[  400/ 1016]
+#   50;	train_loss: 0.803;	train_accuracy: 70.0%		[  500/ 1016]
+#   60;	train_loss: 0.927;	train_accuracy: 80.0%		[  600/ 1016]
+#   70;	train_loss: 0.510;	train_accuracy: 90.0%		[  700/ 1016]
+#   80;	train_loss: 1.013;	train_accuracy: 70.0%		[  800/ 1016]
+#   90;	train_loss: 0.560;	train_accuracy: 80.0%		[  900/ 1016]
+#  100;	train_loss: 1.095;	train_accuracy: 60.0%		[ 1000/ 1016]
+Valid metrics:
+	 avg_loss: 0.086677;	 avg_accuracy: 73.1%
 Epoch 8/25
 -------------------------------
 #    0;	train_loss: 0.818;	train_accuracy: 80.0%		[    0/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.572;	train_accuracy: 80.0%		[  100/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.550;	train_accuracy: 80.0%		[  200/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.561;	train_accuracy: 90.0%		[  300/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.316;	train_accuracy:100.0%		[  400/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.435;	train_accuracy: 90.0%		[  500/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 1.031;	train_accuracy: 60.0%		[  600/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.722;	train_accuracy: 70.0%		[  700/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.558;	train_accuracy: 70.0%		[  800/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.193;	train_accuracy: 90.0%		[  900/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.932;	train_accuracy: 60.0%		[ 1000/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.082211;	 avg_accuracy: 71.7%
+#   10;	train_loss: 0.572;	train_accuracy: 80.0%		[  100/ 1016]
+#   20;	train_loss: 0.549;	train_accuracy: 80.0%		[  200/ 1016]
+#   30;	train_loss: 0.561;	train_accuracy: 90.0%		[  300/ 1016]
+#   40;	train_loss: 0.316;	train_accuracy:100.0%		[  400/ 1016]
+#   50;	train_loss: 0.435;	train_accuracy: 90.0%		[  500/ 1016]
+#   60;	train_loss: 1.031;	train_accuracy: 60.0%		[  600/ 1016]
+#   70;	train_loss: 0.722;	train_accuracy: 70.0%		[  700/ 1016]
+#   80;	train_loss: 0.558;	train_accuracy: 70.0%		[  800/ 1016]
+#   90;	train_loss: 0.193;	train_accuracy: 90.0%		[  900/ 1016]
+#  100;	train_loss: 0.932;	train_accuracy: 60.0%		[ 1000/ 1016]
+Valid metrics:
+	 avg_loss: 0.082203;	 avg_accuracy: 71.7%
 Epoch 9/25
 -------------------------------
 #    0;	train_loss: 0.449;	train_accuracy: 80.0%		[    0/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.479;	train_accuracy: 80.0%		[  100/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.448;	train_accuracy: 90.0%		[  200/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.686;	train_accuracy: 60.0%		[  300/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.447;	train_accuracy: 80.0%		[  400/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.217;	train_accuracy:100.0%		[  500/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.134;	train_accuracy:100.0%		[  600/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.081;	train_accuracy:100.0%		[  700/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 1.153;	train_accuracy: 70.0%		[  800/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.714;	train_accuracy: 80.0%		[  900/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.296;	train_accuracy: 90.0%		[ 1000/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.083768;	 avg_accuracy: 70.7%
+#   10;	train_loss: 0.479;	train_accuracy: 80.0%		[  100/ 1016]
+#   20;	train_loss: 0.448;	train_accuracy: 90.0%		[  200/ 1016]
+#   30;	train_loss: 0.685;	train_accuracy: 60.0%		[  300/ 1016]
+#   40;	train_loss: 0.447;	train_accuracy: 80.0%		[  400/ 1016]
+#   50;	train_loss: 0.217;	train_accuracy:100.0%		[  500/ 1016]
+#   60;	train_loss: 0.134;	train_accuracy:100.0%		[  600/ 1016]
+#   70;	train_loss: 0.081;	train_accuracy:100.0%		[  700/ 1016]
+#   80;	train_loss: 1.154;	train_accuracy: 70.0%		[  800/ 1016]
+#   90;	train_loss: 0.714;	train_accuracy: 80.0%		[  900/ 1016]
+#  100;	train_loss: 0.296;	train_accuracy: 90.0%		[ 1000/ 1016]
+Valid metrics:
+	 avg_loss: 0.083770;	 avg_accuracy: 70.7%
 Epoch 10/25
 -------------------------------
-#    0;	train_loss: 0.336;	train_accuracy: 90.0%		[    0/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.296;	train_accuracy: 90.0%		[  100/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.335;	train_accuracy: 90.0%		[  200/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.280;	train_accuracy: 90.0%		[  300/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.297;	train_accuracy:100.0%		[  400/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.039;	train_accuracy:100.0%		[  500/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.135;	train_accuracy:100.0%		[  600/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.282;	train_accuracy: 90.0%		[  700/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.623;	train_accuracy: 80.0%		[  800/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.336;	train_accuracy: 90.0%		[  900/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.297;	train_accuracy: 80.0%		[ 1000/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.084382;	 avg_accuracy: 73.4%
+#    0;	train_loss: 0.335;	train_accuracy: 90.0%		[    0/ 1016]
+#   10;	train_loss: 0.295;	train_accuracy: 90.0%		[  100/ 1016]
+#   20;	train_loss: 0.335;	train_accuracy: 90.0%		[  200/ 1016]
+#   30;	train_loss: 0.280;	train_accuracy: 90.0%		[  300/ 1016]
+#   40;	train_loss: 0.297;	train_accuracy:100.0%		[  400/ 1016]
+#   50;	train_loss: 0.039;	train_accuracy:100.0%		[  500/ 1016]
+#   60;	train_loss: 0.135;	train_accuracy:100.0%		[  600/ 1016]
+#   70;	train_loss: 0.281;	train_accuracy: 90.0%		[  700/ 1016]
+#   80;	train_loss: 0.623;	train_accuracy: 80.0%		[  800/ 1016]
+#   90;	train_loss: 0.335;	train_accuracy: 90.0%		[  900/ 1016]
+#  100;	train_loss: 0.297;	train_accuracy: 80.0%		[ 1000/ 1016]
+Valid metrics:
+	 avg_loss: 0.084373;	 avg_accuracy: 73.4%
 Epoch 11/25
 -------------------------------
 #    0;	train_loss: 0.263;	train_accuracy: 90.0%		[    0/ 1016]
+#   10;	train_loss: 0.206;	train_accuracy: 90.0%		[  100/ 1016]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.206;	train_accuracy: 90.0%		[  100/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.602;	train_accuracy: 80.0%		[  200/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.361;	train_accuracy: 80.0%		[  300/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.391;	train_accuracy: 80.0%		[  400/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.030;	train_accuracy:100.0%		[  500/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.147;	train_accuracy:100.0%		[  600/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.282;	train_accuracy: 90.0%		[  700/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.069;	train_accuracy:100.0%		[  800/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.374;	train_accuracy: 90.0%		[  900/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.244;	train_accuracy: 90.0%		[ 1000/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.073708;	 avg_accuracy: 78.3%
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.601;	train_accuracy: 80.0%		[  200/ 1016]
+#   30;	train_loss: 0.361;	train_accuracy: 80.0%		[  300/ 1016]
+#   40;	train_loss: 0.391;	train_accuracy: 80.0%		[  400/ 1016]
+#   50;	train_loss: 0.030;	train_accuracy:100.0%		[  500/ 1016]
+#   60;	train_loss: 0.147;	train_accuracy:100.0%		[  600/ 1016]
+#   70;	train_loss: 0.282;	train_accuracy: 90.0%		[  700/ 1016]
+#   80;	train_loss: 0.069;	train_accuracy:100.0%		[  800/ 1016]
+#   90;	train_loss: 0.374;	train_accuracy: 90.0%		[  900/ 1016]
+#  100;	train_loss: 0.243;	train_accuracy: 90.0%		[ 1000/ 1016]
+Valid metrics:
+	 avg_loss: 0.073709;	 avg_accuracy: 78.3%
 Epoch 12/25
 -------------------------------
 #    0;	train_loss: 0.677;	train_accuracy: 80.0%		[    0/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.326;	train_accuracy: 90.0%		[  100/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.446;	train_accuracy: 80.0%		[  200/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.211;	train_accuracy: 90.0%		[  300/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.192;	train_accuracy: 90.0%		[  400/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.018;	train_accuracy:100.0%		[  500/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.044;	train_accuracy:100.0%		[  600/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.347;	train_accuracy: 80.0%		[  700/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.027;	train_accuracy:100.0%		[  800/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.146;	train_accuracy:100.0%		[  900/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.136;	train_accuracy:100.0%		[ 1000/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.074493;	 avg_accuracy: 79.3%
+#   10;	train_loss: 0.326;	train_accuracy: 90.0%		[  100/ 1016]
+#   20;	train_loss: 0.446;	train_accuracy: 80.0%		[  200/ 1016]
+#   30;	train_loss: 0.211;	train_accuracy: 90.0%		[  300/ 1016]
+#   40;	train_loss: 0.191;	train_accuracy: 90.0%		[  400/ 1016]
+#   50;	train_loss: 0.018;	train_accuracy:100.0%		[  500/ 1016]
+#   60;	train_loss: 0.044;	train_accuracy:100.0%		[  600/ 1016]
+#   70;	train_loss: 0.347;	train_accuracy: 80.0%		[  700/ 1016]
+#   80;	train_loss: 0.027;	train_accuracy:100.0%		[  800/ 1016]
+#   90;	train_loss: 0.146;	train_accuracy:100.0%		[  900/ 1016]
+#  100;	train_loss: 0.136;	train_accuracy:100.0%		[ 1000/ 1016]
+Valid metrics:
+	 avg_loss: 0.074484;	 avg_accuracy: 79.3%
 Epoch 13/25
 -------------------------------
 #    0;	train_loss: 0.134;	train_accuracy:100.0%		[    0/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.100;	train_accuracy:100.0%		[  100/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.245;	train_accuracy: 90.0%		[  200/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.335;	train_accuracy: 90.0%		[  300/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.109;	train_accuracy:100.0%		[  400/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.057;	train_accuracy:100.0%		[  500/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.125;	train_accuracy:100.0%		[  600/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.067;	train_accuracy:100.0%		[  700/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.160;	train_accuracy: 90.0%		[  800/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.062;	train_accuracy:100.0%		[  900/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.240;	train_accuracy: 90.0%		[ 1000/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.074170;	 avg_accuracy: 79.3%
+#   10;	train_loss: 0.100;	train_accuracy:100.0%		[  100/ 1016]
+#   20;	train_loss: 0.245;	train_accuracy: 90.0%		[  200/ 1016]
+#   30;	train_loss: 0.335;	train_accuracy: 90.0%		[  300/ 1016]
+#   40;	train_loss: 0.109;	train_accuracy:100.0%		[  400/ 1016]
+#   50;	train_loss: 0.057;	train_accuracy:100.0%		[  500/ 1016]
+#   60;	train_loss: 0.125;	train_accuracy:100.0%		[  600/ 1016]
+#   70;	train_loss: 0.067;	train_accuracy:100.0%		[  700/ 1016]
+#   80;	train_loss: 0.160;	train_accuracy: 90.0%		[  800/ 1016]
+#   90;	train_loss: 0.062;	train_accuracy:100.0%		[  900/ 1016]
+#  100;	train_loss: 0.240;	train_accuracy: 90.0%		[ 1000/ 1016]
+Valid metrics:
+	 avg_loss: 0.074189;	 avg_accuracy: 79.3%
 Epoch 14/25
 -------------------------------
-#    0;	train_loss: 0.193;	train_accuracy: 90.0%		[    0/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.022;	train_accuracy:100.0%		[  100/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.222;	train_accuracy:100.0%		[  200/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.030;	train_accuracy:100.0%		[  300/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.625;	train_accuracy: 80.0%		[  400/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.223;	train_accuracy: 90.0%		[  500/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.098;	train_accuracy:100.0%		[  600/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.627;	train_accuracy: 90.0%		[  700/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.063;	train_accuracy:100.0%		[  800/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.285;	train_accuracy: 80.0%		[  900/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.051;	train_accuracy:100.0%		[ 1000/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.087010;	 avg_accuracy: 76.6%
+#    0;	train_loss: 0.192;	train_accuracy: 90.0%		[    0/ 1016]
+#   10;	train_loss: 0.022;	train_accuracy:100.0%		[  100/ 1016]
+#   20;	train_loss: 0.222;	train_accuracy:100.0%		[  200/ 1016]
+#   30;	train_loss: 0.029;	train_accuracy:100.0%		[  300/ 1016]
+#   40;	train_loss: 0.625;	train_accuracy: 80.0%		[  400/ 1016]
+#   50;	train_loss: 0.223;	train_accuracy: 90.0%		[  500/ 1016]
+#   60;	train_loss: 0.098;	train_accuracy:100.0%		[  600/ 1016]
+#   70;	train_loss: 0.627;	train_accuracy: 90.0%		[  700/ 1016]
+#   80;	train_loss: 0.063;	train_accuracy:100.0%		[  800/ 1016]
+#   90;	train_loss: 0.284;	train_accuracy: 80.0%		[  900/ 1016]
+#  100;	train_loss: 0.051;	train_accuracy:100.0%		[ 1000/ 1016]
+Valid metrics:
+	 avg_loss: 0.087015;	 avg_accuracy: 76.6%
 Epoch 15/25
 -------------------------------
 #    0;	train_loss: 0.092;	train_accuracy:100.0%		[    0/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.040;	train_accuracy:100.0%		[  100/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.056;	train_accuracy:100.0%		[  200/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.032;	train_accuracy:100.0%		[  300/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.085;	train_accuracy:100.0%		[  400/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.114;	train_accuracy:100.0%		[  500/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.041;	train_accuracy:100.0%		[  600/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.087;	train_accuracy:100.0%		[  700/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.076;	train_accuracy:100.0%		[  800/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.011;	train_accuracy:100.0%		[  900/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.045;	train_accuracy:100.0%		[ 1000/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.070460;	 avg_accuracy: 82.8%
+#   10;	train_loss: 0.040;	train_accuracy:100.0%		[  100/ 1016]
+#   20;	train_loss: 0.056;	train_accuracy:100.0%		[  200/ 1016]
+#   30;	train_loss: 0.032;	train_accuracy:100.0%		[  300/ 1016]
+#   40;	train_loss: 0.085;	train_accuracy:100.0%		[  400/ 1016]
+#   50;	train_loss: 0.114;	train_accuracy:100.0%		[  500/ 1016]
+#   60;	train_loss: 0.041;	train_accuracy:100.0%		[  600/ 1016]
+#   70;	train_loss: 0.087;	train_accuracy:100.0%		[  700/ 1016]
+#   80;	train_loss: 0.076;	train_accuracy:100.0%		[  800/ 1016]
+#   90;	train_loss: 0.011;	train_accuracy:100.0%		[  900/ 1016]
+#  100;	train_loss: 0.045;	train_accuracy:100.0%		[ 1000/ 1016]
+Valid metrics:
+	 avg_loss: 0.070456;	 avg_accuracy: 82.8%
 Epoch 16/25
 -------------------------------
 #    0;	train_loss: 0.084;	train_accuracy:100.0%		[    0/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.068;	train_accuracy:100.0%		[  100/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.039;	train_accuracy:100.0%		[  200/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.014;	train_accuracy:100.0%		[  300/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.111;	train_accuracy:100.0%		[  400/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.019;	train_accuracy:100.0%		[  500/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.020;	train_accuracy:100.0%		[  600/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.107;	train_accuracy:100.0%		[  700/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.103;	train_accuracy:100.0%		[  800/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.007;	train_accuracy:100.0%		[  900/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.099;	train_accuracy:100.0%		[ 1000/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.080264;	 avg_accuracy: 79.7%
+#   10;	train_loss: 0.068;	train_accuracy:100.0%		[  100/ 1016]
+#   20;	train_loss: 0.039;	train_accuracy:100.0%		[  200/ 1016]
+#   30;	train_loss: 0.014;	train_accuracy:100.0%		[  300/ 1016]
+#   40;	train_loss: 0.111;	train_accuracy:100.0%		[  400/ 1016]
+#   50;	train_loss: 0.019;	train_accuracy:100.0%		[  500/ 1016]
+#   60;	train_loss: 0.020;	train_accuracy:100.0%		[  600/ 1016]
+#   70;	train_loss: 0.107;	train_accuracy:100.0%		[  700/ 1016]
+#   80;	train_loss: 0.103;	train_accuracy:100.0%		[  800/ 1016]
+#   90;	train_loss: 0.007;	train_accuracy:100.0%		[  900/ 1016]
+#  100;	train_loss: 0.099;	train_accuracy:100.0%		[ 1000/ 1016]
+Valid metrics:
+	 avg_loss: 0.080272;	 avg_accuracy: 79.3%
 Epoch 17/25
 -------------------------------
 #    0;	train_loss: 0.017;	train_accuracy:100.0%		[    0/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.035;	train_accuracy:100.0%		[  100/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.055;	train_accuracy:100.0%		[  200/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.017;	train_accuracy:100.0%		[  300/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.013;	train_accuracy:100.0%		[  400/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.079;	train_accuracy:100.0%		[  500/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.024;	train_accuracy:100.0%		[  600/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.024;	train_accuracy:100.0%		[  700/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.010;	train_accuracy:100.0%		[  800/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.166;	train_accuracy:100.0%		[  900/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.154;	train_accuracy: 90.0%		[ 1000/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.076702;	 avg_accuracy: 80.0%
+#   10;	train_loss: 0.035;	train_accuracy:100.0%		[  100/ 1016]
+#   20;	train_loss: 0.055;	train_accuracy:100.0%		[  200/ 1016]
+#   30;	train_loss: 0.017;	train_accuracy:100.0%		[  300/ 1016]
+#   40;	train_loss: 0.013;	train_accuracy:100.0%		[  400/ 1016]
+#   50;	train_loss: 0.079;	train_accuracy:100.0%		[  500/ 1016]
+#   60;	train_loss: 0.024;	train_accuracy:100.0%		[  600/ 1016]
+#   70;	train_loss: 0.024;	train_accuracy:100.0%		[  700/ 1016]
+#   80;	train_loss: 0.010;	train_accuracy:100.0%		[  800/ 1016]
+#   90;	train_loss: 0.166;	train_accuracy:100.0%		[  900/ 1016]
+#  100;	train_loss: 0.154;	train_accuracy: 90.0%		[ 1000/ 1016]
+Valid metrics:
+	 avg_loss: 0.076693;	 avg_accuracy: 80.0%
 Epoch 18/25
 -------------------------------
 #    0;	train_loss: 0.020;	train_accuracy:100.0%		[    0/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.080;	train_accuracy:100.0%		[  100/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.012;	train_accuracy:100.0%		[  200/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.054;	train_accuracy:100.0%		[  300/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.055;	train_accuracy:100.0%		[  400/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.024;	train_accuracy:100.0%		[  500/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.028;	train_accuracy:100.0%		[  600/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.051;	train_accuracy:100.0%		[  700/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.054;	train_accuracy:100.0%		[  800/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.190;	train_accuracy: 90.0%		[  900/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.020;	train_accuracy:100.0%		[ 1000/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.083478;	 avg_accuracy: 82.4%
+#   10;	train_loss: 0.079;	train_accuracy:100.0%		[  100/ 1016]
+#   20;	train_loss: 0.012;	train_accuracy:100.0%		[  200/ 1016]
+#   30;	train_loss: 0.054;	train_accuracy:100.0%		[  300/ 1016]
+#   40;	train_loss: 0.054;	train_accuracy:100.0%		[  400/ 1016]
+#   50;	train_loss: 0.025;	train_accuracy:100.0%		[  500/ 1016]
+#   60;	train_loss: 0.028;	train_accuracy:100.0%		[  600/ 1016]
+#   70;	train_loss: 0.051;	train_accuracy:100.0%		[  700/ 1016]
+#   80;	train_loss: 0.054;	train_accuracy:100.0%		[  800/ 1016]
+#   90;	train_loss: 0.190;	train_accuracy: 90.0%		[  900/ 1016]
+#  100;	train_loss: 0.020;	train_accuracy:100.0%		[ 1000/ 1016]
+Valid metrics:
+	 avg_loss: 0.083471;	 avg_accuracy: 82.4%
 Epoch 19/25
 -------------------------------
 #    0;	train_loss: 0.039;	train_accuracy:100.0%		[    0/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.028;	train_accuracy:100.0%		[  100/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.006;	train_accuracy:100.0%		[  200/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.246;	train_accuracy: 90.0%		[  300/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.137;	train_accuracy: 90.0%		[  400/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.083;	train_accuracy: 90.0%		[  500/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.037;	train_accuracy:100.0%		[  600/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.061;	train_accuracy:100.0%		[  700/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.016;	train_accuracy:100.0%		[  800/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.073;	train_accuracy:100.0%		[  900/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.004;	train_accuracy:100.0%		[ 1000/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.088384;	 avg_accuracy: 78.6%
+#   10;	train_loss: 0.028;	train_accuracy:100.0%		[  100/ 1016]
+#   20;	train_loss: 0.006;	train_accuracy:100.0%		[  200/ 1016]
+#   30;	train_loss: 0.247;	train_accuracy: 90.0%		[  300/ 1016]
+#   40;	train_loss: 0.136;	train_accuracy: 90.0%		[  400/ 1016]
+#   50;	train_loss: 0.083;	train_accuracy: 90.0%		[  500/ 1016]
+#   60;	train_loss: 0.037;	train_accuracy:100.0%		[  600/ 1016]
+#   70;	train_loss: 0.061;	train_accuracy:100.0%		[  700/ 1016]
+#   80;	train_loss: 0.016;	train_accuracy:100.0%		[  800/ 1016]
+#   90;	train_loss: 0.072;	train_accuracy:100.0%		[  900/ 1016]
+#  100;	train_loss: 0.004;	train_accuracy:100.0%		[ 1000/ 1016]
+Valid metrics:
+	 avg_loss: 0.088379;	 avg_accuracy: 78.6%
 Epoch 20/25
 -------------------------------
 #    0;	train_loss: 0.044;	train_accuracy:100.0%		[    0/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.058;	train_accuracy:100.0%		[  100/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.034;	train_accuracy:100.0%		[  200/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.032;	train_accuracy:100.0%		[  300/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.266;	train_accuracy: 90.0%		[  400/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.003;	train_accuracy:100.0%		[  500/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.004;	train_accuracy:100.0%		[  600/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.393;	train_accuracy: 80.0%		[  700/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.010;	train_accuracy:100.0%		[  800/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.166;	train_accuracy: 90.0%		[  900/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.011;	train_accuracy:100.0%		[ 1000/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.096033;	 avg_accuracy: 78.6%
+#   10;	train_loss: 0.057;	train_accuracy:100.0%		[  100/ 1016]
+#   20;	train_loss: 0.034;	train_accuracy:100.0%		[  200/ 1016]
+#   30;	train_loss: 0.032;	train_accuracy:100.0%		[  300/ 1016]
+#   40;	train_loss: 0.267;	train_accuracy: 90.0%		[  400/ 1016]
+#   50;	train_loss: 0.003;	train_accuracy:100.0%		[  500/ 1016]
+#   60;	train_loss: 0.004;	train_accuracy:100.0%		[  600/ 1016]
+#   70;	train_loss: 0.393;	train_accuracy: 80.0%		[  700/ 1016]
+#   80;	train_loss: 0.010;	train_accuracy:100.0%		[  800/ 1016]
+#   90;	train_loss: 0.167;	train_accuracy: 90.0%		[  900/ 1016]
+#  100;	train_loss: 0.011;	train_accuracy:100.0%		[ 1000/ 1016]
+Valid metrics:
+	 avg_loss: 0.096028;	 avg_accuracy: 78.6%
 Epoch 21/25
 -------------------------------
-#    0;	train_loss: 0.383;	train_accuracy: 90.0%		[    0/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.002;	train_accuracy:100.0%		[  100/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.004;	train_accuracy:100.0%		[  200/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.282;	train_accuracy: 90.0%		[  300/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.009;	train_accuracy:100.0%		[  400/ 1016]
+#    0;	train_loss: 0.384;	train_accuracy: 90.0%		[    0/ 1016]
+#   10;	train_loss: 0.002;	train_accuracy:100.0%		[  100/ 1016]
+#   20;	train_loss: 0.004;	train_accuracy:100.0%		[  200/ 1016]
+#   30;	train_loss: 0.282;	train_accuracy: 90.0%		[  300/ 1016]
+#   40;	train_loss: 0.009;	train_accuracy:100.0%		[  400/ 1016]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.073;	train_accuracy:100.0%		[  500/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.097;	train_accuracy: 90.0%		[  600/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.134;	train_accuracy:100.0%		[  700/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.015;	train_accuracy:100.0%		[  800/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.072;	train_accuracy:100.0%		[  900/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.040;	train_accuracy:100.0%		[ 1000/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.089688;	 avg_accuracy: 81.4%
+#   60;	train_loss: 0.098;	train_accuracy: 90.0%		[  600/ 1016]
+#   70;	train_loss: 0.134;	train_accuracy:100.0%		[  700/ 1016]
+#   80;	train_loss: 0.015;	train_accuracy:100.0%		[  800/ 1016]
+#   90;	train_loss: 0.072;	train_accuracy:100.0%		[  900/ 1016]
+#  100;	train_loss: 0.040;	train_accuracy:100.0%		[ 1000/ 1016]
+Valid metrics:
+	 avg_loss: 0.089697;	 avg_accuracy: 81.4%
 Epoch 22/25
 -------------------------------
 #    0;	train_loss: 0.003;	train_accuracy:100.0%		[    0/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.014;	train_accuracy:100.0%		[  100/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.010;	train_accuracy:100.0%		[  200/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.003;	train_accuracy:100.0%		[  300/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.011;	train_accuracy:100.0%		[  400/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.048;	train_accuracy:100.0%		[  500/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.002;	train_accuracy:100.0%		[  600/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.019;	train_accuracy:100.0%		[  700/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.108;	train_accuracy: 90.0%		[  800/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.082;	train_accuracy: 90.0%		[  900/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.020;	train_accuracy:100.0%		[ 1000/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.093829;	 avg_accuracy: 79.0%
+#   10;	train_loss: 0.014;	train_accuracy:100.0%		[  100/ 1016]
+#   20;	train_loss: 0.010;	train_accuracy:100.0%		[  200/ 1016]
+#   30;	train_loss: 0.003;	train_accuracy:100.0%		[  300/ 1016]
+#   40;	train_loss: 0.011;	train_accuracy:100.0%		[  400/ 1016]
+#   50;	train_loss: 0.048;	train_accuracy:100.0%		[  500/ 1016]
+#   60;	train_loss: 0.002;	train_accuracy:100.0%		[  600/ 1016]
+#   70;	train_loss: 0.019;	train_accuracy:100.0%		[  700/ 1016]
+#   80;	train_loss: 0.109;	train_accuracy: 90.0%		[  800/ 1016]
+#   90;	train_loss: 0.083;	train_accuracy: 90.0%		[  900/ 1016]
+#  100;	train_loss: 0.020;	train_accuracy:100.0%		[ 1000/ 1016]
+Valid metrics:
+	 avg_loss: 0.093843;	 avg_accuracy: 79.0%
 Epoch 23/25
 -------------------------------
 #    0;	train_loss: 0.110;	train_accuracy:100.0%		[    0/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.101;	train_accuracy:100.0%		[  100/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.002;	train_accuracy:100.0%		[  200/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.015;	train_accuracy:100.0%		[  300/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.035;	train_accuracy:100.0%		[  400/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.017;	train_accuracy:100.0%		[  500/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.074;	train_accuracy:100.0%		[  600/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.004;	train_accuracy:100.0%		[  700/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.058;	train_accuracy:100.0%		[  800/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.008;	train_accuracy:100.0%		[  900/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.035;	train_accuracy:100.0%		[ 1000/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.084978;	 avg_accuracy: 81.4%
+#   10;	train_loss: 0.101;	train_accuracy:100.0%		[  100/ 1016]
+#   20;	train_loss: 0.002;	train_accuracy:100.0%		[  200/ 1016]
+#   30;	train_loss: 0.015;	train_accuracy:100.0%		[  300/ 1016]
+#   40;	train_loss: 0.035;	train_accuracy:100.0%		[  400/ 1016]
+#   50;	train_loss: 0.017;	train_accuracy:100.0%		[  500/ 1016]
+#   60;	train_loss: 0.074;	train_accuracy:100.0%		[  600/ 1016]
+#   70;	train_loss: 0.004;	train_accuracy:100.0%		[  700/ 1016]
+#   80;	train_loss: 0.058;	train_accuracy:100.0%		[  800/ 1016]
+#   90;	train_loss: 0.008;	train_accuracy:100.0%		[  900/ 1016]
+#  100;	train_loss: 0.034;	train_accuracy:100.0%		[ 1000/ 1016]
+Valid metrics:
+	 avg_loss: 0.084977;	 avg_accuracy: 81.4%
 Epoch 24/25
 -------------------------------
 #    0;	train_loss: 0.156;	train_accuracy: 90.0%		[    0/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.004;	train_accuracy:100.0%		[  100/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.002;	train_accuracy:100.0%		[  200/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.002;	train_accuracy:100.0%		[  300/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.019;	train_accuracy:100.0%		[  400/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.049;	train_accuracy:100.0%		[  500/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.005;	train_accuracy:100.0%		[  600/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.008;	train_accuracy:100.0%		[  700/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.036;	train_accuracy:100.0%		[  800/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.028;	train_accuracy:100.0%		[  900/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.004;	train_accuracy:100.0%		[ 1000/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.097474;	 avg_accuracy: 79.7%
+#   10;	train_loss: 0.004;	train_accuracy:100.0%		[  100/ 1016]
+#   20;	train_loss: 0.002;	train_accuracy:100.0%		[  200/ 1016]
+#   30;	train_loss: 0.002;	train_accuracy:100.0%		[  300/ 1016]
+#   40;	train_loss: 0.019;	train_accuracy:100.0%		[  400/ 1016]
+#   50;	train_loss: 0.050;	train_accuracy:100.0%		[  500/ 1016]
+#   60;	train_loss: 0.005;	train_accuracy:100.0%		[  600/ 1016]
+#   70;	train_loss: 0.008;	train_accuracy:100.0%		[  700/ 1016]
+#   80;	train_loss: 0.036;	train_accuracy:100.0%		[  800/ 1016]
+#   90;	train_loss: 0.028;	train_accuracy:100.0%		[  900/ 1016]
+#  100;	train_loss: 0.004;	train_accuracy:100.0%		[ 1000/ 1016]
+Valid metrics:
+	 avg_loss: 0.097495;	 avg_accuracy: 79.7%
 Epoch 25/25
 -------------------------------
 #    0;	train_loss: 0.012;	train_accuracy:100.0%		[    0/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   10;	train_loss: 0.005;	train_accuracy:100.0%		[  100/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   20;	train_loss: 0.126;	train_accuracy:100.0%		[  200/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   30;	train_loss: 0.100;	train_accuracy:100.0%		[  300/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   40;	train_loss: 0.037;	train_accuracy:100.0%		[  400/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   50;	train_loss: 0.032;	train_accuracy:100.0%		[  500/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   60;	train_loss: 0.012;	train_accuracy:100.0%		[  600/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   70;	train_loss: 0.019;	train_accuracy:100.0%		[  700/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   80;	train_loss: 0.002;	train_accuracy:100.0%		[  800/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#   90;	train_loss: 0.003;	train_accuracy:100.0%		[  900/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#  100;	train_loss: 0.001;	train_accuracy:100.0%		[ 1000/ 1016]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valid metrics:
-	 avg_loss: 0.098691;	 avg_accuracy: 79.7%
+#   10;	train_loss: 0.005;	train_accuracy:100.0%		[  100/ 1016]
+#   20;	train_loss: 0.126;	train_accuracy:100.0%		[  200/ 1016]
+#   30;	train_loss: 0.101;	train_accuracy: 90.0%		[  300/ 1016]
+#   40;	train_loss: 0.037;	train_accuracy:100.0%		[  400/ 1016]
+#   50;	train_loss: 0.032;	train_accuracy:100.0%		[  500/ 1016]
+#   60;	train_loss: 0.013;	train_accuracy:100.0%		[  600/ 1016]
+#   70;	train_loss: 0.019;	train_accuracy:100.0%		[  700/ 1016]
+#   80;	train_loss: 0.002;	train_accuracy:100.0%		[  800/ 1016]
+#   90;	train_loss: 0.003;	train_accuracy:100.0%		[  900/ 1016]
+#  100;	train_loss: 0.001;	train_accuracy:100.0%		[ 1000/ 1016]
+Valid metrics:
+	 avg_loss: 0.098641;	 avg_accuracy: 79.7%
 </pre></div>
 </div>
 </div>
@@ -1735,15 +1328,15 @@ Epoch 25/25
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test metrics:
-	 avg_loss: 0.103379;	 avg_accuracy: 77.4%
+	 avg_loss: 0.103537;	 avg_accuracy: 77.4%
 </pre></div>
 </div>
 </div>
 </div>
 <p>The performance is good but how could we still improve it?</p>
-</div>
-<div class="section" id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Try out different time window sizes, batch size for the dataset,</p></li>
 <li><p>Try different brain graph construction methods.</p></li>
@@ -1751,17 +1344,19 @@ Epoch 25/25
 <li><p><strong>Hard</strong>: Treat the parameters you changed, such as time window size and batch size, as parameters of part of the model training.</p></li>
 <li><p><strong>Hard</strong>: Try extracting regions from network components using dictionary learning for estimating brain networks.</p></li>
 </ul>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<div class="docutils container" id="id2">
+<div role="list" class="citation-list">
+<div class="citation" id="id4" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">HGF+01</a><span class="fn-bracket">]</span></span>
+<p>J V Haxby, M I Gobbini, M L Furey, A Ishai, J L Schouten, and P Pietrini. Distributed and overlapping representations of faces and objects in ventral temporal cortex. <em>Science</em>, 293(5539):2425–2430, September 2001.</p>
 </div>
-<div class="section" id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
-<p id="id2"><dl class="citation">
-<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id1">HGF+01</a></span></dt>
-<dd><p>J V Haxby, M I Gobbini, M L Furey, A Ishai, J L Schouten, and P Pietrini. Distributed and overlapping representations of faces and objects in ventral temporal cortex. <em>Science</em>, 293(5539):2425–2430, September 2001.</p>
-</dd>
-</dl>
-</p>
 </div>
 </div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1775,7 +1370,7 @@ Epoch 25/25
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -1783,44 +1378,111 @@ Epoch 25/25
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="mlp_decoding.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Brain decoding with MLP</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="mlp_decoding.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Brain decoding with MLP</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="encoding.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="encoding.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Brain encoding</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
+                </footer>
+              
+            </div>
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Peer Herholz, Pierre Bellec, Shima Rastegarnia, Hao-Ting Wang, Loic Tetrel, Bertrand Thirion, Alexis Thual, Isil Bilgin, Alexandre Pasquiou, Pravish Sainath<br/>
-    
-        &copy; Copyright 2022.<br/>
-  </p>
-</footer>
-</main>
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-      </div>
-    </div>
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brain-graph-representation">Brain graph representation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-convolution-network-gcn">Graph Convolution Network (GCN)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-data">Getting the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-brain-graph-for-gcn">Create brain graph for GCN</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-dataset-for-model-training">Preparing the dataset for model training</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-a-gcn-model">Generating a GCN model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-and-evaluating-the-model">Train and evaluating the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By The MAIN Educational Team
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
