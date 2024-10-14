@@ -1,22 +1,21 @@
 nilearn==0.8.1
-pandas==1.1.5
-numpy==1.19.5
-keras==2.6.0
-tensorflow==2.6.2
-scikit-learn==0.24.2
-pandas==1.1.5
+numpy==1.22
+keras==2.8.0
+tensorflow==2.8.2
+scikit-learn==1.0.2
+joblib==1.1.0
+pandas==1.2.0
 matplotlib==3.3.4
 seaborn==0.11.1
 jupyter-book==0.12.1
 sphinx-design
-torch==1.11.0
+torch==1.13.0
 psutil==5.8.0
 torchvision
-torch-cluster
---find-links https://data.pyg.org/whl/torch-1.11.0+cpu.html
-torch-scatter
---find-links https://data.pyg.org/whl/torch-1.11.0+cpu.html
-torch-sparse
---find-links https://data.pyg.org/whl/torch-1.11.0+cpu.html
+tensorboard==2.8.0
+tensorboard-data-server==0.6.1
+tensorboard-plugin-wit==1.8.1
+tensorflow-estimator==2.8.0
 torch-geometric
---find-links https://data.pyg.org/whl/torch-1.11.0+cpu.html
+torch-scatter==2.0.8
+torch-sparse==0.6.11
