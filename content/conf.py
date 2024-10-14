@@ -17,7 +17,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'brain_encoding_decoding'
-copyright = '2022, '
+copyright = '2024, The MAIN Educational Team '
 author = ''
 
 master_doc = "index"
