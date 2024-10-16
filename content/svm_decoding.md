@@ -163,7 +163,8 @@ plotting.view_img(
 Note: the Decoder implements a one-vs-all strategy. Note that this is a better choice in general than one-vs-one.
 
 ## Getting more meaningful weight maps with Frem
-It is often tempting to interpret regions with high weights as 'important' for the prediction task. However, there is no statistical guarantee on these maps. Moreover, they iften do not even exhibit very clear structure. To improve that, a regularization can be brought by using the so-called Fast Regularized Ensembles of models (FREM), that rely on simple averaging and clustering tools to provide smoother maps, yet with minimal computational overhead.
+
+It is often tempting to interpret regions with high weights as 'important' for the prediction task. However, there is no statistical guarantee on these maps. Moreover, they often do not even exhibit very clear structure. To improve that, a regularization can be brought by using the so-called Fast Regularized Ensembles of models (FREM), that rely on simple averaging and clustering tools to provide smoother maps, yet with minimal computational overhead.
 
 ```{code-cell} ipython3
 from nilearn.decoding import FREMClassifier
