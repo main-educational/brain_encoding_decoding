@@ -180,7 +180,7 @@ Note that the resulting accuracy is in general slightly higher:
 ```{code-cell} ipython3
 print('F1 scoreswith FREM')
 for category in categories:
-    print(category, '\t\t    {:.2f}'.format(np.mean(decoder.cv_scores_[category])))
+    print(category, '\t\t    {:.2f}'.format(np.mean(frem.cv_scores_[category])))
 ```
 
 ## Exercises
