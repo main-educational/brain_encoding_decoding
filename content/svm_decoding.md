@@ -35,7 +35,7 @@ We are going to download the dataset from Haxby and colleagues (2001) {cite:p}`H
 ```{code-cell} ipython3
 import os
 import warnings
-warnings.filterwarnings(action='once')
+warnings.filterwarnings(action='ignore')
 
 from nilearn import datasets
 # We are fetching the data for subject 4
@@ -153,7 +153,7 @@ We can now look at the results: F1 score and coefficient image:
 ```{code-cell} ipython3
 print('F1 scores')
 for category in categories:
-    print(category, '\t\t    {:.2f}'.format(np.mean(decoder.cv_scores_[category])))
+    print(f"{category.ljust(15)}    {np.mean(decoder.cv_scores_[category]):.2f}")
 plotting.view_img(
     decoder.coef_img_['face'], bg_img=haxby_dataset.anat[0],
     title="SVM weights for face", dim=-1, resampling_interpolation='nearest'
@@ -179,9 +179,9 @@ plotting.view_img(
 Note that the resulting accuracy is in general slightly higher:
 
 ```{code-cell} ipython3
-print('F1 scoreswith FREM')
+print('F1 scores with FREM')
 for category in categories:
-    print(category, '\t\t    {:.2f}'.format(np.mean(frem.cv_scores_[category])))
+    print(f"{category.ljust(15)}    {np.mean(frem.cv_scores_[category]):.2f}")
 ```
 
 ## Exercises
