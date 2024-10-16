@@ -45,7 +45,7 @@ haxby_dataset = datasets.fetch_haxby(subjects=[sub_no], fetch_stimuli=True, data
 func_file = haxby_dataset.func[0]
 
 # mask the data
-from nilearn.input_data import NiftiMasker
+from nilearn.maskers import NiftiMasker
 mask_filename = haxby_dataset.mask_vt[0]
 masker = NiftiMasker(mask_img=mask_filename, standardize=True, detrend=True)
 X = masker.fit_transform(func_file)
