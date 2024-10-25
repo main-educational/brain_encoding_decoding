@@ -1642,7 +1642,7 @@ magic           : b&#39;n+1&#39;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays._slicers.OrthoSlicer at 0x7faaa27a3610&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays._slicers.OrthoSlicer at 0x7f66b807dc90&gt;
 </pre></div>
 </div>
 <img alt="_images/3c2e26146e29b855792c4d733bf847176f0b0773894537d73ef17ebe3a638766.png" src="_images/3c2e26146e29b855792c4d733bf847176f0b0773894537d73ef17ebe3a638766.png" />
@@ -2151,7 +2151,7 @@ magic           : b&#39;n+1&#39;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays._slicers.OrthoSlicer at 0x7faaa261b090&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays._slicers.OrthoSlicer at 0x7f66b506c3d0&gt;
 </pre></div>
 </div>
 <img alt="_images/5269164b72a8b290771534a1cf48be42623de3b734d5d5dedd54a1d4fced23e0.png" src="_images/5269164b72a8b290771534a1cf48be42623de3b734d5d5dedd54a1d4fced23e0.png" />
@@ -2289,28 +2289,318 @@ magic           : b&#39;n+1&#39;
 </div>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vt_mask</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vt_mask</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ExpiredDeprecationError</span><span class="g g-Whitespace">                   </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">23</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">vt_mask</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[[[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.10/x64/lib/python3.11/site-packages/nibabel/deprecator.py:224,</span> in <span class="ni">Deprecator.__call__.&lt;locals&gt;.deprecator.&lt;locals&gt;.deprecated_func</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">221</span> <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">222</span> <span class="k">def</span> <span class="nf">deprecated_func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">P</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">P</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">223</span>     <span class="k">if</span> <span class="n">until</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_bad_version</span><span class="p">(</span><span class="n">until</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">224</span>         <span class="k">raise</span> <span class="n">exception</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">225</span>     <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">warning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">226</span>     <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
 
-<span class="ne">ExpiredDeprecationError</span>: get_data() is deprecated in favor of get_fdata(), which has a more predictable return type. To obtain get_data() behavior going forward, use numpy.asanyarray(img.dataobj).
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
 
-<span class="o">*</span> <span class="n">deprecated</span> <span class="kn">from</span> <span class="nn">version</span><span class="p">:</span> <span class="mf">3.0</span>
-<span class="o">*</span> <span class="n">Raises</span> <span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">nibabel</span><span class="o">.</span><span class="n">deprecator</span><span class="o">.</span><span class="n">ExpiredDeprecationError</span><span class="s1">&#39;&gt; as of version: 5.0</span>
+        ...,
+
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
+
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
+
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]]],
+
+
+       [[[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
+
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
+
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
+
+        ...,
+
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
+
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
+
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]]],
+
+
+       [[[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
+
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
+
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
+
+        ...,
+
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
+
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
+
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]]],
+
+
+       ...,
+
+
+       [[[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
+
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
+
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
+
+        ...,
+
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
+
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
+
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]]],
+
+
+       [[[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
+
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
+
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
+
+        ...,
+
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
+
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
+
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]]],
+
+
+       [[[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
+
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
+
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
+
+        ...,
+
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
+
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]],
+
+        [[0.],
+         [0.],
+         [0.],
+         ...,
+         [0.],
+         [0.],
+         [0.]]]])
 </pre></div>
 </div>
 </div>
@@ -2336,10 +2626,10 @@ magic           : b&#39;n+1&#39;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f8b2c76b130&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays._slicers.OrthoSlicer at 0x7f66b3171950&gt;
 </pre></div>
 </div>
-<img alt="_images/75e6e5aaa9045b3b738a8673900a955efa7ee63c5782ea4ac2b4c181b691bb2c.png" src="_images/75e6e5aaa9045b3b738a8673900a955efa7ee63c5782ea4ac2b4c181b691bb2c.png" />
+<img alt="_images/0956cb496715481247a5e3db1598ed822a4858bb5fbf397163396d3d28e52b26.png" src="_images/0956cb496715481247a5e3db1598ed822a4858bb5fbf397163396d3d28e52b26.png" />
 </div>
 </div>
 <p>With that, we had a quick look at all <code class="docutils literal notranslate"><span class="pre">neuroimaging</span></code> <code class="docutils literal notranslate"><span class="pre">file</span></code> <code class="docutils literal notranslate"><span class="pre">types</span></code> present in the <code class="docutils literal notranslate"><span class="pre">dataset</span></code> and can continue to have a look at the other <code class="docutils literal notranslate"><span class="pre">file</span> <span class="pre">types</span></code> (and information therein) required to apply a <code class="docutils literal notranslate"><span class="pre">decoding</span> <span class="pre">model</span></code>.</p>
@@ -2462,7 +2752,7 @@ magic           : b&#39;n+1&#39;
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/d3731383fc66953ff04a680a4d6671e6cfbaa19d6fda5f0089239e37c384ac71.png" src="_images/d3731383fc66953ff04a680a4d6671e6cfbaa19d6fda5f0089239e37c384ac71.png" />
+<img alt="_images/e7ee3822777de29b4978b40bd5d14627bd5d68417d8daea46364bd5f0662b01b.png" src="_images/e7ee3822777de29b4978b40bd5d14627bd5d68417d8daea46364bd5f0662b01b.png" />
 </div>
 </div>
 <p>As we can see, the information provided indicates what <code class="docutils literal notranslate"><span class="pre">category</span></code> <code class="docutils literal notranslate"><span class="pre">participants</span></code> perceived at which <code class="docutils literal notranslate"><span class="pre">sample</span></code> or <code class="docutils literal notranslate"><span class="pre">fMRI</span> <span class="pre">image</span> <span class="pre">acquisition</span></code> aka point in time during the experiment. With that, we have the needed <code class="docutils literal notranslate"><span class="pre">labels</span></code> for our <code class="docutils literal notranslate"><span class="pre">samples</span></code> (ie our <code class="docutils literal notranslate"><span class="pre">Y</span></code>) and can thus apply a <code class="docutils literal notranslate"><span class="pre">supervised</span> <span class="pre">learning</span> <span class="pre">problem</span></code>.</p>
@@ -2542,13 +2832,13 @@ magic           : b&#39;n+1&#39;
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/918c567202a346d5c536383fe7d4f4a16cff1f199ed58968b2cd1404c8b22934.png" src="_images/918c567202a346d5c536383fe7d4f4a16cff1f199ed58968b2cd1404c8b22934.png" />
-<img alt="_images/6ee187c065ac83ab362b9a957576f6a9f7c761e19d579b30f46779ab30bda56d.png" src="_images/6ee187c065ac83ab362b9a957576f6a9f7c761e19d579b30f46779ab30bda56d.png" />
-<img alt="_images/9299d31a7c598d5b447c76212e8c6f07e768bcae6937f4f8504727202e5c6d70.png" src="_images/9299d31a7c598d5b447c76212e8c6f07e768bcae6937f4f8504727202e5c6d70.png" />
-<img alt="_images/8822967299a7561fa74a5efa7c03bf48d7b688fef720308fe4a69b36817067ed.png" src="_images/8822967299a7561fa74a5efa7c03bf48d7b688fef720308fe4a69b36817067ed.png" />
-<img alt="_images/c53ab5854e7b30baf5aad43a45998f67e88b65197fcf2ec0fb1ed90077c5b884.png" src="_images/c53ab5854e7b30baf5aad43a45998f67e88b65197fcf2ec0fb1ed90077c5b884.png" />
-<img alt="_images/f0205f36a10a59827c3eb0f5338c73747c1667ca177259e871827a3feff242ff.png" src="_images/f0205f36a10a59827c3eb0f5338c73747c1667ca177259e871827a3feff242ff.png" />
-<img alt="_images/930934071515e95cbfe174ec4bdaece02a18af181f3f265e2f40350a9ab0476b.png" src="_images/930934071515e95cbfe174ec4bdaece02a18af181f3f265e2f40350a9ab0476b.png" />
+<img alt="_images/dd01104cd4311719ac77fcf8f37d4307c3e1390c018e3f44319033f5d1c076ef.png" src="_images/dd01104cd4311719ac77fcf8f37d4307c3e1390c018e3f44319033f5d1c076ef.png" />
+<img alt="_images/cbd9219737016c748ef0d14ce51a8418274497b449f18d7d76e7869bc73550ed.png" src="_images/cbd9219737016c748ef0d14ce51a8418274497b449f18d7d76e7869bc73550ed.png" />
+<img alt="_images/b6b34099bd49e00ee543f1a95b85e222a8b99906c929243955f9437e991c8160.png" src="_images/b6b34099bd49e00ee543f1a95b85e222a8b99906c929243955f9437e991c8160.png" />
+<img alt="_images/8db19a3a2e949b8487ac33297693dd183d342f3fdc2334fd245cf16871364f7f.png" src="_images/8db19a3a2e949b8487ac33297693dd183d342f3fdc2334fd245cf16871364f7f.png" />
+<img alt="_images/e2b0dee43afa60c63d3270b63dea11415c2e19b70235a3aa628da46d5aa938b3.png" src="_images/e2b0dee43afa60c63d3270b63dea11415c2e19b70235a3aa628da46d5aa938b3.png" />
+<img alt="_images/f015ffd83ee011995854b5c572db209e8ec84a9d9a3f76a0401ee0f59e4dbac6.png" src="_images/f015ffd83ee011995854b5c572db209e8ec84a9d9a3f76a0401ee0f59e4dbac6.png" />
+<img alt="_images/424bcb5136902a0b0afdb3f428797d3e7ea214db081ee53958cc5e9c9af902a4.png" src="_images/424bcb5136902a0b0afdb3f428797d3e7ea214db081ee53958cc5e9c9af902a4.png" />
 </div>
 </div>
 <p>Please note that for each <code class="docutils literal notranslate"><span class="pre">image</span></code> <code class="docutils literal notranslate"><span class="pre">category</span></code>, a number of <code class="docutils literal notranslate"><span class="pre">scrambled</span> <span class="pre">images</span></code> were also presented.</p>
@@ -2572,13 +2862,13 @@ magic           : b&#39;n+1&#39;
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/6e9b986229331e5ce700a60ecf39d0dc9f75cc01cf20146e3589c5978a7b1f83.png" src="_images/6e9b986229331e5ce700a60ecf39d0dc9f75cc01cf20146e3589c5978a7b1f83.png" />
-<img alt="_images/914c54f3f57c1e090877e15161fe174453d8c17e1d8a37475cd93ee3505cef91.png" src="_images/914c54f3f57c1e090877e15161fe174453d8c17e1d8a37475cd93ee3505cef91.png" />
-<img alt="_images/ad9951ee0a3fb4a6c0d294cd8ec5dffd501114dd0cecde5be736a0a2e59e46a6.png" src="_images/ad9951ee0a3fb4a6c0d294cd8ec5dffd501114dd0cecde5be736a0a2e59e46a6.png" />
-<img alt="_images/89613106bc738028f15f94f4f975d9c7c543803481ad47a0bb64ee31f84d90a4.png" src="_images/89613106bc738028f15f94f4f975d9c7c543803481ad47a0bb64ee31f84d90a4.png" />
-<img alt="_images/b4c0787f6812e502fb205ce817f677c39d2d0469e24263416fc5d8e35a054395.png" src="_images/b4c0787f6812e502fb205ce817f677c39d2d0469e24263416fc5d8e35a054395.png" />
-<img alt="_images/4454939a8ca8eb4e93906881a208af26c695409e6881a5c15499e1c7cd87996e.png" src="_images/4454939a8ca8eb4e93906881a208af26c695409e6881a5c15499e1c7cd87996e.png" />
-<img alt="_images/097027cedcc5b70b5c8ca8e844c9959896456e606f109133e5b3d51b5e479db9.png" src="_images/097027cedcc5b70b5c8ca8e844c9959896456e606f109133e5b3d51b5e479db9.png" />
+<img alt="_images/ad80c6b19043b25ed013c84a81921e087bdfa2b36e4e78e93b395432fe5b2c5c.png" src="_images/ad80c6b19043b25ed013c84a81921e087bdfa2b36e4e78e93b395432fe5b2c5c.png" />
+<img alt="_images/c7889d1fcd1cb972ec439fb5c06d17bf020034183caef7490be6df5533700822.png" src="_images/c7889d1fcd1cb972ec439fb5c06d17bf020034183caef7490be6df5533700822.png" />
+<img alt="_images/9f838e313829ca27a2e5b03de2e6b67f5c1181c54dad7b78e7a7c354ef958aa0.png" src="_images/9f838e313829ca27a2e5b03de2e6b67f5c1181c54dad7b78e7a7c354ef958aa0.png" />
+<img alt="_images/68921000554e68ca2bfb9371b1c63d13dbd1bff60a2a686d62f857b997ccf4cc.png" src="_images/68921000554e68ca2bfb9371b1c63d13dbd1bff60a2a686d62f857b997ccf4cc.png" />
+<img alt="_images/cf0174ecb3bcfcc6514d316fe02929ce0264c06c219f2b5c173a5b1c30138ea4.png" src="_images/cf0174ecb3bcfcc6514d316fe02929ce0264c06c219f2b5c173a5b1c30138ea4.png" />
+<img alt="_images/d4e8bc1ab562bffceb0b434a1b13a439815cb336117c4e1fec9ebe64e97c5d9b.png" src="_images/d4e8bc1ab562bffceb0b434a1b13a439815cb336117c4e1fec9ebe64e97c5d9b.png" />
+<img alt="_images/05c37801c17562a4a8d96262f909a7fd7f83109a84ab88df0ea2922866339dd6.png" src="_images/05c37801c17562a4a8d96262f909a7fd7f83109a84ab88df0ea2922866339dd6.png" />
 </div>
 </div>
 </section>
