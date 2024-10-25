@@ -71,7 +71,7 @@ Explore this tutorial {fas}`arrow-right`
 :margin: 3
 :class-body: text-center
 :class-header: bg-light text-center
-:link: https://main-educational.github.io/brain_decoding/svm_decoding.html
+:link: https://main-educational.github.io/brain_encoding_decoding/svm_decoding.html
 
 **Brain decoding with SVM**
 ^^^
@@ -91,7 +91,7 @@ Explore this tutorial {fas}`arrow-right`
 :margin: 3
 :class-body: text-center
 :class-header: bg-light text-center
-:link: https://main-educational.github.io/brain_decoding/mlp_decoding.html
+:link: https://main-educational.github.io/brain_encoding_decoding/mlp_decoding.html
 
 **Brain decoding with MLP**
 ^^^

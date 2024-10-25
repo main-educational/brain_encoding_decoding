@@ -25,7 +25,7 @@ A SVM aims at finding an optimal hyperplane to separate two classes in high-dime
 ```
 We are going to train a support vector machine (SVM) classifier for brain decoding on the Haxby dataset. SVM is often successful in high dimensional spaces, and it is a popular technique in neuroimaging.
 
-In the SVM algorithm, we plot each data item as a point in N-dimensional space that N depends on the number of features that distinctly classify the data points (e.g. when the number of features is 3 the hyperplane becomes a two-dimensional plane.). The objective here is finding a hyperplane (decision boundaries that help classify the data points) with the maximum margin (i.e the maximum distance between data points of both classes). Data points falling on either side of the hyperplane can be attributed to different classes.
+In the SVM algorithm, we plot each data item as a point in N-dimensional space where N depends on the number of features that distinctly classify the data points (e.g. when the number of features is 3 the hyperplane becomes a two-dimensional plane.). The objective here is finding a hyperplane (decision boundaries that help classify the data points) with the maximum margin (i.e the maximum distance between data points of both classes). Data points falling on either side of the hyperplane can be attributed to different classes.
 
 The scikit-learn [documentation](https://scikit-learn.org/stable/modules/svm.html) contains a detailed description of different variants of SVM, as well as example of applications with simple datasets.
 
@@ -35,7 +35,7 @@ We are going to download the dataset from Haxby and colleagues (2001) {cite:p}`H
 ```{code-cell} ipython3
 import os
 import warnings
-warnings.filterwarnings(action='once')
+warnings.filterwarnings(action='ignore')
 
 from nilearn import datasets
 # We are fetching the data for subject 4
@@ -45,7 +45,7 @@ haxby_dataset = datasets.fetch_haxby(subjects=[sub_no], fetch_stimuli=True, data
 func_file = haxby_dataset.func[0]
 
 # mask the data
-from nilearn.input_data import NiftiMasker
+from nilearn.maskers import NiftiMasker
 mask_filename = haxby_dataset.mask_vt[0]
 masker = NiftiMasker(mask_img=mask_filename, standardize=True, detrend=True)
 X = masker.fit_transform(func_file)
@@ -137,7 +137,6 @@ We can use the high-level `Decoder` object from Nilearn. See [Decoder object](ht
 from nilearn.decoding import Decoder
 # Specify the classifier to the decoder object.
 # With the decoder we can input the masker directly.
-# We are using the svc_l1 here because it is intra subject.
 #
 # cv=5 means that we use 5-fold cross-validation
 #
@@ -153,7 +152,7 @@ We can now look at the results: F1 score and coefficient image:
 ```{code-cell} ipython3
 print('F1 scores')
 for category in categories:
-    print(category, '\t\t    {:.2f}'.format(np.mean(decoder.cv_scores_[category])))
+    print(f"{category.ljust(15)}    {np.mean(decoder.cv_scores_[category]):.2f}")
 plotting.view_img(
     decoder.coef_img_['face'], bg_img=haxby_dataset.anat[0],
     title="SVM weights for face", dim=-1, resampling_interpolation='nearest'
@@ -162,8 +161,35 @@ plotting.view_img(
 
 Note: the Decoder implements a one-vs-all strategy. Note that this is a better choice in general than one-vs-one.
 
+
+## Generating sharper weight maps with L1 regularization
+Nilearn offers different flavours of SVCs. While the default uses L2 regularization under the hood,
+we can can obtain sharper weight maps by encouraging sparsity with L1 regularization.
+
+```{figure} svm_decoding/regularizations.png
+---
+width: 750px
+name: regularizations-fig
+---
+L1 penalty promotes sparsity of the estimated coefficients, while L2 penalty promotes weight sharing among all 
+components. One can combine both L1 and L2 regularization to obtain the [ElasticNet](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html) penalty.
+```
+
+```{code-cell} ipython3
+# Let's swap the estimator with the svc_l1
+l1_decoder = Decoder(estimator='svc_l1', cv=5, mask=mask_filename, scoring='f1') 
+l1_decoder.fit(func_file, y)
+plotting.view_img(
+    l1_decoder.coef_img_['face'], bg_img=haxby_dataset.anat[0],
+    title="L1-SVM weights for face", dim=-1, resampling_interpolation='nearest'
+)
+```
+
+We can observe that far fewer components are selected and the information is much more localized.
+
 ## Getting more meaningful weight maps with Frem
-It is often tempting to interpret regions with high weights as 'important' for the prediction task. However, there is no statistical guarantee on these maps. Moreover, they iften do not even exhibit very clear structure. To improve that, a regularization can be brought by using the so-called Fast Regularized Ensembles of models (FREM), that rely on simple averaging and clustering tools to provide smoother maps, yet with minimal computational overhead.
+
+It is often tempting to interpret regions with high weights as 'important' for the prediction task. However, there is no statistical guarantee on these maps. Moreover, they often do not even exhibit very clear structure. To improve that, a regularization can be brought by using the so-called Fast Regularized Ensembles of models (FREM), that rely on simple averaging and clustering tools to provide smoother maps, yet with minimal computational overhead.
 
 ```{code-cell} ipython3
 from nilearn.decoding import FREMClassifier
@@ -178,9 +204,63 @@ plotting.view_img(
 Note that the resulting accuracy is in general slightly higher:
 
 ```{code-cell} ipython3
-print('F1 scoreswith FREM')
+print('F1 scores with FREM')
 for category in categories:
-    print(category, '\t\t    {:.2f}'.format(np.mean(decoder.cv_scores_[category])))
+    print(f"{category.ljust(15)}    {np.mean(frem.cv_scores_[category]):.2f}")
+```
+
+
+## ⚡️ (Experimental) Running a surfacic analysis
+
+Nilearn recently expanded its surface API to enable surface-based decoding. We start by projecting our data onto the FreeSurfer `fsaverage4` template, which is a downsampled version of the standard FreeSurfer template containing approximately 2,562 vertices per hemisphere. This template serves as the common space for analysis. We then create a SurfaceImage object that combines the mesh geometry with functional data. This object maintains separate representations for left and right hemispheres while providing a unified interface for surface-based analysis.
+```{code-cell} ipython3
+from nilearn.surface import vol_to_surf
+from nilearn.experimental.surface._datasets import load_fsaverage
+from nilearn.experimental.surface._surface_image import SurfaceImage
+
+# We first load the fsaverage mesh
+mesh = load_fsaverage("fsaverage4")["pial"]
+
+# We then project the data on each hemisphere
+data_lh = vol_to_surf(func_file, mesh["left_hemisphere"]).T
+data_rh = vol_to_surf(func_file, mesh["right_hemisphere"]).T
+
+# Then we build the SurfaceImage object
+surf_img = SurfaceImage(
+    mesh=mesh,
+    data={
+        "left_hemisphere": data_lh,
+        "right_hemisphere": data_rh,
+    },
+)
+print(f"Image shape: {surf_img.shape}")
+```
+
+The decoder fitting process is similar to the previous ones, but with a key distinction: we implement the SurfaceMasker object for surface-based data processing. This masker is specifically designed to handle cortical surface information, allowing us to maintain the spatial structure of the brain's surface representation throughout the decoding analysis.
+```{code-cell} ipython3
+# The following is just disabling a couple of checks performed by the decoder
+# that would force us to use a `NiftiMasker`.
+from nilearn._utils import param_validation
+def monkeypatch_masker_checks():
+    def adjust_screening_percentile(screening_percentile, *args, **kwargs):
+        return screening_percentile
+
+    param_validation.adjust_screening_percentile = adjust_screening_percentile
+monkeypatch_masker_checks()
+
+from nilearn.experimental.surface import SurfaceMasker
+
+decoder = Decoder(mask=SurfaceMasker(), cv=3, screening_percentile=1)
+decoder.fit(surf_img, y)
+```
+
+We finally plot the resulting weight map for `face` using an interactive surface viewer:
+```{code-cell} ipython3
+plotting.view_surf(
+    decoder.coef_img_["face"].mesh["right_hemisphere"],
+    decoder.coef_img_["face"].data["right_hemisphere"],
+    cmap="coolwarm",
+)
 ```
 
 ## Exercises
