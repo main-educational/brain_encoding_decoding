@@ -212,6 +212,7 @@ for category in categories:
 
 ## ⚡️ (Experimental) Running a surfacic analysis
 
+Nilearn recently expanded its surface API to enable surface-based decoding. We start by projecting our data onto the FreeSurfer `fsaverage4` template, which is a downsampled version of the standard FreeSurfer template containing approximately 2,562 vertices per hemisphere. This template serves as the common space for analysis. We then create a SurfaceImage object that combines the mesh geometry with functional data. This object maintains separate representations for left and right hemispheres while providing a unified interface for surface-based analysis.
 ```{code-cell} ipython3
 from nilearn.surface import vol_to_surf
 from nilearn.experimental.surface._datasets import load_fsaverage
@@ -235,6 +236,7 @@ surf_img = SurfaceImage(
 print(f"Image shape: {surf_img.shape}")
 ```
 
+The decoder fitting process is similar to the previous ones, but with a key distinction: we implement the SurfaceMasker object for surface-based data processing. This masker is specifically designed to handle cortical surface information, allowing us to maintain the spatial structure of the brain's surface representation throughout the decoding analysis.
 ```{code-cell} ipython3
 # The following is just disabling a couple of checks performed by the decoder
 # that would force us to use a `NiftiMasker`.
@@ -252,6 +254,7 @@ decoder = Decoder(mask=SurfaceMasker(), cv=3, screening_percentile=1)
 decoder.fit(surf_img, y)
 ```
 
+We finally plot the resulting weight map for `face` using an interactive surface viewer:
 ```{code-cell} ipython3
 plotting.view_surf(
     decoder.coef_img_["face"].mesh["right_hemisphere"],
